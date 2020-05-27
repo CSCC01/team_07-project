@@ -31,6 +31,16 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
-    `gatsby-plugin-mdx`,
+
+    // MDX Config
+    // https://www.gatsbyjs.org/packages/gatsby-plugin-mdx/?=mdx
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        defaultLayouts: {
+          default: require.resolve("./src/components/Layout.tsx"),
+        },
+      },
+    },
   ],
 }
