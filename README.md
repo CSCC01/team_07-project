@@ -1,8 +1,22 @@
-
+## Resources
 - [Gatsby: Modern Static Site Generator](https://www.gatsbyjs.org)
 - [MDX: Markdown + React](https://mdxjs.com)
 - [GitHub Pages Integration](https://www.gatsbyjs.org/docs/how-gatsby-works-with-github-pages)
 
+## Development
+
+The only page we have right now is in `src/pages/index.mdx`
+
+
+### To Develop Locally
+
+- `git clone https://github.com/yifeiyin/C01-Write-Ups && cd C01-Write-Ups`
+- `npm install`
+- `npm run develop`
+
+### To Deploy the Site
+
+- `npm run deploy`
 
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <!--
