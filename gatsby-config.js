@@ -1,9 +1,9 @@
 module.exports = {
   pathPrefix: "/C01-Write-Ups",
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `CSCC01 Project Write Ups`,
+    description: `CSCC01 Project Write Ups`,
+    author: `Yifei Yin, Katrina Chen, Leo Zhou, Jeoy Zhuang, Min Qi Zhang`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

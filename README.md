@@ -1,7 +1,8 @@
 
-[Gatsby + MDX](https://www.gatsbyjs.org/docs/mdx)
-[GitHub Pages Integration](https://www.gatsbyjs.org/docs/how-gatsby-works-with-github-pages)
-[MDX Install](https://mdxjs.com/getting-started/gatsby)
+- [Gatsby: Modern Static Site Generator](https://www.gatsbyjs.org)
+- [MDX: Markdown + React](https://mdxjs.com)
+- [GitHub Pages Integration](https://www.gatsbyjs.org/docs/how-gatsby-works-with-github-pages)
+
 
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <!--
