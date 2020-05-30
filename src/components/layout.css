@@ -639,3 +639,18 @@ a.link-anchor {
 a.link-anchor:hover {
   opacity: 1;
 }
+
+
+img.member-photo {
+  max-height: 300px;
+  max-width: 30%;
+  float: left;
+  margin: 5px;
+}
+
+@media only screen and (max-width: 480px) {
+  img.member-photo {
+    max-height: unset;
+    float: right;
+  }
+}
