@@ -14,11 +14,14 @@ import "./layout.css"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
+    query MyQuery {
       site {
         siteMetadata {
           title
         }
+      }
+      siteBuildMetadata {
+        buildTime(formatString: "YYYY-MM-DD HH:MM:SS")
       }
     }
   `)
@@ -34,11 +37,13 @@ const Layout = ({ children }) => {
         }}
       >
         <main>{children}</main>
-        {/* <footer>
-          © {new Date().getFullYear()}, Built with
+        <footer>
+          {/* © {new Date().getFullYear()}, Built with
           {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer> */}
+          <a href="https://www.gatsbyjs.org">Gatsby</a> */}
+          <div>Last built on {data.siteBuildMetadata.buildTime} GMT</div>
+          <a target="_blank" href="https://github.com/yifeiyin/C01-Write-Ups">View source</a>
+        </footer>
       </div>
     </>
   )
