@@ -629,3 +629,13 @@ h2 {
   padding-bottom: .3em;
   border-bottom: 1px solid #eaecef;
 }
+
+a.link-anchor {
+  opacity: 0;
+  transition: 0.1s;
+  text-decoration: none;
+}
+
+a.link-anchor:hover {
+  opacity: 1;
+}
