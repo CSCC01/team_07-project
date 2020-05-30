@@ -1,7 +1,7 @@
 module.exports = {
   pathPrefix: "/C01-Write-Ups",
   siteMetadata: {
-    title: `CSCC01 Project Write Ups`,
+    title: `CSCC01 - Team Byte Me`,
     description: `CSCC01 Project Write Ups`,
     author: `Yifei Yin, Katrina Chen, Leo Zhou, Jeoy Zhuang, Min Qi Zhang`,
   },
