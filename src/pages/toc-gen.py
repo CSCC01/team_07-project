@@ -65,10 +65,10 @@ def generateTOC(filename):
                 del contents[i]
                 break
 
-    toctext = "<!-- TOC -->\n\n## Table of Contents\n"
+    toctext = "<!-- TOC -->\n\n"
     for item in contents:
         indent_text = (item['level'] - indent_offset) * '    '
-        line = f"{ indent_text }1. [{ item['text'] }]({ item['link'] })\n"
+        line = f"{ indent_text }- [{ item['text'] }]({ item['link'] })\n"
         toctext += line
     toctext += "\n<!-- /TOC -->\n"
 
