@@ -7,6 +7,8 @@
 
 The only page we have right now is in `src/pages/index.mdx`
 
+- Ensure you have node installed
+- Install the Gatsby CLI: `npm install -g gatsby-cli`
 
 ### To Develop Locally
 
