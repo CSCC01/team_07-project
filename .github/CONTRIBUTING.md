@@ -19,6 +19,11 @@ WIP
 - Update `/Delierables/README.md` to include a link to the new deliverable
 
 
+### Uploading Burn-Down Chart & Task Board
+- Name the files using format that are consistent with existing files
+- Update `/Burn-Down Chart & Task Board/README.md` to include the new images
+
+
 ## User Stories & Tasks on GitHub/ZenHub
 
 ```
