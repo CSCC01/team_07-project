@@ -25,9 +25,9 @@ WIP
                 |    user story    |   user story                 |
                 |  without tasks   |   with tasks       tasks     |
 ----------------+------------------+------------------------------+
-zenhub estimate |       ✔️         |     ❌[1]           ✔️       |
- priority label |       ✔️         |     ✔️              ❌       |
-      milestone |       ✔️         |     ✔️              ✔️       |
+zenhub estimate |       ✔️         |     ❌[1]           ✔️      |
+ priority label |       ✔️         |     ✔️              ❌      |
+      milestone |       ✔️         |     ✔️              ✔️      |
           notes |                  |     [2]             [3]      |
 
 ```
