@@ -30,12 +30,10 @@ WIP
 ### Making Tasks
 - ZenHub: the user story should be a epic
 - ZenHub: tasks are added to the epic
-
 - GitHub: tasks need to have proper prefix in issue title
 - GitHub: tasks need to have "Task of #xx." in issue description
 - GitHub: the epic issue is assigned to no one
 - GitHub: tasks are assigned to people
-- GitHub: tasks does not need to be labelled with priority (?)
-
+- GitHub: tasks does not need to be labelled with priority
 - Report: properly listed in user story section
 - Report: user story estimate is re-calculated
