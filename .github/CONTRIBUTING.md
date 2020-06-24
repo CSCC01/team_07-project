@@ -1,10 +1,38 @@
 # Contributing Guide
 
 ## Branching
-WIP
+Branch names should `[<Task Number #>-]<User Story #>-<short description>`
+
+The short description should be no more then 20 characters long; words are all smaller cases, separated using minuses.
+
+✅ Good:
+- `30-31-add-doc-plugin`
+- `20-login-ui`
+
+❌ Bad:
+- `30`
+- `add-doc-plugin`
+- `30-31-add_doc_plugin`
+- `19-Create-promotion-page`
+
 
 ## Commits
-WIP
+Commit messages should follow the following rules:
+- Capitalize the first letter of the summary
+- Do not use stop at the end of the summary
+- Use present tense
+- Summarize should be less than 50 characters 
+
+```
+Summarize changes in 50 characters or less
+
+More detailed explanatory text, if necessary. Wrap it to about 72
+characters or so. In some contexts, the first line is treated as the
+subject of the commit and the rest of the text as the body. The
+blank line separating the summary from the body is critical (unless
+you omit the body entirely); various tools like `log`, `shortlog`
+and `rebase` can get confused if you run the two together.
+```
 
 ## Writing Content for the Course
 
