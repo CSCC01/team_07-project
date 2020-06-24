@@ -1,6 +1,6 @@
-{
+module.exports = {
   "parser": "babel-eslint",
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "env": {
     "commonjs": true,
     "es6": true,
@@ -14,6 +14,12 @@
     },
     "sourceType": "module"
   },
+  "ignorePatterns": [
+    "/.cache/**",
+    "/build/**",
+    "/node_modules/**",
+    "/.tmp/**",
+  ],
   "globals": {
     "strapi": true
   },
