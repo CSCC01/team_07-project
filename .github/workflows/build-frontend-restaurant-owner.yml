@@ -8,6 +8,10 @@ on:
     branches: [ master ]
     paths: 'frontend-restaurant-owner/**'
 
+defaults:
+  run:
+    working-directory: 'frontend-restaurant-owner/'
+
 jobs:
   build:
     name: Build
@@ -19,6 +23,5 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 14.x
-    - working-directory: 'frontend-restaurant-owner/'
     - run: npm ci
     - run: npm run build
