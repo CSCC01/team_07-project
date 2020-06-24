@@ -1,0 +1,24 @@
+name: Build frontend-restaurant-owner
+
+on:
+  push:
+    branches: [ master ]
+    paths: 'frontend-restaurant-owner/**'
+  pull_request:
+    branches: [ master ]
+    paths: 'frontend-restaurant-owner/**'
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 14.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+    - working-directory: 'frontend-restaurant-owner/'
+    - run: npm ci
+    - run: npm run build
