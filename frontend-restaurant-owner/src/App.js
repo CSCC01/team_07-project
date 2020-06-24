@@ -12,20 +12,20 @@ import {
 function App() {
   return (
     <div className="App">
-        <Router>
+      <Router>
         <Navbar />
         <Switch>
           <Route path="/create-promotion">
-              <CreatePromotion />
+            <CreatePromotion />
           </Route>
           <Route path="/other">
-              <Other />
+            <Other />
           </Route>
           <Route path="/">
-              <Home />
+            <Home />
           </Route>
         </Switch>
-        </Router>
+      </Router>
     </div>
   );
 }
