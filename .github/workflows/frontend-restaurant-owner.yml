@@ -1,4 +1,4 @@
-name: Build frontend-restaurant-owner
+name: frontend-restaurant-owner
 
 on:
   push:
@@ -13,6 +13,18 @@ defaults:
     working-directory: 'frontend-restaurant-owner/'
 
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 14.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+    - run: npm ci
+    - run: npm run lint-check
+
   build:
     name: Build
     runs-on: ubuntu-latest
