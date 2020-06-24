@@ -15,6 +15,8 @@ Here is the high-level workflow of completing a task.
 
 
 ## Branching
+Pull request should have `master` as the target branch.
+
 Branch names should `[<Task Number #>-]<User Story #>-<short description>`
 
 The short description should be no more then 20 characters long; words are all smaller cases, separated using minuses.
@@ -35,7 +37,7 @@ Commit messages should follow the following rules:
 - Capitalize the first letter of the summary
 - Do not use stop at the end of the summary
 - Use present tense
-- Summarize should be less than 50 characters 
+- Summarize should be less than 50 characters
 
 ```
 Summarize changes in 50 characters or less
