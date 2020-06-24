@@ -1,0 +1,39 @@
+name: backend
+
+on:
+  push:
+    branches: [ master ]
+    paths: 'backend/**'
+  pull_request:
+    branches: [ master ]
+    paths: 'backend/**'
+
+defaults:
+  run:
+    working-directory: 'backend/'
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 14.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+    - run: npm ci
+    - run: npm run lint-check
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 14.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+    - run: npm ci
+    - run: npm run build
