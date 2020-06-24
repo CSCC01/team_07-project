@@ -1,5 +1,19 @@
 # Contributing Guide
 
+## Workflow
+Here is the high-level workflow of completing a task.
+1. Ensure the task to "In Progress" column on ZenHub
+2. Make sure your master is up to date
+3. Create branch from master with name `[task-]userstory-task-keywords`
+4. Commit your changes using proper commit messages
+5. Open a PR on GitHub, with appropriate title. Include `Resolves #<issue number>` in the description when it applies
+6. Commit more changes
+7. Request a review from teammates
+8. Commit more changes using the feedback
+9. Request another review from teammates
+10. Reviewer squash merges the changes and deletes the branch
+
+
 ## Branching
 Branch names should `[<Task Number #>-]<User Story #>-<short description>`
 
