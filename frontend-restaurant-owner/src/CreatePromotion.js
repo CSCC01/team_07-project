@@ -1,7 +1,13 @@
 import React from 'react';
+import SubtaskBtns from './components/SubtaskBtns';
 
 function CreatePromotion() {
-  return <p>create promotion</p>;
+  return (
+    <div>
+      <p>Subtasks</p>
+      <SubtaskBtns />
+    </div>
+  );
 }
 
 export default CreatePromotion;
