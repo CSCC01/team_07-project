@@ -36,7 +36,13 @@ function Login() {
             id="password"
             autoComplete="current-password"
           />
-          <Button type="submit" fullWidth variant="contained" color="primary" style={{marginTop: 20}}>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            style={{ marginTop: 20 }}
+          >
             Log In
           </Button>
         </form>
