@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "subtasks",
+  "info": {
+    "name": "Subtask"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "description": {
+      "type": "richtext"
+    },
+    "promotion": {
+      "via": "subtasks",
+      "model": "promotion"
+    }
+  }
+}

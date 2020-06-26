@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/subtasks",
+      "handler": "subtask.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/subtasks/count",
+      "handler": "subtask.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/subtasks/:id",
+      "handler": "subtask.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/subtasks",
+      "handler": "subtask.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/subtasks/:id",
+      "handler": "subtask.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/subtasks/:id",
+      "handler": "subtask.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
