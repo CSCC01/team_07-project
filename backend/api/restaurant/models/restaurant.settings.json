@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "restaurants",
+  "info": {
+    "name": "Restaurant"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "promotions": {
+      "via": "restaurant",
+      "collection": "promotion"
+    },
+    "users": {
+      "via": "restaurant",
+      "plugin": "users-permissions",
+      "collection": "user"
+    }
+  }
+}

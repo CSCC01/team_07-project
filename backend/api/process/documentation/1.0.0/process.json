@@ -565,11 +565,8 @@
                   "type": "string"
                 }
               },
-              "promotions": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
+              "restaurant": {
+                "type": "string"
               }
             }
           },
@@ -593,9 +590,6 @@
               "description": {
                 "type": "string"
               },
-              "image": {
-                "type": "string"
-              },
               "progresses": {
                 "type": "array",
                 "items": {
@@ -608,7 +602,10 @@
                   "type": "string"
                 }
               },
-              "user": {
+              "restaurant": {
+                "type": "string"
+              },
+              "image": {
                 "type": "string"
               }
             }
