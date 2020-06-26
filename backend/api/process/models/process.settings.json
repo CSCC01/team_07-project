@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "processes",
+  "info": {
+    "name": "Progress"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "promotion_status": {
+      "type": "json"
+    },
+    "user": {
+      "via": "processes",
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "starting_date": {
+      "type": "date"
+    },
+    "expired_date": {
+      "type": "date"
+    },
+    "promotion": {
+      "via": "progresses",
+      "model": "promotion"
+    }
+  }
+}

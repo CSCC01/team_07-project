@@ -1244,6 +1244,71 @@
                 }
               }
             }
+          },
+          "processes": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "promotion_status": {
+                  "type": "object"
+                },
+                "user": {
+                  "type": "string"
+                },
+                "starting_date": {
+                  "type": "string"
+                },
+                "expired_date": {
+                  "type": "string"
+                },
+                "promotion": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "promotions": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "image": {
+                  "type": "string"
+                },
+                "progresses": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "subtasks": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "user": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -1281,6 +1346,18 @@
           },
           "role": {
             "type": "string"
+          },
+          "processes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "promotions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       }
