@@ -6,10 +6,6 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
 function Login() {
-  const ButtonStyle = {
-    marginTop: 20,
-  };
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -40,7 +36,7 @@ function Login() {
             id="password"
             autoComplete="current-password"
           />
-          <Button type="submit" fullWidth variant="contained" color="primary" style={ButtonStyle}>
+          <Button type="submit" fullWidth variant="contained" color="primary" style={{marginTop: 20}}>
             Log In
           </Button>
         </form>
