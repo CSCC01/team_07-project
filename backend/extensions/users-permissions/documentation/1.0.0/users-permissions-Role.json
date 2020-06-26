@@ -615,11 +615,8 @@
                     "type": "string"
                   }
                 },
-                "promotions": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
+                "restaurant": {
+                  "type": "string"
                 }
               }
             }

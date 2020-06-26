@@ -57,9 +57,9 @@
       "collection": "process",
       "via": "user"
     },
-    "promotions": {
-      "collection": "promotion",
-      "via": "user"
+    "restaurant": {
+      "model": "restaurant",
+      "via": "users"
     }
   }
 }

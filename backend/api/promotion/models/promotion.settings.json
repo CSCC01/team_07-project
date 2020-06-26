@@ -15,17 +15,6 @@
     "description": {
       "type": "richtext"
     },
-    "image": {
-      "model": "file",
-      "via": "related",
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
-      ],
-      "plugin": "upload",
-      "required": false
-    },
     "progresses": {
       "collection": "process",
       "via": "promotion"
@@ -34,10 +23,12 @@
       "collection": "subtask",
       "via": "promotion"
     },
-    "user": {
-      "via": "promotions",
-      "plugin": "users-permissions",
-      "model": "user"
+    "restaurant": {
+      "model": "restaurant",
+      "via": "promotions"
+    },
+    "image": {
+      "type": "string"
     }
   }
 }

@@ -1273,38 +1273,26 @@
               }
             }
           },
-          "promotions": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
+          "restaurant": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "promotions": {
+                "type": "array",
+                "items": {
                   "type": "string"
-                },
-                "title": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "image": {
-                  "type": "string"
-                },
-                "progresses": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "subtasks": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "user": {
+                }
+              },
+              "users": {
+                "type": "array",
+                "items": {
                   "type": "string"
                 }
               }
@@ -1353,11 +1341,8 @@
               "type": "string"
             }
           },
-          "promotions": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "restaurant": {
+            "type": "string"
           }
         }
       }
