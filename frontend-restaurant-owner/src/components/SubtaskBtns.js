@@ -6,6 +6,14 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  dialogActions: {
+    display: "flex",
+    justifyContent: "space-around",
+  }
+});
 
 export default class SubtaskBtns extends React.Component {
   constructor(props){
@@ -62,7 +70,7 @@ export default class SubtaskBtns extends React.Component {
     taskDecscription[i] = e.target.value;
     this.setState({taskDecscription: taskDecscription});
   }
-
+  
   render(){
     let btns = [];
     for (let i=1; i < this.state.taskNum; i++) {
@@ -78,7 +86,7 @@ export default class SubtaskBtns extends React.Component {
     }   
 
     return (
-    <ButtonGroup>
+    <ButtonGroup className={classes.btngroup}>
       {btns}
       <Button onClick={() => this.addBtn()}>+</Button>
     </ButtonGroup>
@@ -87,6 +95,7 @@ export default class SubtaskBtns extends React.Component {
 }
 
 function SubBtn(props) {
+  const classes = useStyles();
   return (
     <div>
     <Button onClick={props.openDialog}>{props.num}</Button>
@@ -97,11 +106,11 @@ function SubBtn(props) {
       <DialogContent dividers>
         <TextareaAutosize aria-label="empty textarea" placeholder="Empty" rowsMin="5" value={props.description} onChange={props.editDialog}/>
       </DialogContent>
-      <DialogActions>
+      <DialogActions className={classes.dialogActions}>
         <Button autoFocus onClick={props.closeDialog} color="primary">
           Save
         </Button>
-        <Button autoFocus onClick={props.deleteTask} color="primary">
+        <Button autoFocus onClick={props.deleteTask} color="secondary">
           Delete
         </Button>
       </DialogActions>
