@@ -1,7 +1,14 @@
 import React from 'react';
+import PresetTemplates from './components/PresetTemplates';
 
 function CreatePromotion() {
-  return <p>create promotion</p>;
+  return (
+    <div>
+      <p>Create Promotion</p>
+      <br></br>
+      <PresetTemplates />
+    </div>
+  );
 }
 
 export default CreatePromotion;

@@ -1,0 +1,51 @@
+.btn {
+  background: white;
+  border: 3px black solid;
+  border-radius: 3;
+  margin: 20px;
+  color: black;
+  height: 48;
+  padding: 15px 50px;
+  cursor: pointer;
+  transition: 0.5s;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background: black;
+  color: white;
+}
+
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  transition: 1s;
+}
+
+.item {
+  background-color: white;
+  border: 2px black solid;
+  padding: 0 10px;
+  width: 250px;
+  height: 200px;
+  margin: 5px;
+  line-height: 200px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.5s;
+  font-weight: bold;
+}
+
+.item:hover {
+  background: black;
+  color: white;
+}
+
+.inactive {
+  display: none;
+}
+
+.task {
+  font-weight: bold;
+}
