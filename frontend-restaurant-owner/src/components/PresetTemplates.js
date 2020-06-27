@@ -1,5 +1,5 @@
 import React from 'react';
-import './PresetTemplates.css';
+import styles from './PresetTemplates.module.css';
 import NVisit from './NVisit';
 import XItems from './XItems';
 import XVisitsYDays from './XVisitsYDays';
@@ -11,43 +11,21 @@ class PresetTemplates extends React.Component {
     super(props);
     this.state = {
       subTask: [],
-      hideList: false,
-      name: 'container inactive',
-      nthVisit: false,
-      xItems: false,
-      xVisitsYDays: false,
-      xDollars: false,
-      buyXGetY: false,
+      hideList: true,
+      selectedTemplate: 0,
+      displayTask: 0,
       x: 0,
       y: 0,
       n: 0,
       itemName: '',
-      displayNVisitSub: false,
-      displayXItemsSub: false,
-      displayXVisitsYDaysSub: false,
-      displayXDollarsSub: false,
-      displayBuyXGetYSub: false,
     };
 
     this.toggleList = this.toggleList.bind(this);
+    this.hideForms = this.hideForms.bind(this);
+    this.hideTask = this.hideTask.bind(this);
     this.handleXChange = this.handleXChange.bind(this);
     this.handleYChange = this.handleYChange.bind(this);
     this.handleItemNameChange = this.handleItemNameChange.bind(this);
-
-    this.nVisit = this.nVisit.bind(this);
-    this.finishNVisit = this.finishNVisit.bind(this);
-
-    this.xItems = this.xItems.bind(this);
-    this.finishXItems = this.finishXItems.bind(this);
-
-    this.xVisitsYDays = this.xVisitsYDays.bind(this);
-    this.finishXVisitsYDays = this.finishXVisitsYDays.bind(this);
-
-    this.xDollars = this.xDollars.bind(this);
-    this.finishXDollars = this.finishXDollars.bind(this);
-
-    this.buyXGetY = this.buyXGetY.bind(this);
-    this.finishBuyXGetY = this.finishBuyXGetY.bind(this);
   }
 
   // sendData(subTask) {
@@ -66,83 +44,14 @@ class PresetTemplates extends React.Component {
     this.setState((prevState) => {
       return { hideList: !prevState.hideList };
     });
-    if (this.state.hideList) {
-      this.setState({ name: 'container inactive' });
-    } else {
-      this.setState({ name: 'container' });
-    }
   }
 
   hideForms() {
-    this.setState({ nthVisit: false });
-    this.setState({ xItems: false });
-    this.setState({ xVisitsYDays: false });
-    this.setState({ xDollars: false });
-    this.setState({ buyXGetY: false });
+    this.setState({ selectedTemplate: 0 });
   }
 
   hideTask() {
-    this.setState({ displayNVisitSub: false });
-    this.setState({ displayXItemsSub: false });
-    this.setState({ displayXVisitsYDaysSub: false });
-    this.setState({ displayXDollarsSub: false });
-    this.setState({ displayXVisitsYDaysSub: false });
-  }
-
-  // clearInputs() {
-  //   this.setState({ x: 0 });
-  //   this.setState({ y: 0 });
-  //   this.setState({ itemName: '' });
-  // }
-
-  nVisit() {
-    this.toggleList();
-    this.setState({ nthVisit: true });
-  }
-
-  xItems() {
-    this.toggleList();
-    this.setState({ xItems: true });
-  }
-
-  xVisitsYDays() {
-    this.toggleList();
-    this.setState({ xVisitsYDays: true });
-  }
-
-  xDollars() {
-    this.toggleList();
-    this.setState({ xDollars: true });
-  }
-
-  buyXGetY() {
-    this.toggleList();
-    this.setState({ buyXGetY: true });
-  }
-
-  finishNVisit() {
-    this.setState({ displayNVisitSub: true });
-    this.setState({ nthVisit: false });
-  }
-
-  finishXItems() {
-    this.setState({ displayXItemsSub: true });
-    this.setState({ xItems: false });
-  }
-
-  finishXVisitsYDays() {
-    this.setState({ displayXVisitsYDaysSub: true });
-    this.setState({ xVisitsYDays: false });
-  }
-
-  finishXDollars() {
-    this.setState({ displayXDollarsSub: true });
-    this.setState({ xDollars: false });
-  }
-
-  finishBuyXGetY() {
-    this.setState({ displayBuyXGetYSub: true });
-    this.setState({ buyXGetY: false });
+    this.setState({ displayTask: 0 });
   }
 
   handleXChange(e) {
@@ -164,7 +73,7 @@ class PresetTemplates extends React.Component {
     return (
       <div>
         <button
-          className="btn"
+          className={styles.btn}
           onClick={() => {
             this.toggleList();
             this.hideForms();
@@ -174,61 +83,119 @@ class PresetTemplates extends React.Component {
           PRESET TEMPLATES
         </button>
 
-        <div className={this.state.name}>
-          <div className="item" onClick={this.nVisit}>
+        <div className={this.state.hideList ? styles.inactive : styles.container}>
+          <div
+            className={styles.item}
+            onClick={() => {
+              this.setState({ selectedTemplate: 1 });
+              this.toggleList();
+            }}
+          >
             N-th Visit
           </div>
-          <div className="item" onClick={this.xItems}>
+          <div
+            className={styles.item}
+            onClick={() => {
+              this.setState({ selectedTemplate: 2 });
+              this.toggleList();
+            }}
+          >
             Order X Specific Items
           </div>
-          <div className="item" onClick={this.xVisitsYDays}>
+          <div
+            className={styles.item}
+            onClick={() => {
+              this.setState({ selectedTemplate: 3 });
+              this.toggleList();
+            }}
+          >
             Visit X Times Within Y Days
           </div>
-          <div className="item" onClick={this.xDollars}>
+          <div
+            className={styles.item}
+            onClick={() => {
+              this.setState({ selectedTemplate: 4 });
+              this.toggleList();
+            }}
+          >
             Spend X Dollars in an Order
           </div>
-          <div className="item" onClick={this.buyXGetY}>
+          <div
+            className={styles.item}
+            onClick={() => {
+              this.setState({ selectedTemplate: 5 });
+              this.toggleList();
+            }}
+          >
             Buy X Get Y Free
           </div>
         </div>
 
-        {this.state.nthVisit && (
+        {this.state.selectedTemplate === 1 && (
           <div>
             <p>Enter # of visits</p>
             <input type="number" onChange={this.handleXChange}></input>
-            <button onClick={this.finishNVisit}>Finish</button>
+            <button
+              onClick={() => {
+                this.setState({ displayTask: 1 });
+                this.hideForms();
+              }}
+            >
+              Finish
+            </button>
           </div>
         )}
 
-        {this.state.xItems && (
+        {this.state.selectedTemplate === 2 && (
           <div>
             <p>Enter # of items need to be ordered.</p>
             <input type="number" onChange={this.handleXChange}></input>
             <p>Enter the name of item need to be ordered.</p>
             <input type="text" onChange={this.handleItemNameChange}></input>
-            <button onClick={this.finishXItems}>Finish</button>
+            <button
+              onClick={() => {
+                this.setState({ displayTask: 2 });
+                this.hideForms();
+              }}
+            >
+              Finish
+            </button>
           </div>
         )}
 
-        {this.state.xVisitsYDays && (
+        {this.state.selectedTemplate === 3 && (
           <div>
             <p>Enter # visits.</p>
             <input type="number" onChange={this.handleXChange}></input>
             <p>Enter # of days.</p>
             <input type="number" onChange={this.handleYChange}></input>
-            <button onClick={this.finishXVisitsYDays}>Finish</button>
+            <button
+              onClick={() => {
+                this.setState({ displayTask: 3 });
+                this.hideForms();
+              }}
+            >
+              Finish
+            </button>
           </div>
         )}
 
-        {this.state.xDollars && (
+        {this.state.selectedTemplate === 4 && (
           <div>
             <p>Enter the money need to spend on an order.</p>
             <input type="number" onChange={this.handleXChange}></input>
-            <button onClick={this.finishXDollars}>Finish</button>
+            <button
+              onClick={() => {
+                this.setState({ displayTask: 4 });
+                this.hideForms();
+              }}
+            >
+              Finish
+            </button>
           </div>
         )}
 
-        {this.state.buyXGetY && (
+        {this.state.selectedTemplate === 5 && (
           <div>
             <p>Enter # of an item need to buy.</p>
             <input type="number" onChange={this.handleXChange}></input>
@@ -236,24 +203,29 @@ class PresetTemplates extends React.Component {
             <input type="number" onChange={this.handleYChange}></input>
             <p>Enter the name of item need to be ordered.</p>
             <input type="text" onChange={this.handleItemNameChange}></input>
-            <button onClick={this.finishBuyXGetY}>Finish</button>
+            <button
+              onClick={() => {
+                this.setState({ displayTask: 5 });
+                this.hideForms();
+              }}
+            >
+              Finish
+            </button>
           </div>
         )}
 
         {/* {this.state.displayNVisitSub === true && (
           <NVisit count={this.state.handleXChange} parentCallback={this.callbackFunction} />
         )} */}
-        {this.state.displayNVisitSub && <NVisit count={this.state.x} />}
+        {this.state.displayTask === 1 && <NVisit count={this.state.x} />}
 
-        {this.state.displayXItemsSub && (
+        {this.state.displayTask === 2 && (
           <XItems itemCount={this.state.x} itemName={this.state.itemName} />
         )}
 
-        {this.state.displayXVisitsYDaysSub && (
-          <XVisitsYDays visits={this.state.x} days={this.state.y} />
-        )}
-        {this.state.displayXDollarsSub && <XDollars dollars={this.state.x} />}
-        {this.state.displayBuyXGetYSub && (
+        {this.state.displayTask === 3 && <XVisitsYDays visits={this.state.x} days={this.state.y} />}
+        {this.state.displayTask === 4 && <XDollars dollars={this.state.x} />}
+        {this.state.displayTask === 5 && (
           <BuyXGetY buyX={this.state.x} getY={this.state.y} itemName={this.state.itemName} />
         )}
       </div>
