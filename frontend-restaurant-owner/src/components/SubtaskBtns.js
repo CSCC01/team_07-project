@@ -88,7 +88,7 @@ export default class SubtaskBtns extends React.Component {
     }
 
     return (
-      <ButtonGroup className={classes.btngroup}>
+      <ButtonGroup>
         {btns}
         <Button onClick={() => this.addBtn()}>+</Button>
       </ButtonGroup>
