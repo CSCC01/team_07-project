@@ -2,13 +2,10 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 
 export default class PromotionTime extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      startTime: '',
-      closeTime: '',
-    };
-  }
+  state = {
+    startTime: '',
+    closeTime: '',
+  };
 
   changeStartTime(e) {
     this.setState({
