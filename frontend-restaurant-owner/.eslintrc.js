@@ -1,4 +1,5 @@
 module.exports = {
+  parser: 'babel-eslint',
   extends: [
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
@@ -10,7 +11,7 @@ module.exports = {
     browser: true,
   },
   parserOptions: {
-    ecmaVersion: 8,
+    ecmaVersion: 2018,
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
@@ -20,6 +21,7 @@ module.exports = {
   rules: {
     'no-unused-vars': ['warn', { args: 'none', argsIgnorePattern: 'req|res|next|val' }],
     'prettier/prettier': ['error'],
+    'react/prop-type': 0,
   },
   settings: {
     react: {
