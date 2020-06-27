@@ -1,85 +1,23 @@
-body {
-    margin: 0px;
-    puploading: 0px;
-}
-
-/* -----------before-task---------- */
 .before-task-wrapper {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    margin: 0px 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 30px;
 }
 
 .before-task-left {
     margin-right:20px;
 }
 
-.title-popup-wrapper {
-    display: flex;
-    flex-direction: row;
-}
-
-.title {
-    color: black;
-    font-size: 1.5em;
-    font-weight: 500;
-    margin: 0px;
-    text-align: left;
-}
-
-.image-popup-button {
-    margin-left: 10px;
-    margin-bottom: 10px;
-    margin-left: 10px;
-}
-
-.margin {
-    margin-left: 10px;
-}
-
-.image-button-wrapper {
-    position: relative;
-    /* border: 2px solid blue; */
-}
-
-.upload-image-init {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 50%;
-    transform: translate(0%, -50%);
-}
-
-.upload-image {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 50%;
-    transform: translate(0%, -50%);
-    opacity: 0;
-}
-
-.upload-image:hover {
-    opacity: 1;
-}
-
-.image-upload-button {
-    top: 50%;
-    transform: translate(0%, -50%);
-}
-
-.image {
-    height: 300px;
-    width: 100%;
-    object-fit: cover;
-    background-color: #eee;
-    border-radius: 10px;
-}
-
 .before-task-right {
     margin-left:20px;
 }
 
-.margin-top {
-    margin-top: 10px;
+.margin-bottom {
+    margin-bottom: 10px;
+}
+
+.align {
+    text-align: left;
 }

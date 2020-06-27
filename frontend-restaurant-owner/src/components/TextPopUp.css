@@ -1,0 +1,18 @@
+.title-popup-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.title {
+    color: black;
+    font-size: 1.5em;
+    font-weight: 500;
+    margin: 0px;
+    text-align: left;
+}
+
+.title-popup-button {
+    margin-left: 10px;
+    margin-left: 10px;
+}

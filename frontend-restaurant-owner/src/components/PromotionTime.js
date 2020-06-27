@@ -11,18 +11,19 @@ export default class PromotionTime extends React.Component {
     this.setState({
       startTime: e.target.value,
     });
+    this.props.onSelectStartTime(e.target.value);
   }
 
   changeCloseTime(e) {
     this.setState({
       closeTime: e.target.value,
     });
+    this.props.onSelectCloseTime(e.target.value);
   }
 
   render() {
     return (
       <div>
-        <p>Time Period</p>
         <form noValidate>
           <TextField
             id="datetime-local"

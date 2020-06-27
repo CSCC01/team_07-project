@@ -1,0 +1,38 @@
+.image-button-wrapper {
+    position: relative;
+    /* border: 2px solid blue; */
+}
+
+.upload-image-init {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    transform: translate(0%, -50%);
+}
+
+.upload-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    transform: translate(0%, -50%);
+    opacity: 0;
+}
+
+.upload-image:hover {
+    opacity: 1;
+}
+
+.image-upload-button {
+    top: 50%;
+    transform: translate(0%, -50%);
+}
+
+.image {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+    background-color: #eee;
+    border-radius: 10px;
+}
