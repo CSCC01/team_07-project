@@ -1,11 +1,13 @@
 import React from 'react';
 import PresetTemplates from './components/PresetTemplates';
+import SubtaskBtns from './components/SubtaskBtns';
+
 
 function CreatePromotion() {
   return (
     <div>
-      <p>Create Promotion</p>
-      <br></br>
+      <p>Subtasks</p>
+      <SubtaskBtns />
       <PresetTemplates />
     </div>
   );

@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "promotions",
+  "info": {
+    "name": "Promotion"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "progresses": {
+      "collection": "process",
+      "via": "promotion"
+    },
+    "subtasks": {
+      "collection": "subtask",
+      "via": "promotion"
+    },
+    "restaurant": {
+      "model": "restaurant",
+      "via": "promotions"
+    },
+    "image": {
+      "type": "string"
+    }
+  }
+}

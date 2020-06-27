@@ -608,6 +608,15 @@
                 },
                 "role": {
                   "type": "string"
+                },
+                "processes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "restaurant": {
+                  "type": "string"
                 }
               }
             }

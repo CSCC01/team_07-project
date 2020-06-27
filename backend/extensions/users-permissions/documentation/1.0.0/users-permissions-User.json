@@ -1244,6 +1244,59 @@
                 }
               }
             }
+          },
+          "processes": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "promotion_status": {
+                  "type": "object"
+                },
+                "user": {
+                  "type": "string"
+                },
+                "starting_date": {
+                  "type": "string"
+                },
+                "expired_date": {
+                  "type": "string"
+                },
+                "promotion": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "restaurant": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "promotions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "users": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -1280,6 +1333,15 @@
             "default": false
           },
           "role": {
+            "type": "string"
+          },
+          "processes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "restaurant": {
             "type": "string"
           }
         }
