@@ -21,7 +21,7 @@ module.exports = {
   rules: {
     'no-unused-vars': ['warn', { args: 'none', argsIgnorePattern: 'req|res|next|val' }],
     'prettier/prettier': ['error'],
-    'react/prop-type': 0,
+    'react/prop-types': 0,
   },
   settings: {
     react: {
