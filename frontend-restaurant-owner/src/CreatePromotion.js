@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SubtaskBtns from './components/SubtaskBtns';
+import PromotionTime from './components/PromotionTime';
 import './CreatePromotion.css';
 import { faPlus, faQuestion } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -199,8 +200,11 @@ class CreatePromotion extends Component {
           
         </div>
   
-        <p>Subtasks</p>
-        <SubtaskBtns />
+        <div>
+          <p>Subtasks</p>
+          <SubtaskBtns />
+          <PromotionTime />
+        </div>
       </div>
     );
   }
