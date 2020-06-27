@@ -1,8 +1,8 @@
 import React from 'react';
 
-function XItems(prop) {
-  let itemCount = prop.itemCount;
-  let itemName = prop.itemName;
+function XItems(props) {
+  let itemCount = props.itemCount;
+  let itemName = props.itemName;
   let list = [];
   for (let i = 0; i < itemCount; i++) {
     list.push(<p key={i}>Buy 1 {itemName}.</p>);

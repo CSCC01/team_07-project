@@ -1,8 +1,8 @@
 import React from 'react';
 
-function XVisitsYDays(prop) {
-  let visits = prop.visits;
-  let days = prop.days;
+function XVisitsYDays(props) {
+  let visits = props.visits;
+  let days = props.days;
   let list = [];
   for (let i = 0; i < visits; i++) {
     list.push(<p key={i}>Complete one visit within {days} days.</p>);

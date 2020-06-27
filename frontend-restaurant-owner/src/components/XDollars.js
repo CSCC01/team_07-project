@@ -1,7 +1,7 @@
 import React from 'react';
 
-function XDollars(prop) {
-  let dollars = prop.dollars;
+function XDollars(props) {
+  let dollars = props.dollars;
   if (dollars > 0) {
     return (
       <div>

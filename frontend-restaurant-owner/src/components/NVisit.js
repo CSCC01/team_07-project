@@ -1,11 +1,20 @@
 import React from 'react';
 
+// function sendData(prop, subTask) {
+//   this.prop.parentCallback(subTask);
+// }
+
 function NVisit(prop) {
   let count = prop.count;
   let list = [];
+  // let subTask = [];
   for (let i = 0; i < count; i++) {
     list.push(<p key={i}>Complete one visit.</p>);
+    // subTask.push('Complete one visit.');
   }
+
+  // sendData(prop, subTask);
+
   if (count > 0) {
     return (
       <div>
@@ -15,7 +24,7 @@ function NVisit(prop) {
       </div>
     );
   } else {
-    return <div></div>;
+    return <p></p>;
   }
 }
 

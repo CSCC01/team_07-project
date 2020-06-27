@@ -26,10 +26,14 @@ export default class SubtaskBtns extends React.Component {
     for (let i = 1; i < this.state.taskNum; i++)
       btns.push(<Button onclick={() => this.popupSubtask()}>{i}</Button>);
 
+    // for (let j = 1; j < this.props.taskCount; j++) {
+    //   this.addBtn(this.props.subTask[this.props.taskCount - 1]);
+    // }
+
     return (
       <ButtonGroup>
         {btns}
-        <Button onClick={() => this.addBtn()}>+</Button>
+        <Button onClick={() => this.addBtn('')}>+</Button>
         <Popover
           anchorOrigin={{
             vertical: 'bottom',
