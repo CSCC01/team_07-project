@@ -4,6 +4,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import CreatePromotion from './CreatePromotion';
 import Home from './Home';
+import Login from './components/LoginForm';
 
 function App() {
   return (
@@ -11,6 +12,9 @@ function App() {
       <Router>
         <Navbar />
         <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
           <Route path="/create-promotion">
             <CreatePromotion />
           </Route>
