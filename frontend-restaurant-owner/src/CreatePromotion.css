@@ -1,19 +1,23 @@
-.before-task-wrapper {
+.create-promotion-wrapper {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.input-wrapper {
     display: grid;
     grid-template-columns: 1fr 2fr;
     margin-left: 5%;
     margin-right: 5%;
+}
+
+.left-button-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin-top: 30px;
 }
 
-.before-task-left {
-    margin-right:20px;
-}
-
-.before-task-right {
-    margin-left:20px;
-}
-
+/* ---------somewhere else ------------*/
 .margin-bottom {
     margin-bottom: 10px;
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import './UploadImage.css';
+
 import TextPopUp from './TextPopUp';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,10 +25,19 @@ class UploadImage extends Component {
     this.props.onSelectImage(url);
   };
 
+  onEdit = (url) => {
+    this.setState({
+      image: url,
+    });
+  };
+
   render() {
     return (
       <div>
-        <TextPopUp title="Image" popup="User can only upload one image. Hover to reupload." />
+        <TextPopUp
+          title="Image"
+          popup="User can only upload one image. Need to upload a different image after delete."
+        />
 
         <div className="image-button-wrapper">
           <div className={this.state.image ? 'upload-image' : 'upload-image-init'}>
@@ -48,9 +58,12 @@ class UploadImage extends Component {
             />
           </div>
           {this.state.image ? (
-            <img className="image" src={this.state.image}></img>
+            <div>
+              <img className="image" src={this.state.image}></img>
+              <div className="backgroud"></div>
+            </div>
           ) : (
-            <div className="image"></div>
+            <div className="backgroud"></div>
           )}
         </div>
       </div>

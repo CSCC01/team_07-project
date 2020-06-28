@@ -29,10 +29,20 @@
     transform: translate(0%, -50%);
 }
 
-.image {
-    height: 300px;
+.backgroud {
+    /* height: 300px; */
     width: 100%;
+    padding-bottom: 100%;
     object-fit: cover;
     background-color: #eee;
     border-radius: 10px;
+}
+
+.image {
+    position: absolute;
+    width: 100%;
+    object-fit: cover;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

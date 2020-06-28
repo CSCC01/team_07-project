@@ -47,6 +47,7 @@ export default class SubtaskBtns extends React.Component {
       taskDecscription: taskDecscription,
       dialogOpen: dialogOpen,
     }));
+    this.props.onSelectTask(taskDecscription);
   }
 
   openDialog(i) {
