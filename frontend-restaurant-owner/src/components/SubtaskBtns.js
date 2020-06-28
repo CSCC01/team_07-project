@@ -7,6 +7,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import { makeStyles } from '@material-ui/core/styles';
+import NVisit from './NVisit';
+import PresetTemplates from './PresetTemplates';
 
 const useStyles = makeStyles({
   dialogActions: {
@@ -88,10 +90,13 @@ export default class SubtaskBtns extends React.Component {
     }
 
     return (
-      <ButtonGroup>
-        {btns}
-        <Button onClick={() => this.addBtn()}>+</Button>
-      </ButtonGroup>
+      <div>
+        <NVisit addBtn={this.addBtn} taskNum={this.state.taskNum} test="1" />
+        <ButtonGroup>
+          {btns}
+          <Button onClick={() => this.addBtn()}>+</Button>
+        </ButtonGroup>
+      </div>
     );
   }
 }

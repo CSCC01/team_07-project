@@ -4,8 +4,8 @@ import React from 'react';
 //   this.prop.parentCallback(subTask);
 // }
 
-function NVisit(prop) {
-  let count = prop.count;
+function NVisit(props) {
+  let count = props.count;
   let list = [];
   // let subTask = [];
   for (let i = 0; i < count; i++) {
@@ -21,6 +21,10 @@ function NVisit(prop) {
         <p>Task: Get reward at {count}-th visit.</p>
         <p>Subtasks: </p>
         <p>{list}</p>
+        <button onClick={props.addBtn}>Click me</button>
+        <p>
+          Tasknum: {props.taskNum} test: {props.test}
+        </p>
       </div>
     );
   } else {
