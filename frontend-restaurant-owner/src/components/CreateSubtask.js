@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 
 import TextPopUp from './TextPopUp';
 import SubtaskBtns from './SubtaskBtns';
+import PresetTemplates from './PresetTemplates';
 
 import '../CreatePromotion.css';
 
 class CreateSubtask extends Component {
   state = {
     tasks: [],
+    addBtn: '',
+    deleteAllTasks: '',
   };
 
   getSelectedTask = (tasks) => {
@@ -15,11 +18,17 @@ class CreateSubtask extends Component {
     this.props.onSelectTask(tasks);
   };
 
+  parentFunction = (addBtnFromChild, deleteAllTasksFromChild) => {
+    this.setState({ addBtn: addBtnFromChild });
+    this.setState({ deleteAllTasks: deleteAllTasksFromChild });
+  };
+
   render() {
     return (
       <div className="margin-bottom align">
         <TextPopUp title="Subtask" popup="Empty" />
-        <SubtaskBtns onSelectTask={this.getSelectedTask} />
+        <SubtaskBtns onSelectTask={this.getSelectedTask} functionFromParent={this.parentFunction} />
+        <PresetTemplates addBtn={this.state.addBtn} deleteAllTasks={this.state.deleteAllTasks} />
       </div>
     );
   }

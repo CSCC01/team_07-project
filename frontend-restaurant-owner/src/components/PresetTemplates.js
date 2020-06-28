@@ -10,7 +10,6 @@ class PresetTemplates extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      subTask: [],
       hideList: true,
       selectedTemplate: 0,
       x: 0,

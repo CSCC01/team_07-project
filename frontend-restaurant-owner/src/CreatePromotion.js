@@ -6,7 +6,6 @@ import CreateSubtask from './components/CreateSubtask';
 import DateInput from './components/DateInput';
 import SelectReward from './components/SelectReward';
 import EditImagePopUp from './components/EditImagePopUp';
-import PresetTemplates from './components/PresetTemplates';
 
 import Button from '@material-ui/core/Button';
 
@@ -72,11 +71,6 @@ class CreatePromotion extends Component {
     }
   };
 
-  parentFunction = (addBtnFromChild, deleteAllTasksFromChild) => {
-    this.setState({ addBtn: addBtnFromChild });
-    this.setState({ deleteAllTasks: deleteAllTasksFromChild });
-  };
-
   render() {
     return (
       <div className="create-promotion-wrapper">
@@ -109,7 +103,7 @@ class CreatePromotion extends Component {
               onSelectStartTime={(value) => this.onUpdate('startTime', value)}
               onSelectCloseTime={(value) => this.onUpdate('closeTime', value)}
             />
-            <CreateSubtask onSelectTask={(value) => this.onUpdate('task', value)} />
+            <CreateSubtask ref="c" onSelectTask={(value) => this.onUpdate('task', value)} />
             <SelectReward onSelectReward={(value) => this.onUpdate('reward', value)} />
           </div>
         </div>
@@ -131,7 +125,6 @@ class CreatePromotion extends Component {
             Submit
           </Button>
         </div>
-        <PresetTemplates addBtn={this.state.addBtn} deleteAllTasks={this.state.deleteAllTasks} />
       </div>
     );
   }

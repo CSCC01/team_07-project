@@ -48,7 +48,7 @@ export default class SubtaskBtns extends React.Component {
       taskDecscription: taskDecscription,
       dialogOpen: dialogOpen,
     }));
-    this.props.onSelectTask(taskDecscription);
+    // this.props.onSelectTask(taskDecscription);
   }
 
   deleteAllTasks = () => {
@@ -78,7 +78,7 @@ export default class SubtaskBtns extends React.Component {
     let taskDecscription = this.state.taskDecscription;
     taskDecscription[i] = e.target.value;
     this.setState({ taskDecscription: taskDecscription });
-    this.props.onSelectTask(taskDecscription);
+    // this.props.onSelectTask(taskDecscription);
   }
 
   childFunction = () => {
