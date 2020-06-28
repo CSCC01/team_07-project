@@ -1,25 +1,23 @@
 import React from 'react';
 
-function BuyXGetY(props) {
-  let buyX = props.buyX;
-  let getY = props.getY;
-  let itemName = props.itemName;
-  let list = [];
-  for (let i = 0; i < buyX; i++) {
-    list.push(<p key={i}>Buy one {itemName}.</p>);
-  }
-  if (buyX > 0 && getY > 0) {
+class BuyXGetY extends React.Component {
+  addSubtask = () => {
+    let buyX = this.props.buyX;
+    let getY = this.props.getY;
+    let itemName = this.props.itemName;
+    if (buyX > 0 && getY > 0) {
+      this.props.addBtn('Buy ' + buyX + ' ' + itemName + ' get ' + getY + ' ' + itemName + 'free.');
+    }
+    this.props.hideForms();
+    this.props.clearInputs();
+  };
+
+  render() {
     return (
       <div>
-        <p>
-          Task: Buy {buyX} {itemName} get {getY} {itemName} free.
-        </p>
-        <p>Subtasks: </p>
-        <p>{list}</p>
+        <button onClick={this.addSubtask}>Finish</button>
       </div>
     );
-  } else {
-    return <div></div>;
   }
 }
 

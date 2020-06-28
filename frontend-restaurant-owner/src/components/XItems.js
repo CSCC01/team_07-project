@@ -1,24 +1,22 @@
 import React from 'react';
 
-function XItems(props) {
-  let itemCount = props.itemCount;
-  let itemName = props.itemName;
-  let list = [];
-  for (let i = 0; i < itemCount; i++) {
-    list.push(<p key={i}>Buy 1 {itemName}.</p>);
-  }
-  if (itemCount > 0) {
+class XItems extends React.Component {
+  addSubtask = () => {
+    let itemCount = this.props.itemCount;
+    let itemName = this.props.itemName;
+    for (let i = 0; i < itemCount; i++) {
+      this.props.addBtn('Buy 1 ' + itemName + '.');
+    }
+    this.props.hideForms();
+    this.props.clearInputs();
+  };
+
+  render() {
     return (
       <div>
-        <p>
-          Task: Get reward for buying {itemCount} {itemName}s{' '}
-        </p>
-        <p>Subtasks: </p>
-        <p>{list}</p>
+        <button onClick={this.addSubtask}>Finish</button>
       </div>
     );
-  } else {
-    return <div></div>;
   }
 }
 

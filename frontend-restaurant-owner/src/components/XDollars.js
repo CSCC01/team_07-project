@@ -1,16 +1,21 @@
 import React from 'react';
 
-function XDollars(props) {
-  let dollars = props.dollars;
-  if (dollars > 0) {
+class XDollars extends React.Component {
+  addSubtask = () => {
+    let dollars = this.props.dollars;
+    if (dollars > 0) {
+      this.props.addBtn('Get reward for spending ' + dollars + ' dollars on an order.');
+    }
+    this.props.hideForms();
+    this.props.clearInputs();
+  };
+
+  render() {
     return (
       <div>
-        <p>Task: Get reward for spending {dollars} dollars on an order.</p>
-        <p>Subtask: Get reward for spending {dollars} dollars on an order.</p>
+        <button onClick={this.addSubtask}>Finish</button>
       </div>
     );
-  } else {
-    return <div></div>;
   }
 }
 

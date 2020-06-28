@@ -13,63 +13,42 @@ class PresetTemplates extends React.Component {
       subTask: [],
       hideList: true,
       selectedTemplate: 0,
-      displayTask: 0,
       x: 0,
       y: 0,
       n: 0,
       itemName: '',
     };
-
-    this.toggleList = this.toggleList.bind(this);
-    this.hideForms = this.hideForms.bind(this);
-    this.hideTask = this.hideTask.bind(this);
-    this.handleXChange = this.handleXChange.bind(this);
-    this.handleYChange = this.handleYChange.bind(this);
-    this.handleItemNameChange = this.handleItemNameChange.bind(this);
   }
 
-  // sendData(subTask) {
-  //   this.props.callbackFunction(subTask);
-  // }
-
-  // generateList(count) {
-  //   let subTask = [];
-  //   for (let i = 0; i < count; i++) {
-  //     subTask.push('Complete one visit.');
-  //   }
-  //   return subTask;
-  // }
-
-  toggleList() {
+  toggleList = () => {
     this.setState((prevState) => {
       return { hideList: !prevState.hideList };
     });
-  }
+  };
 
-  hideForms() {
+  hideForms = () => {
     this.setState({ selectedTemplate: 0 });
-  }
+  };
 
-  hideTask() {
-    this.setState({ displayTask: 0 });
-  }
+  clearInputs = () => {
+    this.setState({ x: 0 });
+    this.setState({ y: 0 });
+    this.setState({ itemName: '' });
+  };
 
-  handleXChange(e) {
+  handleXChange = (e) => {
     this.setState({ x: e.target.value });
-  }
+  };
 
-  handleYChange(e) {
+  handleYChange = (e) => {
     this.setState({ y: e.target.value });
-  }
+  };
 
-  handleItemNameChange(e) {
+  handleItemNameChange = (e) => {
     this.setState({ itemName: e.target.value });
-  }
+  };
 
   render() {
-    // if (this.state.displayXItemsSub) {
-    //   this.sendData(this.generateList(this.state.nthVisitInput), this.state.xVisitsInput);
-    // }
     return (
       <div>
         <button
@@ -77,7 +56,7 @@ class PresetTemplates extends React.Component {
           onClick={() => {
             this.toggleList();
             this.hideForms();
-            this.hideTask();
+            // this.hideTask();
           }}
         >
           PRESET TEMPLATES
@@ -135,14 +114,12 @@ class PresetTemplates extends React.Component {
           <div>
             <p>Enter # of visits</p>
             <input type="number" onChange={this.handleXChange}></input>
-            <button
-              onClick={() => {
-                this.setState({ displayTask: 1 });
-                this.hideForms();
-              }}
-            >
-              Finish
-            </button>
+            <NVisit
+              addBtn={this.props.addBtn}
+              count={this.state.x}
+              hideForms={this.hideForms}
+              clearInputs={this.clearInputs}
+            />
           </div>
         )}
 
@@ -152,14 +129,13 @@ class PresetTemplates extends React.Component {
             <input type="number" onChange={this.handleXChange}></input>
             <p>Enter the name of item need to be ordered.</p>
             <input type="text" onChange={this.handleItemNameChange}></input>
-            <button
-              onClick={() => {
-                this.setState({ displayTask: 2 });
-                this.hideForms();
-              }}
-            >
-              Finish
-            </button>
+            <XItems
+              addBtn={this.props.addBtn}
+              itemCount={this.state.x}
+              itemName={this.state.itemName}
+              hideForms={this.hideForms}
+              clearInputs={this.clearInputs}
+            />
           </div>
         )}
 
@@ -169,14 +145,13 @@ class PresetTemplates extends React.Component {
             <input type="number" onChange={this.handleXChange}></input>
             <p>Enter # of days.</p>
             <input type="number" onChange={this.handleYChange}></input>
-            <button
-              onClick={() => {
-                this.setState({ displayTask: 3 });
-                this.hideForms();
-              }}
-            >
-              Finish
-            </button>
+            <XVisitsYDays
+              addBtn={this.props.addBtn}
+              visits={this.state.x}
+              days={this.state.y}
+              hideForms={this.hideForms}
+              clearInputs={this.clearInputs}
+            />
           </div>
         )}
 
@@ -184,14 +159,12 @@ class PresetTemplates extends React.Component {
           <div>
             <p>Enter the money need to spend on an order.</p>
             <input type="number" onChange={this.handleXChange}></input>
-            <button
-              onClick={() => {
-                this.setState({ displayTask: 4 });
-                this.hideForms();
-              }}
-            >
-              Finish
-            </button>
+            <XDollars
+              addBtn={this.props.addBtn}
+              dollars={this.state.x}
+              hideForms={this.hideForms}
+              clearInputs={this.clearInputs}
+            />
           </div>
         )}
 
@@ -203,30 +176,15 @@ class PresetTemplates extends React.Component {
             <input type="number" onChange={this.handleYChange}></input>
             <p>Enter the name of item need to be ordered.</p>
             <input type="text" onChange={this.handleItemNameChange}></input>
-            <button
-              onClick={() => {
-                this.setState({ displayTask: 5 });
-                this.hideForms();
-              }}
-            >
-              Finish
-            </button>
+            <BuyXGetY
+              addBtn={this.props.addBtn}
+              buyX={this.state.x}
+              getY={this.state.y}
+              itemName={this.state.itemName}
+              hideForms={this.hideForms}
+              clearInputs={this.clearInputs}
+            />
           </div>
-        )}
-
-        {/* {this.state.displayNVisitSub === true && (
-          <NVisit count={this.state.handleXChange} parentCallback={this.callbackFunction} />
-        )} */}
-        {this.state.displayTask === 1 && <NVisit count={this.state.x} />}
-
-        {this.state.displayTask === 2 && (
-          <XItems itemCount={this.state.x} itemName={this.state.itemName} />
-        )}
-
-        {this.state.displayTask === 3 && <XVisitsYDays visits={this.state.x} days={this.state.y} />}
-        {this.state.displayTask === 4 && <XDollars dollars={this.state.x} />}
-        {this.state.displayTask === 5 && (
-          <BuyXGetY buyX={this.state.x} getY={this.state.y} itemName={this.state.itemName} />
         )}
       </div>
     );

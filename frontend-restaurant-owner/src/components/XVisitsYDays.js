@@ -1,24 +1,22 @@
 import React from 'react';
 
-function XVisitsYDays(props) {
-  let visits = props.visits;
-  let days = props.days;
-  let list = [];
-  for (let i = 0; i < visits; i++) {
-    list.push(<p key={i}>Complete one visit within {days} days.</p>);
-  }
-  if (visits > 0 && days > 0) {
+class XVisitsYDays extends React.Component {
+  addSubtask = () => {
+    let visits = this.props.visits;
+    let days = this.props.days;
+    for (let i = 0; i < visits; i++) {
+      this.props.addBtn('Complete one visit within ' + days + ' days.');
+    }
+    this.props.hideForms();
+    this.props.clearInputs();
+  };
+
+  render() {
     return (
       <div>
-        <p>
-          Task: Get reward by visiting {visits} times within {days} days.
-        </p>
-        <p>Subtasks: </p>
-        <p>{list}</p>
+        <button onClick={this.addSubtask}>Finish</button>
       </div>
     );
-  } else {
-    return <div></div>;
   }
 }
 

@@ -7,8 +7,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import { makeStyles } from '@material-ui/core/styles';
-import NVisit from './NVisit';
-import PresetTemplates from './PresetTemplates';
 
 const useStyles = makeStyles({
   dialogActions: {
@@ -25,11 +23,12 @@ export default class SubtaskBtns extends React.Component {
       taskDecscription: [],
       dialogOpen: [],
     };
+    this.childFunction();
   }
 
-  addBtn() {
+  addBtn = (desc) => {
     let taskDecscription = this.state.taskDecscription;
-    taskDecscription.push('');
+    taskDecscription.push(desc);
     let dialogOpen = this.state.dialogOpen;
     dialogOpen.push(false);
     this.setState((state) => ({
@@ -37,7 +36,7 @@ export default class SubtaskBtns extends React.Component {
       taskDecscription: taskDecscription,
       dialogOpen: dialogOpen,
     }));
-  }
+  };
 
   deleteTask(i) {
     const taskDecscription = this.state.taskDecscription;
@@ -73,6 +72,10 @@ export default class SubtaskBtns extends React.Component {
     this.setState({ taskDecscription: taskDecscription });
   }
 
+  childFunction = () => {
+    this.props.functionFromParent(this.addBtn);
+  };
+
   render() {
     let btns = [];
     for (let i = 1; i < this.state.taskNum; i++) {
@@ -90,13 +93,10 @@ export default class SubtaskBtns extends React.Component {
     }
 
     return (
-      <div>
-        <NVisit addBtn={this.addBtn} taskNum={this.state.taskNum} test="1" />
-        <ButtonGroup>
-          {btns}
-          <Button onClick={() => this.addBtn()}>+</Button>
-        </ButtonGroup>
-      </div>
+      <ButtonGroup>
+        {btns}
+        <Button onClick={() => this.addBtn('')}>+</Button>
+      </ButtonGroup>
     );
   }
 }
