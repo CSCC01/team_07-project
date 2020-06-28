@@ -66,7 +66,7 @@ class PresetTemplates extends React.Component {
         </button>
 
         <div className={this.state.hideList ? styles.inactive : styles.container}>
-          <div
+          <p
             className={styles.item}
             onClick={() => {
               this.setState({ selectedTemplate: 1 });
@@ -74,8 +74,8 @@ class PresetTemplates extends React.Component {
             }}
           >
             N-th Visit
-          </div>
-          <div
+          </p>
+          <p
             className={styles.item}
             onClick={() => {
               this.setState({ selectedTemplate: 2 });
@@ -83,8 +83,8 @@ class PresetTemplates extends React.Component {
             }}
           >
             Order X Specific Items
-          </div>
-          <div
+          </p>
+          <p
             className={styles.item}
             onClick={() => {
               this.setState({ selectedTemplate: 3 });
@@ -92,8 +92,8 @@ class PresetTemplates extends React.Component {
             }}
           >
             Visit X Times Within Y Days
-          </div>
-          <div
+          </p>
+          <p
             className={styles.item}
             onClick={() => {
               this.setState({ selectedTemplate: 4 });
@@ -101,8 +101,8 @@ class PresetTemplates extends React.Component {
             }}
           >
             Spend X Dollars in an Order
-          </div>
-          <div
+          </p>
+          <p
             className={styles.item}
             onClick={() => {
               this.setState({ selectedTemplate: 5 });
@@ -110,7 +110,7 @@ class PresetTemplates extends React.Component {
             }}
           >
             Buy X Get Y Free
-          </div>
+          </p>
         </div>
 
         {this.state.selectedTemplate === 1 && (
