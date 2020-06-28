@@ -50,6 +50,13 @@ export default class SubtaskBtns extends React.Component {
     }));
   }
 
+  deleteAllTasks = () => {
+    let totalTask = this.state.taskNum;
+    for (let i = 1; i < totalTask; i++) {
+      this.deleteTask(0);
+    }
+  };
+
   openDialog(i) {
     let dialogOpen = this.state.dialogOpen;
     dialogOpen[i] = true;
@@ -73,7 +80,7 @@ export default class SubtaskBtns extends React.Component {
   }
 
   childFunction = () => {
-    this.props.functionFromParent(this.addBtn);
+    this.props.functionFromParent(this.addBtn, this.deleteAllTasks);
   };
 
   render() {

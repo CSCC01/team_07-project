@@ -15,7 +15,6 @@ class PresetTemplates extends React.Component {
       selectedTemplate: 0,
       x: 0,
       y: 0,
-      n: 0,
       itemName: '',
     };
   }
@@ -34,6 +33,11 @@ class PresetTemplates extends React.Component {
     this.setState({ x: 0 });
     this.setState({ y: 0 });
     this.setState({ itemName: '' });
+  };
+
+  hideAndClear = () => {
+    this.hideForms();
+    this.clearInputs();
   };
 
   handleXChange = (e) => {
@@ -56,7 +60,6 @@ class PresetTemplates extends React.Component {
           onClick={() => {
             this.toggleList();
             this.hideForms();
-            // this.hideTask();
           }}
         >
           PRESET TEMPLATES
@@ -116,9 +119,9 @@ class PresetTemplates extends React.Component {
             <input type="number" onChange={this.handleXChange}></input>
             <NVisit
               addBtn={this.props.addBtn}
+              deleteAllTasks={this.props.deleteAllTasks}
               count={this.state.x}
-              hideForms={this.hideForms}
-              clearInputs={this.clearInputs}
+              hideAndClear={this.hideAndClear}
             />
           </div>
         )}
@@ -131,10 +134,10 @@ class PresetTemplates extends React.Component {
             <input type="text" onChange={this.handleItemNameChange}></input>
             <XItems
               addBtn={this.props.addBtn}
+              deleteAllTasks={this.props.deleteAllTasks}
               itemCount={this.state.x}
               itemName={this.state.itemName}
-              hideForms={this.hideForms}
-              clearInputs={this.clearInputs}
+              hideAndClear={this.hideAndClear}
             />
           </div>
         )}
@@ -147,10 +150,10 @@ class PresetTemplates extends React.Component {
             <input type="number" onChange={this.handleYChange}></input>
             <XVisitsYDays
               addBtn={this.props.addBtn}
+              deleteAllTasks={this.props.deleteAllTasks}
               visits={this.state.x}
               days={this.state.y}
-              hideForms={this.hideForms}
-              clearInputs={this.clearInputs}
+              hideAndClear={this.hideAndClear}
             />
           </div>
         )}
@@ -161,9 +164,9 @@ class PresetTemplates extends React.Component {
             <input type="number" onChange={this.handleXChange}></input>
             <XDollars
               addBtn={this.props.addBtn}
+              deleteAllTasks={this.props.deleteAllTasks}
               dollars={this.state.x}
-              hideForms={this.hideForms}
-              clearInputs={this.clearInputs}
+              hideAndClear={this.hideAndClear}
             />
           </div>
         )}
@@ -178,11 +181,11 @@ class PresetTemplates extends React.Component {
             <input type="text" onChange={this.handleItemNameChange}></input>
             <BuyXGetY
               addBtn={this.props.addBtn}
+              deleteAllTasks={this.props.deleteAllTasks}
               buyX={this.state.x}
               getY={this.state.y}
               itemName={this.state.itemName}
-              hideForms={this.hideForms}
-              clearInputs={this.clearInputs}
+              hideAndClear={this.hideAndClear}
             />
           </div>
         )}
