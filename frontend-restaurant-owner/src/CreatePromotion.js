@@ -6,23 +6,29 @@ import CreateSubtask from './components/CreateSubtask';
 import DateInput from './components/DateInput';
 import SelectReward from './components/SelectReward';
 import EditImagePopUp from './components/EditImagePopUp';
+import PresetTemplates from './components/PresetTemplates';
 
 import Button from '@material-ui/core/Button';
 
 import './CreatePromotion.css';
 
 class CreatePromotion extends Component {
-  state = {
-    image: '',
-    sourceImage: '',
-    title: '',
-    description: '',
-    startTime: '',
-    closeTime: '',
-    tasks: [],
-    reward: -1,
-    show: 0,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      addBtn: '',
+      deleteAllTasks: '',
+      image: '',
+      sourceImage: '',
+      title: '',
+      description: '',
+      startTime: '',
+      closeTime: '',
+      tasks: [],
+      reward: -1,
+      show: 0,
+    };
+  }
 
   createPromotion = () => {
     this.setState({ show: !this.state.show });
@@ -64,6 +70,11 @@ class CreatePromotion extends Component {
     } else if (this.state.reward === -1) {
       console.log('reward empty');
     }
+  };
+
+  parentFunction = (addBtnFromChild, deleteAllTasksFromChild) => {
+    this.setState({ addBtn: addBtnFromChild });
+    this.setState({ deleteAllTasks: deleteAllTasksFromChild });
   };
 
   render() {
@@ -120,6 +131,7 @@ class CreatePromotion extends Component {
             Submit
           </Button>
         </div>
+        <PresetTemplates addBtn={this.state.addBtn} deleteAllTasks={this.state.deleteAllTasks} />
       </div>
     );
   }
