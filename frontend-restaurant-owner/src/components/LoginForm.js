@@ -17,7 +17,6 @@ function Login() {
 
   function postLogin(event) {
     event.preventDefault();
-    console.log('test');
     axios
       .post('http://localhost:1337/auth/local', {
         identifier: userName,
