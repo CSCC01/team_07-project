@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
-function Login() {
+function LoginForm() {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -91,4 +91,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginForm;
