@@ -3,7 +3,7 @@ import Popup from 'reactjs-popup';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 import ImageCropper from './ImageCropper';
 
@@ -21,7 +21,11 @@ class EditImagePopUp extends Component {
     return (
       <Popup
         trigger={
-          <Button variant="contained" color="secondary">
+          <Button
+            variant="contained"
+            color="secondary"
+            startIcon={<FontAwesomeIcon icon={faEdit} />}
+          >
             Edit
           </Button>
         }

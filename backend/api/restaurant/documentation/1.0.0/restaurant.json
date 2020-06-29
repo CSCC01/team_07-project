@@ -525,43 +525,6 @@
           "name": {
             "type": "string"
           },
-          "promotions": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "title": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "progresses": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "subtasks": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "restaurant": {
-                  "type": "string"
-                },
-                "image": {
-                  "type": "string"
-                }
-              }
-            }
-          },
           "users": {
             "type": "array",
             "items": {
@@ -616,12 +579,6 @@
         "properties": {
           "name": {
             "type": "string"
-          },
-          "promotions": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           },
           "users": {
             "type": "array",

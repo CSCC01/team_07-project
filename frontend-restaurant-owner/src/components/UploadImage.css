@@ -1,32 +1,42 @@
 .image-button-wrapper {
     position: relative;
-    /* border: 2px solid blue; */
 }
 
-.upload-image-init {
+.button-wrapper {
     position: absolute;
     width: 100%;
     height: 100%;
-    top: 50%;
-    transform: translate(0%, -50%);
+    z-index: 100;
+}
+
+.hover {
+    opacity: 0; 
+}
+
+.hover:hover {
+    opacity: 1;
 }
 
 .upload-image {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    /* width: 100%;
+    height: 100%; */
     top: 50%;
-    transform: translate(0%, -50%);
-    opacity: 0;
+    right: 50%;
+    transform: translate(50%, -50%);
 }
 
-.upload-image:hover {
-    opacity: 1;
-}
-
-.image-upload-button {
+.left-image {
+    position: absolute;
     top: 50%;
     transform: translate(0%, -50%);
+}
+
+.right-image {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translate(-100%, -50%);
 }
 
 .backgroud {

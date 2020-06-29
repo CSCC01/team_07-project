@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import TextPopUp from './TextPopUp';
 import PromotionTime from './PromotionTime';
 
-import '../CreatePromotion.css';
-
 class DateInput extends Component {
   state = {
     startTime: '',
@@ -23,7 +21,7 @@ class DateInput extends Component {
 
   render() {
     return (
-      <div className="margin-bottom align">
+      <div style={{ marginBottom: 10, textAlign: 'left' }}>
         <TextPopUp title="Date" popup="Empty" />
         <PromotionTime
           onSelectStartTime={this.getSelectedStartTime}

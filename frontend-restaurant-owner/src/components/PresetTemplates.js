@@ -86,29 +86,11 @@ class PresetTemplates extends React.Component {
           <p
             className={styles.item}
             onClick={() => {
-              this.setState({ selectedTemplate: 3 });
-              this.toggleList();
-            }}
-          >
-            Visit X Times Within Y Days
-          </p>
-          <p
-            className={styles.item}
-            onClick={() => {
               this.setState({ selectedTemplate: 4 });
               this.toggleList();
             }}
           >
             Spend X Dollars in an Order
-          </p>
-          <p
-            className={styles.item}
-            onClick={() => {
-              this.setState({ selectedTemplate: 5 });
-              this.toggleList();
-            }}
-          >
-            Buy X Get Y Free
           </p>
         </div>
 

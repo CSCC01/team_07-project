@@ -15,19 +15,13 @@
     "description": {
       "type": "richtext"
     },
-    "progresses": {
-      "collection": "process",
-      "via": "promotion"
-    },
-    "subtasks": {
-      "collection": "subtask",
-      "via": "promotion"
-    },
-    "restaurant": {
-      "model": "restaurant",
-      "via": "promotions"
-    },
     "image": {
+      "type": "string"
+    },
+    "starting_date": {
+      "type": "string"
+    },
+    "expired_date": {
       "type": "string"
     }
   }

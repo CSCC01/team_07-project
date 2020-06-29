@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import TextPopUp from './TextPopUp';
 
-import '../CreatePromotion.css';
-
 import TextField from '@material-ui/core/TextField';
 
 class DescriptionInput extends Component {
@@ -20,8 +18,8 @@ class DescriptionInput extends Component {
 
   render() {
     return (
-      <div className="margin-bottom">
-        <TextPopUp title="Description" popup="No character limitation" />
+      <div style={{ marginBottom: 10 }}>
+        <TextPopUp title="Description" popup="Limitation: 500 characters" />
         <TextField
           variant="outlined"
           fullWidth
@@ -29,7 +27,7 @@ class DescriptionInput extends Component {
           rows={4}
           onChange={this.descriptionChange}
           inputProps={{
-            maxLength: 300,
+            maxLength: 500,
           }}
         />
       </div>

@@ -11,10 +11,6 @@
   "attributes": {
     "description": {
       "type": "richtext"
-    },
-    "promotion": {
-      "via": "subtasks",
-      "model": "promotion"
     }
   }
 }

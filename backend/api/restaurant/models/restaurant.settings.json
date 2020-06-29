@@ -12,10 +12,6 @@
     "name": {
       "type": "string"
     },
-    "promotions": {
-      "via": "restaurant",
-      "collection": "promotion"
-    },
     "users": {
       "via": "restaurant",
       "plugin": "users-permissions",

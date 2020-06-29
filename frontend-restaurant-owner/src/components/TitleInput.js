@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import TextPopUp from './TextPopUp';
 
-import '../CreatePromotion.css';
-
 import TextField from '@material-ui/core/TextField';
 
 class TitleInput extends Component {
@@ -20,7 +18,7 @@ class TitleInput extends Component {
 
   render() {
     return (
-      <div className="margin-bottom">
+      <div style={{ marginBottom: 10 }}>
         <TextPopUp title="Title" popup="Limitation: 30 characters" />
         <TextField
           variant="outlined"

@@ -22,10 +22,6 @@
     },
     "expired_date": {
       "type": "date"
-    },
-    "promotion": {
-      "via": "progresses",
-      "model": "promotion"
     }
   }
 }

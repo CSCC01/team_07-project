@@ -528,79 +528,13 @@
           "description": {
             "type": "string"
           },
-          "progresses": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "promotion_status": {
-                  "type": "object"
-                },
-                "user": {
-                  "type": "string"
-                },
-                "starting_date": {
-                  "type": "string"
-                },
-                "expired_date": {
-                  "type": "string"
-                },
-                "promotion": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "subtasks": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "promotion": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "restaurant": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "promotions": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "users": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            }
-          },
           "image": {
+            "type": "string"
+          },
+          "starting_date": {
+            "type": "string"
+          },
+          "expired_date": {
             "type": "string"
           }
         }
@@ -613,22 +547,13 @@
           "description": {
             "type": "string"
           },
-          "progresses": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "subtasks": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "restaurant": {
+          "image": {
             "type": "string"
           },
-          "image": {
+          "starting_date": {
+            "type": "string"
+          },
+          "expired_date": {
             "type": "string"
           }
         }

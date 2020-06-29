@@ -4,8 +4,6 @@ import TextPopUp from './TextPopUp';
 import SubtaskBtns from './SubtaskBtns';
 import PresetTemplates from './PresetTemplates';
 
-import '../CreatePromotion.css';
-
 class CreateSubtask extends Component {
   state = {
     tasks: [],
@@ -25,8 +23,11 @@ class CreateSubtask extends Component {
 
   render() {
     return (
-      <div className="margin-bottom align">
-        <TextPopUp title="Subtask" popup="Empty" />
+      <div style={{ marginBottom: 10, textAlign: 'left' }}>
+        <TextPopUp
+          title="Subtask"
+          popup="Users can only use one preset. Reselect preset will delete all the exsting task."
+        />
         <SubtaskBtns onSelectTask={this.getSelectedTask} functionFromParent={this.parentFunction} />
         <PresetTemplates addBtn={this.state.addBtn} deleteAllTasks={this.state.deleteAllTasks} />
       </div>
