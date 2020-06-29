@@ -1266,9 +1266,6 @@
                 },
                 "expired_date": {
                   "type": "string"
-                },
-                "promotion": {
-                  "type": "string"
                 }
               }
             }
@@ -1283,12 +1280,6 @@
               },
               "name": {
                 "type": "string"
-              },
-              "promotions": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
               },
               "users": {
                 "type": "array",

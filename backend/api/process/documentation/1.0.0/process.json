@@ -575,40 +575,6 @@
           },
           "expired_date": {
             "type": "string"
-          },
-          "promotion": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "title": {
-                "type": "string"
-              },
-              "description": {
-                "type": "string"
-              },
-              "progresses": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "subtasks": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "restaurant": {
-                "type": "string"
-              },
-              "image": {
-                "type": "string"
-              }
-            }
           }
         }
       },
@@ -624,9 +590,6 @@
             "type": "string"
           },
           "expired_date": {
-            "type": "string"
-          },
-          "promotion": {
             "type": "string"
           }
         }
