@@ -2,9 +2,7 @@ import React from 'react';
 import styles from './PresetTemplates.module.css';
 import NVisit from './NVisit';
 import XItems from './XItems';
-import XVisitsYDays from './XVisitsYDays';
 import XDollars from './XDollars';
-import BuyXGetY from './BuyXGetY';
 
 class PresetTemplates extends React.Component {
   constructor(props) {
@@ -13,7 +11,6 @@ class PresetTemplates extends React.Component {
       hideList: true,
       selectedTemplate: 0,
       x: 0,
-      y: 0,
       itemName: '',
     };
   }
@@ -30,7 +27,6 @@ class PresetTemplates extends React.Component {
 
   clearInputs = () => {
     this.setState({ x: 0 });
-    this.setState({ y: 0 });
     this.setState({ itemName: '' });
   };
 
@@ -41,10 +37,6 @@ class PresetTemplates extends React.Component {
 
   handleXChange = (e) => {
     this.setState({ x: e.target.value });
-  };
-
-  handleYChange = (e) => {
-    this.setState({ y: e.target.value });
   };
 
   handleItemNameChange = (e) => {
@@ -86,7 +78,7 @@ class PresetTemplates extends React.Component {
           <p
             className={styles.item}
             onClick={() => {
-              this.setState({ selectedTemplate: 4 });
+              this.setState({ selectedTemplate: 3 });
               this.toggleList();
             }}
           >
@@ -125,47 +117,12 @@ class PresetTemplates extends React.Component {
 
         {this.state.selectedTemplate === 3 && (
           <div>
-            <p>Enter # visits.</p>
-            <input type="number" onChange={this.handleXChange}></input>
-            <p>Enter # of days.</p>
-            <input type="number" onChange={this.handleYChange}></input>
-            <XVisitsYDays
-              addBtn={this.props.addBtn}
-              deleteAllTasks={this.props.deleteAllTasks}
-              visits={this.state.x}
-              days={this.state.y}
-              hideAndClear={this.hideAndClear}
-            />
-          </div>
-        )}
-
-        {this.state.selectedTemplate === 4 && (
-          <div>
             <p>Enter the money need to spend on an order.</p>
             <input type="number" onChange={this.handleXChange}></input>
             <XDollars
               addBtn={this.props.addBtn}
               deleteAllTasks={this.props.deleteAllTasks}
               dollars={this.state.x}
-              hideAndClear={this.hideAndClear}
-            />
-          </div>
-        )}
-
-        {this.state.selectedTemplate === 5 && (
-          <div>
-            <p>Enter # of an item need to buy.</p>
-            <input type="number" onChange={this.handleXChange}></input>
-            <p>Enter # of item will get.</p>
-            <input type="number" onChange={this.handleYChange}></input>
-            <p>Enter the name of item need to be ordered.</p>
-            <input type="text" onChange={this.handleItemNameChange}></input>
-            <BuyXGetY
-              addBtn={this.props.addBtn}
-              deleteAllTasks={this.props.deleteAllTasks}
-              buyX={this.state.x}
-              getY={this.state.y}
-              itemName={this.state.itemName}
               hideAndClear={this.hideAndClear}
             />
           </div>

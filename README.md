@@ -11,3 +11,8 @@
 - [Google Drive](https://drive.google.com/drive/folders/1tfXjluQZ-lfSA7MviKEsdAbaYbPf0zbP)
 
 
+## References
+- [Strapi](https://strapi.io)
+- [React Router](https://reacttraining.com/react-router/web/api/BrowserRouter)
+- [Material UI Home Page](https://material-ui.com)
+- [Material Icons](https://material-ui.com/components/material-icons/)

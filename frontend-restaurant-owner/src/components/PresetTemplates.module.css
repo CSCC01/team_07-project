@@ -2,8 +2,12 @@
   background: white;
   border: 3px black solid;
   border-radius: 3;
+<<<<<<< HEAD
   margin-top: 10px;
   margin-bottom: 10px;
+=======
+  margin: 20px;
+>>>>>>> 387cb8f92ea0e5960e64f47111c9dd7921dc73e8
   color: black;
   height: 48;
   padding: 15px 50px;
@@ -31,7 +35,11 @@
   padding: 30px 10px;
   width: 100px;
   height: 60px;
+<<<<<<< HEAD
   margin-right: 15px;
+=======
+  margin: 5px;
+>>>>>>> 387cb8f92ea0e5960e64f47111c9dd7921dc73e8
   text-align: justify;
   text-align: center;
   cursor: pointer;
