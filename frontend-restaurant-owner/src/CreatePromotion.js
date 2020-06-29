@@ -8,7 +8,7 @@ import SelectReward from './components/SelectReward';
 import EditImagePopUp from './components/EditImagePopUp';
 
 import Button from '@material-ui/core/Button';
-import Axios from 'axios';
+// import Axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 

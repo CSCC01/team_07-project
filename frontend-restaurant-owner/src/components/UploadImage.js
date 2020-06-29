@@ -132,7 +132,7 @@ class UploadImage extends Component {
                   />
                 </div>
               </div>
-              <img className="image" src={this.state.image}></img>
+              <img className="image" src={this.state.image} alt=""></img>
               <div className="backgroud"></div>
             </div>
           ) : (
@@ -178,7 +178,7 @@ class UploadImage extends Component {
                   </div>
                 ) : null}
               </div>
-              <img className="image" src={this.state.image}></img>
+              <img className="image" src={this.state.image} alt=""></img>
               <div className="backgroud"></div>
             </div>
           )}
