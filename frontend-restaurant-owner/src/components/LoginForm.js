@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -6,6 +8,33 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
 function Login() {
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  /*
+  const [isError, setIsError] = useState(false);
+  */
+
+  function postLogin(event) {
+    event.preventDefault();
+    console.log("test");
+    axios.post("http://localhost:1337/auth/local", {
+      identifier: userName,
+      password: password,
+    }).then(reponse => {
+      if (reponse.status === 200) {
+        axios.defaults.headers.common['Authorization'] = reponse.data.jwt;
+        setLoggedIn(true);
+      }
+    }).catch(error => {
+      alert("The username or password provided were incorrect!");
+    });
+  }
+
+  if (isLoggedIn) {
+    return <Redirect to="/create-promotion" />;
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -22,6 +51,10 @@ function Login() {
             id="username"
             label="Username"
             name="username"
+            value={userName}
+            onChange={e => {
+              setUserName(e.target.value);
+            }}
             autoComplete="username"
             autoFocus
           />
@@ -32,6 +65,10 @@ function Login() {
             fullWidth
             name="password"
             label="Password"
+            value={password}
+            onChange={e => {
+              setPassword(e.target.value);
+            }}
             type="password"
             id="password"
             autoComplete="current-password"
@@ -42,6 +79,7 @@ function Login() {
             variant="contained"
             color="primary"
             style={{ marginTop: 20 }}
+            onClick={postLogin}
           >
             Log In
           </Button>
