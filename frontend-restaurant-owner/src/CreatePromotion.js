@@ -58,7 +58,7 @@ class CreatePromotion extends Component {
       show = 2;
     }
     this.setState({ disable: 1 });
-    this.refs.child.show(url, show);
+    this.refs.child.show(url, show); // eslint-disable-line
   };
 
   onRight = () => {
@@ -72,14 +72,14 @@ class CreatePromotion extends Component {
       show = 1;
       this.setState({ disable: 0 });
     }
-    this.refs.child.show(url, show);
+    this.refs.child.show(url, show); // eslint-disable-line
   };
 
   onEdit = (value) => {
     let image = this.state.image;
     image[this.state.currentIndex] = value;
     this.setState({ image: image });
-    this.refs.child.onEdit(value);
+    this.refs.child.onEdit(value); // eslint-disable-line
   };
 
   onDelete = () => {
@@ -107,7 +107,7 @@ class CreatePromotion extends Component {
         this.setState({ disable: 0 });
       }
     }
-    this.refs.child.onDelete(url, show);
+    this.refs.child.onDelete(url, show); // eslint-disable-line
   };
 
   discardPromotion = () => {
@@ -166,7 +166,7 @@ class CreatePromotion extends Component {
         <div className="input-wrapper">
           <div style={{ marginRight: 20 }}>
             <UploadImage
-              ref="child"
+              ref="child"  // eslint-disable-line
               onSelectImage={(image) => this.onLoad(image)}
               onLeft={this.onLeft}
               onRight={this.onRight}
