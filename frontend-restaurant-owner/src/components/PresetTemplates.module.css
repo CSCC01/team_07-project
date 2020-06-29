@@ -1,0 +1,55 @@
+.btn {
+  background: white;
+  border: 3px black solid;
+  border-radius: 3;
+  margin: 20px;
+  color: black;
+  height: 48;
+  padding: 15px 50px;
+  cursor: pointer;
+  transition: 0.5s;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background: black;
+  color: white;
+  box-shadow: 0 5px 15px #193047;
+  transform: translateY(-3px);
+}
+
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.item {
+  background-color: white;
+  border: 2px black solid;
+  padding: 30px 10px;
+  width: 100px;
+  height: 60px;
+  margin: 5px;
+  text-align: justify;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.5s;
+  font-weight: bold;
+  transition: 0.5s;
+}
+
+.item:hover {
+  background: black;
+  color: white;
+  box-shadow: 0 5px 15px #193047;
+  transform: translateY(-3px);
+}
+
+.inactive {
+  display: none;
+}
+
+.task {
+  font-weight: bold;
+}

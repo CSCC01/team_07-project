@@ -23,11 +23,12 @@ export default class SubtaskBtns extends React.Component {
       taskDecscription: [],
       dialogOpen: [],
     };
+    this.childFunction();
   }
 
-  addBtn() {
+  addBtn = (desc) => {
     let taskDecscription = this.state.taskDecscription;
-    taskDecscription.push('');
+    taskDecscription.push(desc);
     let dialogOpen = this.state.dialogOpen;
     dialogOpen.push(false);
     this.setState((state) => ({
@@ -35,7 +36,7 @@ export default class SubtaskBtns extends React.Component {
       taskDecscription: taskDecscription,
       dialogOpen: dialogOpen,
     }));
-  }
+  };
 
   deleteTask(i) {
     const taskDecscription = this.state.taskDecscription;
@@ -48,6 +49,13 @@ export default class SubtaskBtns extends React.Component {
       dialogOpen: dialogOpen,
     }));
   }
+
+  deleteAllTasks = () => {
+    let totalTask = this.state.taskNum;
+    for (let i = 1; i < totalTask; i++) {
+      this.deleteTask(0);
+    }
+  };
 
   openDialog(i) {
     let dialogOpen = this.state.dialogOpen;
@@ -71,6 +79,10 @@ export default class SubtaskBtns extends React.Component {
     this.setState({ taskDecscription: taskDecscription });
   }
 
+  childFunction = () => {
+    this.props.functionFromParent(this.addBtn, this.deleteAllTasks);
+  };
+
   render() {
     let btns = [];
     for (let i = 1; i < this.state.taskNum; i++) {
@@ -90,7 +102,7 @@ export default class SubtaskBtns extends React.Component {
     return (
       <ButtonGroup>
         {btns}
-        <Button onClick={() => this.addBtn()}>+</Button>
+        <Button onClick={() => this.addBtn('')}>+</Button>
       </ButtonGroup>
     );
   }
