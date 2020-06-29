@@ -133,30 +133,29 @@ class CreatePromotion extends Component {
     } else if (this.state.reward === -1) {
       alert('Failure: reward empty');
     } else {
-      const sourceImage = this.state.sourceImage;
-      const title = this.state.title;
-      const description = this.state.description;
-      const startTime = this.state.startTime;
-      const closeTime = this.state.closeTime;
-
-      const data = {
-        image: sourceImage,
-        title: title,
-        description: description,
-        starting_date: startTime,
-        closing_date: closeTime,
-      };
-
-      const add = await Axios({
-        method: 'POST',
-        url: 'http://localhost:1337/promotions',
-        data,
-      });
-      if (add.status === 200) {
-        alert('Promotion has successfully been added.');
-      } else {
-        alert('Something went wrong with the server.');
-      }
+      // const sourceImage = this.state.sourceImage;
+      // const title = this.state.title;
+      // const description = this.state.description;
+      // const startTime = this.state.startTime;
+      // const closeTime = this.state.closeTime;
+      // const data = {
+      //   image: sourceImage,
+      //   title: title,
+      //   description: description,
+      //   starting_date: startTime,
+      //   closing_date: closeTime,
+      // };
+      // const add = await Axios({
+      //   method: 'POST',
+      //   url: 'http://localhost:1337/promotions',
+      //   data,
+      // });
+      // if (add.status === 200) {
+      //   alert('Promotion has successfully been added.');
+      // } else {
+      //   alert('Something went wrong with the server.');
+      // }
+      // connect to the backend
     }
   };
 
