@@ -5,6 +5,7 @@ import Navbar from './sharedComponents/Navbar';
 import CreatePromotion from './CreatePromotion';
 import Home from './Home';
 import Login from './Login';
+import Register from './Register';
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
         <Switch>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
           </Route>
           <Route path="/create-promotion">
             <CreatePromotion />
