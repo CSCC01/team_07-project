@@ -15,21 +15,19 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import './CreatePromotion.css';
 
 class CreatePromotion extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      image: [''],
-      sourceImage: [''],
-      currentIndex: 0,
-      title: '',
-      description: '',
-      startTime: '',
-      closeTime: '',
-      tasks: [],
-      reward: -1,
-      disable: 1, // 0 - disable; 1 - enable
-    };
-  }
+  state = {
+    image: [''],
+    sourceImage: [''],
+    currentIndex: 0,
+    title: '',
+    description: '',
+    startTime: '',
+    closeTime: '',
+    tasks: [],
+    reward: -1,
+    disable: 1, // 0 - disable; 1 - enable
+  };
+  UploadImageRef = React.createRef();
 
   onUpdate = (key, value) => {
     this.setState({ [key]: value });
@@ -58,7 +56,7 @@ class CreatePromotion extends Component {
       show = 2;
     }
     this.setState({ disable: 1 });
-    this.refs.child.show(url, show); // eslint-disable-line
+    this.UploadImageRef.current.show(url, show);
   };
 
   onRight = () => {
@@ -72,14 +70,14 @@ class CreatePromotion extends Component {
       show = 1;
       this.setState({ disable: 0 });
     }
-    this.refs.child.show(url, show); // eslint-disable-line
+    this.UploadImageRef.current.show(url, show);
   };
 
   onEdit = (value) => {
     let image = this.state.image;
     image[this.state.currentIndex] = value;
     this.setState({ image: image });
-    this.refs.child.onEdit(value); // eslint-disable-line
+    this.UploadImageRef.current.onEdit(value);
   };
 
   onDelete = () => {
@@ -107,7 +105,7 @@ class CreatePromotion extends Component {
         this.setState({ disable: 0 });
       }
     }
-    this.refs.child.onDelete(url, show); // eslint-disable-line
+    this.UploadImageRef.current.onDelete(url, show);
   };
 
   discardPromotion = () => {
@@ -165,7 +163,7 @@ class CreatePromotion extends Component {
         <div className="input-wrapper">
           <div style={{ marginRight: 20 }}>
             <UploadImage
-              ref="child"  // eslint-disable-line
+              ref={this.UploadImageRef}
               onSelectImage={(image) => this.onLoad(image)}
               onLeft={this.onLeft}
               onRight={this.onRight}

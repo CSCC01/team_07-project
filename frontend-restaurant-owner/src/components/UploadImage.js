@@ -61,12 +61,11 @@ class UploadImage extends Component {
     });
   };
 
-  onDelete = (url, show) => {
+  onDelete = (url) => {
     document.getElementById('image-input').value = '';
     let numOfImage = this.state.numOfImage;
     this.setState({
       image: url,
-      show: show,
       numOfImage: numOfImage - 1,
     });
   };
