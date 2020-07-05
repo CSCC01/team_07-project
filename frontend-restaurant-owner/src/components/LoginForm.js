@@ -6,35 +6,53 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import Link from '@material-ui/core/Link';
 
 function LoginForm() {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggedIn, setLoggedIn] = useState(false);
-  /*
-  const [isError, setIsError] = useState(false);
-  */
+  const [hasToken, setHasToken] = useState(false);
+
+  React.useEffect(() => {
+    if (localStorage.getItem('Authorization-Token')) {
+      setHasToken(true);
+    }
+  }, []);
+
+  if (isLoggedIn) {
+    return <Redirect to="/create-promotion" />;
+  }
+
+  function useExistingToken(event) {
+    event.preventDefault();
+    const token = localStorage.getItem('Authorization-Token');
+    axios.defaults.headers.common['Authorization'] = token;
+    setLoggedIn(true);
+  }
 
   function postLogin(event) {
+    // Disable the default form submit action
     event.preventDefault();
+
+    // Remove existing login token
+    delete axios.defaults.headers.common['Authorization'];
+
     axios
       .post('http://localhost:1337/auth/local', {
         identifier: userName,
         password: password,
       })
-      .then((reponse) => {
-        if (reponse.status === 200) {
-          axios.defaults.headers.common['Authorization'] = reponse.data.jwt;
-          setLoggedIn(true);
-        }
+      .then((response) => {
+        if (response.status !== 200) console.warn(response);
+        axios.defaults.headers.common['Authorization'] = response.data.jwt;
+        localStorage.setItem('Authorization-Token', response.data.jwt);
+        setLoggedIn(true);
       })
       .catch((error) => {
+        console.warn(error);
         alert('The username or password provided were incorrect!');
       });
-  }
-
-  if (isLoggedIn) {
-    return <Redirect to="/create-promotion" />;
   }
 
   return (
@@ -42,7 +60,7 @@ function LoginForm() {
       <CssBaseline />
       <div>
         <Typography component="h1" variant="h5">
-          Log in
+          Login
         </Typography>
         <form noValidate>
           <TextField
@@ -83,8 +101,13 @@ function LoginForm() {
             style={{ marginTop: 20 }}
             onClick={postLogin}
           >
-            Log In
+            Login
           </Button>
+          {hasToken && (
+            <Link variant="h6" href="" onClick={useExistingToken} style={{ marginTop: 20 }}>
+              It seems like that you are already logged in. Click here to continue.
+            </Link>
+          )}
         </form>
       </div>
     </Container>
