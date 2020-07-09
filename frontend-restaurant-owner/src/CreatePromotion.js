@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import UploadImage from './components/UploadImage';
-import TitleInput from './components/TitleInput';
-import DescriptionInput from './components/DescriptionInput';
+import TextPopUp from './components/TextPopUp';
+import TextField from '@material-ui/core/TextField';
 import CreateSubtask from './components/CreateSubtask';
-import DateInput from './components/DateInput';
 import SelectReward from './components/SelectReward';
 import EditImagePopUp from './components/EditImagePopUp';
 
@@ -31,7 +30,6 @@ class CreatePromotion extends Component {
 
   onUpdate = (key, value) => {
     this.setState({ [key]: value });
-    console.log(key, value);
   };
 
   onLoad = (value) => {
@@ -109,21 +107,18 @@ class CreatePromotion extends Component {
   };
 
   discardPromotion = () => {
-    // goback
+    // goBack
   };
 
   submitPromotion = async () => {
+    for (let key of ['title', 'description', 'startTime', 'closeTime']) {
+      if (this.state[key] === '') {
+        alert(`Failure: ${key} empty`);
+      }
+    }
+
     if (this.state.image.length === 1) {
       alert('Failure: image empty');
-    } else if (this.state.title === '') {
-      alert('Failure: title empty');
-    } else if (this.state.description === '') {
-      alert('Failure: description empty');
-    } else if (this.state.startTime === '') {
-      console.log(this.state.startTime);
-      alert('Failure: startTime empty');
-    } else if (this.state.closeTime === '') {
-      alert('Failure: closeTime empty');
     } else if (lessTime(this.state.closeTime, this.state.startTime)) {
       alert('Failure: closeTime before startTime');
     } else if (lessTime(this.state.closeTime, getToday())) {
@@ -131,18 +126,19 @@ class CreatePromotion extends Component {
     } else if (this.state.reward === -1) {
       alert('Failure: reward empty');
     } else {
-      // const sourceImage = this.state.sourceImage;
-      // const title = this.state.title;
-      // const description = this.state.description;
-      // const startTime = this.state.startTime;
-      // const closeTime = this.state.closeTime;
-      // const data = {
-      //   image: sourceImage,
-      //   title: title,
-      //   description: description,
-      //   starting_date: startTime,
-      //   closing_date: closeTime,
-      // };
+      const sourceImage = this.state.sourceImage;
+      const title = this.state.title;
+      const description = this.state.description;
+      const startTime = this.state.startTime;
+      const closeTime = this.state.closeTime;
+      const data = {
+        image: sourceImage,
+        title: title,
+        description: description,
+        starting_date: startTime,
+        closing_date: closeTime,
+      };
+      console.log(data);
       // const add = await Axios({
       //   method: 'POST',
       //   url: 'http://localhost:1337/promotions',
@@ -188,14 +184,52 @@ class CreatePromotion extends Component {
           </div>
 
           <div style={{ marginLeft: 20 }}>
-            <TitleInput onSelectTitle={(value) => this.onUpdate('title', value)} />
-            <DescriptionInput
-              onSelectDescription={(value) => this.onUpdate('description', value)}
-            />
-            <DateInput
-              onSelectStartTime={(value) => this.onUpdate('startTime', value)}
-              onSelectCloseTime={(value) => this.onUpdate('closeTime', value)}
-            />
+            {/* Title */}
+            <div style={{ marginBottom: 10 }}>
+              <TextPopUp title="Title" popup="Limitation: 30 characters" />
+              <TextField
+                variant="outlined"
+                fullWidth
+                onChange={(event) => this.onUpdate('title', event.target.value)}
+                inputProps={{ maxLength: 30 }}
+              />
+            </div>
+
+            {/* Description */}
+            <div style={{ marginBottom: 10 }}>
+              <TextPopUp title="Description" popup="Limitation: 500 characters" />
+              <TextField
+                variant="outlined"
+                fullWidth
+                multiline
+                rows={4}
+                onChange={(event) => this.onUpdate('description', event.target.value)}
+                inputProps={{ maxLength: 500 }}
+              />
+            </div>
+
+            {/* Date Inputs */}
+            <div style={{ marginBottom: 10, textAlign: 'left' }}>
+              <TextPopUp title="Date" popup="Empty" />
+              <form noValidate>
+                <TextField
+                  label="Starting Time"
+                  type="datetime-local"
+                  defaultValue="2020-01-01T00:00"
+                  InputLabelProps={{ shrink: true }}
+                  onChange={(event) => this.onUpdate('startTime', event.target.value)}
+                />
+                <br />
+                <TextField
+                  label="Expiring Time"
+                  type="datetime-local"
+                  defaultValue="2020-01-01T00:00"
+                  InputLabelProps={{ shrink: true }}
+                  onChange={(event) => this.onUpdate('closeTime', event.target.value)}
+                />
+              </form>
+            </div>
+
             <CreateSubtask onSelectTask={(value) => this.onUpdate('task', value)} />
             <SelectReward onSelectReward={(value) => this.onUpdate('reward', value)} />
           </div>
@@ -226,41 +260,9 @@ class CreatePromotion extends Component {
 export default CreatePromotion;
 
 function lessTime(t1, t2) {
-  let t1Arr = t1.split('-');
-  let t2Arr = t2.split('-');
-  if (parseInt(t1Arr[0]) > parseInt(t2Arr[0])) {
-    return 0;
-  } else if (parseInt(t1Arr[1]) > parseInt(t2Arr[1])) {
-    return 0;
-  } else {
-    let t1Arr1 = t1Arr[2].split('T');
-    let t2Arr1 = t2Arr[2].split('T');
-    if (parseInt(t1Arr1[0]) > parseInt(t2Arr1[0])) {
-      return 0;
-    } else {
-      let t1Arr3 = t1Arr1[1].split(':');
-      let t2Arr3 = t2Arr1[1].split(':');
-      if (parseInt(t1Arr3[0]) > parseInt(t2Arr3[0])) {
-        return 0;
-      } else if (parseInt(t1Arr3[0]) > parseInt(t2Arr3[0])) {
-        return 0;
-      }
-    }
-  }
-  return 1;
+  return new Date(t1) < new Date(t2);
 }
 
 function getToday() {
-  let today = new Date();
-  let time =
-    today.getFullYear() +
-    '-' +
-    (today.getMonth() + 1) +
-    '-' +
-    today.getDate() +
-    'T' +
-    today.getHours() +
-    ':' +
-    today.getMinutes();
-  return time;
+  return new Date().toString();
 }
