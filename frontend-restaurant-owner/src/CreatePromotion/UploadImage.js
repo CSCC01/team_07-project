@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './UploadImage.css';
 
-import TextPopUp from './TextPopUp';
+import TextPopUp from '../sharedComponents/TextPopUp';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';

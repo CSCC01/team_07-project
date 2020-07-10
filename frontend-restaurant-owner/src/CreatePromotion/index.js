@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import UploadImage from './components/UploadImage';
-import TextPopUp from './components/TextPopUp';
+import UploadImage from './UploadImage';
+import TextPopUp from '../sharedComponents/TextPopUp';
 import TextField from '@material-ui/core/TextField';
-import CreateSubtask from './components/CreateSubtask';
-import SelectReward from './components/SelectReward';
-import EditImagePopUp from './components/EditImagePopUp';
+import CreateSubtask from './CreateSubtask';
+import SelectReward from './SelectReward';
+import EditImagePopUp from './EditImagePopUp';
 
 import Button from '@material-ui/core/Button';
 // import Axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-import './CreatePromotion.css';
+import './index.css';
 
-class CreatePromotion extends Component {
+export default class CreatePromotion extends Component {
   state = {
     image: [''],
     sourceImage: [''],
@@ -256,8 +256,6 @@ class CreatePromotion extends Component {
     );
   }
 }
-
-export default CreatePromotion;
 
 function lessTime(t1, t2) {
   return new Date(t1) < new Date(t2);
