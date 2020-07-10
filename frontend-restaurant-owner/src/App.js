@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import Navbar from './components/Navbar';
+import Navbar from './sharedComponents/Navbar';
 import CreatePromotion from './CreatePromotion';
 import Home from './Home';
-import Login from './components/LoginForm';
+import Login from './Login';
 
 function App() {
   return (

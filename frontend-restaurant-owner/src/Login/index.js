@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 
-function LoginForm() {
+function Login() {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -114,4 +114,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default Login;

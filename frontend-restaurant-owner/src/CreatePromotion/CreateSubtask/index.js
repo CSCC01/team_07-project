@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import TextPopUp from './TextPopUp';
+import TextPopUp from '../../sharedComponents/TextPopUp';
 import SubtaskBtns from './SubtaskBtns';
 import PresetTemplates from './PresetTemplates';
 

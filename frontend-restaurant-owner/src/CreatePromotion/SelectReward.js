@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import TextPopUp from './TextPopUp';
+import TextPopUp from '../sharedComponents/TextPopUp';
 
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
