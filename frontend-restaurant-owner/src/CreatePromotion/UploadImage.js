@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './UploadImage.css';
 
-import TextPopUp from './TextPopUp';
+import TextPopUp from '../sharedComponents/TextPopUp';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
@@ -61,12 +61,11 @@ class UploadImage extends Component {
     });
   };
 
-  onDelete = (url, show) => {
+  onDelete = (url) => {
     document.getElementById('image-input').value = '';
     let numOfImage = this.state.numOfImage;
     this.setState({
       image: url,
-      show: show,
       numOfImage: numOfImage - 1,
     });
   };
@@ -100,7 +99,7 @@ class UploadImage extends Component {
                   accept=".jpg, .jpeg, .png"
                 />
               </div>
-              <div className="backgroud"></div>
+              <div className="background"></div>
             </div>
           ) : this.state.show === 1 ? (
             <div>
@@ -133,7 +132,7 @@ class UploadImage extends Component {
                 </div>
               </div>
               <img className="image" src={this.state.image} alt=""></img>
-              <div className="backgroud"></div>
+              <div className="background"></div>
             </div>
           ) : (
             <div>
@@ -179,7 +178,7 @@ class UploadImage extends Component {
                 ) : null}
               </div>
               <img className="image" src={this.state.image} alt=""></img>
-              <div className="backgroud"></div>
+              <div className="background"></div>
             </div>
           )}
         </div>

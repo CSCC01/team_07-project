@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import TextPopUp from './TextPopUp';
+import TextPopUp from '../sharedComponents/TextPopUp';
 
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -21,7 +21,7 @@ class SelectReward extends Component {
   render() {
     return (
       <div style={{ marginBottom: 10 }}>
-        <TextPopUp title="Reward" popup="Coupon and points are unavaliable right now" />
+        <TextPopUp title="Reward" popup="Coupon and points are unavailable right now" />
 
         <RadioGroup
           aria-label="gender"
