@@ -21,7 +21,7 @@ class SelectReward extends Component {
   render() {
     return (
       <div style={{ marginBottom: 10 }}>
-        <TextPopUp title="Reward" popup="Coupon and points are unavaliable right now" />
+        <TextPopUp title="Reward" popup="Coupon and points are unavailable right now" />
 
         <RadioGroup
           aria-label="gender"
