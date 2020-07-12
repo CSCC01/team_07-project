@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -28,8 +27,8 @@ function Register() {
         if (response.status !== 200) console.warn(response);
         //Not sure if I should store the jwt
         //localStorage.setItem('Authorization-Token', response.data.jwt);
-        window.alert("Registration is successful. You can log in with this account.");
-        window.location.href = "/login";
+        window.alert('Registration is successful. You can log in with this account.');
+        window.location.href = '/login';
       })
       .catch((error) => {
         console.warn(error);
