@@ -18,7 +18,7 @@ function Register() {
     // Disable the default form submit action
     event.preventDefault();
     if (password !== passwordDup) {
-      alert("Your password don't match");
+      alert("Your passwords don't match.");
     } else {
       axios
         .post('http://localhost:1337/auth/local/register', {
