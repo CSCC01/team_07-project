@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '@material-ui/core';
 
 class XDollars extends React.Component {
   addSubtask = () => {
@@ -13,7 +14,9 @@ class XDollars extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.addSubtask}>Finish</button>
+        <Button variant="contained" color="primary" onClick={this.addSubtask}>
+          Finish
+        </Button>
       </div>
     );
   }

@@ -1,4 +1,6 @@
 import React from 'react';
+import { TextField } from '@material-ui/core';
+import ModalPopUp from '../../sharedComponents/ModalPopUp';
 import styles from './PresetTemplates.module.css';
 import NVisit from './NVisit';
 import XItems from './XItems';
@@ -86,6 +88,9 @@ class PresetTemplates extends React.Component {
           </p>
         </div>
 
+        <ModalPopUp open={this.state.selectedTemplate !== 0}>
+          {this.state.selectedTemplate === 1 && (
+            <div>
         {this.state.selectedTemplate === 1 && (
           <div>
             <p>Enter # of visits</p>
@@ -127,6 +132,7 @@ class PresetTemplates extends React.Component {
             />
           </div>
         )}
+        </ModalPopUp>
       </div>
     );
   }
