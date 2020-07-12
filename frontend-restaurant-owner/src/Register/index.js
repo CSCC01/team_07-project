@@ -11,29 +11,32 @@ import Container from '@material-ui/core/Container';
 function Register() {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordDup, setPasswordDup] = useState('');
   const [email, setEmail] = useState('');
 
   function postRegister(event) {
     // Disable the default form submit action
     event.preventDefault();
-
-    axios
-      .post('http://localhost:1337/auth/local/register', {
-        username: userName,
-        email: email,
-        password: password,
-      })
-      .then((response) => {
-        if (response.status !== 200) console.warn(response);
-        //Not sure if I should store the jwt
-        //localStorage.setItem('Authorization-Token', response.data.jwt);
-        window.alert('Registration is successful. You can log in with this account.');
-        window.location.href = '/login';
-      })
-      .catch((error) => {
-        console.warn(error);
-        alert('An unexpected error has occurred');
-      });
+    if (password !== passwordDup) {
+      alert("Your password don't match");
+    } else {
+      axios
+        .post('http://localhost:1337/auth/local/register', {
+          username: userName,
+          email: email,
+          password: password,
+        })
+        .then((response) => {
+          if (response.status !== 200) console.warn(response);
+          localStorage.setItem('Authorization-Token', response.data.jwt);
+          window.alert('Registration is successful. You can log in with this account.');
+          window.location.href = '/login';
+        })
+        .catch((error) => {
+          console.warn(error);
+          alert('An unexpected error has occurred');
+        });
+    }
   }
 
   return (
@@ -85,6 +88,20 @@ function Register() {
             }}
             style={{ marginTop: 20 }}
           />
+          <TextField
+            variant="outlined"
+            required
+            fullWidth
+            name="passwordDup"
+            label="Confirm Password"
+            type="password"
+            id="passwordDup"
+            autoComplete="current-password"
+            onChange={(e) => {
+              setPasswordDup(e.target.value);
+            }}
+            style={{ marginTop: 20 }}
+          />
           <Button
             type="submit"
             fullWidth
@@ -98,7 +115,7 @@ function Register() {
           <Grid container justify="flex-end" style={{ marginTop: 20 }}>
             <Grid item>
               <Link href="/login" variant="body2">
-                Already have an account? Log in
+                Already have an account? Login
               </Link>
             </Grid>
           </Grid>
