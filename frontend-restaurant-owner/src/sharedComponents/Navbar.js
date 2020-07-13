@@ -17,8 +17,13 @@ export default function Navbar() {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/other" activeClassName={styles.activeTab}>
-            Other
+          <NavLink to="/create-coupons" activeClassName={styles.activeTab}>
+            Create Coupons
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/analysis" activeClassName={styles.activeTab}>
+            Analysis
           </NavLink>
         </li>
       </ul>

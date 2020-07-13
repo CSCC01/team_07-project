@@ -110,7 +110,7 @@ function Register() {
           >
             Register
           </Button>
-          <Grid container justify="flex-end" style={{ marginTop: 20 }}>
+          <Grid container justify="center" style={{ marginTop: 20 }}>
             <Grid item>
               <Link href="/login" variant="body2">
                 Already have an account? Login

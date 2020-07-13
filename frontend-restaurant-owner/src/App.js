@@ -21,9 +21,11 @@ function App() {
           <Navbar />
           <CreatePromotion />
         </Route>
-        <Route path="/other">
+        <Route path="/create-coupons">
           <Navbar />
-          <Other />
+        </Route>
+        <Route path="/analysis">
+          <Navbar />
         </Route>
         <Route path="/">
           <Navbar />
@@ -32,10 +34,6 @@ function App() {
       </Switch>
     </div>
   );
-}
-
-function Other() {
-  return <h2>Made by ByteMe</h2>;
 }
 
 export default App;
