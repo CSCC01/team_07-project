@@ -27,13 +27,20 @@ function App() {
         <Route path="/analysis">
           <Navbar />
         </Route>
-        <Route path="/">
+        <Route exact path="/">
           <Navbar />
           <Home />
+        </Route>
+        <Route path="*">
+          <NoMatch />
         </Route>
       </Switch>
     </div>
   );
+}
+
+function NoMatch() {
+  return <div>You have come to a place of nowhere! :(</div>;
 }
 
 export default App;
