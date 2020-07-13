@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
@@ -57,7 +56,6 @@ function Login() {
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div>
         <Typography component="h1" variant="h5">
           Login
