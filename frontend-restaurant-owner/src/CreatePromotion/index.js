@@ -7,9 +7,9 @@ import SelectReward from './SelectReward';
 import EditImagePopUp from './EditImagePopUp';
 
 import Button from '@material-ui/core/Button';
-// import Axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import Axios from 'axios';
 
 import './index.css';
 
@@ -106,8 +106,8 @@ export default class CreatePromotion extends Component {
     this.UploadImageRef.current.onDelete(url, show);
   };
 
-  discardPromotion = () => {
-    // goBack
+  discardPromotion = async () => {
+    // go to view promotion
   };
 
   submitPromotion = async () => {
@@ -131,25 +131,26 @@ export default class CreatePromotion extends Component {
       const description = this.state.description;
       const startTime = this.state.startTime;
       const closeTime = this.state.closeTime;
+      const tasks = this.state.tasks;
       const data = {
         image: sourceImage,
         title: title,
         description: description,
         starting_date: startTime,
         closing_date: closeTime,
+        subtask: tasks,
       };
-      console.log(getToday());
-      // const add = await Axios({
-      //   method: 'POST',
-      //   url: 'http://localhost:1337/promotions',
-      //   data,
-      // });
-      // if (add.status === 200) {
-      //   alert('Promotion has successfully been added.');
-      // } else {
-      //   alert('Something went wrong with the server.');
-      // }
-      // connect to the backend
+      console.log(data);
+      const add = await Axios({
+        method: 'POST',
+        url: 'http://localhost:1337/promotions',
+        data,
+      });
+      if (add.status === 200) {
+        alert('Promotion has successfully been added.');
+      } else {
+        alert('Something went wrong with the server.');
+      }
     }
   };
 
@@ -230,7 +231,7 @@ export default class CreatePromotion extends Component {
               </form>
             </div>
 
-            <CreateSubtask onSelectTask={(value) => this.onUpdate('task', value)} />
+            <CreateSubtask onSelectTask={(value) => this.onUpdate('tasks', value)} />
             <SelectReward onSelectReward={(value) => this.onUpdate('reward', value)} />
           </div>
         </div>
