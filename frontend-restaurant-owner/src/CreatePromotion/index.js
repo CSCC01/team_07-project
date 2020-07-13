@@ -121,7 +121,7 @@ export default class CreatePromotion extends Component {
       alert('Failure: image empty');
     } else if (lessTime(this.state.closeTime, this.state.startTime)) {
       alert('Failure: closeTime before startTime');
-    } else if (lessTime(this.state.closeTime, getToday())) {
+    } else if (lessTime(this.state.startTime, getToday())) {
       alert('Failure: startTime before today');
     } else if (this.state.reward === -1) {
       alert('Failure: reward empty');
@@ -138,7 +138,7 @@ export default class CreatePromotion extends Component {
         starting_date: startTime,
         closing_date: closeTime,
       };
-      console.log(data);
+      console.log(getToday());
       // const add = await Axios({
       //   method: 'POST',
       //   url: 'http://localhost:1337/promotions',
