@@ -106,7 +106,7 @@ export default class CreatePromotion extends Component {
     this.UploadImageRef.current.onDelete(url, show);
   };
 
-  discardPromotion = async () => {
+  discardPromotion = () => {
     // go to view promotion
   };
 
@@ -140,7 +140,6 @@ export default class CreatePromotion extends Component {
         closing_date: closeTime,
         subtask: tasks,
       };
-      console.log(data);
       const add = await Axios({
         method: 'POST',
         url: 'http://localhost:1337/promotions',
