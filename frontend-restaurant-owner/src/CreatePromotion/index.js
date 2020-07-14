@@ -137,7 +137,7 @@ export default class CreatePromotion extends Component {
         title: title,
         description: description,
         starting_date: startTime,
-        closing_date: closeTime,
+        expired_date: closeTime,
         subtask: tasks,
       };
       const add = await Axios({
@@ -145,7 +145,7 @@ export default class CreatePromotion extends Component {
         url: 'http://localhost:1337/promotions',
         data,
       });
-      if (add.status === 200) {
+      if (add.status == 200) {
         alert('Promotion has successfully been added.');
       } else {
         alert('Something went wrong with the server.');
