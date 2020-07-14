@@ -91,47 +91,45 @@ class PresetTemplates extends React.Component {
         <ModalPopUp open={this.state.selectedTemplate !== 0}>
           {this.state.selectedTemplate === 1 && (
             <div>
-        {this.state.selectedTemplate === 1 && (
-          <div>
-            <p>Enter # of visits</p>
-            <input type="number" onChange={this.handleXChange}></input>
-            <NVisit
-              addBtn={this.props.addBtn}
-              deleteAllTasks={this.props.deleteAllTasks}
-              count={this.state.x}
-              hideAndClear={this.hideAndClear}
-            />
-          </div>
-        )}
+              <p>Enter # of visits</p>
+              <TextField type="number" onChange={this.handleXChange}></TextField>
+              <NVisit
+                addBtn={this.props.addBtn}
+                deleteAllTasks={this.props.deleteAllTasks}
+                count={this.state.x}
+                hideAndClear={this.hideAndClear}
+              />
+            </div>
+          )}
 
-        {this.state.selectedTemplate === 2 && (
-          <div>
-            <p>Enter # of items need to be ordered.</p>
-            <input type="number" onChange={this.handleXChange}></input>
-            <p>Enter the name of item need to be ordered.</p>
-            <input type="text" onChange={this.handleItemNameChange}></input>
-            <XItems
-              addBtn={this.props.addBtn}
-              deleteAllTasks={this.props.deleteAllTasks}
-              itemCount={this.state.x}
-              itemName={this.state.itemName}
-              hideAndClear={this.hideAndClear}
-            />
-          </div>
-        )}
+          {this.state.selectedTemplate === 2 && (
+            <div>
+              <p>Enter # of items need to be ordered.</p>
+              <TextField type="number" onChange={this.handleXChange}></TextField>
+              <p>Enter the name of item need to be ordered.</p>
+              <TextField type="text" onChange={this.handleItemNameChange}></TextField>
+              <XItems
+                addBtn={this.props.addBtn}
+                deleteAllTasks={this.props.deleteAllTasks}
+                itemCount={this.state.x}
+                itemName={this.state.itemName}
+                hideAndClear={this.hideAndClear}
+              />
+            </div>
+          )}
 
-        {this.state.selectedTemplate === 3 && (
-          <div>
-            <p>Enter the money need to spend on an order.</p>
-            <input type="number" onChange={this.handleXChange}></input>
-            <XDollars
-              addBtn={this.props.addBtn}
-              deleteAllTasks={this.props.deleteAllTasks}
-              dollars={this.state.x}
-              hideAndClear={this.hideAndClear}
-            />
-          </div>
-        )}
+          {this.state.selectedTemplate === 3 && (
+            <div>
+              <p>Enter the money need to spend on an order.</p>
+              <TextField type="number" onChange={this.handleXChange}></TextField>
+              <XDollars
+                addBtn={this.props.addBtn}
+                deleteAllTasks={this.props.deleteAllTasks}
+                dollars={this.state.x}
+                hideAndClear={this.hideAndClear}
+              />
+            </div>
+          )}
         </ModalPopUp>
       </div>
     );
