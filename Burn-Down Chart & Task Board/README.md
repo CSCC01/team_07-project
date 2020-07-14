@@ -9,3 +9,5 @@
 |0629| ![](./sprint2-initial-bdc.png) |  ![](./sprint2-initial-tb.png)   |
 |0705| ![](./sprint2-final-bdc.png) |  ![](./sprint2-final-tb.png)   |
 |0706| ![](./sprint3-initial-bdc.png) |  ![](./sprint3-initial-tb.png)   |
+|0712| ![](./sprint3-final-bdc.png) |  ![](./sprint3-final-tb.png)   |
+|0713| ![](./sprint4-initial-bdc.png) |  ![](./sprint4-initial-tb.png)   |
