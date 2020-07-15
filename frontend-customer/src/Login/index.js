@@ -106,7 +106,7 @@ function Login() {
               </Button>
               <Box display="flex" justifyContent="center" alignItems="center">
                 {hasToken && (
-                  <Link variant="h6" href="/" onClick={useExistingToken} style={{ marginTop: 20, textAlign: "center"}}>
+                  <Link variant="body2" href="/" onClick={useExistingToken} style={{ marginTop: 20, textAlign: "center"}}>
                     It seems like that you are already logged in. Click here to continue.
                   </Link>
                 )}
