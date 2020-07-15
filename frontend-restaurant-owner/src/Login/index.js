@@ -56,69 +56,73 @@ function Login() {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <div>
-        <Typography component="h1" variant="h5">
-          Login
-        </Typography>
-        <form noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="username"
-            label="Username"
-            name="username"
-            value={userName}
-            onChange={(e) => {
-              setUserName(e.target.value);
-            }}
-            autoComplete="username"
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            style={{ marginTop: 20 }}
-            onClick={postLogin}
-          >
-            Login
-          </Button>
-          <Grid container justify="center" style={{ marginTop: 20 }}>
-            {hasToken && (
-              <Grid item>
-                <Link variant="body2" href="/" onClick={useExistingToken}>
-                  It seems like that you are already logged in. Click here to continue.
-                </Link>
+    <Grid container direction="column" justify="center" style={{ minHeight: '100vh' }}>
+      <Grid item>
+        <Container maxWidth="xs">
+          <div>
+            <Typography component="h1" variant="h5">
+              Login
+            </Typography>
+            <form noValidate>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                value={userName}
+                onChange={(e) => {
+                  setUserName(e.target.value);
+                }}
+                autoComplete="username"
+                autoFocus
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                style={{ marginTop: 20 }}
+                onClick={postLogin}
+              >
+                Login
+              </Button>
+              <Grid container justify="center" style={{ marginTop: 20 }}>
+                {hasToken && (
+                  <Grid item>
+                    <Link variant="body2" href="/" onClick={useExistingToken}>
+                      It seems like that you are already logged in. Click here to continue.
+                    </Link>
+                  </Grid>
+                )}
+                <Grid item>
+                  <Link variant="body2" href="/register">
+                    Do not have an account? Click here to sign up.
+                  </Link>
+                </Grid>
               </Grid>
-            )}
-            <Grid item>
-              <Link variant="body2" href="/register">
-                Do not have an account? Click here to sign up.
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-    </Container>
+            </form>
+          </div>
+        </Container>
+      </Grid>
+    </Grid>
   );
 }
 

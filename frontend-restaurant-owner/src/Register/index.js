@@ -39,87 +39,91 @@ function Register() {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <div>
-        <Typography component="h1" variant="h5">
-          Register
-        </Typography>
-        <form noValidate>
-          <TextField
-            autoComplete="username"
-            name="UserName"
-            variant="outlined"
-            required
-            fullWidth
-            id="username"
-            label="Username"
-            style={{ marginTop: 20 }}
-            onChange={(e) => {
-              setUserName(e.target.value);
-            }}
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-            style={{ marginTop: 20 }}
-          />
-          <TextField
-            variant="outlined"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-            style={{ marginTop: 20 }}
-          />
-          <TextField
-            variant="outlined"
-            required
-            fullWidth
-            name="passwordDup"
-            label="Confirm Password"
-            type="password"
-            id="passwordDup"
-            autoComplete="current-password"
-            onChange={(e) => {
-              setPasswordDup(e.target.value);
-            }}
-            style={{ marginTop: 20 }}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            style={{ marginTop: 20 }}
-            onClick={postRegister}
-          >
-            Register
-          </Button>
-          <Grid container justify="center" style={{ marginTop: 20 }}>
-            <Grid item>
-              <Link href="/login" variant="body2">
-                Already have an account? Login
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-    </Container>
+    <Grid container direction="column" justify="center" style={{ minHeight: '100vh' }}>
+      <Grid item>
+        <Container maxWidth="xs">
+          <div>
+            <Typography component="h1" variant="h5">
+              Register
+            </Typography>
+            <form noValidate>
+              <TextField
+                autoComplete="username"
+                name="UserName"
+                variant="outlined"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                style={{ marginTop: 20 }}
+                onChange={(e) => {
+                  setUserName(e.target.value);
+                }}
+                autoFocus
+              />
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+                style={{ marginTop: 20 }}
+              />
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                style={{ marginTop: 20 }}
+              />
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="passwordDup"
+                label="Confirm Password"
+                type="password"
+                id="passwordDup"
+                autoComplete="current-password"
+                onChange={(e) => {
+                  setPasswordDup(e.target.value);
+                }}
+                style={{ marginTop: 20 }}
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                style={{ marginTop: 20 }}
+                onClick={postRegister}
+              >
+                Register
+              </Button>
+              <Grid container justify="center" style={{ marginTop: 20 }}>
+                <Grid item>
+                  <Link href="/login" variant="body2">
+                    Already have an account? Login
+                  </Link>
+                </Grid>
+              </Grid>
+            </form>
+          </div>
+        </Container>
+      </Grid>
+    </Grid>
   );
 }
 
