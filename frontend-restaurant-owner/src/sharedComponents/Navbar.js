@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
@@ -7,19 +7,24 @@ export default function Navbar() {
     <nav className={styles.navbar}>
       <ul>
         <li>
-          <Link to="/login">Login</Link>
+          <NavLink to="/" activeClassName={styles.activeTab} exact={true}>
+            Home
+          </NavLink>
         </li>
         <li>
-          <Link to="/register">Register</Link>
+          <NavLink to="/create-promotion" activeClassName={styles.activeTab}>
+            Create Promotion
+          </NavLink>
         </li>
         <li>
-          <Link to="/">Home</Link>
+          <NavLink to="/create-coupons" activeClassName={styles.activeTab}>
+            Create Coupons
+          </NavLink>
         </li>
         <li>
-          <Link to="/create-promotion">Create Promotion</Link>
-        </li>
-        <li>
-          <Link to="/other">Other</Link>
+          <NavLink to="/analysis" activeClassName={styles.activeTab}>
+            Analysis
+          </NavLink>
         </li>
       </ul>
     </nav>
