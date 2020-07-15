@@ -14,9 +14,16 @@ function App() {
             Welcome!
           </h1>
         </Route>
+        <Route>
+          <NoMatch />
+        </Route>
       </Switch>
     </div>
   );
+}
+
+function NoMatch() {
+  return <div>You have come to a place of nowhere! :(</div>
 }
 
 export default App;
