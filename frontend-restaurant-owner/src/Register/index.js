@@ -20,7 +20,7 @@ function Register() {
       alert("Your passwords don't match.");
     } else {
       axios
-        .post('http://localhost:1337/auth/local/register', {
+        .post('/auth/local/register', {
           username: userName,
           email: email,
           password: password,

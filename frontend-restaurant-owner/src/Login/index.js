@@ -39,7 +39,7 @@ function Login() {
     delete axios.defaults.headers.common['Authorization'];
 
     axios
-      .post('http://localhost:1337/auth/local', {
+      .post('/auth/local', {
         identifier: userName,
         password: password,
       })
