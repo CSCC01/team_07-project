@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 function Logout(props) {
   const [isLoggedOut, setLoggedOut] = useState(false);
@@ -11,6 +12,7 @@ function Logout(props) {
 
   function logout() {
     localStorage.clear('Authorization-Token');
+    delete axios.defaults.headers.common['Authorization']; 
     setLoggedOut(true);
   }
 
