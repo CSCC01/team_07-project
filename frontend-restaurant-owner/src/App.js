@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Navbar from './sharedComponents/Navbar';
 import CreatePromotion from './CreatePromotion';
@@ -10,32 +10,37 @@ import Register from './Register';
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Navbar />
-        <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/register">
-            <Register />
-          </Route>
-          <Route path="/create-promotion">
-            <CreatePromotion />
-          </Route>
-          <Route path="/other">
-            <Other />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </Router>
+      <Switch>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
+        <Route path="/create-promotion">
+          <Navbar />
+          <CreatePromotion />
+        </Route>
+        <Route path="/create-coupons">
+          <Navbar />
+        </Route>
+        <Route path="/analysis">
+          <Navbar />
+        </Route>
+        <Route exact path="/">
+          <Navbar />
+          <Home />
+        </Route>
+        <Route path="*">
+          <NoMatch />
+        </Route>
+      </Switch>
     </div>
   );
 }
 
-function Other() {
-  return <h2>Made by ByteMe</h2>;
+function NoMatch() {
+  return <div>You have come to a place of nowhere! :(</div>;
 }
 
 export default App;
