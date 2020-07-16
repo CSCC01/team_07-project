@@ -1,5 +1,5 @@
 import React from 'react';
-import Logout from '../sharedComponents/Logout';
+import Logout from './Logout';
 
 function Home() {
   return (
