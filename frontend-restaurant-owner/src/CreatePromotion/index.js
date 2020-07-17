@@ -9,14 +9,14 @@ import EditImagePopUp from './EditImagePopUp';
 import Button from '@material-ui/core/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import Axios from 'axios';
+import axios from 'axios';
 
 import './index.css';
 
 export default class CreatePromotion extends Component {
   state = {
-    image: [''],
-    sourceImage: [''],
+    image: [null],
+    sourceImage: [null],
     currentIndex: 0,
     title: '',
     description: '',
@@ -37,7 +37,7 @@ export default class CreatePromotion extends Component {
     let image = this.state.image;
     let currentIndex = this.state.currentIndex;
     sourceImage.splice(currentIndex, 0, value);
-    image.splice(currentIndex, 0, value);
+    image.splice(currentIndex, 0, 0); // no modified image
     this.setState({ image: image });
     this.setState({ sourceImage: sourceImage });
     this.setState({ disable: 1 });
@@ -48,7 +48,15 @@ export default class CreatePromotion extends Component {
     this.setState({ currentIndex: currentIndex - 1 });
 
     let image = this.state.image;
-    let url = image[currentIndex - 1];
+    let sourceImage = this.state.sourceImage;
+
+    let url = '';
+    if (image[currentIndex - 1] === 0) {
+      url = URL.createObjectURL(sourceImage[currentIndex - 1]);
+    } else {
+      url = image[currentIndex - 1].toDataURL('image/png');
+    }
+
     let show = 3;
     if (currentIndex - 1 === 0) {
       show = 2;
@@ -59,10 +67,18 @@ export default class CreatePromotion extends Component {
 
   onRight = () => {
     let currentIndex = this.state.currentIndex;
-    let image = this.state.image;
     this.setState({ currentIndex: currentIndex + 1 });
 
-    let url = image[currentIndex + 1];
+    let image = this.state.image;
+    let sourceImage = this.state.sourceImage;
+
+    let url = '';
+    if (image[currentIndex + 1] === 0) {
+      url = URL.createObjectURL(sourceImage[currentIndex + 1]);
+    } else {
+      url = image[currentIndex + 1] === null ? '' : image[currentIndex + 1].toDataURL('image/png');
+    }
+
     let show = 3;
     if (currentIndex + 2 === image.length) {
       show = 1;
@@ -75,7 +91,7 @@ export default class CreatePromotion extends Component {
     let image = this.state.image;
     image[this.state.currentIndex] = value;
     this.setState({ image: image });
-    this.UploadImageRef.current.onEdit(value);
+    this.UploadImageRef.current.onEdit(value.toDataURL('image/png'));
   };
 
   onDelete = () => {
@@ -86,7 +102,13 @@ export default class CreatePromotion extends Component {
     image.splice(currentIndex, 1);
     this.setState({ image: image, sourceImage: sourceImage });
 
-    let url = image[this.state.currentIndex];
+    let url = '';
+    if (image[currentIndex] === 0) {
+      url = URL.createObjectURL(sourceImage[currentIndex]);
+    } else {
+      url = image[currentIndex] === null ? '' : image[currentIndex].toDataURL('image/png');
+    }
+
     let show;
     if (currentIndex === 0) {
       if (image.length === 1) {
@@ -126,21 +148,66 @@ export default class CreatePromotion extends Component {
     } else if (this.state.reward === -1) {
       alert('Failure: reward empty');
     } else {
-      const sourceImage = this.state.sourceImage;
-      const title = this.state.title;
-      const description = this.state.description;
-      const startTime = this.state.startTime;
-      const closeTime = this.state.closeTime;
-      const tasks = this.state.tasks;
-      const data = {
-        image: sourceImage,
+      let sourceImage = this.state.sourceImage;
+      let image = this.state.image;
+
+      // upload image to strapi
+
+      let file;
+      let getId;
+      let idList = [];
+      for (let index = 0; index < image.length - 1; index++) {
+        if (image[index] === 0) {
+          // if user doesn't modified the image
+          file = sourceImage[index];
+          let imageFile = new FormData();
+          imageFile.append('files', file);
+          getId = await axios({
+            method: 'POST',
+            url: 'http://localhost:1337/upload',
+            data: imageFile,
+          });
+          idList.push(getId.data[0].id);
+        } else {
+          // if user modified the image
+          let blob = await new Promise((resolve) => image[index].toBlob(resolve, 'image/png'));
+          let imageCanvas = new FormData();
+          imageCanvas.append('files', blob);
+          getId = await axios({
+            method: 'POST',
+            url: 'http://localhost:1337/upload',
+            data: imageCanvas,
+          });
+          idList.push(getId.data[0].id);
+        }
+      }
+
+      // get uploaded image url
+      let uploadedImage = [];
+      for (let i = 0; i < idList.length; i++) {
+        let getUrl = await axios({
+          method: 'GET',
+          url: 'http://localhost:1337/upload/files/' + idList[i],
+        });
+        uploadedImage.push(getUrl.data.url);
+      }
+
+      // save data to the database
+      let title = this.state.title;
+      let description = this.state.description;
+      let startTime = this.state.startTime;
+      let closeTime = this.state.closeTime;
+      let tasks = this.state.tasks;
+
+      let data = {
+        image: uploadedImage,
         title: title,
         description: description,
         starting_date: startTime,
         expired_date: closeTime,
         subtask: tasks,
       };
-      const add = await Axios({
+      let add = await axios({
         method: 'POST',
         url: 'http://localhost:1337/promotions',
         data,

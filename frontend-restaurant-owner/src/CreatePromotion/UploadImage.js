@@ -11,7 +11,8 @@ import IconButton from '@material-ui/core/IconButton';
 
 class UploadImage extends Component {
   state = {
-    image: '',
+    image: null,
+    url: '',
     show: 0, // 0 - show nothing; 1 - show left; 2 - show right; 3 - show both
     numOfImage: 0,
   };
@@ -26,10 +27,12 @@ class UploadImage extends Component {
     } else {
       if (event.target.files[0] != null) {
         let url = URL.createObjectURL(event.target.files[0]);
+        let file = event.target.files[0];
         let numOfImage = this.state.numOfImage;
 
         this.setState({
-          image: url,
+          image: file,
+          url: url,
           numOfImage: numOfImage + 1,
         });
 
@@ -43,30 +46,31 @@ class UploadImage extends Component {
             show: 3,
           });
         }
-        this.props.onSelectImage(url);
+        this.props.onSelectImage(file);
       }
     }
   };
 
   show = (url, show) => {
     this.setState({
-      image: url,
+      url: url,
       show: show,
     });
   };
 
   onEdit = (url) => {
     this.setState({
-      image: url,
+      url: url,
     });
   };
 
-  onDelete = (url) => {
+  onDelete = (url, show) => {
     document.getElementById('image-input').value = '';
     let numOfImage = this.state.numOfImage;
     this.setState({
-      image: url,
+      url: url,
       numOfImage: numOfImage - 1,
+      show: show,
     });
   };
 
@@ -131,7 +135,7 @@ class UploadImage extends Component {
                   />
                 </div>
               </div>
-              <img className="image" src={this.state.image} alt=""></img>
+              <img className="image" src={this.state.url} alt=""></img>
               <div className="background"></div>
             </div>
           ) : (
@@ -177,7 +181,7 @@ class UploadImage extends Component {
                   </div>
                 ) : null}
               </div>
-              <img className="image" src={this.state.image} alt=""></img>
+              <img className="image" src={this.state.url} alt=""></img>
               <div className="background"></div>
             </div>
           )}
