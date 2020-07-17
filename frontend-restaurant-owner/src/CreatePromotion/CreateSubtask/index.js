@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import TextPopUp from '../../sharedComponents/TextPopUp';
-import SubtaskBtns from './SubtaskBtns';
+import SubtaskButtons from './SubtaskButtons';
 import PresetTemplates from './PresetTemplates';
 
 class CreateSubtask extends Component {
@@ -26,9 +26,12 @@ class CreateSubtask extends Component {
       <div style={{ marginBottom: 10, textAlign: 'left' }}>
         <TextPopUp
           title="Subtask"
-          popup="Users can only use one preset. Reselect preset will delete all the exsting task."
+          popup="Users can only use one preset. Reselect preset will delete all the existing task."
         />
-        <SubtaskBtns onSelectTask={this.getSelectedTask} functionFromParent={this.parentFunction} />
+        <SubtaskButtons
+          onSelectTask={this.getSelectedTask}
+          functionFromParent={this.parentFunction}
+        />
         <PresetTemplates addBtn={this.state.addBtn} deleteAllTasks={this.state.deleteAllTasks} />
       </div>
     );

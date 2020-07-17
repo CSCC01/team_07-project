@@ -88,11 +88,18 @@ class PresetTemplates extends React.Component {
           </p>
         </div>
 
-        <ModalPopUp open={this.state.selectedTemplate !== 0}>
+        <ModalPopUp
+          open={this.state.selectedTemplate !== 0}
+          onModalRequestClose={this.hideAndClear}
+        >
           {this.state.selectedTemplate === 1 && (
             <div>
               <p>Enter # of visits</p>
-              <TextField type="number" onChange={this.handleXChange}></TextField>
+              <TextField
+                type="number"
+                inputProps={{ min: 1, max: 20 }}
+                onChange={this.handleXChange}
+              />
               <NVisit
                 addBtn={this.props.addBtn}
                 deleteAllTasks={this.props.deleteAllTasks}
@@ -105,9 +112,13 @@ class PresetTemplates extends React.Component {
           {this.state.selectedTemplate === 2 && (
             <div>
               <p>Enter # of items need to be ordered.</p>
-              <TextField type="number" onChange={this.handleXChange}></TextField>
+              <TextField
+                type="number"
+                inputProps={{ min: 1, max: 20 }}
+                onChange={this.handleXChange}
+              />
               <p>Enter the name of item need to be ordered.</p>
-              <TextField type="text" onChange={this.handleItemNameChange}></TextField>
+              <TextField type="text" onChange={this.handleItemNameChange} />
               <XItems
                 addBtn={this.props.addBtn}
                 deleteAllTasks={this.props.deleteAllTasks}
@@ -121,7 +132,11 @@ class PresetTemplates extends React.Component {
           {this.state.selectedTemplate === 3 && (
             <div>
               <p>Enter the money need to spend on an order.</p>
-              <TextField type="number" onChange={this.handleXChange}></TextField>
+              <TextField
+                type="number"
+                inputProps={{ min: 1, max: 20 }}
+                onChange={this.handleXChange}
+              />
               <XDollars
                 addBtn={this.props.addBtn}
                 deleteAllTasks={this.props.deleteAllTasks}
