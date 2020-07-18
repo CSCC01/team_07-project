@@ -94,7 +94,7 @@ class PresetTemplates extends React.Component {
         >
           {this.state.selectedTemplate === 1 && (
             <div>
-              <p>Enter # of visits</p>
+              <p>Enter number of visits</p>
               <TextField
                 type="number"
                 inputProps={{ min: 1, max: 20 }}
@@ -111,7 +111,7 @@ class PresetTemplates extends React.Component {
 
           {this.state.selectedTemplate === 2 && (
             <div>
-              <p>Enter # of items need to be ordered.</p>
+              <p>Enter number of items need to be ordered.</p>
               <TextField
                 type="number"
                 inputProps={{ min: 1, max: 20 }}
