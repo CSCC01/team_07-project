@@ -7,7 +7,7 @@ class BuyXGetY extends React.Component {
     let getY = this.props.getY;
     let itemName = this.props.itemName;
     if (buyX > 0 && getY > 0) {
-      this.props.addBtn(
+      this.props.addButton(
         'Buy ' + buyX + ' ' + itemName + ' get ' + getY + ' ' + itemName + ' free.',
       );
     }

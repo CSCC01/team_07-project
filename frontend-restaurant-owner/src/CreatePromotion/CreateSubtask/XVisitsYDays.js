@@ -6,7 +6,7 @@ class XVisitsYDays extends React.Component {
     let visits = this.props.visits;
     let days = this.props.days;
     for (let i = 0; i < visits; i++) {
-      this.props.addBtn('Complete one visit within ' + days + ' days.');
+      this.props.addButton('Complete one visit within ' + days + ' days.');
     }
     this.props.hideAndClear();
   };

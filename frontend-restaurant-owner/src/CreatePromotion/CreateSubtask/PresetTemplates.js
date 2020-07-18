@@ -101,7 +101,7 @@ class PresetTemplates extends React.Component {
                 onChange={this.handleXChange}
               />
               <NVisit
-                addBtn={this.props.addBtn}
+                addButton={this.props.addButton}
                 deleteAllTasks={this.props.deleteAllTasks}
                 count={this.state.x}
                 hideAndClear={this.hideAndClear}
@@ -120,7 +120,7 @@ class PresetTemplates extends React.Component {
               <p>Enter the name of item need to be ordered.</p>
               <TextField type="text" onChange={this.handleItemNameChange} />
               <XItems
-                addBtn={this.props.addBtn}
+                addButton={this.props.addButton}
                 deleteAllTasks={this.props.deleteAllTasks}
                 itemCount={this.state.x}
                 itemName={this.state.itemName}
@@ -138,7 +138,7 @@ class PresetTemplates extends React.Component {
                 onChange={this.handleXChange}
               />
               <XDollars
-                addBtn={this.props.addBtn}
+                addButton={this.props.addButton}
                 deleteAllTasks={this.props.deleteAllTasks}
                 dollars={this.state.x}
                 hideAndClear={this.hideAndClear}

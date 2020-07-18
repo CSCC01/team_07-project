@@ -7,7 +7,7 @@ import PresetTemplates from './PresetTemplates';
 class CreateSubtask extends Component {
   state = {
     tasks: [],
-    addBtn: '',
+    addButton: '',
     deleteAllTasks: '',
   };
 
@@ -16,8 +16,8 @@ class CreateSubtask extends Component {
     this.props.onSelectTask(tasks);
   };
 
-  parentFunction = (addBtnFromChild, deleteAllTasksFromChild) => {
-    this.setState({ addBtn: addBtnFromChild });
+  parentFunction = (addButtonFromChild, deleteAllTasksFromChild) => {
+    this.setState({ addButton: addButtonFromChild });
     this.setState({ deleteAllTasks: deleteAllTasksFromChild });
   };
 
@@ -32,7 +32,10 @@ class CreateSubtask extends Component {
           onSelectTask={this.getSelectedTask}
           functionFromParent={this.parentFunction}
         />
-        <PresetTemplates addBtn={this.state.addBtn} deleteAllTasks={this.state.deleteAllTasks} />
+        <PresetTemplates
+          addButton={this.state.addButton}
+          deleteAllTasks={this.state.deleteAllTasks}
+        />
       </div>
     );
   }

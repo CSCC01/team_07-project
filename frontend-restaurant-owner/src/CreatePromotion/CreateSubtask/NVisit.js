@@ -6,7 +6,7 @@ class NVisit extends React.Component {
     this.props.deleteAllTasks();
     let count = this.props.count;
     for (let i = 0; i < count; i++) {
-      this.props.addBtn('Complete one visit.');
+      this.props.addButton('Complete one visit.');
     }
     this.props.hideAndClear();
   };
