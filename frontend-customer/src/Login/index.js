@@ -50,8 +50,8 @@ function Login() {
         setLoggedIn(true);
       })
       .catch((error) => {
-        console.warn(error);
-        alert('The username or password provided were incorrect!');
+        console.log(error.response);
+        alert(error.response.data.message[0].messages[0].message);
       });
   }
 
