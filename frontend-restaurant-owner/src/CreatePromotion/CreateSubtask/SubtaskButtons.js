@@ -5,8 +5,8 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import { makeStyles } from '@material-ui/core/styles';
+import { TextField } from '@material-ui/core';
 
 const useStyles = makeStyles({
   dialogActions: {
@@ -124,10 +124,12 @@ function SubButton(props) {
       >
         <DialogTitle id="customized-dialog-title">Subtask {props.num}</DialogTitle>
         <DialogContent dividers>
-          <TextareaAutosize
+          <TextField
+            variant="outlined"
             aria-label="empty textarea"
             placeholder="Empty"
-            rowsMin="5"
+            rows={4}
+            multiline
             value={props.description}
             onChange={props.editDialog}
           />
