@@ -58,6 +58,9 @@ class PresetTemplates extends React.Component {
       case 'visits':
         for (let i = 0; i < this.state.x; i++) this.props.addButton('Complete one visit.');
         break;
+
+      default:
+        throw new Error('Unreachable');
     }
     this.hideAndClear();
   };
