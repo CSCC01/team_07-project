@@ -4,9 +4,9 @@ import { Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import { Grid, Box } from '@material-ui/core';
 
 function Login() {
   const [userName, setUserName] = useState('');
@@ -39,7 +39,7 @@ function Login() {
     delete axios.defaults.headers.common['Authorization'];
 
     axios
-      .post('/auth/local', {
+      .post('http://localhost:1337/auth/local', {
         identifier: userName,
         password: password,
       })
@@ -50,17 +50,17 @@ function Login() {
         setLoggedIn(true);
       })
       .catch((error) => {
-        console.warn(error);
-        alert('The username or password provided were incorrect!');
+        console.log(error.response);
+        alert(error.response.data.message[0].messages[0].message);
       });
   }
 
   return (
-    <Grid container direction="column" justify="center" style={{ minHeight: '100vh' }}>
+    <Grid container direction="column" justify="center" style={{ minHeight: '100vh'}}>
       <Grid item>
         <Container maxWidth="xs">
           <div>
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="alignCenter">
               Login
             </Typography>
             <form noValidate>
@@ -104,20 +104,13 @@ function Login() {
               >
                 Login
               </Button>
-              <Grid container justify="center" style={{ marginTop: 20 }}>
+              <Box display="flex" justifyContent="center" alignItems="center">
                 {hasToken && (
-                  <Grid item>
-                    <Link variant="body2" href="/" onClick={useExistingToken}>
-                      It seems like that you are already logged in. Click here to continue.
-                    </Link>
-                  </Grid>
-                )}
-                <Grid item>
-                  <Link variant="body2" href="/register">
-                    Do not have an account? Click here to sign up.
+                  <Link variant="body2" href="/" onClick={useExistingToken} style={{ marginTop: 20, textAlign: "center"}}>
+                    It seems like that you are already logged in. Click here to continue.
                   </Link>
-                </Grid>
-              </Grid>
+                )}
+              </Box>
             </form>
           </div>
         </Container>

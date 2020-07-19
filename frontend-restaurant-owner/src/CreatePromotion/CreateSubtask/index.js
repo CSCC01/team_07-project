@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
 import TextPopUp from '../../sharedComponents/TextPopUp';
-import SubtaskBtns from './SubtaskBtns';
+import SubtaskButtons from './SubtaskButtons';
 import PresetTemplates from './PresetTemplates';
 
 class CreateSubtask extends Component {
   state = {
     tasks: [],
-    addBtn: '',
+    addButton: '',
     deleteAllTasks: '',
   };
 
@@ -16,8 +16,8 @@ class CreateSubtask extends Component {
     this.props.onSelectTask(tasks);
   };
 
-  parentFunction = (addBtnFromChild, deleteAllTasksFromChild) => {
-    this.setState({ addBtn: addBtnFromChild });
+  parentFunction = (addButtonFromChild, deleteAllTasksFromChild) => {
+    this.setState({ addButton: addButtonFromChild });
     this.setState({ deleteAllTasks: deleteAllTasksFromChild });
   };
 
@@ -26,10 +26,16 @@ class CreateSubtask extends Component {
       <div style={{ marginBottom: 10, textAlign: 'left' }}>
         <TextPopUp
           title="Subtask"
-          popup="Users can only use one preset. Reselect preset will delete all the exsting task."
+          popup="Users can only use one preset. Reselect preset will delete all the existing task."
         />
-        <SubtaskBtns onSelectTask={this.getSelectedTask} functionFromParent={this.parentFunction} />
-        <PresetTemplates addBtn={this.state.addBtn} deleteAllTasks={this.state.deleteAllTasks} />
+        <SubtaskButtons
+          onSelectTask={this.getSelectedTask}
+          functionFromParent={this.parentFunction}
+        />
+        <PresetTemplates
+          addButton={this.state.addButton}
+          deleteAllTasks={this.state.deleteAllTasks}
+        />
       </div>
     );
   }

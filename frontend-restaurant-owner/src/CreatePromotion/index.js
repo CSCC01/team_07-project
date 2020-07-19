@@ -141,7 +141,7 @@ export default class CreatePromotion extends Component {
       console.log(data);
       // const add = await Axios({
       //   method: 'POST',
-      //   url: 'http://localhost:1337/promotions',
+      //   url: '/promotions',
       //   data,
       // });
       // if (add.status === 200) {
