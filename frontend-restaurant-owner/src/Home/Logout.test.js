@@ -9,7 +9,11 @@ beforeEach(() => {
     value: {
       clear: jest.fn(() => null),
     },
-    writable: true,
+  });
+  Object.defineProperty(window, 'location', {
+    value: {
+      assign: jest.fn(() => null),
+    },
   });
 });
 
@@ -27,4 +31,5 @@ it('calls localStorage clear on click', () => {
   const { getByTestId } = render(<Logout />);
   fireEvent.click(getByTestId('logout'));
   expect(window.localStorage.clear).toBeCalled();
+  expect(window.location.assign).toBeCalledWith('/login');
 });

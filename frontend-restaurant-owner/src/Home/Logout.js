@@ -7,10 +7,11 @@ function Logout(props) {
   function logout() {
     localStorage.clear('Authorization-Token');
     delete axios.defaults.headers.common['Authorization'];
+    window.location.assign('/login');
   }
 
   return (
-    <Button data-testid="logout" variant="contained" color="primary" onClick={logout} href="/login">
+    <Button data-testid="logout" variant="contained" color="primary" onClick={logout}>
       Logout
     </Button>
   );
