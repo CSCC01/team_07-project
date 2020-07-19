@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -8,6 +7,8 @@ import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import { Grid, Box } from '@material-ui/core';
 import PromotionList from './PromotionList';
+import TitleBar from '../sharedComponents/TitleBar';
+import './index.css';
 
 export default class Home extends React.Component {
     state = {
@@ -29,12 +30,16 @@ export default class Home extends React.Component {
     
     render(){
         return (
-            <Container>
-                <Typography component="h2">
-                    Promotions Avaliable to You:
-                </Typography>
-                <PromotionList content={this.state.promotionList} />
-            </Container>
+            <div>
+                <TitleBar title='Home' />
+                <div className='mainSection'>
+                    <Typography component="h2" className='headline'>
+                        Promotions Avaliable to You:
+                    </Typography>
+                    <hr />
+                    <PromotionList content={this.state.promotionList}/>
+                </div>
+            </div>
         );
     }
 }

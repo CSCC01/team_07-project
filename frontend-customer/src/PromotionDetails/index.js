@@ -1,17 +1,17 @@
 import React from 'react';
 
-export default class PromotionDetails{
+export default class PromotionDetails extends React.Component{
     constructor(props){
         super(props);
 
-        state = {
-            id = -1,
-            title = "",
-            description = "",
-            images = [],
-            starting_date = "",
-            expired_date = "",
-            subtasks = []
+        this.state = {
+            id: -1,
+            title: "",
+            description: "",
+            images: [],
+            starting_date: "",
+            expired_date: "",
+            subtasks: []
         };
     }
 }

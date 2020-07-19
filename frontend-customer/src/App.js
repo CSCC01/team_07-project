@@ -2,6 +2,7 @@ import React from 'react';
 import Login from './Login';
 import { Route, Switch } from 'react-router-dom';
 import Home from './Home';
+import PromotionDetails from './PromotionDetails'
 
 function App() {
   return (
