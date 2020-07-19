@@ -17,7 +17,7 @@ export default class Home extends React.Component {
 
     componentDidMount(){
         axios
-        .get('http://localhost:3008/promotions')
+        .get('http://localhost:1337/promotions')
         .then((response) => {
             this.setState({
                 promotionList: response.data,
