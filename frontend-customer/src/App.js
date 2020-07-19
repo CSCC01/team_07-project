@@ -1,6 +1,7 @@
 import React from 'react';
 import Login from './Login';
 import { Route, Switch } from 'react-router-dom';
+import Home from './Home';
 
 function App() {
   return (
@@ -9,10 +10,11 @@ function App() {
         <Route path="/login">
           <Login />
         </Route>
+        <Route path="/promotions/:id">
+          <PromotionDetails />
+        </Route>
         <Route exact path="/">
-          <h1>
-            Welcome!
-          </h1>
+          <Home />
         </Route>
         <Route>
           <NoMatch />
