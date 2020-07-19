@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Navbar from './sharedComponents/Navbar';
 import CreatePromotion from './CreatePromotion';
+import ViewPromotion from './ViewPromotion';
 import Home from './Home';
 import Login from './Login';
 import Register from './Register';
@@ -16,6 +17,10 @@ function App() {
         </Route>
         <Route path="/register">
           <Register />
+        </Route>
+        <Route path="/view-promotion">
+          <Navbar />
+          <ViewPromotion />
         </Route>
         <Route path="/create-promotion">
           <Navbar />
