@@ -5,12 +5,10 @@ import { List } from '@material-ui/core';
 
 export default function PromotionList(props){
     return (
-        <Container>
-            <List>
+            <List data-testid="promotion-list">
             {props.content.map(promotion => (
                 <PromotionBox content={promotion}/>
             ))}
             </List>
-        </Container>
     );
 }

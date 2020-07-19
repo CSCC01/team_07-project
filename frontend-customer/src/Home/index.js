@@ -1,11 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
-import { Grid, Box } from '@material-ui/core';
 import PromotionList from './PromotionList';
 import TitleBar from '../sharedComponents/TitleBar';
 import './index.css';
@@ -16,16 +11,17 @@ export default class Home extends React.Component {
     }
 
     componentDidMount(){
-        axios
-        .get('http://localhost:1337/promotions')
-        .then((response) => {
+        axios.get('/promotions').then((response) => {
+            const currentTime = new Date();
+            const promotionList = response.data.filter(
+                promotion => new Date(promotion.expired_date) > currentTime);
             this.setState({
-                promotionList: response.data,
+                promotionList: promotionList,
             });
         })
         .catch((error) => {
             console.log(error.response);
-        })
+        });
     }
     
     render(){
