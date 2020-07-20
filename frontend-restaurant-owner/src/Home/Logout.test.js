@@ -1,16 +1,16 @@
+/**
+ * This test suite tests Logout component.
+ * The following aspects are tested:
+ * 1. Logout button is able to render without crashing
+ * 2. Shows a logout button
+ * 3. Calls localStorage clear and location assign when Logout is clicked
+ */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import Logout from './Logout';
-
-/**
- * This test suite tests Logout component.
- * The following aspects are tested:
- * 1. Logout button is able to render without crashing
- * 2. Logout button is present in the document
- * 3. Calls localStorage clear and location assign when Logout is clicked
- */
 
 beforeEach(() => {
   Object.defineProperty(window, 'localStorage', {
