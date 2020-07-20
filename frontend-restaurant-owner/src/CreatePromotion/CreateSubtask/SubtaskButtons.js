@@ -5,8 +5,8 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import { makeStyles } from '@material-ui/core/styles';
+import { TextField } from '@material-ui/core';
 
 const useStyles = makeStyles({
   dialogActions: {
@@ -15,42 +15,42 @@ const useStyles = makeStyles({
   },
 });
 
-export default class SubtaskBtns extends React.Component {
+export default class SubtaskButtons extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       taskNum: 1,
-      taskDecscription: [],
+      taskDescription: [],
       dialogOpen: [],
     };
     this.childFunction();
   }
 
-  addBtn = (desc) => {
-    let taskDecscription = this.state.taskDecscription;
-    taskDecscription.push(desc);
+  addButton = (desc) => {
+    let taskDescription = this.state.taskDescription;
+    taskDescription.push(desc);
     let dialogOpen = this.state.dialogOpen;
     dialogOpen.push(false);
     this.setState((state) => ({
       taskNum: state.taskNum + 1,
-      taskDecscription: taskDecscription,
+      taskDescription: taskDescription,
       dialogOpen: dialogOpen,
     }));
-    this.props.onSelectTask(taskDecscription);
+    this.props.onSelectTask(taskDescription);
   };
 
-  deleteTask(i) {
-    const taskDecscription = this.state.taskDecscription;
-    taskDecscription.splice(i, 1);
+  deleteTask = (i) => {
+    const taskDescription = this.state.taskDescription;
+    taskDescription.splice(i, 1);
     const dialogOpen = this.state.dialogOpen;
     dialogOpen.splice(i, 1);
     this.setState((state) => ({
       taskNum: state.taskNum - 1,
-      taskDecscription: taskDecscription,
+      taskDescription: taskDescription,
       dialogOpen: dialogOpen,
     }));
-    this.props.onSelectTask(taskDecscription);
-  }
+    this.props.onSelectTask(taskDescription);
+  };
 
   deleteAllTasks = () => {
     let totalTask = this.state.taskNum;
@@ -59,40 +59,41 @@ export default class SubtaskBtns extends React.Component {
     }
   };
 
-  openDialog(i) {
+  openDialog = (i) => {
     let dialogOpen = this.state.dialogOpen;
     dialogOpen[i] = true;
     this.setState({
       dialogOpen: dialogOpen,
     });
-  }
+  };
 
-  closeDialog(i) {
+  closeDialog = (i) => {
     let dialogOpen = this.state.dialogOpen;
     dialogOpen[i] = false;
     this.setState({
       dialogOpen: dialogOpen,
     });
-  }
+  };
 
-  editDialog(i, e) {
-    let taskDecscription = this.state.taskDecscription;
-    taskDecscription[i] = e.target.value;
-    this.setState({ taskDecscription: taskDecscription });
-    this.props.onSelectTask(taskDecscription);
-  }
+  editDialog = (i, e) => {
+    let taskDescription = this.state.taskDescription;
+    taskDescription[i] = e.target.value;
+    this.setState({ taskDescription: taskDescription });
+    this.props.onSelectTask(taskDescription);
+  };
 
   childFunction = () => {
-    this.props.functionFromParent(this.addBtn, this.deleteAllTasks);
+    this.props.functionFromParent(this.addButton, this.deleteAllTasks);
   };
 
   render() {
-    let btns = [];
+    let buttons = [];
     for (let i = 1; i < this.state.taskNum; i++) {
-      btns.push(
-        <SubBtn
+      buttons.push(
+        <SubButton
+          key={i}
           num={i}
-          description={this.state.taskDecscription[i - 1]}
+          description={this.state.taskDescription[i - 1]}
           openDialog={() => this.openDialog(i - 1)}
           closeDialog={() => this.closeDialog(i - 1)}
           editDialog={(e) => this.editDialog(i - 1, e)}
@@ -104,14 +105,14 @@ export default class SubtaskBtns extends React.Component {
 
     return (
       <ButtonGroup>
-        {btns}
-        <Button onClick={() => this.addBtn('')}>+</Button>
+        {buttons}
+        <Button onClick={() => this.addButton('')}>+</Button>
       </ButtonGroup>
     );
   }
 }
 
-function SubBtn(props) {
+function SubButton(props) {
   const classes = useStyles();
   return (
     <div>
@@ -123,10 +124,12 @@ function SubBtn(props) {
       >
         <DialogTitle id="customized-dialog-title">Subtask {props.num}</DialogTitle>
         <DialogContent dividers>
-          <TextareaAutosize
+          <TextField
+            variant="outlined"
             aria-label="empty textarea"
             placeholder="Empty"
-            rowsMin="5"
+            rows={4}
+            multiline
             value={props.description}
             onChange={props.editDialog}
           />
