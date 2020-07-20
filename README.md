@@ -5,7 +5,8 @@
 - [Burn-Down Chart & Task Board](./Burn-Down%20Chart%20%26%20Task%20Board)
 
 ## Deployment
-- http://167.99.186.59:3001
+- Restaurant Owner: http://167.99.186.59:3001
+- Customer: http://167.99.186.59:3002
 
 ## Unit Tests
 Our unit tests are located right besides the component it tests, and they can be identified by the filename ending `*.test.js`. You can use [this GitHub search link](https://github.com/search?q=repo%3ACSCC01%2Fteam_07-project+filename%3Atest.js&type=Code&ref=advsearch) to find all of our test cases, but be aware that the search result is delayed and may not reflect our recent changes.
