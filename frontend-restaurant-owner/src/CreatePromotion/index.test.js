@@ -5,15 +5,23 @@ import CreatePromotion from '.';
 import { checkData, lessTime, uploadImage, getUrl, postData } from './index.js';
 
 import axios from 'axios';
+beforeAll(() => (axios.defaults.baseURL = process.env.BASE_URL || 'http://localhost:1338'));
 
-// test the existence of the submit button
+/**
+ * This function tests whether the submit button is on the promotion page.
+ * There should be one submit button rendered by the CreatePromotion.
+ */
 it('shows the submit button', () => {
   const { getByRole } = render(<CreatePromotion />);
   expect(getByRole('button', { name: /submit/i })).toBeInTheDocument();
 });
 
-// test function checkDate all initial data
-it('alerts when all required fields are empty on submission', async () => {
+/**
+ * This function tests the function checkData.
+ * It tests the case when all the required fields are empty on submission.
+ * The promotion page should alert with a useful message.
+ */
+it('alerts when all the required fields are empty on submission', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
   checkData('', '', '', '', [null], -1);
   await waitFor(() =>
@@ -23,49 +31,79 @@ it('alerts when all required fields are empty on submission', async () => {
   );
 });
 
-// test function checkDate empty title
-it('alerts when title field is empty on submission', async () => {
+/**
+ * This function tests the function checkData.
+ * It tests the case when the title field is empty on submission.
+ * The promotion page should alert with a useful message.
+ */
+it('alerts when the title field is empty on submission', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
   checkData('', 'test', '2020-08-20T00:00', '2020-09-24T00:00', ['test', null], 1);
   await waitFor(() => expect(window.alert).toBeCalledWith('Failure: title is empty'));
 });
 
-// test function checkDate empty description
-it('alerts when description field is empty on submission', async () => {
+/**
+ * This function tests the function checkData.
+ * It tests the case when the description field is empty on submission.
+ * The promotion page should alert with a useful message.
+ */
+it('alerts when the description field is empty on submission', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
   checkData('test', '', '2020-08-20T00:00', '2020-09-24T00:00', ['test', null], 1);
   await waitFor(() => expect(window.alert).toBeCalledWith('Failure: description is empty'));
 });
 
-// test function checkDate empty startTIme
-it('alerts when startTime field is empty on submission', async () => {
+/**
+ * This function tests the function checkData.
+ * It tests the case when the startTime field is empty on submission.
+ * The promotion page should alert with a useful message.
+ */
+it('alerts when the startTime field is empty on submission', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
   checkData('test', 'test', '', '2020-09-24T00:00', ['test', null], 1);
   await waitFor(() => expect(window.alert).toBeCalledWith('Failure: start time is empty'));
 });
 
-// test function checkDate empty closeTIme
-it('alerts when closeTime field is empty on submission', async () => {
+/**
+ * This function tests the function checkData.
+ * It tests the case when the closeTime field is empty on submission.
+ * The promotion page should alert with a useful message.
+ */
+it('alerts when the closeTime field is empty on submission', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
   checkData('test', 'test', '2020-08-20T00:00', '', ['test', null], 1);
   await waitFor(() => expect(window.alert).toBeCalledWith('Failure: expired time is empty'));
 });
 
-// test function checkDate empty image
-it('alerts when image field is empty on submission', async () => {
+/**
+ * This function tests the function checkData.
+ * It tests the case when the image field is empty on submission.
+ * The promotion page should alert with a useful message.
+ */
+it('alerts when the image field is empty on submission', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
   checkData('test', 'test', '2020-08-20T00:00', '2020-09-24T00:00', [null], 1);
   await waitFor(() => expect(window.alert).toBeCalledWith('Failure: image is empty'));
 });
 
-// test function checkDate unselect reward
-it('alerts when reward field is unselected on submission', async () => {
+/**
+ * This function tests the function checkData.
+ * It tests the case when reward is unselected on submission.
+ * The promotion page should alert with a useful message.
+ */
+it('alerts when the reward field is unselected on submission', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
   checkData('test', 'test', '2020-08-20T00:00', '2020-09-24T00:00', ['test', null], -1);
   await waitFor(() => expect(window.alert).toBeCalledWith('Failure: reward is empty'));
 });
 
-// test lessTime
+/**
+ * This function tests the function lessTime.
+ * lessTime should return true if the first time is earlier than the second time.
+ * Otherwise, it should return false.
+ * This function tests cases when the first time is earlier than the second time and
+ * when the first time is later than the second time.
+ */
 it('tests the function lessTime', () => {
   let output1 = lessTime('2020-08-20T00:00', '2020-09-24T00:00');
   expect(output1).toBeTruthy();
@@ -73,31 +111,47 @@ it('tests the function lessTime', () => {
   expect(output2).toBeFalsy();
 });
 
-// test function checkDate with closeTime before startTime
-it('alerts when closeTime is before startTime', async () => {
+/**
+ * This function tests the function checkData.
+ * It tests the case when closeTime is earlier than startTime on submission.
+ * The promotion page should alert with a useful message.
+ */
+it('alerts when closeTime is earlier than startTime', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
   checkData('test', 'test', '2020-09-24T00:00', '2020-08-20T00:00', ['test', null], 1);
   await waitFor(() => expect(window.alert).toBeCalledWith('Failure: closeTime before startTime'));
 });
 
-// test function checkDate with startTime before today
-it('alerts when closeTime is before startTime', async () => {
+/**
+ * This function tests the function checkData.
+ * It tests the case when startTime is earlier than today on submission.
+ * The promotion page should alert with a useful message.
+ */
+it('alerts when startTime is earlier than today', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
   checkData('test', 'test', '2020-01-24T00:00', '2020-08-20T00:00', ['test', null], 1);
   await waitFor(() => expect(window.alert).toBeCalledWith('Failure: startTime before today'));
 });
 
-// test function checkDate with valid data
-it('alerts when all the fields are filled in on submission', async () => {
+/**
+ * This function tests the function checkData.
+ * It tests the case when all the fields are filled in correctly on submission.
+ * The promotion page should not alert in this case.
+ */
+it('does not alert when all the fields are filled in correctly on submission', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
   checkData('test', 'test', '2020-08-20T00:00', '2020-09-24T00:00', ['test', null], 1);
   await waitFor(() => expect(window.alert).toBeCalledTimes(9));
 });
 
-// test function uploadImage - single unmodified file
-it('checks whether a non-cropped image have been uploaded or not', async () => {
+/**
+ * This function tests the function uploadImage.
+ * It tests the case when only one image needs to be upload.
+ * It checks the status returned by axios and clears the database in the end.
+ */
+it('checks whether an image have been uploaded or not', async () => {
   let f = new File(['test'], 'test.jpg', { type: 'image' });
-  let idDict = await uploadImage([f, null], [0, null], 'http://localhost:1338/upload');
+  let idDict = await uploadImage([f, null], [0, null], '/upload');
   let statusIsGood = true;
   for (let key in idDict) {
     let status = idDict[key];
@@ -114,7 +168,7 @@ it('checks whether a non-cropped image have been uploaded or not', async () => {
     if (status === 200) {
       await axios({
         method: 'DELETE',
-        url: 'http://localhost:1338/upload/files/' + key,
+        url: '/upload/files/' + key,
       }).catch(() => {
         indicator = 0;
       });
@@ -123,18 +177,18 @@ it('checks whether a non-cropped image have been uploaded or not', async () => {
   expect(indicator).toBe(1);
 });
 
-// test function uploadImage - multiple
-it('checks whether a non-cropped image have been uploaded or not', async () => {
+/**
+ * This function tests the function uploadImage.
+ * It tests the case when mulitple images need to be upload.
+ * It checks the status returned by axios and clears the database in the end.
+ */
+it('checks whether mulitple images have been uploaded or not', async () => {
   let f1 = new File(['test'], 'test.jpg', { type: 'image' });
   let f2 = new File(['test'], 'test.jpg', { type: 'image' });
   let f3 = new File(['test'], 'test.jpg', { type: 'image' });
   let f4 = new File(['test'], 'test.jpg', { type: 'image' });
   let f5 = new File(['test'], 'test.jpg', { type: 'image' });
-  let idDict = await uploadImage(
-    [f1, f2, f3, f4, f5, null],
-    [0, 0, 0, 0, 0, null],
-    'http://localhost:1338/upload',
-  );
+  let idDict = await uploadImage([f1, f2, f3, f4, f5, null], [0, 0, 0, 0, 0, null], '/upload');
   let statusIsGood = true;
   for (let key in idDict) {
     let status = idDict[key];
@@ -151,7 +205,7 @@ it('checks whether a non-cropped image have been uploaded or not', async () => {
     if (status === 200) {
       await axios({
         method: 'DELETE',
-        url: 'http://localhost:1338/upload/files/' + key,
+        url: '/upload/files/' + key,
       }).catch(() => {
         indicator = 0;
       });
@@ -160,9 +214,15 @@ it('checks whether a non-cropped image have been uploaded or not', async () => {
   expect(indicator).toBe(1);
 });
 
-// test function getUrl - single id
-it('checks whether correct urls are returned by uploaded file id', async () => {
-  let idDict = await getUrl({ 109: 200 }, 'http://localhost:1338/upload/files/');
+/**
+ * This function tests the function getUrl.
+ * getUrl takes ids and gets a list of corresponding image url.
+ * It tests the case when only one id is provided.
+ * It checks the status returned by axios and verifies that the list of urls returned
+ * by axios is the same as what we are looking for.
+ */
+it('checks whether correct url is returned by one uploaded file id', async () => {
+  let idDict = await getUrl({ 109: 200 }, '/upload/files/');
   let statusIsGood = true;
   for (let key in idDict) {
     let status = idDict[key];
@@ -174,9 +234,15 @@ it('checks whether correct urls are returned by uploaded file id', async () => {
   expect(Object.keys(idDict)).toEqual(['/uploads/1_34ac2e4ff7.jpeg']);
 });
 
-// test function getUrl - multiple ids
-it('checks whether correct urls are returned by uploaded file id', async () => {
-  let idDict = await getUrl({ 109: 200, 110: 200 }, 'http://localhost:1338/upload/files/');
+/**
+ * This function tests the function getUrl.
+ * getUrl takes ids and gets a list of corresponding image url.
+ * It tests the case when multiple ids are provided.
+ * It checks the status returned by axios and verifies that the list of urls returned
+ * by axios is the same as what we are looking for.
+ */
+it('checks whether correct urls are returned by multiple uploaded file ids', async () => {
+  let idDict = await getUrl({ 109: 200, 110: 200 }, '/upload/files/');
   let statusIsGood = true;
   for (let key in idDict) {
     let status = idDict[key];
@@ -188,10 +254,14 @@ it('checks whether correct urls are returned by uploaded file id', async () => {
   expect(Object.keys(idDict)).toEqual(['/uploads/1_34ac2e4ff7.jpeg', '/uploads/2_46dbd22c42.jpeg']);
 });
 
-// test function postData
+/**
+ * This function tests the function postData.
+ * postData should save data into the backend when valid data is provided.
+ * This fucntion checks the status returned by axios and clears the database in the end.
+ */
 it('checks whether postData has saved data to the backend', async () => {
   let output = await postData(
-    'http://localhost:1338/promotions',
+    '/promotions',
     'title',
     'description',
     '2020-08-20T00:00',
@@ -208,7 +278,7 @@ it('checks whether postData has saved data to the backend', async () => {
     if (status === 200) {
       await axios({
         method: 'DELETE',
-        url: 'http://localhost:1338/promotions/' + key,
+        url: '/promotions/' + key,
       }).catch(() => {
         indicator = 0;
       });

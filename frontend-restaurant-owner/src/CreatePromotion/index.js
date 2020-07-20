@@ -148,7 +148,7 @@ export default class CreatePromotion extends Component {
     let uploadedImage;
     let output;
     if (indicator === 1) {
-      idDict = await uploadImage(sourceImage, image, 'http://localhost:1337/upload');
+      idDict = await uploadImage(sourceImage, image, '/upload');
       for (let key in idDict) {
         let status = idDict[key];
         if (status !== 200) {
@@ -158,7 +158,7 @@ export default class CreatePromotion extends Component {
       }
     }
     if (indicator === 1) {
-      uploadedImage = await getUrl(idDict, 'http://localhost:1337/upload/files/');
+      uploadedImage = await getUrl(idDict, '/upload/files/');
       for (let key in uploadedImage) {
         let status = uploadedImage[key];
         if (status !== 200) {
@@ -169,7 +169,7 @@ export default class CreatePromotion extends Component {
     }
     if (indicator === 1) {
       output = await postData(
-        'http://localhost:1337/promotions',
+        '/promotions',
         title,
         description,
         startTime,
