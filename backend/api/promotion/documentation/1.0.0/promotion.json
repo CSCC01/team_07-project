@@ -528,14 +528,17 @@
           "description": {
             "type": "string"
           },
-          "image": {
-            "type": "string"
-          },
           "starting_date": {
             "type": "string"
           },
           "expired_date": {
             "type": "string"
+          },
+          "subtask": {
+            "type": "object"
+          },
+          "image": {
+            "type": "object"
           }
         }
       },
@@ -547,14 +550,17 @@
           "description": {
             "type": "string"
           },
-          "image": {
-            "type": "string"
-          },
           "starting_date": {
             "type": "string"
           },
           "expired_date": {
             "type": "string"
+          },
+          "subtask": {
+            "type": "object"
+          },
+          "image": {
+            "type": "object"
           }
         }
       }

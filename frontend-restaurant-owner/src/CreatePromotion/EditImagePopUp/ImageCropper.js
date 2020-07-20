@@ -10,6 +10,7 @@ class ImageCropper extends React.Component {
     super();
     this.state = {
       imageDestination: '',
+      canvas: null,
     };
     this.imageElement = React.createRef();
   }
@@ -21,13 +22,14 @@ class ImageCropper extends React.Component {
       aspectRatio: 1,
       crop: () => {
         const canvas = cropper.getCroppedCanvas();
-        this.setState({ imageDestination: canvas.toDataURL('image/png') });
+        this.setState({ imageDestination: canvas.toDataURL('image/png'), canvas: canvas });
       },
     });
   }
 
   save = () => {
-    this.props.onSelectImage(this.state.imageDestination);
+    // this.props.onSelectImage(this.state.imageDestination);
+    this.props.onSelectImage(this.state.canvas);
     this.props.close();
   };
 
