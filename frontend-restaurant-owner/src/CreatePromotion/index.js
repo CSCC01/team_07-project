@@ -144,37 +144,9 @@ export default class CreatePromotion extends Component {
 
     let indicator = checkData(title, description, startTime, closeTime, sourceImage, reward);
 
-    // else {
-
-    //   // save data to the database
-    //   let title = this.state.title;
-    //   let description = this.state.description;
-    //   let startTime = this.state.startTime;
-    //   let closeTime = this.state.closeTime;
-    //   let tasks = this.state.tasks;
-
-    //   let data = {
-    //     image: uploadedImage,
-    //     title: title,
-    //     description: description,
-    //     starting_date: startTime,
-    //     expired_date: closeTime,
-    //     subtask: tasks,
-    //   };
-    //   let add = await axios({
-    //     method: 'POST',
-    //     url: 'http://localhost:1337/promotions',
-    //     data,
-    //   });
-    //   if (add.status == 200) {
-    //     alert('Promotion has successfully been added.');
-    //   } else {
-    //     alert('Something went wrong with the server.');
-    //   }
-    // }
-
     let idDict;
     let uploadedImage;
+    let output;
     if (indicator === 1) {
       idDict = await uploadImage(sourceImage, image, 'http://localhost:1337/upload');
       for (let key in idDict) {
@@ -196,7 +168,7 @@ export default class CreatePromotion extends Component {
       }
     }
     if (indicator === 1) {
-      indicator = await postData(
+      output = await postData(
         'http://localhost:1337/promotions',
         title,
         description,
@@ -206,6 +178,7 @@ export default class CreatePromotion extends Component {
         uploadedImage,
       );
     }
+    indicator = Object.values(output)[0] === 200 ? 1 : 0;
     if (indicator === 1) {
       alert('Promotion has successfully been added.');
     } else {
@@ -433,9 +406,9 @@ export const postData = async (
   tasks,
   uploadedImage,
 ) => {
-  let output;
+  let output = {};
   let data = {
-    image: uploadedImage,
+    image: Object.keys(uploadedImage),
     title: title,
     description: description,
     starting_date: startTime,
@@ -446,14 +419,13 @@ export const postData = async (
   await axios({
     method: 'POST',
     url: url,
-    data,
+    data: data,
   })
     .then((response) => {
-      output = response.status;
+      output[response.data.id] = response.status;
     })
     .catch(() => {
-      output = -1;
+      output[-1] = -1;
     });
-
-  return output === 200 ? 1 : 0;
+  return output;
 };

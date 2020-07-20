@@ -2,12 +2,9 @@ import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import CreatePromotion from '.';
-import { checkData, lessTime, uploadImage, getUrl } from './index.js';
+import { checkData, lessTime, uploadImage, getUrl, postData } from './index.js';
 
 import axios from 'axios';
-beforeAll(() => (axios.defaults.baseURL = process.env.BASE_URL || 'http://localhost:1337'));
-
-configure({ adapter: new Adapter() });
 
 // test the existence of the submit button
 it('shows the submit button', () => {
@@ -99,38 +96,8 @@ it('alerts when all the fields are filled in on submission', async () => {
 
 // test function uploadImage - single unmodified file
 it('checks whether a non-cropped image have been uploaded or not', async () => {
-  let f = new File(['abc'], 'test.jpg', { type: 'image' });
-  let idDict = uploadImage([f, null], [0, null], 'http://localhost:1338/upload');
-  let statusIsGood = true;
-  for (let key in idDict) {
-    let status = dict[key];
-    if (status !== 200) {
-      statusIsGood = false;
-    }
-  }
-  expect(statusIsGood).toBeTruthy();
-
-  // clean up the database
-  let indicator = 1;
-  for (let key in idDict) {
-    let status = dict[key];
-    if (status === 200) {
-      await axios({
-        method: 'DELETE',
-        url: url + '/files/' + key,
-      }).catch(() => {
-        indicator = 0;
-      });
-    }
-  }
-  expect(indicator).toBe(1);
-});
-
-// test function uploadImage - single modified file
-it('checks whether a cropped image have been uploaded or not', async () => {
-  let f = new File(['abc'], 'test.jpg', { type: 'image' });
-  let canvas = document.createElement('canvas', { height: 200, width: 200 });
-  let idDict = uploadImage([f, null], [canvas, null], 'http://localhost:1338/upload');
+  let f = new File(['test'], 'test.jpg', { type: 'image' });
+  let idDict = await uploadImage([f, null], [0, null], 'http://localhost:1338/upload');
   let statusIsGood = true;
   for (let key in idDict) {
     let status = idDict[key];
@@ -143,11 +110,11 @@ it('checks whether a cropped image have been uploaded or not', async () => {
   // clean up the database
   let indicator = 1;
   for (let key in idDict) {
-    let status = dict[key];
+    let status = idDict[key];
     if (status === 200) {
       await axios({
         method: 'DELETE',
-        url: url + '/files/' + key,
+        url: 'http://localhost:1338/upload/files/' + key,
       }).catch(() => {
         indicator = 0;
       });
@@ -156,11 +123,46 @@ it('checks whether a cropped image have been uploaded or not', async () => {
   expect(indicator).toBe(1);
 });
 
-// test function uploadImage - mixed
+// test function uploadImage - multiple
+it('checks whether a non-cropped image have been uploaded or not', async () => {
+  let f1 = new File(['test'], 'test.jpg', { type: 'image' });
+  let f2 = new File(['test'], 'test.jpg', { type: 'image' });
+  let f3 = new File(['test'], 'test.jpg', { type: 'image' });
+  let f4 = new File(['test'], 'test.jpg', { type: 'image' });
+  let f5 = new File(['test'], 'test.jpg', { type: 'image' });
+  let idDict = await uploadImage(
+    [f1, f2, f3, f4, f5, null],
+    [0, 0, 0, 0, 0, null],
+    'http://localhost:1338/upload',
+  );
+  let statusIsGood = true;
+  for (let key in idDict) {
+    let status = idDict[key];
+    if (status !== 200) {
+      statusIsGood = false;
+    }
+  }
+  expect(statusIsGood).toBeTruthy();
+
+  // clean up the database
+  let indicator = 1;
+  for (let key in idDict) {
+    let status = idDict[key];
+    if (status === 200) {
+      await axios({
+        method: 'DELETE',
+        url: 'http://localhost:1338/upload/files/' + key,
+      }).catch(() => {
+        indicator = 0;
+      });
+    }
+  }
+  expect(indicator).toBe(1);
+});
 
 // test function getUrl - single id
 it('checks whether correct urls are returned by uploaded file id', async () => {
-  let idDict = await getUrl({ 48: 200 }, 'http://localhost:1338/upload/files/');
+  let idDict = await getUrl({ 109: 200 }, 'http://localhost:1338/upload/files/');
   let statusIsGood = true;
   for (let key in idDict) {
     let status = idDict[key];
@@ -169,11 +171,48 @@ it('checks whether correct urls are returned by uploaded file id', async () => {
     }
   }
   expect(statusIsGood).toBeTruthy();
-  expect(Object.keys(idDict)).toEqual([
-    '/uploads/Screen_Shot_2020_07_20_at_6_36_17_AM_1c2b5078dd.png',
-  ]);
+  expect(Object.keys(idDict)).toEqual(['/uploads/1_34ac2e4ff7.jpeg']);
 });
 
 // test function getUrl - multiple ids
+it('checks whether correct urls are returned by uploaded file id', async () => {
+  let idDict = await getUrl({ 109: 200, 110: 200 }, 'http://localhost:1338/upload/files/');
+  let statusIsGood = true;
+  for (let key in idDict) {
+    let status = idDict[key];
+    if (status !== 200) {
+      statusIsGood = false;
+    }
+  }
+  expect(statusIsGood).toBeTruthy();
+  expect(Object.keys(idDict)).toEqual(['/uploads/1_34ac2e4ff7.jpeg', '/uploads/2_46dbd22c42.jpeg']);
+});
 
-// test function postData: check status
+// test function postData
+it('checks whether postData has saved data to the backend', async () => {
+  let output = await postData(
+    'http://localhost:1338/promotions',
+    'title',
+    'description',
+    '2020-08-20T00:00',
+    '2020-09-24T00:00',
+    [('test', 'test')],
+    ['/uploads/1_34ac2e4ff7.jpeg', '/uploads/2_46dbd22c42.jpeg'],
+  );
+  expect(Object.values(output)[0]).toBe(200);
+
+  // clean up the database
+  let indicator = 1;
+  for (let key in output) {
+    let status = output[key];
+    if (status === 200) {
+      await axios({
+        method: 'DELETE',
+        url: 'http://localhost:1338/promotions/' + key,
+      }).catch(() => {
+        indicator = 0;
+      });
+    }
+  }
+  expect(indicator).toBe(1);
+});
