@@ -26,8 +26,10 @@ export default class Home extends React.Component {
     
     render(){
         return (
-            <div>
-                <TitleBar title='Home' />
+            <>
+                <div data-testid='title'>
+                    <TitleBar title='Home'/>
+                </div>
                 <div className='mainSection'>
                     <Typography component="h2" className='headline'>
                         Promotions Avaliable to You:
@@ -35,7 +37,7 @@ export default class Home extends React.Component {
                     <hr />
                     <PromotionList content={this.state.promotionList}/>
                 </div>
-            </div>
+            </>
         );
     }
 }
