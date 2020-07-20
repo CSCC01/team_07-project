@@ -7,9 +7,9 @@ import Logout from './Logout';
 /**
  * This test suite tests Logout component.
  * The following aspects are tested:
- * 1. Logout is able to render without crashing
- * 2. Logout is present in a document
- * 3. Calls localStorage clear and location assign on click
+ * 1. Logout button is able to render without crashing
+ * 2. Logout button is present in the document
+ * 3. Calls localStorage clear and location assign when Logout is clicked
  */
 
 beforeEach(() => {
@@ -42,7 +42,7 @@ it('shows a logout button', () => {
 });
 
 /**
- * Calls localStorage clear and location assign on click
+ * Calls localStorage clear and location assign when Logout is clicked
  */
 it('calls localStorage clear and location assign on click', () => {
   const { getByTestId } = render(<Logout />);
