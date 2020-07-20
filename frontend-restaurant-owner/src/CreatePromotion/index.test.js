@@ -1,11 +1,11 @@
 import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import CreatePromotion from '.';
 
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 
 import axios from 'axios';
 beforeAll(() => (axios.defaults.baseURL = process.env.BASE_URL || 'http://localhost:1337'));
@@ -21,7 +21,7 @@ it('shows the submit button', () => {
 // test invalid data
 
 // test empty task
-it('alerts when task field is empty on submisson', async () => {
+it('alerts when task field is empty on submission', async () => {
   jest.spyOn(window, 'alert');
   const wrapper = mount(<CreatePromotion />);
   wrapper.setState({
@@ -34,10 +34,10 @@ it('alerts when task field is empty on submisson', async () => {
     closeTime: '2020-09-24T00:00',
     tasks: [],
     reward: 1,
-    disable: 1, // 0 - disable; 1 - enable
-  }); // successfully set state
-  // expect(wrapper.find('#submit').to.have.lengthOf(1)); // failed
-  wrapper.find('#submit').simulate('click'); // 5 found instead
+    disable: 1,
+  });
+
+  wrapper.find('#submit').at(0).simulate('click');
   await waitFor(() => expect(window.alert).toBeCalled());
 });
 
