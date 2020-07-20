@@ -1,3 +1,14 @@
+/**
+ * This test suite tests CreatePromotion component.
+ * The following aspects are tested:
+ * 1. the existence of the submit button
+ * 2. the functionality of checkData
+ * 3. the functionality of lessTime
+ * 4. the functionality of uploadImage
+ * 5. the functionality of getUrl
+ * 6. the functionality of postData
+ */
+
 import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
