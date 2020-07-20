@@ -1,22 +1,17 @@
 import React from 'react';
 import Login from './Login';
 import { Route, Switch } from 'react-router-dom';
+import Home from './Home';
+import PromotionDetails from './PromotionDetails'
 
 function App() {
   return (
     <div className="App">
       <Switch>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route exact path="/">
-          <h1>
-            Welcome!
-          </h1>
-        </Route>
-        <Route>
-          <NoMatch />
-        </Route>
+        <Route path="/login" component={Login} />
+        <Route path="/promotions/:id" component={PromotionDetails} />
+        <Route exact path="/" component={Home} />
+        <Route component={NoMatch} />
       </Switch>
     </div>
   );
