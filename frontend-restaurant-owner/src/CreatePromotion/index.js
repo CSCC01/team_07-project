@@ -133,13 +133,27 @@ export default class CreatePromotion extends Component {
   };
 
   submitPromotion = async () => {
+    let title = this.state.title;
+    let description = this.state.description;
+    let startTime = this.state.startTime;
+    let closeTime = this.state.closeTime;
+    let tasks = this.state.tasks;
+    let image = this.state.image;
+    let sourceImage = this.state.sourceImage;
+    console.log(title);
+    console.log(description);
+    console.log(startTime);
+    console.log(closeTime);
+    console.log(tasks);
+    console.log(image);
+    console.log(sourceImage);
     for (let key of ['title', 'description', 'startTime', 'closeTime']) {
       if (this.state[key] === '') {
         alert(`Failure: ${key} empty`);
       }
     }
 
-    if (this.state.image.length === 1) {
+    if (this.state.sourceImage.length === 1) {
       alert('Failure: image empty');
     } else if (lessTime(this.state.closeTime, this.state.startTime)) {
       alert('Failure: closeTime before startTime');
@@ -147,77 +161,78 @@ export default class CreatePromotion extends Component {
       alert('Failure: startTime before today');
     } else if (this.state.reward === -1) {
       alert('Failure: reward empty');
-    } else {
-      let sourceImage = this.state.sourceImage;
-      let image = this.state.image;
-
-      // upload image to strapi
-
-      let file;
-      let getId;
-      let idList = [];
-      for (let index = 0; index < image.length - 1; index++) {
-        if (image[index] === 0) {
-          // if user doesn't modified the image
-          file = sourceImage[index];
-          let imageFile = new FormData();
-          imageFile.append('files', file);
-          getId = await axios({
-            method: 'POST',
-            url: 'http://localhost:1337/upload',
-            data: imageFile,
-          });
-          idList.push(getId.data[0].id);
-        } else {
-          // if user modified the image
-          let blob = await new Promise((resolve) => image[index].toBlob(resolve, 'image/png'));
-          let imageCanvas = new FormData();
-          imageCanvas.append('files', blob);
-          getId = await axios({
-            method: 'POST',
-            url: 'http://localhost:1337/upload',
-            data: imageCanvas,
-          });
-          idList.push(getId.data[0].id);
-        }
-      }
-
-      // get uploaded image url
-      let uploadedImage = [];
-      for (let i = 0; i < idList.length; i++) {
-        let getUrl = await axios({
-          method: 'GET',
-          url: 'http://localhost:1337/upload/files/' + idList[i],
-        });
-        uploadedImage.push(getUrl.data.url);
-      }
-
-      // save data to the database
-      let title = this.state.title;
-      let description = this.state.description;
-      let startTime = this.state.startTime;
-      let closeTime = this.state.closeTime;
-      let tasks = this.state.tasks;
-
-      let data = {
-        image: uploadedImage,
-        title: title,
-        description: description,
-        starting_date: startTime,
-        expired_date: closeTime,
-        subtask: tasks,
-      };
-      let add = await axios({
-        method: 'POST',
-        url: 'http://localhost:1337/promotions',
-        data,
-      });
-      if (add.status == 200) {
-        alert('Promotion has successfully been added.');
-      } else {
-        alert('Something went wrong with the server.');
-      }
     }
+    // else {
+    //   let sourceImage = this.state.sourceImage;
+    //   let image = this.state.image;
+
+    //   // upload image to strapi
+
+    //   let file;
+    //   let getId;
+    //   let idList = [];
+    //   for (let index = 0; index < image.length - 1; index++) {
+    //     if (image[index] === 0) {
+    //       // if user doesn't modified the image
+    //       file = sourceImage[index];
+    //       let imageFile = new FormData();
+    //       imageFile.append('files', file);
+    //       getId = await axios({
+    //         method: 'POST',
+    //         url: 'http://localhost:1337/upload',
+    //         data: imageFile,
+    //       });
+    //       idList.push(getId.data[0].id);
+    //     } else {
+    //       // if user modified the image
+    //       let blob = await new Promise((resolve) => image[index].toBlob(resolve, 'image/png'));
+    //       let imageCanvas = new FormData();
+    //       imageCanvas.append('files', blob);
+    //       getId = await axios({
+    //         method: 'POST',
+    //         url: 'http://localhost:1337/upload',
+    //         data: imageCanvas,
+    //       });
+    //       idList.push(getId.data[0].id);
+    //     }
+    //   }
+
+    //   // get uploaded image url
+    //   let uploadedImage = [];
+    //   for (let i = 0; i < idList.length; i++) {
+    //     let getUrl = await axios({
+    //       method: 'GET',
+    //       url: 'http://localhost:1337/upload/files/' + idList[i],
+    //     });
+    //     uploadedImage.push(getUrl.data.url);
+    //   }
+
+    //   // save data to the database
+    //   let title = this.state.title;
+    //   let description = this.state.description;
+    //   let startTime = this.state.startTime;
+    //   let closeTime = this.state.closeTime;
+    //   let tasks = this.state.tasks;
+
+    //   let data = {
+    //     image: uploadedImage,
+    //     title: title,
+    //     description: description,
+    //     starting_date: startTime,
+    //     expired_date: closeTime,
+    //     subtask: tasks,
+    //   };
+    //   let add = await axios({
+    //     method: 'POST',
+    //     url: 'http://localhost:1337/promotions',
+    //     data,
+    //   });
+    //   if (add.status == 200) {
+    //     alert('Promotion has successfully been added.');
+    //   } else {
+    //     alert('Something went wrong with the server.');
+    //   }
+    // }
   };
 
   render() {
@@ -311,6 +326,7 @@ export default class CreatePromotion extends Component {
             Discard
           </Button>
           <Button
+            id="submit"
             variant="contained"
             color="secondary"
             style={{ marginLeft: 40 }}
