@@ -140,72 +140,11 @@ export default class CreatePromotion extends Component {
     let tasks = this.state.tasks;
     let image = this.state.image;
     let sourceImage = this.state.sourceImage;
-    console.log(title);
-    console.log(description);
-    console.log(startTime);
-    console.log(closeTime);
-    console.log(tasks);
-    console.log(image);
-    console.log(sourceImage);
-    for (let key of ['title', 'description', 'startTime', 'closeTime']) {
-      if (this.state[key] === '') {
-        alert(`Failure: ${key} empty`);
-      }
-    }
+    let reward = this.state.reward;
 
-    if (this.state.sourceImage.length === 1) {
-      alert('Failure: image empty');
-    } else if (lessTime(this.state.closeTime, this.state.startTime)) {
-      alert('Failure: closeTime before startTime');
-    } else if (lessTime(this.state.startTime, getToday())) {
-      alert('Failure: startTime before today');
-    } else if (this.state.reward === -1) {
-      alert('Failure: reward empty');
-    }
+    let indicator = checkData(title, description, startTime, closeTime, sourceImage, reward);
+
     // else {
-    //   let sourceImage = this.state.sourceImage;
-    //   let image = this.state.image;
-
-    //   // upload image to strapi
-
-    //   let file;
-    //   let getId;
-    //   let idList = [];
-    //   for (let index = 0; index < image.length - 1; index++) {
-    //     if (image[index] === 0) {
-    //       // if user doesn't modified the image
-    //       file = sourceImage[index];
-    //       let imageFile = new FormData();
-    //       imageFile.append('files', file);
-    //       getId = await axios({
-    //         method: 'POST',
-    //         url: 'http://localhost:1337/upload',
-    //         data: imageFile,
-    //       });
-    //       idList.push(getId.data[0].id);
-    //     } else {
-    //       // if user modified the image
-    //       let blob = await new Promise((resolve) => image[index].toBlob(resolve, 'image/png'));
-    //       let imageCanvas = new FormData();
-    //       imageCanvas.append('files', blob);
-    //       getId = await axios({
-    //         method: 'POST',
-    //         url: 'http://localhost:1337/upload',
-    //         data: imageCanvas,
-    //       });
-    //       idList.push(getId.data[0].id);
-    //     }
-    //   }
-
-    //   // get uploaded image url
-    //   let uploadedImage = [];
-    //   for (let i = 0; i < idList.length; i++) {
-    //     let getUrl = await axios({
-    //       method: 'GET',
-    //       url: 'http://localhost:1337/upload/files/' + idList[i],
-    //     });
-    //     uploadedImage.push(getUrl.data.url);
-    //   }
 
     //   // save data to the database
     //   let title = this.state.title;
@@ -233,6 +172,45 @@ export default class CreatePromotion extends Component {
     //     alert('Something went wrong with the server.');
     //   }
     // }
+
+    let idDict;
+    let uploadedImage;
+    if (indicator === 1) {
+      idDict = await uploadImage(sourceImage, image, 'http://localhost:1337/upload');
+      for (let key in idDict) {
+        let status = idDict[key];
+        if (status !== 200) {
+          indicator = 0;
+          break;
+        }
+      }
+    }
+    if (indicator === 1) {
+      uploadedImage = await getUrl(idDict, 'http://localhost:1337/upload/files/');
+      for (let key in uploadedImage) {
+        let status = uploadedImage[key];
+        if (status !== 200) {
+          indicator = 0;
+          break;
+        }
+      }
+    }
+    if (indicator === 1) {
+      indicator = await postData(
+        'http://localhost:1337/promotions',
+        title,
+        description,
+        startTime,
+        closeTime,
+        tasks,
+        uploadedImage,
+      );
+    }
+    if (indicator === 1) {
+      alert('Promotion has successfully been added.');
+    } else {
+      alert('Something went wrong with the backend.');
+    }
   };
 
   render() {
@@ -340,10 +318,142 @@ export default class CreatePromotion extends Component {
   }
 }
 
-function lessTime(t1, t2) {
+export const lessTime = (t1, t2) => {
   return new Date(t1) < new Date(t2);
-}
+};
 
-function getToday() {
+export const getToday = () => {
   return new Date().toString();
-}
+};
+
+export const checkData = (title, description, startTime, closeTime, sourceImage, reward) => {
+  let prompt = [];
+
+  if (title === '') {
+    prompt.push('Failure: title is empty');
+  }
+  if (description === '') {
+    prompt.push('Failure: description is empty');
+  }
+  if (startTime === '') {
+    prompt.push('Failure: start time is empty');
+  }
+  if (closeTime === '') {
+    prompt.push('Failure: expired time is empty');
+  }
+  if (sourceImage.length === 1) {
+    prompt.push('Failure: image is empty');
+  }
+  if (lessTime(closeTime, startTime)) {
+    prompt.push('Failure: closeTime before startTime');
+  }
+  if (lessTime(startTime, getToday())) {
+    prompt.push('Failure: startTime before today');
+  }
+  if (reward === -1) {
+    prompt.push('Failure: reward is empty');
+  }
+
+  let output = prompt.join('\n');
+  let indicator = 1;
+  if (output !== '') {
+    alert(output);
+    indicator = 0;
+  }
+
+  return indicator;
+};
+
+export const uploadImage = async (sourceImage, image, url) => {
+  let file;
+  let idDict = {};
+  for (let index = 0; index < image.length - 1; index++) {
+    if (image[index] === 0) {
+      // if user doesn't modified the image
+      file = sourceImage[index];
+      let imageFile = new FormData();
+      imageFile.append('files', file);
+
+      await axios({
+        method: 'POST',
+        url: url,
+        data: imageFile,
+      })
+        .then((response) => {
+          idDict[response.data[0].id] = response.status;
+        })
+        .catch(() => {
+          idDict[-1] = -1;
+        });
+    } else {
+      // if user modified the image
+      let blob = await new Promise((resolve) => image[index].toBlob(resolve, 'image/png'));
+      let imageCanvas = new FormData();
+      imageCanvas.append('files', blob);
+
+      await axios({
+        method: 'POST',
+        url: url,
+        data: imageCanvas,
+      })
+        .then((response) => {
+          idDict[response.data[0].id] = response.status;
+        })
+        .catch(() => {
+          idDict[-1] = -1;
+        });
+    }
+  }
+  return idDict;
+};
+
+export const getUrl = async (idDict, url) => {
+  let uploadedImage = {};
+  for (let key in idDict) {
+    await axios({
+      method: 'GET',
+      url: url + key,
+    })
+      .then((response) => {
+        uploadedImage[response.data.url] = response.status;
+      })
+      .catch(() => {
+        uploadedImage[-1] = -1;
+      });
+  }
+  return uploadedImage;
+};
+
+export const postData = async (
+  url,
+  title,
+  description,
+  startTime,
+  closeTime,
+  tasks,
+  uploadedImage,
+) => {
+  let output;
+  let data = {
+    image: uploadedImage,
+    title: title,
+    description: description,
+    starting_date: startTime,
+    expired_date: closeTime,
+    subtask: tasks,
+  };
+
+  await axios({
+    method: 'POST',
+    url: url,
+    data,
+  })
+    .then((response) => {
+      output = response.status;
+    })
+    .catch(() => {
+      output = -1;
+    });
+
+  return output === 200 ? 1 : 0;
+};

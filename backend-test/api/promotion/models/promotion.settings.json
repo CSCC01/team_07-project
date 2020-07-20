@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "promotions",
+  "info": {
+    "name": "Promotion"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "starting_date": {
+      "type": "string"
+    },
+    "expired_date": {
+      "type": "string"
+    },
+    "subtask": {
+      "type": "json"
+    },
+    "image": {
+      "type": "json"
+    }
+  }
+}
