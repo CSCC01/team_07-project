@@ -6,7 +6,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-axios.defaults.baseURL = process.env.BASE_URL || 'http://localhost:1337';
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:1337';
 
 ReactDOM.render(
   <React.StrictMode>
