@@ -8,14 +8,17 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 class SelectReward extends Component {
   state = {
-    reward: -1,
+    type: null,
+    value: null,
+    showingModal: false,
   };
 
   rewardChange = (event) => {
     this.setState({
-      reward: event.target.value,
+      type: event.target.value,
+      value: null,
+      showingModal: true,
     });
-    this.props.onSelectReward(event.target.value);
   };
 
   render() {
