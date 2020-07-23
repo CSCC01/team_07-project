@@ -6,6 +6,8 @@
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",
+    "start-testing-server": "ENV_PATH='./.env.testing' strapi start",
+    "start-develop-testing-server": "ENV_PATH='./.env.testing' strapi develop",
     "build": "strapi build",
     "strapi": "strapi",
     "lint": "eslint --fix .",
