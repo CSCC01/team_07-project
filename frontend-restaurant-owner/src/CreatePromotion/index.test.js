@@ -16,7 +16,13 @@ import CreatePromotion from '.';
 import { checkData, lessTime, uploadImage, getUrl, postData } from './index.js';
 
 import axios from 'axios';
-beforeAll(() => (axios.defaults.baseURL = process.env.BASE_URL || 'http://localhost:1338'));
+
+/**
+ * Reset database after each test case.
+ */
+afterEach(async () => {
+  await axios.post('testing/reset');
+});
 
 /**
  * This function tests whether the submit button is on the promotion page.
@@ -171,21 +177,6 @@ it('checks whether an image have been uploaded or not', async () => {
     }
   }
   expect(statusIsGood).toBeTruthy();
-
-  // clean up the database
-  let indicator = 1;
-  for (let key in idDict) {
-    let status = idDict[key];
-    if (status === 200) {
-      await axios({
-        method: 'DELETE',
-        url: '/upload/files/' + key,
-      }).catch(() => {
-        indicator = 0;
-      });
-    }
-  }
-  expect(indicator).toBe(1);
 });
 
 /**
@@ -208,21 +199,6 @@ it('checks whether mulitple images have been uploaded or not', async () => {
     }
   }
   expect(statusIsGood).toBeTruthy();
-
-  // clean up the database
-  let indicator = 1;
-  for (let key in idDict) {
-    let status = idDict[key];
-    if (status === 200) {
-      await axios({
-        method: 'DELETE',
-        url: '/upload/files/' + key,
-      }).catch(() => {
-        indicator = 0;
-      });
-    }
-  }
-  expect(indicator).toBe(1);
 });
 
 /**
@@ -281,19 +257,4 @@ it('checks whether postData has saved data to the backend', async () => {
     ['/uploads/1_34ac2e4ff7.jpeg', '/uploads/2_46dbd22c42.jpeg'],
   );
   expect(Object.values(output)[0]).toBe(200);
-
-  // clean up the database
-  let indicator = 1;
-  for (let key in output) {
-    let status = output[key];
-    if (status === 200) {
-      await axios({
-        method: 'DELETE',
-        url: '/promotions/' + key,
-      }).catch(() => {
-        indicator = 0;
-      });
-    }
-  }
-  expect(indicator).toBe(1);
 });
