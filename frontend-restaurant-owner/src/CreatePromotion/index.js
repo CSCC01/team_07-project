@@ -177,8 +177,8 @@ export default class CreatePromotion extends Component {
         tasks,
         uploadedImage,
       );
+      indicator = Object.values(output)[0] === 200 ? 1 : 0;
     }
-    indicator = Object.values(output)[0] === 200 ? 1 : 0;
     if (indicator === 1) {
       alert('Promotion has successfully been added.');
     } else {
