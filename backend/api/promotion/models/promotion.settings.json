@@ -15,14 +15,17 @@
     "description": {
       "type": "richtext"
     },
-    "image": {
-      "type": "string"
-    },
     "starting_date": {
       "type": "string"
     },
     "expired_date": {
       "type": "string"
+    },
+    "subtask": {
+      "type": "json"
+    },
+    "image": {
+      "type": "json"
     }
   }
 }

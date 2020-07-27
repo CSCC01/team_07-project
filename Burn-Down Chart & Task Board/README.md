@@ -11,3 +11,7 @@
 |0706| ![](./sprint3-initial-bdc.png) |  ![](./sprint3-initial-tb.png)   |
 |0712| ![](./sprint3-final-bdc.png) |  ![](./sprint3-final-tb.png)   |
 |0713| ![](./sprint4-initial-bdc.png) |  ![](./sprint4-initial-tb.png)   |
+|0719| ![](./sprint4-final-bdc.png) |  ![](./sprint4-final-tb.png)   |
+|0720| ![](./0720-bdc.png) |  ![](./0720-tb.png)   |
+|0722| ![](./0722-bdc.png) |  ![](./0722-tb.png)   |
+|0724| ![](./0724-bdc.png) |  ![](./0724-tb.png)   |

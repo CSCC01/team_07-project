@@ -7,16 +7,16 @@ import SelectReward from './SelectReward';
 import EditImagePopUp from './EditImagePopUp';
 
 import Button from '@material-ui/core/Button';
-// import Axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
 import './index.css';
 
 export default class CreatePromotion extends Component {
   state = {
-    image: [''],
-    sourceImage: [''],
+    image: [null],
+    sourceImage: [null],
     currentIndex: 0,
     title: '',
     description: '',
@@ -37,7 +37,7 @@ export default class CreatePromotion extends Component {
     let image = this.state.image;
     let currentIndex = this.state.currentIndex;
     sourceImage.splice(currentIndex, 0, value);
-    image.splice(currentIndex, 0, value);
+    image.splice(currentIndex, 0, 0); // no modified image
     this.setState({ image: image });
     this.setState({ sourceImage: sourceImage });
     this.setState({ disable: 1 });
@@ -48,7 +48,15 @@ export default class CreatePromotion extends Component {
     this.setState({ currentIndex: currentIndex - 1 });
 
     let image = this.state.image;
-    let url = image[currentIndex - 1];
+    let sourceImage = this.state.sourceImage;
+
+    let url = '';
+    if (image[currentIndex - 1] === 0) {
+      url = URL.createObjectURL(sourceImage[currentIndex - 1]);
+    } else {
+      url = image[currentIndex - 1].toDataURL('image/png');
+    }
+
     let show = 3;
     if (currentIndex - 1 === 0) {
       show = 2;
@@ -59,10 +67,18 @@ export default class CreatePromotion extends Component {
 
   onRight = () => {
     let currentIndex = this.state.currentIndex;
-    let image = this.state.image;
     this.setState({ currentIndex: currentIndex + 1 });
 
-    let url = image[currentIndex + 1];
+    let image = this.state.image;
+    let sourceImage = this.state.sourceImage;
+
+    let url = '';
+    if (image[currentIndex + 1] === 0) {
+      url = URL.createObjectURL(sourceImage[currentIndex + 1]);
+    } else {
+      url = image[currentIndex + 1] === null ? '' : image[currentIndex + 1].toDataURL('image/png');
+    }
+
     let show = 3;
     if (currentIndex + 2 === image.length) {
       show = 1;
@@ -75,7 +91,7 @@ export default class CreatePromotion extends Component {
     let image = this.state.image;
     image[this.state.currentIndex] = value;
     this.setState({ image: image });
-    this.UploadImageRef.current.onEdit(value);
+    this.UploadImageRef.current.onEdit(value.toDataURL('image/png'));
   };
 
   onDelete = () => {
@@ -86,7 +102,13 @@ export default class CreatePromotion extends Component {
     image.splice(currentIndex, 1);
     this.setState({ image: image, sourceImage: sourceImage });
 
-    let url = image[this.state.currentIndex];
+    let url = '';
+    if (image[currentIndex] === 0) {
+      url = URL.createObjectURL(sourceImage[currentIndex]);
+    } else {
+      url = image[currentIndex] === null ? '' : image[currentIndex].toDataURL('image/png');
+    }
+
     let show;
     if (currentIndex === 0) {
       if (image.length === 1) {
@@ -107,49 +129,60 @@ export default class CreatePromotion extends Component {
   };
 
   discardPromotion = () => {
-    // goBack
+    // go to view promotion
   };
 
   submitPromotion = async () => {
-    for (let key of ['title', 'description', 'startTime', 'closeTime']) {
-      if (this.state[key] === '') {
-        alert(`Failure: ${key} empty`);
+    let title = this.state.title;
+    let description = this.state.description;
+    let startTime = this.state.startTime;
+    let closeTime = this.state.closeTime;
+    let tasks = this.state.tasks;
+    let image = this.state.image;
+    let sourceImage = this.state.sourceImage;
+    let reward = this.state.reward;
+
+    let indicator = checkData(title, description, startTime, closeTime, sourceImage, reward);
+
+    let idDict;
+    let uploadedImage;
+    let output;
+    if (indicator === 1) {
+      idDict = await uploadImage(sourceImage, image, '/upload');
+      for (let key in idDict) {
+        let status = idDict[key];
+        if (status !== 200) {
+          indicator = 0;
+          break;
+        }
       }
     }
-
-    if (this.state.image.length === 1) {
-      alert('Failure: image empty');
-    } else if (lessTime(this.state.closeTime, this.state.startTime)) {
-      alert('Failure: closeTime before startTime');
-    } else if (lessTime(this.state.closeTime, getToday())) {
-      alert('Failure: startTime before today');
-    } else if (this.state.reward === -1) {
-      alert('Failure: reward empty');
+    if (indicator === 1) {
+      uploadedImage = await getUrl(idDict, '/upload/files/');
+      for (let key in uploadedImage) {
+        let status = uploadedImage[key];
+        if (status !== 200) {
+          indicator = 0;
+          break;
+        }
+      }
+    }
+    if (indicator === 1) {
+      output = await postData(
+        '/promotions',
+        title,
+        description,
+        startTime,
+        closeTime,
+        tasks,
+        uploadedImage,
+      );
+      indicator = Object.values(output)[0] === 200 ? 1 : 0;
+    }
+    if (indicator === 1) {
+      alert('Promotion has successfully been added.');
     } else {
-      const sourceImage = this.state.sourceImage;
-      const title = this.state.title;
-      const description = this.state.description;
-      const startTime = this.state.startTime;
-      const closeTime = this.state.closeTime;
-      const data = {
-        image: sourceImage,
-        title: title,
-        description: description,
-        starting_date: startTime,
-        closing_date: closeTime,
-      };
-      console.log(data);
-      // const add = await Axios({
-      //   method: 'POST',
-      //   url: '/promotions',
-      //   data,
-      // });
-      // if (add.status === 200) {
-      //   alert('Promotion has successfully been added.');
-      // } else {
-      //   alert('Something went wrong with the server.');
-      // }
-      // connect to the backend
+      alert('Something went wrong with the backend.');
     }
   };
 
@@ -230,7 +263,7 @@ export default class CreatePromotion extends Component {
               </form>
             </div>
 
-            <CreateSubtask onSelectTask={(value) => this.onUpdate('task', value)} />
+            <CreateSubtask onSelectTask={(value) => this.onUpdate('tasks', value)} />
             <SelectReward onSelectReward={(value) => this.onUpdate('reward', value)} />
           </div>
         </div>
@@ -244,6 +277,7 @@ export default class CreatePromotion extends Component {
             Discard
           </Button>
           <Button
+            id="submit"
             variant="contained"
             color="secondary"
             style={{ marginLeft: 40 }}
@@ -257,10 +291,141 @@ export default class CreatePromotion extends Component {
   }
 }
 
-function lessTime(t1, t2) {
+export const lessTime = (t1, t2) => {
   return new Date(t1) < new Date(t2);
-}
+};
 
-function getToday() {
+export const getToday = () => {
   return new Date().toString();
-}
+};
+
+export const checkData = (title, description, startTime, closeTime, sourceImage, reward) => {
+  let prompt = [];
+
+  if (title === '') {
+    prompt.push('Failure: title is empty');
+  }
+  if (description === '') {
+    prompt.push('Failure: description is empty');
+  }
+  if (startTime === '') {
+    prompt.push('Failure: start time is empty');
+  }
+  if (closeTime === '') {
+    prompt.push('Failure: expired time is empty');
+  }
+  if (sourceImage.length === 1) {
+    prompt.push('Failure: image is empty');
+  }
+  if (lessTime(closeTime, startTime)) {
+    prompt.push('Failure: closeTime before startTime');
+  }
+  if (lessTime(startTime, getToday())) {
+    prompt.push('Failure: startTime before today');
+  }
+  if (reward === -1) {
+    prompt.push('Failure: reward is empty');
+  }
+
+  let output = prompt.join('\n');
+  let indicator = 1;
+  if (output !== '') {
+    alert(output);
+    indicator = 0;
+  }
+
+  return indicator;
+};
+
+export const uploadImage = async (sourceImage, image, url) => {
+  let file;
+  let idDict = {};
+  for (let index = 0; index < image.length - 1; index++) {
+    if (image[index] === 0) {
+      // if user doesn't modified the image
+      file = sourceImage[index];
+      let imageFile = new FormData();
+      imageFile.append('files', file);
+
+      await axios({
+        method: 'POST',
+        url: url,
+        data: imageFile,
+      })
+        .then((response) => {
+          idDict[response.data[0].id] = response.status;
+        })
+        .catch(() => {
+          idDict[-1] = -1;
+        });
+    } else {
+      // if user modified the image
+      let blob = await new Promise((resolve) => image[index].toBlob(resolve, 'image/png'));
+      let imageCanvas = new FormData();
+      imageCanvas.append('files', blob);
+
+      await axios({
+        method: 'POST',
+        url: url,
+        data: imageCanvas,
+      })
+        .then((response) => {
+          idDict[response.data[0].id] = response.status;
+        })
+        .catch(() => {
+          idDict[-1] = -1;
+        });
+    }
+  }
+  return idDict;
+};
+
+export const getUrl = async (idDict, url) => {
+  let uploadedImage = {};
+  for (let key in idDict) {
+    await axios({
+      method: 'GET',
+      url: url + key,
+    })
+      .then((response) => {
+        uploadedImage[response.data.url] = response.status;
+      })
+      .catch(() => {
+        uploadedImage[-1] = -1;
+      });
+  }
+  return uploadedImage;
+};
+
+export const postData = async (
+  url,
+  title,
+  description,
+  startTime,
+  closeTime,
+  tasks,
+  uploadedImage,
+) => {
+  let output = {};
+  let data = {
+    image: Object.keys(uploadedImage),
+    title: title,
+    description: description,
+    starting_date: startTime,
+    expired_date: closeTime,
+    subtask: tasks,
+  };
+
+  await axios({
+    method: 'POST',
+    url: url,
+    data: data,
+  })
+    .then((response) => {
+      output[response.data.id] = response.status;
+    })
+    .catch(() => {
+      output[-1] = -1;
+    });
+  return output;
+};
