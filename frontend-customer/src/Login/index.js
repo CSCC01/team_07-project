@@ -27,7 +27,7 @@ function Login() {
   function useExistingToken(event) {
     event.preventDefault();
     const token = localStorage.getItem('Authorization-Token');
-    axios.defaults.headers.common['Authorization'] = token;
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
     setLoggedIn(true);
   }
 

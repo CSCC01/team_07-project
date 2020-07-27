@@ -19,6 +19,7 @@ function Register() {
     if (password !== passwordDup) {
       alert("Your passwords don't match.");
     } else {
+      var userid;
       axios
         .post('/auth/local/register', {
           username: userName,
@@ -28,14 +29,30 @@ function Register() {
         .then((response) => {
           if (response.status !== 200) console.warn(response);
           localStorage.setItem('Authorization-Token', response.data.jwt);
-          window.alert('Registration is successful. You can log in with this account.');
-          window.location.href = '/login';
-        })
-        .catch((error) => {
-          console.log(error.response);
-          // Alert the error message fetched from backend
-          alert(error.response.data.message[0].messages[0].message);
-        });
+          axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.jwt;
+          userid = response.data.user.id;
+          //Set role to customer
+          axios
+            .put('/users/' + userid, {
+              // Set role to customer
+              role: 3
+            })
+            .then((response) => {
+              if (response.status !== 200) console.warn(response);
+              window.alert('Registration is successful. You can log in with this account.');
+              window.location.href = '/login';
+            })
+            .catch((error) => {
+              console.log(error.response);
+              // Alert the error message fetched from backend
+              alert(error.response.data.message);
+            });
+            })
+          .catch((error) => {
+            console.log(error.response);
+            // Alert the error message fetched from backend
+            alert(error.response.data.message[0].messages[0].message);
+          });
     }
   }
 
