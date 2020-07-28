@@ -60,7 +60,7 @@ function Login() {
       <Grid item>
         <Container maxWidth="xs">
           <div>
-            <Typography component="h1" variant="alignCenter">
+            <Typography variant="h4" align="center" style={{fontWeight: "bold"}}>
               Login
             </Typography>
             <form noValidate>
