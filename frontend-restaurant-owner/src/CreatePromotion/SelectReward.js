@@ -13,6 +13,19 @@ class SelectReward extends Component {
     showingModal: false,
   };
 
+  get couponLabel() {
+    return (
+      'Coupon' +
+      (this.state.type === 'coupon' && this.state.value !== null ? ': ' + this.state.value : '')
+    );
+  }
+
+  get pointsLabel() {
+    return this.state.type === 'points' && this.state.value !== null
+      ? this.state.value + ' Points'
+      : 'Points';
+  }
+
   rewardChange = (event) => {
     this.setState({
       type: event.target.value,
@@ -32,8 +45,28 @@ class SelectReward extends Component {
           value={this.state.reward}
           onChange={this.rewardChange}
         >
-          <FormControlLabel value="0" control={<Radio />} label="Coupon" />
-          <FormControlLabel value="1" control={<Radio />} label="Point" />
+          <FormControlLabel
+            value="coupon"
+            control={
+              <Radio
+                onClick={() =>
+                  this.state.type === 'coupon' && this.setState({ showingModal: true })
+                }
+              />
+            }
+            label={this.couponLabel}
+          />
+          <FormControlLabel
+            value="points"
+            control={
+              <Radio
+                onClick={() =>
+                  this.state.type === 'points' && this.setState({ showingModal: true })
+                }
+              />
+            }
+            label={this.pointsLabel}
+          />
         </RadioGroup>
       </div>
     );
