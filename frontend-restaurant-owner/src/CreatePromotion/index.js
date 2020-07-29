@@ -345,7 +345,10 @@ export const checkData = (title, description, startTime, closeTime, sourceImage,
   if (lessTime(startTime, getToday())) {
     prompt.push('Failure: startTime before today');
   }
-  if (reward === -1) {
+  if (!['points', 'coupon'].includes(reward.type)) {
+    prompt.push('Failure: reward type is empty');
+  }
+  if (!reward.value) {
     prompt.push('Failure: reward is empty');
   }
 

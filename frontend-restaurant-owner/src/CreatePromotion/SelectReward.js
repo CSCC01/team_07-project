@@ -4,7 +4,11 @@ import TextPopUp from '../sharedComponents/TextPopUp';
 
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import { Typography, Button } from '@material-ui/core';
 
 class SelectReward extends Component {
   state = {
@@ -32,6 +36,11 @@ class SelectReward extends Component {
       value: null,
       showingModal: true,
     });
+  };
+
+  onContentChange = ({ target: { value } }) => {
+    this.setState({ value });
+    this.props.onSelectReward({ type: this.state.type, value });
   };
 
   render() {
@@ -68,6 +77,27 @@ class SelectReward extends Component {
             label={this.pointsLabel}
           />
         </RadioGroup>
+              {this.state.type === 'coupon'
+                ? 'Please enter the coupon description'
+                : 'Please enter number of points'}
+            </Typography>
+            {this.state.type === 'coupon' ? (
+              <TextField
+                variant="outlined"
+                type="text"
+                inputProps={{ size: 40 }}
+                value={this.state.value || ''}
+                onChange={this.onContentChange}
+              />
+            ) : this.state.type === 'points' ? (
+              <TextField
+                variant="outlined"
+                type="number"
+                inputProps={{ min: 1 }}
+                value={this.state.value || ''}
+                onChange={this.onContentChange}
+              />
+            ) : null}
       </div>
     );
   }
