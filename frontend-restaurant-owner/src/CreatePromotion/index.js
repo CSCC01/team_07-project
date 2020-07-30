@@ -133,6 +133,7 @@ export default class CreatePromotion extends Component {
   };
 
   submitPromotion = async () => {
+    let restaurant_id = await getRestaurant('/users/me/');
     let title = this.state.title;
     let description = this.state.description;
     let startTime = this.state.startTime;
@@ -176,12 +177,13 @@ export default class CreatePromotion extends Component {
         closeTime,
         tasks,
         uploadedImage,
+        restaurant_id,
       );
       indicator = Object.values(output)[0] === 200 ? 1 : 0;
     }
     if (indicator === 1) {
       alert('Promotion has successfully been added.');
-    } else {
+    } else if (indicator === 0) {
       alert('Something went wrong with the backend.');
     }
   };
@@ -291,6 +293,21 @@ export default class CreatePromotion extends Component {
   }
 }
 
+export const getRestaurant = async (url) => {
+  let jwt_token = localStorage.getItem('Authorization-Token');
+  let restaurant_id = 0;
+  await axios({
+    method: 'GET',
+    url: url,
+    headers: {
+      Authorization: 'Bearer ' + jwt_token,
+    },
+  }).then((response) => {
+    restaurant_id = response.data.restaurant;
+  });
+  return restaurant_id;
+};
+
 export const lessTime = (t1, t2) => {
   return new Date(t1) < new Date(t2);
 };
@@ -331,7 +348,7 @@ export const checkData = (title, description, startTime, closeTime, sourceImage,
   let indicator = 1;
   if (output !== '') {
     alert(output);
-    indicator = 0;
+    indicator = -1;
   }
 
   return indicator;
@@ -405,6 +422,7 @@ export const postData = async (
   closeTime,
   tasks,
   uploadedImage,
+  restaurant_id,
 ) => {
   let output = {};
   let data = {
@@ -414,6 +432,7 @@ export const postData = async (
     starting_date: startTime,
     expired_date: closeTime,
     subtask: tasks,
+    restaurant: restaurant_id,
   };
 
   await axios({

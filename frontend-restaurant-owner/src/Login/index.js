@@ -45,7 +45,7 @@ function Login() {
       })
       .then((response) => {
         if (response.status !== 200) console.warn(response);
-        axios.defaults.headers.common['Authorization'] = response.data.jwt;
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.jwt;
         localStorage.setItem('Authorization-Token', response.data.jwt);
         setLoggedIn(true);
       })
