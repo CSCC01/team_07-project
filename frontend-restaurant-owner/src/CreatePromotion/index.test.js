@@ -270,7 +270,7 @@ it('checks whether postData has saved data to the backend', async () => {
     'description',
     '2020-08-20T00:00',
     '2020-09-24T00:00',
-    [('test', 'test')],
+    ['test'],
     ['/uploads/1_34ac2e4ff7.jpeg', '/uploads/2_46dbd22c42.jpeg'],
     '1',
   );
