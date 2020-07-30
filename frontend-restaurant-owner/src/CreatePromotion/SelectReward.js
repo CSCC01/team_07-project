@@ -77,6 +77,13 @@ class SelectReward extends Component {
             label={this.pointsLabel}
           />
         </RadioGroup>
+
+        <Dialog
+          open={this.state.showingModal}
+          onClose={() => this.setState({ showingModal: false })}
+        >
+          <DialogContent dividers style={{ padding: 30 }}>
+            <Typography variant="h6">
               {this.state.type === 'coupon'
                 ? 'Please enter the coupon description'
                 : 'Please enter number of points'}
@@ -98,6 +105,17 @@ class SelectReward extends Component {
                 onChange={this.onContentChange}
               />
             ) : null}
+            <div style={{ margin: 5 }}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => this.setState({ showingModal: false })}
+              >
+                Save
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     );
   }
