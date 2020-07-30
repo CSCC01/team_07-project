@@ -248,7 +248,9 @@ it('checks whether correct urls are returned by multiple uploaded file ids', asy
  * It checks the status returned by axios.
  */
 it('checks whether correct restaurant id is fetched from the backend', async () => {
-  let restaurant = await getRestaurant('/users/me/');
+  let jwt_token =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTk2MDg3NDg2LCJleHAiOjE1OTg2Nzk0ODZ9.bH-txoYGWnFdv4JWqvv_NQKWsNvcIOjBjJmKltk3mr8';
+  let restaurant = await getRestaurant('/users/me/', jwt_token);
   let statusIsGood = true;
   if (restaurant[1] !== 200) {
     statusIsGood = false;
@@ -270,6 +272,7 @@ it('checks whether postData has saved data to the backend', async () => {
     '2020-09-24T00:00',
     [('test', 'test')],
     ['/uploads/1_34ac2e4ff7.jpeg', '/uploads/2_46dbd22c42.jpeg'],
+    '1',
   );
   expect(Object.values(output)[0]).toBe(200);
 });

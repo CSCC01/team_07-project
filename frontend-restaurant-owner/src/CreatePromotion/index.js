@@ -133,7 +133,8 @@ export default class CreatePromotion extends Component {
   };
 
   submitPromotion = async () => {
-    let restaurant = await getRestaurant('/users/me/');
+    let jwt_token = localStorage.getItem('Authorization-Token');
+    let restaurant = await getRestaurant('/users/me/', jwt_token);
     let restaurant_id = restaurant[0];
     let title = this.state.title;
     let description = this.state.description;
@@ -294,8 +295,7 @@ export default class CreatePromotion extends Component {
   }
 }
 
-export const getRestaurant = async (url) => {
-  let jwt_token = localStorage.getItem('Authorization-Token');
+export const getRestaurant = async (url, jwt_token) => {
   let restaurant_id;
   await axios({
     method: 'GET',
