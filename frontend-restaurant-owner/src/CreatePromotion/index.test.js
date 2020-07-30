@@ -6,17 +6,18 @@
  * 3. the functionality of lessTime
  * 4. the functionality of uploadImage
  * 5. the functionality of getUrl
- * 6. the functionality of postData
+ * 6. the functionality of getRestaurant
+ * 7. the functionality of postData
  */
 
 import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import CreatePromotion from '.';
-import { checkData, lessTime, uploadImage, getUrl, postData } from './index.js';
+import { checkData, lessTime, uploadImage, getUrl, getRestaurant, postData } from './index.js';
 
 import axios from 'axios';
-beforeAll(() => (axios.defaults.baseURL = process.env.BASE_URL || 'http://localhost:1338'));
+beforeAll(() => (axios.defaults.baseURL = process.env.BASE_URL || 'http://localhost:1337'));
 
 /**
  * This function tests whether the submit button is on the promotion page.
@@ -263,6 +264,20 @@ it('checks whether correct urls are returned by multiple uploaded file ids', asy
   }
   expect(statusIsGood).toBeTruthy();
   expect(Object.keys(idDict)).toEqual(['/uploads/1_34ac2e4ff7.jpeg', '/uploads/2_46dbd22c42.jpeg']);
+});
+
+/**
+ * This function tests the function getRestaurant.
+ * getRestaurant takes gets the id of the restaurant that the current user (a restaurant owner) owns.
+ * It checks the status returned by axios.
+ */
+it('checks whether correct restaurant id is fetched from the backend', async () => {
+  let restaurant = await getRestaurant('/users/me/');
+  let statusIsGood = true;
+  if (restaurant[1] !== 200) {
+    statusIsGood = false;
+  }
+  expect(statusIsGood).toBeTruthy();
 });
 
 /**
