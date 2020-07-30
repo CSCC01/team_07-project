@@ -16,6 +16,10 @@
       "via": "restaurant",
       "plugin": "users-permissions",
       "collection": "user"
+    },
+    "promotions": {
+      "via": "restaurant",
+      "collection": "promotion"
     }
   }
 }

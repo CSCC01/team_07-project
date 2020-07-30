@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "07/16/2020 12:44:45 AM"
+    "x-generation-date": "07/29/2020 11:40:10 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -4352,6 +4352,31 @@
           },
           "image": {
             "type": "object"
+          },
+          "restaurant": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "users": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "promotions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -4374,6 +4399,9 @@
           },
           "image": {
             "type": "object"
+          },
+          "restaurant": {
+            "type": "string"
           }
         }
       },
@@ -4435,6 +4463,40 @@
                 }
               }
             }
+          },
+          "promotions": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "starting_date": {
+                  "type": "string"
+                },
+                "expired_date": {
+                  "type": "string"
+                },
+                "subtask": {
+                  "type": "object"
+                },
+                "image": {
+                  "type": "object"
+                },
+                "restaurant": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -4444,6 +4506,12 @@
             "type": "string"
           },
           "users": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "promotions": {
             "type": "array",
             "items": {
               "type": "string"
@@ -4702,6 +4770,12 @@
                 "type": "string"
               },
               "users": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "promotions": {
                 "type": "array",
                 "items": {
                   "type": "string"
