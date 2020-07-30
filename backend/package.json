@@ -6,6 +6,9 @@
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",
+    "start-production-server": "ENV_PATH='.env.production' strapi start",
+    "start-testing-server": "cp testing.db .tmp/testing.db; ENV_PATH='./.env.testing' strapi start",
+    "start-develop-testing-server": "cp testing.db .tmp/testing.db; ENV_PATH='./.env.testing' strapi develop",
     "build": "strapi build",
     "strapi": "strapi",
     "lint": "eslint --fix .",

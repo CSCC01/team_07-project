@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/testing/reset",
+      "handler": "testing.reset",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
