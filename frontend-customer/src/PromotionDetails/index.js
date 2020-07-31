@@ -19,12 +19,12 @@ export default function PromotionDetails(props) {
         setData(data);
         console.log(data);
         const carousel = 
-        <Carousel renderThumbs={()=>{}}>
-          {data.image.map(url => 
-          (<div>
-            <img src={axios.defaults.baseURL + url}/>
-           </div>))}
-        </Carousel>;
+          <Carousel renderThumbs={()=>{}}>
+            {data.image.map(url => 
+            (<div className="imageCutter">
+              <img src={axios.defaults.baseURL + url}/>
+            </div>))}
+          </Carousel>;
         setImages(carousel);
       });
     }, [])
