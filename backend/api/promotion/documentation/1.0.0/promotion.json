@@ -539,6 +539,31 @@
           },
           "image": {
             "type": "object"
+          },
+          "restaurant": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "users": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "promotions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -561,6 +586,9 @@
           },
           "image": {
             "type": "object"
+          },
+          "restaurant": {
+            "type": "string"
           }
         }
       }

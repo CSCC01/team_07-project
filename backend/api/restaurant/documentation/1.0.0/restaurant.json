@@ -572,6 +572,40 @@
                 }
               }
             }
+          },
+          "promotions": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "starting_date": {
+                  "type": "string"
+                },
+                "expired_date": {
+                  "type": "string"
+                },
+                "subtask": {
+                  "type": "object"
+                },
+                "image": {
+                  "type": "object"
+                },
+                "restaurant": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -581,6 +615,12 @@
             "type": "string"
           },
           "users": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "promotions": {
             "type": "array",
             "items": {
               "type": "string"

@@ -26,6 +26,10 @@
     },
     "image": {
       "type": "json"
+    },
+    "restaurant": {
+      "model": "restaurant",
+      "via": "promotions"
     }
   }
 }
