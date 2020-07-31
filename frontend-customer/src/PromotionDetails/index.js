@@ -3,12 +3,13 @@ import axios from 'axios';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import { Typography } from '@material-ui/core';
+import Progress from './Progress';
 
 import './index.css'
 
 const jwt_token = localStorage.getItem('Authorization-Token');
 
-function PromotionDetails(props) {
+export default function PromotionDetails(props) {
     const [data, setData] = useState({});
     const [images, setImages] = useState([]); // images as a Carousel element
 
@@ -26,7 +27,7 @@ function PromotionDetails(props) {
         </Carousel>;
         setImages(carousel);
       });
-    }, [data])
+    }, [])
 
     return (
       <>
@@ -34,11 +35,14 @@ function PromotionDetails(props) {
         <Typography variant="h4" component="h1" className="title">
           {data.title}
         </Typography>
+        <Typography>
+          {"Closing Time:" + data.expired_date}
+        </Typography>
         <Typography component="h1" className="title">
           {data.description}
         </Typography>
-        {data.subtask}
-        {data.expired_date}
+        <Progress content={data.subtask} />
+        
       </>
     );
   };
@@ -49,7 +53,6 @@ export const getPromotionDetails = async (id, jwt_token) => {
         Authorization: 'Bearer ' + jwt_token,
     }
   })
+  console.log(promotionDetails.data);
   return promotionDetails.data;
 }
-
-export default PromotionDetails;
