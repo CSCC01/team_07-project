@@ -24,6 +24,7 @@ function Register() {
           username: userName,
           email: email,
           password: password,
+          restaurant: 2,
         })
         .then((response) => {
           if (response.status !== 200) console.warn(response);

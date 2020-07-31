@@ -27,7 +27,7 @@ function Login() {
   function useExistingToken(event) {
     event.preventDefault();
     const token = localStorage.getItem('Authorization-Token');
-    axios.defaults.headers.common['Authorization'] = token;
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
     setLoggedIn(true);
   }
 
@@ -39,13 +39,13 @@ function Login() {
     delete axios.defaults.headers.common['Authorization'];
 
     axios
-      .post('http://localhost:1337/auth/local', {
+      .post('/auth/local', {
         identifier: userName,
         password: password,
       })
       .then((response) => {
         if (response.status !== 200) console.warn(response);
-        axios.defaults.headers.common['Authorization'] = response.data.jwt;
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.jwt;
         localStorage.setItem('Authorization-Token', response.data.jwt);
         setLoggedIn(true);
       })
@@ -60,7 +60,7 @@ function Login() {
       <Grid item>
         <Container maxWidth="xs">
           <div>
-            <Typography component="h1" variant="alignCenter">
+            <Typography variant="h4" align="center" style={{fontWeight: "bold"}}>
               Login
             </Typography>
             <form noValidate>

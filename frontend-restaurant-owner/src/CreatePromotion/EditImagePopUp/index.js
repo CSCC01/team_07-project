@@ -9,7 +9,7 @@ import ImageCropper from './ImageCropper';
 
 class EditImagePopUp extends Component {
   state = {
-    image: '',
+    canvas: null,
   };
 
   onUpdate = (key, value) => {
@@ -39,9 +39,9 @@ class EditImagePopUp extends Component {
               <FontAwesomeIcon icon={faTimes} style={{ marginLeft: 3, marginRight: 3 }} />
             </IconButton>
             <ImageCropper
-              src={this.props.sourceImage}
+              src={URL.createObjectURL(this.props.sourceImage)}
               close={close}
-              onSelectImage={(value) => this.onUpdate('image', value)}
+              onSelectImage={(value) => this.onUpdate('canvas', value)}
             ></ImageCropper>
           </div>
         )}
