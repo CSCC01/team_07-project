@@ -1286,6 +1286,12 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "promotions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               }
             }
           }
