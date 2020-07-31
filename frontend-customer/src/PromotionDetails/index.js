@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import { Typography } from '@material-ui/core';
+import { Typography, Paper } from '@material-ui/core';
 import Progress from './Progress';
 
 import './index.css'
@@ -32,17 +32,18 @@ export default function PromotionDetails(props) {
     return (
       <>
         {images}
-        <Typography variant="h4" component="h1" className="title">
-          {data.title}
-        </Typography>
-        <Typography>
-          {"Closing Time: " + new Date(data.expired_date).toLocaleString()}
-        </Typography>
-        <Typography component="h1" className="title">
-          {data.description}
-        </Typography>
-        <Progress content={data.subtask} />
-        
+        <div className="promotionDetails">
+          <Typography variant="h4" component="h1" className="title">
+            {data.title}
+          </Typography>
+          <Typography>
+            {"Closing Time: " + new Date(data.expired_date).toLocaleString()}
+          </Typography>
+          <Paper className="description">
+            {data.description}
+          </Paper>
+          <Progress content={data.subtask} />
+        </div>
       </>
     );
   };
