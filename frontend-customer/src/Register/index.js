@@ -6,12 +6,18 @@ import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 
 function Register() {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [passwordDup, setPasswordDup] = useState('');
   const [email, setEmail] = useState('');
+  const [role, setRole] = useState("4");
 
   function postRegister(event) {
     // Disable the default form submit action
@@ -20,6 +26,7 @@ function Register() {
       alert("Your passwords don't match.");
     } else {
       var userid;
+      localStorage.clear('Authorization-Token');
       axios
         .post('/auth/local/register', {
           username: userName,
@@ -35,7 +42,7 @@ function Register() {
           axios
             .put('/users/' + userid, {
               // Set role to customer
-              role: 3
+              role: Number(role)
             })
             .then((response) => {
               if (response.status !== 200) console.warn(response);
@@ -56,6 +63,10 @@ function Register() {
     }
   }
 
+  const handleRoleChange = (event) => {
+    setRole(event.target.value);
+  };
+
   return (
     <Grid container direction="column" justify="center" style={{ minHeight: '100vh' }}>
       <Grid item>
@@ -64,6 +75,21 @@ function Register() {
             <Typography variant="h4" align="center" style={{fontWeight: "bold"}}>
               Register
             </Typography>
+            <FormControl component="fieldset"
+              align="center"
+              margin="normal"
+              fullWidth
+              style={{
+              justifySelf: "center",
+              alignContent: "center",
+              alignSelf: "center"}}>
+              <FormLabel component="legend" style={{fontSize: "1.5em", color: "black"}}>Role</FormLabel>
+              <RadioGroup row aria-label="role" name="role" value={role} onChange={handleRoleChange}
+              style={{justifyContent: "center"}}>
+                <FormControlLabel value="4" control={<Radio />} label="Staff" />
+                <FormControlLabel value="3" control={<Radio />} label="Customer" />
+              </RadioGroup>
+            </FormControl>
             <form noValidate>
               <TextField
                 autoComplete="username"
@@ -73,7 +99,6 @@ function Register() {
                 fullWidth
                 id="username"
                 label="Username"
-                style={{ marginTop: 20 }}
                 onChange={(e) => {
                   setUserName(e.target.value);
                 }}
