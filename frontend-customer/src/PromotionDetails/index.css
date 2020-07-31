@@ -9,3 +9,7 @@
     margin-left: 10px;
     margin-right: 10px;
 }
+
+.promotionDetails > * {
+    margin-bottom: 15px;
+}

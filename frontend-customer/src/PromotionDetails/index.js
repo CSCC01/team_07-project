@@ -33,12 +33,14 @@ export default function PromotionDetails(props) {
       <>
         {images}
         <div className="promotionDetails">
-          <Typography variant="h4" component="h1" className="title">
-            {data.title}
-          </Typography>
-          <Typography>
-            {"Closing Time: " + new Date(data.expired_date).toLocaleString()}
-          </Typography>
+          <div>
+            <Typography variant="h4" component="h1" className="title">
+              {data.title}
+            </Typography>
+            <Typography>
+              {"Closing Time: " + new Date(data.expired_date).toLocaleString()}
+            </Typography>
+          </div>
           <Paper className="description">
             {data.description}
           </Paper>
