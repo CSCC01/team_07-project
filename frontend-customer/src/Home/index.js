@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import PromotionList from './PromotionList';
 import TitleBar from '../sharedComponents/TitleBar';
 import './index.css';
+import { Redirect } from 'react-router-dom';
 
 export default class Home extends React.Component {
     state = {
@@ -25,6 +26,7 @@ export default class Home extends React.Component {
     }
     
     render(){
+        if (localStorage.getItem('Authorization-Token') === null) return <Redirect to="/login" />;
         return (
             <>
                 <div data-testid='title'>

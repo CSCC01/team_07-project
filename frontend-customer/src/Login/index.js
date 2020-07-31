@@ -11,7 +11,8 @@ import { Grid, Box } from '@material-ui/core';
 function Login() {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isCusLoggedIn, setCusLoggedIn] = useState(false);
+  const [isRsLoggedIn, setRsLoggedIn] = useState(false);
   const [hasToken, setHasToken] = useState(false);
 
   React.useEffect(() => {
@@ -20,15 +21,26 @@ function Login() {
     }
   }, []);
 
-  if (isLoggedIn) {
+  if (isCusLoggedIn) {
     return <Redirect to="/" />;
+  }
+
+  if (isRsLoggedIn) {
+    //TODO: Redirect to Restaurant staff homepage
+    window.location = "https://www.google.com"
   }
 
   function useExistingToken(event) {
     event.preventDefault();
     const token = localStorage.getItem('Authorization-Token');
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-    setLoggedIn(true);
+    const stored_role = localStorage.getItem('role');
+    if (stored_role.localeCompare("Restaurant Staff") === 0) {
+      setRsLoggedIn(true);
+    }
+    else if (stored_role.localeCompare("Customer") === 0) {
+      setCusLoggedIn(true);
+    }
   }
 
   function postLogin(event) {
@@ -47,7 +59,29 @@ function Login() {
         if (response.status !== 200) console.warn(response);
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.jwt;
         localStorage.setItem('Authorization-Token', response.data.jwt);
-        setLoggedIn(true);
+        var role = response.data.user.role.name;
+        localStorage.setItem('role', role);
+        if (role.localeCompare("Restaurant Staff") === 0) {
+          setRsLoggedIn(true);
+        }
+        else if (role.localeCompare("Customer") === 0) {
+          setCusLoggedIn(true);
+        }
+        else if (role.localeCompare("Restaurant Owner") === 0) {
+          window.alert('Please use Restaurant owner frontend to login.');
+          localStorage.clear('Authorization-Token');
+          localStorage.clear('role');
+          delete axios.defaults.headers.common['Authorization'];
+          setHasToken(false);
+        }
+        else {
+          // Should not reach here
+          window.alert('Something weird happened');
+          localStorage.clear('Authorization-Token');
+          localStorage.clear('role');
+          delete axios.defaults.headers.common['Authorization'];
+          setHasToken(false);
+        }
       })
       .catch((error) => {
         console.log(error.response);
