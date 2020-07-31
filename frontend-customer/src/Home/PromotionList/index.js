@@ -17,7 +17,7 @@ function PromotionBox(props) {
         <ListItem button component={Link} to={'promotions/' + props.content.id} data-testid = "promotion-box">
             <ListItemText
                 primary={props.content.title} 
-                secondary={"expired date： " + props.content.expired_date}
+                secondary={"Closing Time： " + new Date(props.content.expired_date).toLocaleString()}
             />
         </ListItem>
     );

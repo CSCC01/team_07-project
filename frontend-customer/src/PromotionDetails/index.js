@@ -36,7 +36,7 @@ export default function PromotionDetails(props) {
           {data.title}
         </Typography>
         <Typography>
-          {"Closing Time:" + data.expired_date}
+          {"Closing Time: " + new Date(data.expired_date).toLocaleString()}
         </Typography>
         <Typography component="h1" className="title">
           {data.description}
