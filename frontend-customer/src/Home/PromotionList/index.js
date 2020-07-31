@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 export default function PromotionList(props){
     return (
             <List data-testid="promotion-list">
-            {props.content.map(promotion => (
+            {props.content.map(promotion => 
                 <PromotionBox content={promotion}/>
-            ))}
+            )}
             </List>
     );
 }

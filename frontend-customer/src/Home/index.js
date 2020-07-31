@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import PromotionList from './PromotionList';
 import TitleBar from '../sharedComponents/TitleBar';
 import './index.css';
+import PromotionDetails from '../PromotionDetails';
 
 const jwt_token = localStorage.getItem('Authorization-Token');
 
@@ -14,6 +15,7 @@ export default class Home extends React.Component {
 
     componentDidMount(){
         getPromotions(jwt_token).then((promotionList)=>{
+            console.log(promotionList);
             this.setState({
                 promotionList: promotionList,
             });  
@@ -38,9 +40,9 @@ export default class Home extends React.Component {
     }
 }
 
-export const getPromotions = (jwt_token) => {
+export const getPromotions = async (jwt_token) => {
     const currentTime = new Date();
-    return axios.get('/promotions', {
+    return await axios.get('/promotions', {
         headers: {
             Authorization: 'Bearer ' + jwt_token,
         }
@@ -48,5 +50,5 @@ export const getPromotions = (jwt_token) => {
     response.data.filter(promotion => new Date(promotion.expired_date) > currentTime)
     ).catch((error) => {
         console.log(error.response);
-    })
+    });
 };
