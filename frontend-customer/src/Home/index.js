@@ -5,22 +5,18 @@ import PromotionList from './PromotionList';
 import TitleBar from '../sharedComponents/TitleBar';
 import './index.css';
 
+const jwt_token = localStorage.getItem('Authorization-Token');
+
 export default class Home extends React.Component {
     state = {
-        promotionList: []
+        promotionList: [],
     }
 
     componentDidMount(){
-        axios.get('/promotions').then((response) => {
-            const currentTime = new Date();
-            const promotionList = response.data.filter(
-                promotion => new Date(promotion.expired_date) > currentTime);
+        getPromotions(jwt_token).then((promotionList)=>{
             this.setState({
                 promotionList: promotionList,
-            });
-        })
-        .catch((error) => {
-            console.log(error.response);
+            });  
         });
     }
     
@@ -41,3 +37,16 @@ export default class Home extends React.Component {
         );
     }
 }
+
+export const getPromotions = (jwt_token) => {
+    const currentTime = new Date();
+    return axios.get('/promotions', {
+        headers: {
+            Authorization: 'Bearer ' + jwt_token,
+        }
+    }).then((response) =>
+    response.data.filter(promotion => new Date(promotion.expired_date) > currentTime)
+    ).catch((error) => {
+        console.log(error.response);
+    })
+};
