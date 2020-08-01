@@ -1,3 +1,11 @@
+/**
+ * This test suite tests PromotionDetails component.
+ * The following aspects are tested:
+ * 1. the existence of title bar
+ * 2. the existence of promotion list
+ */
+
+
 import React from 'react';
 import { render, getByTestId } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';

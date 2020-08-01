@@ -17,7 +17,6 @@ export default function PromotionDetails(props) {
       const { params: { id } } = props.match;
       getPromotionDetails(id, jwt_token).then((data) => {
         setData(data);
-        console.log(data);
         const carousel = 
           <Carousel renderThumbs={()=>{}}>
             {data.image.map(url => 

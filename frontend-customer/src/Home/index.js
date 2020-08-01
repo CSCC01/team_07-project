@@ -4,7 +4,6 @@ import Typography from '@material-ui/core/Typography';
 import PromotionList from './PromotionList';
 import TitleBar from '../sharedComponents/TitleBar';
 import './index.css';
-import PromotionDetails from '../PromotionDetails';
 
 const jwt_token = localStorage.getItem('Authorization-Token');
 
