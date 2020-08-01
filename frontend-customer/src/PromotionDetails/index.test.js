@@ -38,8 +38,6 @@ it('displays promotion description', () => {
  */
 it('gets promotion details from the backend', async() => {
     let output = await getPromotionDetails(1, jwt_token);
-    let statusIsGood = true;
-    expect(statusIsGood).toBeTruthy();
     const expected = {
         "id": 1,
         "title": "promotion1",
