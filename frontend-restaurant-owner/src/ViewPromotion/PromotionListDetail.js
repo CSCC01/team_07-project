@@ -27,7 +27,7 @@ function PromotionItem(props) {
           ))}
         </div>
 
-        <div style={{ width: 500 }}>
+        <div style={{ width: 500, paddingLeft: 50 }}>
           <h3>Description: {props.promotion.description}</h3>
           <p>Starting Date: {new Date(props.promotion.starting_date).toLocaleString()}</p>
           <p>Expired Date: {new Date(props.promotion.expired_date).toLocaleString()}</p>
