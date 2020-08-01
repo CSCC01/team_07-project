@@ -5,7 +5,7 @@ function PromotionListDetail(props) {
   return (
     <div className={styles.container}>
       {props.promotions.map((promotion) => (
-        <PromotionItem promotion={promotion} />
+        <PromotionItem key={promotion.id} promotion={promotion} />
       ))}
     </div>
   );
@@ -18,8 +18,9 @@ function PromotionItem(props) {
 
       <div className={styles.subContainer}>
         <div style={{ display: 'flex', flexFlow: 'column' }}>
-          {props.promotion.image.map((pic) => (
+          {props.promotion.image.map((pic, index) => (
             <img
+              key={index}
               src={'http://localhost:1337' + pic}
               alt="promotion img"
               style={{ maxWidth: 500, maxHeight: 500 }}
@@ -33,8 +34,8 @@ function PromotionItem(props) {
           <p>Expired Date: {new Date(props.promotion.expired_date).toLocaleString()}</p>
           <p>Subtasks:</p>
           <il>
-            {props.promotion.subtask.map((sub) => (
-              <li>{sub}</li>
+            {props.promotion.subtask.map((sub, index) => (
+              <li key={index}>{sub}</li>
             ))}
           </il>
         </div>
