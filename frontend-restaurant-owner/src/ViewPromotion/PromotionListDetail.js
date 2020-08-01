@@ -17,20 +17,18 @@ function PromotionItem(props) {
       <h1>Title: {props.promotion.title} </h1>
 
       <div className={styles.subContainer}>
-        <div className={styles.subItem}>
+        <div style={{ display: 'flex', flexFlow: 'column' }}>
           {props.promotion.image.map((pic) => (
             <img
               src={'http://localhost:1337' + pic}
               alt="promotion img"
-              width="500"
-              heigh="500"
+              style={{ maxWidth: 500, maxHeight: 500 }}
             ></img>
           ))}
         </div>
 
-        <div className={styles.subItem}>
+        <div style={{ width: 500 }}>
           <h3>Description: {props.promotion.description}</h3>
-
           <p>Starting Date: {new Date(props.promotion.starting_date).toLocaleString()}</p>
           <p>Expired Date: {new Date(props.promotion.expired_date).toLocaleString()}</p>
           <p>Subtasks:</p>

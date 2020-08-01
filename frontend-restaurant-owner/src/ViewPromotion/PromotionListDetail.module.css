@@ -17,7 +17,8 @@
 }
 
 .subContainer p,
-.subContainer li {
+.subContainer li,
+.subContainer h3 {
   font-family: sans-serif;
   font-size: large;
   text-align: left;
