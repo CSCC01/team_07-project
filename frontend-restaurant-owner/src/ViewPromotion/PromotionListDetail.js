@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './PromotionListDetail.module.css';
+import axios from 'axios';
 
 function PromotionListDetail(props) {
   return (
@@ -21,7 +22,7 @@ function PromotionItem(props) {
           {props.promotion.image.map((pic, index) => (
             <img
               key={index}
-              src={'http://localhost:1337' + pic}
+              src={axios.defaults.baseURL + pic}
               alt="promotion img"
               style={{ maxWidth: 500, maxHeight: 500 }}
             ></img>
