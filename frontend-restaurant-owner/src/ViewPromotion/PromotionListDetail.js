@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './PromotionListDetail.module.css';
-import axios from 'axios';
+import SlideView from './SlideView';
 
 function PromotionListDetail(props) {
   return (
@@ -18,16 +18,7 @@ function PromotionItem(props) {
       <h1>Title: {props.promotion.title} </h1>
 
       <div className={styles.subContainer}>
-        <div style={{ display: 'flex', flexFlow: 'column' }}>
-          {props.promotion.image.map((pic, index) => (
-            <img
-              key={index}
-              src={axios.defaults.baseURL + pic}
-              alt="promotion img"
-              style={{ maxWidth: 500, maxHeight: 500 }}
-            ></img>
-          ))}
-        </div>
+        <SlideView images={props.promotion.image} />
 
         <div style={{ width: 500, paddingLeft: 50 }}>
           <h3>Description: {props.promotion.description}</h3>
