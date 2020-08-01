@@ -26,8 +26,7 @@ function Login() {
   }
 
   if (isRsLoggedIn) {
-    //TODO: Redirect to Restaurant staff homepage
-    window.location = "https://www.google.com"
+    return <Redirect to="/couponvalidation" />;
   }
 
   function useExistingToken(event) {
