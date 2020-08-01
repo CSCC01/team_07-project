@@ -30,8 +30,9 @@ function PromotionItem(props) {
 
         <div className={styles.subItem}>
           <h3>Description: {props.promotion.description}</h3>
-          <p>Starting Date: {props.promotion.starting_date}</p>
-          <p>Expired Date: {props.promotion.expired_date}</p>
+
+          <p>Starting Date: {new Date(props.promotion.starting_date).toLocaleString()}</p>
+          <p>Expired Date: {new Date(props.promotion.expired_date).toLocaleString()}</p>
           <p>Subtasks:</p>
           <il>
             {props.promotion.subtask.map((sub) => (
