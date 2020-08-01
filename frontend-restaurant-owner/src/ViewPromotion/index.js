@@ -5,43 +5,17 @@ import PromotionListDetail from './PromotionListDetail';
 class ViewPromotion extends React.Component {
   state = {
     promotionList: [],
-    currentRestaurant: '',
+    jwtToken: localStorage.getItem('Authorization-Token'),
   };
 
   async componentDidMount() {
-    await axios({
-      method: 'GET',
-      url: '/users/me',
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('Authorization-Token'),
-      },
-    })
-      .then((response) => {
-        const userRes = response.data;
-        this.setState({ currentRestaurant: userRes.restaurant });
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
-
-    await axios({
-      method: 'GET',
-      url: '/promotions',
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('Authorization-Token'),
-      },
-    })
-      .then((response) => {
-        const promotionRes = response.data.filter(
-          (promotion) => promotion.restaurant.id === this.state.currentRestaurant,
-        );
+    getRestaurant(this.state.jwtToken).then((currentRestaurant) => {
+      getPromotions(this.state.jwtToken, currentRestaurant.data).then((promotions) => {
         this.setState({
-          promotionList: promotionRes,
+          promotionList: promotions,
         });
-      })
-      .catch((error) => {
-        console.log(error.response);
       });
+    });
   }
 
   render() {
@@ -54,3 +28,28 @@ class ViewPromotion extends React.Component {
 }
 
 export default ViewPromotion;
+
+export const getRestaurant = async (jwtToken) => {
+  const restaurant = await axios({
+    method: 'GET',
+    url: '/users/me',
+    headers: {
+      Authorization: 'Bearer ' + jwtToken,
+    },
+  });
+  return restaurant;
+};
+
+export const getPromotions = async (jwtToken, restaurant) => {
+  var promotionList;
+  await axios({
+    method: 'GET',
+    url: '/promotions',
+    headers: {
+      Authorization: 'Bearer ' + jwtToken,
+    },
+  }).then((response) => {
+    promotionList = response.data.filter((promotion) => promotion.restaurant.id === restaurant.id);
+  });
+  return promotionList;
+};

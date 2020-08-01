@@ -5,9 +5,10 @@ import SlideView from './SlideView';
 function PromotionListDetail(props) {
   return (
     <div className={styles.container}>
-      {props.promotions.map((promotion) => (
-        <PromotionItem key={promotion.id} promotion={promotion} />
-      ))}
+      {props.promotions &&
+        props.promotions.map((promotion) => (
+          <PromotionItem key={promotion.id} promotion={promotion} />
+        ))}
     </div>
   );
 }
@@ -25,11 +26,10 @@ function PromotionItem(props) {
           <p>Starting Date: {new Date(props.promotion.starting_date).toLocaleString()}</p>
           <p>Expired Date: {new Date(props.promotion.expired_date).toLocaleString()}</p>
           <p>Subtasks:</p>
-          <il>
-            {props.promotion.subtask.map((sub, index) => (
-              <li key={index}>{sub}</li>
-            ))}
-          </il>
+          <ul>
+            {props.promotion &&
+              props.promotion.subtask.map((sub, index) => <li key={index}>{sub}</li>)}
+          </ul>
         </div>
       </div>
     </div>
