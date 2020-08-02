@@ -80,6 +80,7 @@ function Login() {
           window.alert('Something weird happened');
           localStorage.clear('Authorization-Token');
           localStorage.clear('role');
+          localStorage.clear('name');
           delete axios.defaults.headers.common['Authorization'];
           setHasToken(false);
         }

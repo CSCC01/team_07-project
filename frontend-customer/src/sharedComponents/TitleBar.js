@@ -52,7 +52,7 @@ export default function TitleBar(props){
         <React.Fragment>
             <Drawer anchor="left" open={open} onClose={handleDrawerClose}>
             <List style={{width: 250}}>
-                <ListItem button>
+                <ListItem>
                     <ListItemIcon>
                         <AccountCircleIcon/>
                     </ListItemIcon>
