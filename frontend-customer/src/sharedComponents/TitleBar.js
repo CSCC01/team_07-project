@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -8,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -18,6 +20,14 @@ export default function TitleBar(props){
     const [open, setOpen] = React.useState(false);
     const [role, setRole] = React.useState('');
     const [name, setName] = React.useState('');
+
+    function logout() {
+        localStorage.clear('Authorization-Token');
+        localStorage.clear('role');
+        localStorage.clear('name');
+        delete axios.defaults.headers.common['Authorization'];
+        window.location.assign('/login');
+    }
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -86,6 +96,10 @@ export default function TitleBar(props){
                 </>
                 )}
                 <Divider />
+                <ListItem button onClick={logout}>
+                        <ListItemIcon><ExitToAppIcon fontSize="small"/></ListItemIcon>
+                        <ListItemText primary="Log out"></ListItemText>
+                </ListItem>
             </List>
             </Drawer>
         </React.Fragment>
