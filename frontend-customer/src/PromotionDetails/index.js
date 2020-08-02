@@ -7,26 +7,24 @@ import Progress from './Progress';
 
 import './index.css'
 
-const jwt_token = localStorage.getItem('Authorization-Token');
-
 export default function PromotionDetails(props) {
     const [data, setData] = useState({});
     const [images, setImages] = useState([]); // images as a Carousel element
 
     useEffect(() => {
       const { params: { id } } = props.match;
-      getPromotionDetails(id, jwt_token).then((data) => {
+      getPromotionDetails(id).then((data) => {
         setData(data);
         const carousel = 
           <Carousel renderThumbs={()=>{}}>
             {data.image.map(url => 
             (<div className="imageCutter">
-              <img src={axios.defaults.baseURL + url}/>
+              <img src={axios.defaults.baseURL + url} alt="promotion img" />
             </div>))}
           </Carousel>;
         setImages(carousel);
       });
-    }, [])
+    }, [props.match])
 
     return (
       <>
@@ -49,12 +47,8 @@ export default function PromotionDetails(props) {
     );
   };
 
-export const getPromotionDetails = async (id, jwt_token) => {
-  const promotionDetails = await axios.get('/promotions/'+ id, {
-    headers: {
-        Authorization: 'Bearer ' + jwt_token,
-    }
-  })
+export const getPromotionDetails = async (id) => {
+  const promotionDetails = await axios.get('/promotions/'+ id)
   console.log(promotionDetails.data);
   return promotionDetails.data;
 }
