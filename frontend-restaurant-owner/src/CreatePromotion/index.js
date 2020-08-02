@@ -179,6 +179,7 @@ export default class CreatePromotion extends Component {
         closeTime,
         tasks,
         uploadedImage,
+        reward,
         restaurant_id,
       );
       indicator = Object.values(output)[0] === 200 ? 1 : 0;
@@ -430,6 +431,7 @@ export const postData = async (
   closeTime,
   tasks,
   uploadedImage,
+  reward,
   restaurant_id,
 ) => {
   let output = {};
@@ -440,6 +442,7 @@ export const postData = async (
     starting_date: startTime,
     expired_date: closeTime,
     subtask: tasks,
+    reward,
     restaurant: restaurant_id,
   };
 
