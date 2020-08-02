@@ -3,14 +3,18 @@ import styles from './PromotionListDetail.module.css';
 import SlideView from './SlideView';
 
 function PromotionListDetail(props) {
-  return (
-    <div className={styles.container}>
-      {props.promotions &&
-        props.promotions.map((promotion) => (
-          <PromotionItem key={promotion.id} promotion={promotion} />
-        ))}
-    </div>
-  );
+  if (props.promotions.length === 0) {
+    return <p data-testid="no-promo-list">You have not created any promotion yet! :(</p>;
+  } else {
+    return (
+      <div data-testid="has-promo-list" className={styles.container}>
+        {props.promotions &&
+          props.promotions.map((promotion) => (
+            <PromotionItem key={promotion.id} promotion={promotion} />
+          ))}
+      </div>
+    );
+  }
 }
 
 function PromotionItem(props) {

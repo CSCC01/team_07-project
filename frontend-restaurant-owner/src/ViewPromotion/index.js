@@ -19,11 +19,7 @@ class ViewPromotion extends React.Component {
   }
 
   render() {
-    if (this.state.promotionList.length === 0) {
-      return <p>You have not created any promotion yet! :(</p>;
-    } else {
-      return <PromotionListDetail data-testid="promoList" promotions={this.state.promotionList} />;
-    }
+    return <PromotionListDetail promotions={this.state.promotionList} />;
   }
 }
 
