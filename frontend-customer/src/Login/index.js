@@ -60,6 +60,7 @@ function Login() {
         localStorage.setItem('Authorization-Token', response.data.jwt);
         var role = response.data.user.role.name;
         localStorage.setItem('role', role);
+        localStorage.setItem('name', response.data.user.username);
         if (role.localeCompare("Restaurant Staff") === 0) {
           setRsLoggedIn(true);
         }
@@ -70,6 +71,7 @@ function Login() {
           window.alert('Please use Restaurant owner frontend to login.');
           localStorage.clear('Authorization-Token');
           localStorage.clear('role');
+          localStorage.clear('name');
           delete axios.defaults.headers.common['Authorization'];
           setHasToken(false);
         }
