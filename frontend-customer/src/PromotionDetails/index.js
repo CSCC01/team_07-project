@@ -49,6 +49,5 @@ export default function PromotionDetails(props) {
 
 export const getPromotionDetails = async (id) => {
   const promotionDetails = await axios.get('/promotions/'+ id)
-  console.log(promotionDetails.data);
   return promotionDetails.data;
 }
