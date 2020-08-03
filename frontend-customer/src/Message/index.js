@@ -28,7 +28,9 @@ export default class Message extends Component {
             messageId={message.code}
             id={message.id}
             message={message}
+            time={message.time}
             key={message.id}
+            data-testid="card"
           />
         ))}
       </div>
@@ -50,7 +52,6 @@ export const getRestaurant = async (url, jwt_token) => {
     })
     .catch(() => {
       restaurant_id = [-1, -1];
-      console.log("res");
     });
   return restaurant_id;
 };
@@ -68,8 +69,8 @@ export const getMessage = async (url, restaurant_id) => {
         }
       });
     })
-    .catch(() => {
-      messages = -1;
+    .catch((error) => {
+      messages = [-1];
     });
   return messages;
 };

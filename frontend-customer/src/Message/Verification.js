@@ -24,7 +24,7 @@ export default class Verification extends Component {
       <div>
         <Popup
           trigger={
-            <div>
+            <div className='verification'>
               <Button variant="contained" color="secondary" disabled={this.state.status}>
                 Verify
               </Button>

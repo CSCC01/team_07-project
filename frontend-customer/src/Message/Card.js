@@ -49,6 +49,7 @@ export default class Card extends Component {
         </div>
 
         <div className="button-row-wrapper">
+          <p className="time">{this.props.time}</p>
           <Verification onYes={() => this.onYes()} />
         </div>
       </div>
@@ -57,15 +58,17 @@ export default class Card extends Component {
 }
 
 export const updateStatus = async (url, data) => {
+  let output;
   await axios({
     method: 'PUT',
     url: url,
     data,
   })
     .then((response) => {
-      // console.log(response);
+      output = response;
     })
     .catch((error) => {
-      console.log(error);
+      // console.log(error);
     });
+  return output;
 };

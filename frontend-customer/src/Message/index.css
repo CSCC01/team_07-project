@@ -64,5 +64,19 @@
     margin-top: 10px;
     margin-bottom: 10px;
     margin-right: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.time {
+    text-align: start;
+    margin: auto;
+    margin-left: 20px;
+    margin-bottom: 0;
+    color: grey;
+    font-size: 1.2em;
+}
+
+.verification {
     text-align: end;
 }
