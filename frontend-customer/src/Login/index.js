@@ -26,7 +26,7 @@ function Login() {
   }
 
   if (isRsLoggedIn) {
-    return <Redirect to="/couponvalidation" />;
+    return <Redirect to="/coupon-validation" />;
   }
 
   function useExistingToken(event) {

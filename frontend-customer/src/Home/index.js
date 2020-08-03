@@ -30,7 +30,7 @@ export default class Home extends React.Component {
             return <Redirect to="/login" />;
         }
         else if (localStorage.getItem('role').localeCompare("Restaurant Staff") === 0) {
-            return <Redirect to="/couponvalidation" />;
+            return <Redirect to="/coupon-validation" />;
         }
         return (
             <>

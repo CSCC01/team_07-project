@@ -77,7 +77,7 @@ export default function TitleBar(props){
                         <ListItemIcon><LoyaltyIcon  fontSize="small"/></ListItemIcon>
                         <ListItemText primary="Promotion"></ListItemText>
                     </ListItem>
-                    <ListItem button component={Link} to="/CouponList">
+                    <ListItem button component={Link} to="/coupon-List">
                         <ListItemIcon><LoyaltyIcon  fontSize="small"/></ListItemIcon>
                         <ListItemText primary="My Coupon" ></ListItemText>
                     </ListItem>
@@ -85,11 +85,11 @@ export default function TitleBar(props){
                 )}
                 {role.localeCompare("Restaurant Staff") === 0 && (
                 <>
-                    <ListItem button component={Link} to="/couponvalidation">
+                    <ListItem button component={Link} to="/coupon-validation">
                         <ListItemIcon><LoyaltyIcon fontSize="small"/></ListItemIcon>
                         <ListItemText primary="Coupon Validation"></ListItemText>
                     </ListItem>
-                    <ListItem button component={Link} to="/subtaskvalidation">
+                    <ListItem button component={Link} to="/subtask-validation">
                         <ListItemIcon><LoyaltyIcon fontSize="small"/></ListItemIcon>
                         <ListItemText primary="Subtask Validation"></ListItemText>
                     </ListItem>
