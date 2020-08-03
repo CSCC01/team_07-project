@@ -16,6 +16,7 @@ function App() {
         <Route path="/register" component={Register} />
         <Route path="/">
           <Navbar />
+          <Route path="/view-promotion" component={ViewPromotion} />
           <Route path="/create-promotion" component={CreatePromotion} />
           <Route path="/create-coupons" />
           <Route path="/analysis" />
