@@ -1,7 +1,7 @@
 import React from 'react';
 import Login from './Login';
 import Register from './Register';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import PromotionDetails from './PromotionDetails';
 import CouponValidation from './CouponValidation';
