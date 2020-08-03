@@ -1,21 +1,25 @@
 .dashboard {
     margin: 0 10%;
+    text-align: center;
 }
 
 .card-wrapper {
-    background-color: #ffef62;
+    background-color: #eee;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 1px #eee;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-bottom: 20px;
 }
 
 .status-id-wrapper {
-    margin: 20px 20px 10px 20px;
+    margin: 10px 20px 10px 20px;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
 
 .status-wrapper {
-    margin: 0px;
+    margin-top: 0px;
     position: relative;
     right: 50px;
     background-color: #2a3eb1;
@@ -30,7 +34,7 @@
 }
 
 .message-id-wrapper {
-    margin: 0px;
+    margin-top: 0px;
     color: #f50057;
     font-size: 1.2em;
     text-align: end;
@@ -42,9 +46,6 @@
 
 .message-wrapper {
     margin: 0px 20px;
-    margin-bottom: 20px;
-    /* display: grid;
-    grid-template-columns: 1fr 2fr; */
 }
 
 .message {
@@ -62,6 +63,6 @@
 .button-row-wrapper {
     margin-top: 10px;
     margin-bottom: 10px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    margin-right: 20px;
+    text-align: end;
 }

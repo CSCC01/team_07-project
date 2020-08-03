@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "07/23/2020 1:30:44 PM"
+    "x-generation-date": "08/02/2020 10:18:40 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -4326,8 +4326,55 @@
           "id": {
             "type": "string"
           },
-          "promotion_status": {
-            "type": "object"
+          "time": {
+            "type": "integer"
+          },
+          "promotion_title": {
+            "type": "string"
+          },
+          "subtask_content": {
+            "type": "string"
+          },
+          "code": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "confirmed",
+              "unconfirmed"
+            ]
+          },
+          "restaurant": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "users": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "promotions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "progresses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "user": {
             "required": [
@@ -4363,37 +4410,44 @@
               "role": {
                 "type": "string"
               },
-              "processes": {
+              "restaurant": {
+                "type": "string"
+              },
+              "progresses": {
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
-              },
-              "restaurant": {
-                "type": "string"
               }
             }
-          },
-          "starting_date": {
-            "type": "string"
-          },
-          "expired_date": {
-            "type": "string"
           }
         }
       },
       "NewProcess": {
         "properties": {
-          "promotion_status": {
-            "type": "object"
+          "time": {
+            "type": "integer"
+          },
+          "promotion_title": {
+            "type": "string"
+          },
+          "subtask_content": {
+            "type": "string"
+          },
+          "code": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "confirmed",
+              "unconfirmed"
+            ]
+          },
+          "restaurant": {
+            "type": "string"
           },
           "user": {
-            "type": "string"
-          },
-          "starting_date": {
-            "type": "string"
-          },
-          "expired_date": {
             "type": "string"
           }
         }
@@ -4442,6 +4496,12 @@
                 }
               },
               "promotions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "progresses": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -4523,14 +4583,14 @@
                 "role": {
                   "type": "string"
                 },
-                "processes": {
+                "restaurant": {
+                  "type": "string"
+                },
+                "progresses": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
-                },
-                "restaurant": {
-                  "type": "string"
                 }
               }
             }
@@ -4568,6 +4628,40 @@
                 }
               }
             }
+          },
+          "progresses": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "time": {
+                  "type": "integer"
+                },
+                "promotion_title": {
+                  "type": "string"
+                },
+                "subtask_content": {
+                  "type": "string"
+                },
+                "code": {
+                  "type": "integer"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "restaurant": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -4583,6 +4677,12 @@
             }
           },
           "promotions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "progresses": {
             "type": "array",
             "items": {
               "type": "string"
@@ -4700,14 +4800,14 @@
                 "role": {
                   "type": "string"
                 },
-                "processes": {
+                "restaurant": {
+                  "type": "string"
+                },
+                "progresses": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
-                },
-                "restaurant": {
-                  "type": "string"
                 }
               }
             }
@@ -4804,31 +4904,6 @@
               }
             }
           },
-          "processes": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "promotion_status": {
-                  "type": "object"
-                },
-                "user": {
-                  "type": "string"
-                },
-                "starting_date": {
-                  "type": "string"
-                },
-                "expired_date": {
-                  "type": "string"
-                }
-              }
-            }
-          },
           "restaurant": {
             "required": [
               "id"
@@ -4849,6 +4924,46 @@
               "promotions": {
                 "type": "array",
                 "items": {
+                  "type": "string"
+                }
+              },
+              "progresses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "progresses": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "time": {
+                  "type": "integer"
+                },
+                "promotion_title": {
+                  "type": "string"
+                },
+                "subtask_content": {
+                  "type": "string"
+                },
+                "code": {
+                  "type": "integer"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "restaurant": {
+                  "type": "string"
+                },
+                "user": {
                   "type": "string"
                 }
               }
@@ -4891,14 +5006,14 @@
           "role": {
             "type": "string"
           },
-          "processes": {
+          "restaurant": {
+            "type": "string"
+          },
+          "progresses": {
             "type": "array",
             "items": {
               "type": "string"
             }
-          },
-          "restaurant": {
-            "type": "string"
           }
         }
       },

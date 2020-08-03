@@ -1,62 +1,75 @@
 import React, { Component } from 'react';
 
 import './index.css';
-import Verification from './Verification';
+import Card from './Card';
+
+import axios from 'axios';
 
 export default class Message extends Component {
-  state = {
-    userName: 'Katrina',
-    promotionName: 'visit the store 5 times',
-    subtaskName: 'Visit once',
-    messageId: generateRandomNumber(),
-    status: 0, // 0 - unconfirmed; 1 - confirmed
-  };
+  state = { messages: [] };
 
-  onYes = () => {
-    this.setState({ status: 1 });
-  };
+  async componentDidMount() {
+    let jwt_token = localStorage.getItem('Authorization-Token');
+    let restaurant = await getRestaurant('/users/me/', jwt_token);
+    let restaurant_id = restaurant[0];
+
+    let messages = await getMessage('/processes', restaurant_id);
+    this.setState({ messages });
+    console.log(messages);
+  }
 
   render() {
     return (
       <div className="dashboard">
-        <div className="card-wrapper">
-          <div className="status-id-wrapper">
-            <div className="status-wrapper">
-              <p className="status">{this.state.status ? 'confirmed' : 'unconfirmed'}</p>
-            </div>
-            <div className="message-id-wrapper">
-              <p className="message-id">#{this.state.messageId}</p>
-            </div>
-          </div>
-
-          <div className="message-wrapper">
-            <div>
-              <p className="message">
-                User Name: <span className="message-highlight">{this.state.userName}</span>
-              </p>
-            </div>
-            <div>
-              <p className="message">
-                Promotion: <span className="message-highlight">{this.state.promotionName}</span>
-              </p>
-            </div>
-            <div>
-              <p className="message">
-                Subtask: <span className="message-highlight">{this.state.subtaskName}</span>
-              </p>
-            </div>
-          </div>
-
-          <div className="button-row-wrapper">
-            <Verification onYes={() => this.onYes()} customerName={this.state.userName} />
-          </div>
-        </div>
+        {this.state.messages.map((message) => (
+          <Card
+            userName={message.user.username}
+            promotionName={message.promotion_title}
+            subtaskName={message.subtask_content}
+            messageId={message.code}
+            id={message.id}
+            message={message}
+            key={message.id}
+          />
+        ))}
       </div>
     );
   }
 }
 
-export const generateRandomNumber = () => {
-  let randomNumber = Math.floor(Math.random() * 1000) + 1;
-  return randomNumber;
+export const getRestaurant = async (url, jwt_token) => {
+  let restaurant_id;
+  await axios({
+    method: 'GET',
+    url: url,
+    headers: {
+      Authorization: 'Bearer ' + jwt_token,
+    },
+  })
+    .then((response) => {
+      restaurant_id = [response.data.restaurant, response.status];
+    })
+    .catch(() => {
+      restaurant_id = [-1, -1];
+    });
+  return restaurant_id;
+};
+
+export const getMessage = async (url, restaurant_id) => {
+  let messages = [];
+  await axios({
+    method: 'GET',
+    url: url,
+  })
+    .then((response) => {
+      response.data.forEach((message) => {
+        if (message.restaurant.id === restaurant_id && message.status === 'unconfirmed') {
+          messages.push(message);
+        }
+      });
+    })
+    .catch(() => {
+      messages = -1;
+    });
+  return messages;
 };

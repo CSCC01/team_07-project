@@ -20,6 +20,10 @@
     "promotions": {
       "via": "restaurant",
       "collection": "promotion"
+    },
+    "progresses": {
+      "via": "restaurant",
+      "collection": "process"
     }
   }
 }

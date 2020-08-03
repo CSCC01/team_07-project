@@ -1245,31 +1245,6 @@
               }
             }
           },
-          "processes": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "promotion_status": {
-                  "type": "object"
-                },
-                "user": {
-                  "type": "string"
-                },
-                "starting_date": {
-                  "type": "string"
-                },
-                "expired_date": {
-                  "type": "string"
-                }
-              }
-            }
-          },
           "restaurant": {
             "required": [
               "id"
@@ -1290,6 +1265,46 @@
               "promotions": {
                 "type": "array",
                 "items": {
+                  "type": "string"
+                }
+              },
+              "progresses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "progresses": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "time": {
+                  "type": "integer"
+                },
+                "promotion_title": {
+                  "type": "string"
+                },
+                "subtask_content": {
+                  "type": "string"
+                },
+                "code": {
+                  "type": "integer"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "restaurant": {
+                  "type": "string"
+                },
+                "user": {
                   "type": "string"
                 }
               }
@@ -1332,14 +1347,14 @@
           "role": {
             "type": "string"
           },
-          "processes": {
+          "restaurant": {
+            "type": "string"
+          },
+          "progresses": {
             "type": "array",
             "items": {
               "type": "string"
             }
-          },
-          "restaurant": {
-            "type": "string"
           }
         }
       }

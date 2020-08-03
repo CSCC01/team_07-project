@@ -9,19 +9,33 @@
     "timestamps": true
   },
   "attributes": {
-    "promotion_status": {
-      "type": "json"
+    "time": {
+      "type": "biginteger"
+    },
+    "promotion_title": {
+      "type": "text"
+    },
+    "subtask_content": {
+      "type": "text"
+    },
+    "code": {
+      "type": "integer"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "confirmed",
+        "unconfirmed"
+      ]
+    },
+    "restaurant": {
+      "model": "restaurant",
+      "via": "progresses"
     },
     "user": {
-      "via": "processes",
       "plugin": "users-permissions",
-      "model": "user"
-    },
-    "starting_date": {
-      "type": "date"
-    },
-    "expired_date": {
-      "type": "date"
+      "model": "user",
+      "via": "progresses"
     }
   }
 }

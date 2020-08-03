@@ -562,6 +562,12 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "progresses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               }
             }
           }

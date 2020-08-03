@@ -561,14 +561,14 @@
                 "role": {
                   "type": "string"
                 },
-                "processes": {
+                "restaurant": {
+                  "type": "string"
+                },
+                "progresses": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
-                },
-                "restaurant": {
-                  "type": "string"
                 }
               }
             }
@@ -606,6 +606,40 @@
                 }
               }
             }
+          },
+          "progresses": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "time": {
+                  "type": "integer"
+                },
+                "promotion_title": {
+                  "type": "string"
+                },
+                "subtask_content": {
+                  "type": "string"
+                },
+                "code": {
+                  "type": "integer"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "restaurant": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -621,6 +655,12 @@
             }
           },
           "promotions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "progresses": {
             "type": "array",
             "items": {
               "type": "string"

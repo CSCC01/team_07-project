@@ -6,8 +6,6 @@ import IconButton from '@material-ui/core/IconButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-import axios from 'axios';
-
 export default class Verification extends Component {
   constructor(props) {
     super(props);
@@ -36,18 +34,18 @@ export default class Verification extends Component {
           modal
           closeOnDocumentClick
           contentStyle={{
-            width: '90%',
+            width: '70%',
             height: 'fit-content',
             borderRadius: '20px',
             border: '0px',
           }}
         >
           {(close) => (
-            <div style={{ margin: 30 }}>
+            <div style={{ margin: 30, textAlign: 'center' }}>
               <IconButton style={{ position: 'absolute', top: 20, right: 20 }} onClick={close}>
                 <FontAwesomeIcon icon={faTimes} style={{ marginLeft: 3, marginRight: 3 }} />
               </IconButton>
-              <div>Are you sure you want to verify?</div>
+              <p style={{ fontSize: '1.2em' }}>Are you sure you want to verify?</p>
               <Button variant="contained" color="secondary" onClick={this.onVerify}>
                 Yes
               </Button>
@@ -58,21 +56,3 @@ export default class Verification extends Component {
     );
   }
 }
-
-export const getUserName = async (url, jwt_token) => {
-  let userName;
-  await axios({
-    method: 'GET',
-    url: url,
-    headers: {
-      Authorization: 'Bearer ' + jwt_token,
-    },
-  })
-    .then((response) => {
-      userName = [response.data.username, response.status];
-    })
-    .catch(() => {
-      userName = [-1, -1];
-    });
-  return userName;
-};

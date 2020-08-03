@@ -609,14 +609,14 @@
                 "role": {
                   "type": "string"
                 },
-                "processes": {
+                "restaurant": {
+                  "type": "string"
+                },
+                "progresses": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
-                },
-                "restaurant": {
-                  "type": "string"
                 }
               }
             }
