@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import TitleBar from '../sharedComponents/TitleBar';
+import Message from "../Message"
 
 function SubtaskValidation() {
     if (localStorage.getItem('Authorization-Token') === null) {
@@ -14,7 +15,7 @@ function SubtaskValidation() {
             <div data-testid='title'>
                 <TitleBar title='Subtask Validation'/>
             </div>
-            <div>Restaurant Staff subtask validation</div>
+            <Message />
         </>
     )
 }

@@ -6,7 +6,6 @@ import CreatePromotion from './CreatePromotion';
 import Home from './Home';
 import Login from './Login';
 import Register from './Register';
-import Message from './Message';
 
 function App() {
   return (
@@ -27,7 +26,6 @@ function App() {
         </Route>
         <Route path="/analysis">
           <Navbar />
-          <Message />
         </Route>
         <Route exact path="/">
           <Navbar />

@@ -15,7 +15,6 @@ export default class Message extends Component {
 
     let messages = await getMessage('/processes', restaurant_id);
     this.setState({ messages });
-    console.log(messages);
   }
 
   render() {
@@ -51,6 +50,7 @@ export const getRestaurant = async (url, jwt_token) => {
     })
     .catch(() => {
       restaurant_id = [-1, -1];
+      console.log("res");
     });
   return restaurant_id;
 };
