@@ -1,12 +1,11 @@
 /**
  * This test suite tests PromotionDetails component.
  * The following aspects are tested:
- * 1. promotion details are rendered
+ * 1. promotion descriptions are rendered
  * 2. the functionality of getPromotionList
  */
 
 import React from 'react';
-import { render, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import PromotionDetails from '.';
 import { getPromotionDetails } from './index.js';
@@ -16,8 +15,6 @@ import axios from 'axios';
 
 configure({ adapter: new Adapter() });
 
-const jwt_token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTk2MDg3NDg2LCJleHAiOjE1OTg2Nzk0ODZ9.bH-txoYGWnFdv4JWqvv_NQKWsNvcIOjBjJmKltk3mr8';
 beforeAll(() => (axios.defaults.baseURL = process.env.BASE_URL || 'http://localhost:1337'));
 
 /**
@@ -27,7 +24,7 @@ beforeAll(() => (axios.defaults.baseURL = process.env.BASE_URL || 'http://localh
  * NEED DB
  */
 it('displays promotion description', () => {
-    const wrapper = shallow(<PromotionDetails match={{params: {id: 1}}} />);
+    const wrapper = shallow(<PromotionDetails match={{params: {id: 5}}} />);
     expect(wrapper.find(".description").exists());
   });
 
@@ -37,26 +34,30 @@ it('displays promotion description', () => {
  * NEED DB
  */
 it('gets promotion details from the backend', async() => {
-    let output = await getPromotionDetails(1, jwt_token);
+    let output = await getPromotionDetails(5);
     const expected = {
-        "id": 1,
-        "title": "promotion1",
-        "description": "promotion1 des",
-        "starting_date": "2020-11-09T00:00",
-        "expired_date": "2022-09-09T00:00",
+        "id": 5,
+        "title": "promotion 1",
+        "description": "Buy three Nice-Creams from our store during the November, you will get one punch card for free!",
+        "starting_date": "2020-10-31T00:00",
+        "expired_date": "2020-12-01T00:00",
         "subtask": [
-            "buy 1 pizza",
-            "buy 1 pizza"
+            "Buy 1 Nice-Cream.",
+            "Buy 1 Nice-Cream.",
+            "Buy 1 Nice-Cream."
         ],
-        "image": [],
+        "image": [
+            "/uploads/demo_15744283fe.png",
+            "/uploads/demo2_f32b8cc16b.png"
+        ],
         "restaurant": {
             "id": 1,
             "name": "Restaurant 1",
             "created_at": "2020-07-20T01:59:07.506Z",
             "updated_at": "2020-07-23T18:11:42.475Z"
         },
-        "created_at": "2020-08-01T03:39:04.938Z",
-        "updated_at": "2020-08-01T03:39:04.958Z"
+        "created_at": "2020-08-03T15:15:14.698Z",
+        "updated_at": "2020-08-03T15:15:14.706Z"
     };
     expect(output).toEqual(expected);
 })
