@@ -5,7 +5,15 @@ import SlideView from './SlideView';
 function PromotionListDetail(props) {
   if (Object.keys(props.promotions).length > 0) {
     return (
-      <div className="has-promo-list" className={styles.container}>
+      <div
+        className="has-promo-list"
+        style={{
+          display: 'flex',
+          flexFlow: 'column',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
         {props.promotions &&
           props.promotions.map((promotion) => (
             <PromotionItem key={promotion.id} promotion={promotion} />
