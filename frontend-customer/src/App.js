@@ -10,7 +10,7 @@ import CouponList from './CouponList';
 
 function App() {
   return (
-    <div className='App'>
+    <div className="App">
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
