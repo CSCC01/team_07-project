@@ -1,40 +1,25 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
-import Navbar from './sharedComponents/Navbar';
 import CreatePromotion from './CreatePromotion';
 import ViewPromotion from './ViewPromotion';
 import Home from './Home';
 import Login from './Login';
 import Register from './Register';
+import Navbar from './sharedComponents/Navbar';
 
 function App() {
   return (
     <div className="App">
       <Switch>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/register">
-          <Register />
-        </Route>
-        <Route path="/view-promotion">
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+        <Route path="/">
           <Navbar />
-          <ViewPromotion />
-        </Route>
-        <Route path="/create-promotion">
-          <Navbar />
-          <CreatePromotion />
-        </Route>
-        <Route path="/create-coupons">
-          <Navbar />
-        </Route>
-        <Route path="/analysis">
-          <Navbar />
-        </Route>
-        <Route exact path="/">
-          <Navbar />
-          <Home />
+          <Route path="/create-promotion" component={CreatePromotion} />
+          <Route path="/create-coupons" />
+          <Route path="/analysis" />
+          <Route exact path="/" component={Home} />
         </Route>
         <Route path="*">
           <NoMatch />

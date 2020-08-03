@@ -1,15 +1,27 @@
+/**
+ * This test suite tests PromotionDetails component.
+ * The following aspects are tested:
+ * 1. the existence of title bar
+ * 2. the existence of promotion list
+ */
+
+
 import React from 'react';
-import { render, getByTestId } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+import { BrowserRouter as Router } from 'react-router-dom';
 import Home from '.';
+import { shallow, configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({ adapter: new Adapter() });
 
 /**
  * This function tests whether the promotion list component is displayed on the 
  * customer homepage
  */
 it('displays promotion list', () => {
-  const { getByTestId } = render(<Home />);
-  expect(getByTestId("promotion-list")).toBeInTheDocument()
+  const wrapper = shallow(<Router><Home /></Router>);
+  expect(wrapper.find(".promotion-list").exists());
 });
 
 /**
@@ -17,6 +29,6 @@ it('displays promotion list', () => {
  * customer homepage
  */
 it('displays title bar', () => {
-  const { getByTestId } = render(<Home />);
-  expect(getByTestId("title")).toBeInTheDocument()
+  const wrapper = shallow(<Router><Home /></Router>);
+  expect(wrapper.find(".title-bar").exists());
 })
