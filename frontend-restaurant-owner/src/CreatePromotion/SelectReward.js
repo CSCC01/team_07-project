@@ -40,6 +40,9 @@ class SelectReward extends Component {
 
   onContentChange = ({ target: { value } }) => {
     this.setState({ value });
+    if (this.state.type === 'points') {
+      value = +value;
+    }
     this.props.onSelectReward({ type: this.state.type, value });
   };
 
