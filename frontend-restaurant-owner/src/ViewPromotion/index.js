@@ -10,7 +10,7 @@ class ViewPromotion extends React.Component {
 
   async componentDidMount() {
     getRestaurant(this.state.jwtToken).then((currentRestaurant) => {
-      getPromotions(this.state.jwtToken, currentRestaurant.data).then((promotions) => {
+      getPromotions(this.state.jwtToken, currentRestaurant).then((promotions) => {
         this.setState({
           promotionList: promotions,
         });
@@ -26,14 +26,14 @@ class ViewPromotion extends React.Component {
 export default ViewPromotion;
 
 export const getRestaurant = async (jwtToken) => {
-  const restaurant = await axios({
+  const user = await axios({
     method: 'GET',
     url: '/users/me',
     headers: {
       Authorization: 'Bearer ' + jwtToken,
     },
   });
-  return restaurant;
+  return user.data.restaurant;
 };
 
 export const getPromotions = async (jwtToken, restaurant) => {
@@ -45,7 +45,7 @@ export const getPromotions = async (jwtToken, restaurant) => {
       Authorization: 'Bearer ' + jwtToken,
     },
   }).then((response) => {
-    promotionList = response.data.filter((promotion) => promotion.restaurant.id === restaurant.id);
+    promotionList = response.data.filter((promotion) => promotion.restaurant.id === restaurant);
   });
   return promotionList;
 };
