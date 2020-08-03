@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import PromotionList from './PromotionList';
 import TitleBar from '../sharedComponents/TitleBar';
 import './index.css';
+import { Redirect } from 'react-router-dom';
 
 export default class Home extends React.Component {
     state = {
@@ -25,10 +26,16 @@ export default class Home extends React.Component {
     }
     
     render(){
+        if (localStorage.getItem('Authorization-Token') === null) {
+            return <Redirect to="/login" />;
+        }
+        else if (localStorage.getItem('role').localeCompare("Restaurant Staff") === 0) {
+            return <Redirect to="/coupon-validation" />;
+        }
         return (
             <>
                 <div data-testid='title'>
-                    <TitleBar title='Home'/>
+                    <TitleBar title='Promotion'/>
                 </div>
                 <div className='mainSection'>
                     <Typography component="h2" className='headline'>
