@@ -603,6 +603,9 @@
                 },
                 "restaurant": {
                   "type": "string"
+                },
+                "reward": {
+                  "type": "object"
                 }
               }
             }

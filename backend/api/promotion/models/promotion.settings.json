@@ -30,6 +30,9 @@
     "restaurant": {
       "model": "restaurant",
       "via": "promotions"
+    },
+    "reward": {
+      "type": "json"
     }
   }
 }
