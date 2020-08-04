@@ -1,0 +1,18 @@
+.item {
+  border: 2px solid #eee;
+  margin: 12px;
+  padding: 25px;
+}
+
+.subContainer {
+  display: flex;
+  flex-flow: row;
+}
+
+.subContainer p,
+.subContainer li,
+.subContainer h3 {
+  font-family: sans-serif;
+  font-size: large;
+  text-align: left;
+}

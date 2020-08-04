@@ -10,3 +10,13 @@ import axios from 'axios';
     process.env.TESTING_BASE_URL || process.env.BASE_URL || 'http://localhost:1337';
   await axios.post('testing/reset');
 })();
+
+window.matchMedia =
+  window.matchMedia ||
+  function () {
+    return {
+      matches: false,
+      addListener: function () {},
+      removeListener: function () {},
+    };
+  };
