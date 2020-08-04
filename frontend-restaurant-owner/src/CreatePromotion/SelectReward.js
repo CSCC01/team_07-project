@@ -49,7 +49,10 @@ class SelectReward extends Component {
   render() {
     return (
       <div style={{ marginBottom: 10 }}>
-        <TextPopUp title="Reward" popup="Enter number of points or enter a description for a coupon." />
+        <TextPopUp
+          title="Reward"
+          popup="Enter number of points or enter a description for a coupon."
+        />
 
         <RadioGroup
           aria-label="gender"
