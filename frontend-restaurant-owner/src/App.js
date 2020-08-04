@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import CreatePromotion from './CreatePromotion';
+import ViewPromotion from './ViewPromotion';
 import Home from './Home';
 import Login from './Login';
 import Register from './Register';
@@ -15,6 +16,7 @@ function App() {
         <Route path="/register" component={Register} />
         <Route path="/">
           <Navbar />
+          <Route path="/view-promotion" component={ViewPromotion} />
           <Route path="/create-promotion" component={CreatePromotion} />
           <Route path="/create-coupons" />
           <Route path="/analysis" />
