@@ -564,6 +564,9 @@
                 }
               }
             }
+          },
+          "reward": {
+            "type": "object"
           }
         }
       },
@@ -589,6 +592,9 @@
           },
           "restaurant": {
             "type": "string"
+          },
+          "reward": {
+            "type": "object"
           }
         }
       }
