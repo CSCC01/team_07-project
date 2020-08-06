@@ -1255,16 +1255,19 @@
                 "id": {
                   "type": "string"
                 },
-                "promotion_status": {
-                  "type": "object"
-                },
                 "user": {
                   "type": "string"
                 },
-                "starting_date": {
+                "promotion": {
                   "type": "string"
                 },
-                "expired_date": {
+                "subtasks": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "status": {
                   "type": "string"
                 }
               }
@@ -1290,6 +1293,80 @@
               "promotions": {
                 "type": "array",
                 "items": {
+                  "type": "string"
+                }
+              },
+              "requests": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "achievements": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "location": {
+                "type": "object"
+              },
+              "coupons": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "achievements": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "string"
+                },
+                "restaurant": {
+                  "type": "string"
+                },
+                "complete_number": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "coupons": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "restaurant": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "string"
+                },
+                "requests": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "status": {
                   "type": "string"
                 }
               }
@@ -1340,6 +1417,18 @@
           },
           "restaurant": {
             "type": "string"
+          },
+          "achievements": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "coupons": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       }

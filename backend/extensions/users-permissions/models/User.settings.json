@@ -54,12 +54,20 @@
       "configurable": false
     },
     "processes": {
-      "collection": "process",
-      "via": "user"
+      "via": "user",
+      "collection": "process"
     },
     "restaurant": {
-      "model": "restaurant",
-      "via": "users"
+      "via": "users",
+      "model": "restaurant"
+    },
+    "achievements": {
+      "via": "user",
+      "collection": "achievement"
+    },
+    "coupons": {
+      "via": "user",
+      "collection": "coupon"
     }
   }
 }

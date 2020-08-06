@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "requests",
+  "info": {
+    "name": "Request"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "subtask": {
+      "via": "requests",
+      "model": "subtask"
+    },
+    "restaurant": {
+      "model": "restaurant",
+      "via": "requests"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "confirmed",
+        "rejected"
+      ]
+    },
+    "coupon": {
+      "model": "coupon",
+      "via": "requests"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "subtask_request",
+        "coupon_request"
+      ]
+    }
+  }
+}

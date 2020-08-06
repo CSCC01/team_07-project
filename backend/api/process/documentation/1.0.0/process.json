@@ -522,9 +522,6 @@
           "id": {
             "type": "string"
           },
-          "promotion_status": {
-            "type": "object"
-          },
           "user": {
             "required": [
               "id",
@@ -567,30 +564,121 @@
               },
               "restaurant": {
                 "type": "string"
+              },
+              "achievements": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "coupons": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               }
             }
           },
-          "starting_date": {
-            "type": "string"
+          "promotion": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "starting_date": {
+                "type": "string"
+              },
+              "expired_date": {
+                "type": "string"
+              },
+              "subtask": {
+                "type": "object"
+              },
+              "image": {
+                "type": "object"
+              },
+              "restaurant": {
+                "type": "string"
+              },
+              "progresses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "coupon": {
+                "type": "string"
+              }
+            }
           },
-          "expired_date": {
-            "type": "string"
+          "subtasks": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "progress": {
+                  "type": "string"
+                },
+                "requests": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "status": {
+                  "type": "string"
+                },
+                "index": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ongoing",
+              "completed"
+            ]
           }
         }
       },
       "NewProcess": {
         "properties": {
-          "promotion_status": {
-            "type": "object"
-          },
           "user": {
             "type": "string"
           },
-          "starting_date": {
+          "promotion": {
             "type": "string"
           },
-          "expired_date": {
-            "type": "string"
+          "subtasks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ongoing",
+              "completed"
+            ]
           }
         }
       }

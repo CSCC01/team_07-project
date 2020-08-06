@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "coupons",
+  "info": {
+    "name": "Coupon"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "description": {
+      "type": "richtext"
+    },
+    "restaurant": {
+      "model": "restaurant",
+      "via": "coupons"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "coupons"
+    },
+    "requests": {
+      "via": "coupon",
+      "collection": "request"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "used",
+        "available"
+      ]
+    }
+  }
+}
