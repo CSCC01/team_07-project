@@ -569,6 +569,21 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "restaurant": {
+                  "type": "string"
+                },
+                "achievements": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "coupons": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 }
               }
             }
@@ -602,6 +617,99 @@
                   "type": "object"
                 },
                 "restaurant": {
+                  "type": "string"
+                },
+                "progresses": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "coupon": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "requests": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "subtask": {
+                  "type": "string"
+                },
+                "restaurant": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "coupon": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "achievements": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "string"
+                },
+                "restaurant": {
+                  "type": "string"
+                },
+                "complete_number": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "location": {
+            "type": "object"
+          },
+          "coupons": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "restaurant": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "string"
+                },
+                "requests": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "status": {
                   "type": "string"
                 }
               }
@@ -660,7 +768,22 @@
               "type": "string"
             }
           },
-          "progresses": {
+          "requests": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "achievements": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "location": {
+            "type": "object"
+          },
+          "coupons": {
             "type": "array",
             "items": {
               "type": "string"

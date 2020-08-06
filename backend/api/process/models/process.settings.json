@@ -9,33 +9,25 @@
     "timestamps": true
   },
   "attributes": {
-    "time": {
-      "type": "biginteger"
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "processes"
     },
-    "promotion_title": {
-      "type": "text"
+    "promotion": {
+      "model": "promotion",
+      "via": "progresses"
     },
-    "subtask_content": {
-      "type": "text"
-    },
-    "code": {
-      "type": "integer"
+    "subtasks": {
+      "via": "progress",
+      "collection": "subtask"
     },
     "status": {
       "type": "enumeration",
       "enum": [
-        "confirmed",
-        "unconfirmed"
+        "ongoing",
+        "completed"
       ]
-    },
-    "restaurant": {
-      "model": "restaurant",
-      "via": "progresses"
-    },
-    "user": {
-      "plugin": "users-permissions",
-      "model": "user",
-      "via": "progresses"
     }
   }
 }

@@ -182,10 +182,10 @@ it('checks whether an image have been uploaded or not', async () => {
 
 /**
  * This function tests the function uploadImage.
- * It tests the case when mulitple images need to be upload.
+ * It tests the case when multiple images need to be upload.
  * It checks the status returned by axios and clears the database in the end.
  */
-it('checks whether mulitple images have been uploaded or not', async () => {
+it('checks whether multiple images have been uploaded or not', async () => {
   let f1 = new File(['test'], 'test.jpg', { type: 'image' });
   let f2 = new File(['test'], 'test.jpg', { type: 'image' });
   let f3 = new File(['test'], 'test.jpg', { type: 'image' });
@@ -261,7 +261,7 @@ it('checks whether correct restaurant id is fetched from the backend', async () 
 /**
  * This function tests the function postData.
  * postData should save data into the backend when valid data is provided.
- * This fucntion checks the status returned by axios and clears the database in the end.
+ * This function checks the status returned by axios and clears the database in the end.
  */
 it('checks whether postData has saved data to the backend', async () => {
   let output = await postData(
@@ -270,7 +270,7 @@ it('checks whether postData has saved data to the backend', async () => {
     'description',
     '2020-08-20T00:00',
     '2020-09-24T00:00',
-    [('test', 'test')],
+    ['test'],
     ['/uploads/1_34ac2e4ff7.jpeg', '/uploads/2_46dbd22c42.jpeg'],
     '1',
   );

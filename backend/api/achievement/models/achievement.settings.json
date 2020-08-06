@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "achievements",
+  "info": {
+    "name": "Achievement"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "achievements"
+    },
+    "restaurant": {
+      "model": "restaurant",
+      "via": "achievements"
+    },
+    "complete_number": {
+      "type": "integer"
+    }
+  }
+}

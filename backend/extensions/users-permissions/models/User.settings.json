@@ -53,13 +53,21 @@
       "plugin": "users-permissions",
       "configurable": false
     },
-    "restaurant": {
-      "model": "restaurant",
-      "via": "users"
-    },
-    "progresses": {
+    "processes": {
       "via": "user",
       "collection": "process"
+    },
+    "restaurant": {
+      "via": "users",
+      "model": "restaurant"
+    },
+    "achievements": {
+      "via": "user",
+      "collection": "achievement"
+    },
+    "coupons": {
+      "via": "user",
+      "collection": "coupon"
     }
   }
 }

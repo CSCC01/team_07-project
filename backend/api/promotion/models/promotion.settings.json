@@ -30,6 +30,13 @@
     "restaurant": {
       "model": "restaurant",
       "via": "promotions"
+    },
+    "progresses": {
+      "via": "promotion",
+      "collection": "process"
+    },
+    "coupon": {
+      "type": "richtext"
     }
   }
 }

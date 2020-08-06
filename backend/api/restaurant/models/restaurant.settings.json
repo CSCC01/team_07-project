@@ -13,17 +13,28 @@
       "type": "string"
     },
     "users": {
-      "via": "restaurant",
       "plugin": "users-permissions",
-      "collection": "user"
+      "collection": "user",
+      "via": "restaurant"
     },
     "promotions": {
       "via": "restaurant",
       "collection": "promotion"
     },
-    "progresses": {
+    "requests": {
       "via": "restaurant",
-      "collection": "process"
+      "collection": "request"
+    },
+    "achievements": {
+      "via": "restaurant",
+      "collection": "achievement"
+    },
+    "location": {
+      "type": "json"
+    },
+    "coupons": {
+      "via": "restaurant",
+      "collection": "coupon"
     }
   }
 }

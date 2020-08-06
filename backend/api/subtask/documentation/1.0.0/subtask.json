@@ -524,6 +524,69 @@
           },
           "description": {
             "type": "string"
+          },
+          "progress": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "user": {
+                "type": "string"
+              },
+              "promotion": {
+                "type": "string"
+              },
+              "subtasks": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "type": "string"
+              }
+            }
+          },
+          "requests": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "subtask": {
+                  "type": "string"
+                },
+                "restaurant": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "coupon": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ongoing",
+              "completed"
+            ]
+          },
+          "index": {
+            "type": "integer"
           }
         }
       },
@@ -531,6 +594,25 @@
         "properties": {
           "description": {
             "type": "string"
+          },
+          "progress": {
+            "type": "string"
+          },
+          "requests": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ongoing",
+              "completed"
+            ]
+          },
+          "index": {
+            "type": "integer"
           }
         }
       }

@@ -12,6 +12,11 @@ export default function Navbar() {
           </NavLink>
         </li>
         <li>
+          <NavLink to="/view-promotion" activeClassName={styles.activeTab}>
+            View Promotion
+          </NavLink>
+        </li>
+        <li>
           <NavLink to="/create-promotion" activeClassName={styles.activeTab}>
             Create Promotion
           </NavLink>

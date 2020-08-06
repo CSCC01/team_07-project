@@ -1245,6 +1245,34 @@
               }
             }
           },
+          "processes": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "string"
+                },
+                "promotion": {
+                  "type": "string"
+                },
+                "subtasks": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "status": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "restaurant": {
             "required": [
               "id"
@@ -1268,7 +1296,22 @@
                   "type": "string"
                 }
               },
-              "progresses": {
+              "requests": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "achievements": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "location": {
+                "type": "object"
+              },
+              "coupons": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -1276,7 +1319,7 @@
               }
             }
           },
-          "progresses": {
+          "achievements": {
             "type": "array",
             "items": {
               "required": [
@@ -1286,25 +1329,44 @@
                 "id": {
                   "type": "string"
                 },
-                "time": {
-                  "type": "integer"
-                },
-                "promotion_title": {
+                "user": {
                   "type": "string"
                 },
-                "subtask_content": {
+                "restaurant": {
                   "type": "string"
                 },
-                "code": {
+                "complete_number": {
                   "type": "integer"
+                }
+              }
+            }
+          },
+          "coupons": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
                 },
-                "status": {
+                "description": {
                   "type": "string"
                 },
                 "restaurant": {
                   "type": "string"
                 },
                 "user": {
+                  "type": "string"
+                },
+                "requests": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "status": {
                   "type": "string"
                 }
               }
@@ -1351,6 +1413,21 @@
             "type": "string"
           },
           "progresses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "restaurant": {
+            "type": "string"
+          },
+          "achievements": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "coupons": {
             "type": "array",
             "items": {
               "type": "string"
