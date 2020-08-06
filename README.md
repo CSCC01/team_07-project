@@ -28,3 +28,4 @@ Our unit tests are located right besides the component it tests, and they can be
 - [React Router](https://reacttraining.com/react-router/web/api/BrowserRouter)
 - [Material UI Home Page](https://material-ui.com)
 - [Material Icons](https://material-ui.com/components/material-icons/)
+- [Backend Doc](./backend/strapi_doc)
