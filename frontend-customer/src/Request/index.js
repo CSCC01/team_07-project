@@ -13,7 +13,7 @@ export default class Message extends Component {
     let restaurant = await getRestaurant('/users/me/', jwt_token);
     let restaurant_id = restaurant[0];
 
-    let messages = await getMessage('/processes', restaurant_id);
+    let messages = await getMessage(jwt_token, '/requests', restaurant_id);
     this.setState({ messages });
   }
 
@@ -56,15 +56,18 @@ export const getRestaurant = async (url, jwt_token) => {
   return restaurant_id;
 };
 
-export const getMessage = async (url, restaurant_id) => {
+export const getMessage = async (jwt_token, url, restaurant_id) => {
   let messages = [];
   await axios({
     method: 'GET',
     url: url,
+    headers: {
+      Authorization: 'Bearer ' + jwt_token,
+    },
   })
     .then((response) => {
       response.data.forEach((message) => {
-        if (message.restaurant.id === restaurant_id && message.status === 'unconfirmed') {
+        if (message.restaurant.id === restaurant_id && message.status === 'pending') {
           messages.push(message);
         }
       });
@@ -72,5 +75,6 @@ export const getMessage = async (url, restaurant_id) => {
     .catch((error) => {
       messages = [-1];
     });
+    console.log(messages);
   return messages;
 };
