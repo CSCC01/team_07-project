@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/restaurants": {
+    "/requests": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Restaurant"
+                    "$ref": "#/components/schemas/Request"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Restaurant"
+          "Request"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Restaurant"
+                  "$ref": "#/components/schemas/Request"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Restaurant"
+          "Request"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewRestaurant"
+                "$ref": "#/components/schemas/NewRequest"
               }
             }
           }
         }
       }
     },
-    "/restaurants/count": {
+    "/requests/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Restaurant"
+          "Request"
         ],
         "parameters": []
       }
     },
-    "/restaurants/{id}": {
+    "/requests/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Restaurant"
+                  "$ref": "#/components/schemas/Request"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Restaurant"
+          "Request"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Restaurant"
+                  "$ref": "#/components/schemas/Request"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Restaurant"
+          "Request"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewRestaurant"
+                "$ref": "#/components/schemas/NewRequest"
               }
             }
           }
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Restaurant"
+          "Request"
         ],
         "parameters": [
           {
@@ -514,7 +514,7 @@
   },
   "components": {
     "schemas": {
-      "Restaurant": {
+      "Request": {
         "required": [
           "id"
         ],
@@ -522,235 +522,150 @@
           "id": {
             "type": "string"
           },
-          "name": {
-            "type": "string"
-          },
-          "users": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "username",
-                "email"
-              ],
-              "properties": {
-                "id": {
+          "subtask": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "progress": {
+                "type": "string"
+              },
+              "requests": {
+                "type": "array",
+                "items": {
                   "type": "string"
-                },
-                "username": {
-                  "type": "string"
-                },
-                "email": {
-                  "type": "string"
-                },
-                "provider": {
-                  "type": "string"
-                },
-                "password": {
-                  "type": "string"
-                },
-                "resetPasswordToken": {
-                  "type": "string"
-                },
-                "confirmed": {
-                  "type": "boolean"
-                },
-                "blocked": {
-                  "type": "boolean"
-                },
-                "role": {
-                  "type": "string"
-                },
-                "processes": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "restaurant": {
-                  "type": "string"
-                },
-                "achievements": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "coupons": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
                 }
+              },
+              "status": {
+                "type": "string"
+              },
+              "index": {
+                "type": "integer"
               }
             }
           },
-          "promotions": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
+          "restaurant": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "users": {
+                "type": "array",
+                "items": {
                   "type": "string"
-                },
-                "title": {
+                }
+              },
+              "promotions": {
+                "type": "array",
+                "items": {
                   "type": "string"
-                },
-                "description": {
+                }
+              },
+              "requests": {
+                "type": "array",
+                "items": {
                   "type": "string"
-                },
-                "starting_date": {
+                }
+              },
+              "achievements": {
+                "type": "array",
+                "items": {
                   "type": "string"
-                },
-                "expired_date": {
-                  "type": "string"
-                },
-                "subtask": {
-                  "type": "object"
-                },
-                "image": {
-                  "type": "object"
-                },
-                "restaurant": {
-                  "type": "string"
-                },
-                "progresses": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "coupon": {
+                }
+              },
+              "location": {
+                "type": "object"
+              },
+              "coupons": {
+                "type": "array",
+                "items": {
                   "type": "string"
                 }
               }
             }
           },
-          "requests": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "subtask": {
-                  "type": "string"
-                },
-                "restaurant": {
-                  "type": "string"
-                },
-                "status": {
-                  "type": "string"
-                },
-                "coupon": {
-                  "type": "string"
-                },
-                "type": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "confirmed",
+              "rejected"
+            ]
+          },
+          "coupon": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "restaurant": {
+                "type": "string"
+              },
+              "user": {
+                "type": "string"
+              },
+              "requests": {
+                "type": "array",
+                "items": {
                   "type": "string"
                 }
+              },
+              "status": {
+                "type": "string"
               }
             }
           },
-          "achievements": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "user": {
-                  "type": "string"
-                },
-                "restaurant": {
-                  "type": "string"
-                },
-                "complete_number": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "location": {
-            "type": "object"
-          },
-          "coupons": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "restaurant": {
-                  "type": "string"
-                },
-                "user": {
-                  "type": "string"
-                },
-                "requests": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "status": {
-                  "type": "string"
-                }
-              }
-            }
+          "type": {
+            "type": "string",
+            "enum": [
+              "subtask_request",
+              "coupon_request"
+            ]
           }
         }
       },
-      "NewRestaurant": {
+      "NewRequest": {
         "properties": {
-          "name": {
+          "subtask": {
             "type": "string"
           },
-          "users": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "restaurant": {
+            "type": "string"
           },
-          "promotions": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "confirmed",
+              "rejected"
+            ]
           },
-          "requests": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "coupon": {
+            "type": "string"
           },
-          "achievements": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "location": {
-            "type": "object"
-          },
-          "coupons": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "type": {
+            "type": "string",
+            "enum": [
+              "subtask_request",
+              "coupon_request"
+            ]
           }
         }
       }
@@ -758,7 +673,7 @@
   },
   "tags": [
     {
-      "name": "Restaurant"
+      "name": "Request"
     }
   ]
 }

@@ -9,19 +9,25 @@
     "timestamps": true
   },
   "attributes": {
-    "promotion_status": {
-      "type": "json"
-    },
     "user": {
-      "via": "processes",
       "plugin": "users-permissions",
-      "model": "user"
+      "model": "user",
+      "via": "processes"
     },
-    "starting_date": {
-      "type": "date"
+    "promotion": {
+      "model": "promotion",
+      "via": "progresses"
     },
-    "expired_date": {
-      "type": "date"
+    "subtasks": {
+      "via": "progress",
+      "collection": "subtask"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "ongoing",
+        "completed"
+      ]
     }
   }
 }

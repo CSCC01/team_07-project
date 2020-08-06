@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/restaurants": {
+    "/achievements": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Restaurant"
+                    "$ref": "#/components/schemas/Achievement"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Restaurant"
+          "Achievement"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Restaurant"
+                  "$ref": "#/components/schemas/Achievement"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Restaurant"
+          "Achievement"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewRestaurant"
+                "$ref": "#/components/schemas/NewAchievement"
               }
             }
           }
         }
       }
     },
-    "/restaurants/count": {
+    "/achievements/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Restaurant"
+          "Achievement"
         ],
         "parameters": []
       }
     },
-    "/restaurants/{id}": {
+    "/achievements/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Restaurant"
+                  "$ref": "#/components/schemas/Achievement"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Restaurant"
+          "Achievement"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Restaurant"
+                  "$ref": "#/components/schemas/Achievement"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Restaurant"
+          "Achievement"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewRestaurant"
+                "$ref": "#/components/schemas/NewAchievement"
               }
             }
           }
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Restaurant"
+          "Achievement"
         ],
         "parameters": [
           {
@@ -514,7 +514,7 @@
   },
   "components": {
     "schemas": {
-      "Restaurant": {
+      "Achievement": {
         "required": [
           "id"
         ],
@@ -522,235 +522,124 @@
           "id": {
             "type": "string"
           },
-          "name": {
-            "type": "string"
-          },
-          "users": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "username",
-                "email"
-              ],
-              "properties": {
-                "id": {
+          "user": {
+            "required": [
+              "id",
+              "username",
+              "email"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "role": {
+                "type": "string"
+              },
+              "processes": {
+                "type": "array",
+                "items": {
                   "type": "string"
-                },
-                "username": {
-                  "type": "string"
-                },
-                "email": {
-                  "type": "string"
-                },
-                "provider": {
-                  "type": "string"
-                },
-                "password": {
-                  "type": "string"
-                },
-                "resetPasswordToken": {
-                  "type": "string"
-                },
-                "confirmed": {
-                  "type": "boolean"
-                },
-                "blocked": {
-                  "type": "boolean"
-                },
-                "role": {
-                  "type": "string"
-                },
-                "processes": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "restaurant": {
-                  "type": "string"
-                },
-                "achievements": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "coupons": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
                 }
-              }
-            }
-          },
-          "promotions": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
+              },
+              "restaurant": {
+                "type": "string"
+              },
+              "achievements": {
+                "type": "array",
+                "items": {
                   "type": "string"
-                },
-                "title": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "starting_date": {
-                  "type": "string"
-                },
-                "expired_date": {
-                  "type": "string"
-                },
-                "subtask": {
-                  "type": "object"
-                },
-                "image": {
-                  "type": "object"
-                },
-                "restaurant": {
-                  "type": "string"
-                },
-                "progresses": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "coupon": {
+                }
+              },
+              "coupons": {
+                "type": "array",
+                "items": {
                   "type": "string"
                 }
               }
             }
           },
-          "requests": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
+          "restaurant": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "users": {
+                "type": "array",
+                "items": {
                   "type": "string"
-                },
-                "subtask": {
+                }
+              },
+              "promotions": {
+                "type": "array",
+                "items": {
                   "type": "string"
-                },
-                "restaurant": {
+                }
+              },
+              "requests": {
+                "type": "array",
+                "items": {
                   "type": "string"
-                },
-                "status": {
+                }
+              },
+              "achievements": {
+                "type": "array",
+                "items": {
                   "type": "string"
-                },
-                "coupon": {
-                  "type": "string"
-                },
-                "type": {
+                }
+              },
+              "location": {
+                "type": "object"
+              },
+              "coupons": {
+                "type": "array",
+                "items": {
                   "type": "string"
                 }
               }
             }
           },
-          "achievements": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "user": {
-                  "type": "string"
-                },
-                "restaurant": {
-                  "type": "string"
-                },
-                "complete_number": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "location": {
-            "type": "object"
-          },
-          "coupons": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "restaurant": {
-                  "type": "string"
-                },
-                "user": {
-                  "type": "string"
-                },
-                "requests": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "status": {
-                  "type": "string"
-                }
-              }
-            }
+          "complete_number": {
+            "type": "integer"
           }
         }
       },
-      "NewRestaurant": {
+      "NewAchievement": {
         "properties": {
-          "name": {
+          "user": {
             "type": "string"
           },
-          "users": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "restaurant": {
+            "type": "string"
           },
-          "promotions": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "requests": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "achievements": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "location": {
-            "type": "object"
-          },
-          "coupons": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "complete_number": {
+            "type": "integer"
           }
         }
       }
@@ -758,7 +647,7 @@
   },
   "tags": [
     {
-      "name": "Restaurant"
+      "name": "Achievement"
     }
   ]
 }

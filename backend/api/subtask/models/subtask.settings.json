@@ -11,6 +11,24 @@
   "attributes": {
     "description": {
       "type": "richtext"
+    },
+    "progress": {
+      "model": "process",
+      "via": "subtasks"
+    },
+    "requests": {
+      "collection": "request",
+      "via": "subtask"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "ongoing",
+        "completed"
+      ]
+    },
+    "index": {
+      "type": "integer"
     }
   }
 }
