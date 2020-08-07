@@ -556,7 +556,7 @@
               "role": {
                 "type": "string"
               },
-              "processes": {
+              "progresses": {
                 "type": "array",
                 "items": {
                   "type": "string"

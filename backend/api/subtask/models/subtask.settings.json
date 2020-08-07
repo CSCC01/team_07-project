@@ -13,7 +13,7 @@
       "type": "richtext"
     },
     "progress": {
-      "model": "process",
+      "model": "progress",
       "via": "subtasks"
     },
     "requests": {

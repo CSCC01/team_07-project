@@ -1245,7 +1245,7 @@
               }
             }
           },
-          "processes": {
+          "progresses": {
             "type": "array",
             "items": {
               "required": [
@@ -1409,7 +1409,7 @@
           "role": {
             "type": "string"
           },
-          "processes": {
+          "progresses": {
             "type": "array",
             "items": {
               "type": "string"
