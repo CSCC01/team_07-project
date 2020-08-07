@@ -10,6 +10,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import MapIcon from '@material-ui/icons/Map';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -80,6 +81,10 @@ export default function TitleBar(props){
                     <ListItem button component={Link} to="/coupon-List">
                         <ListItemIcon><LoyaltyIcon  fontSize="small"/></ListItemIcon>
                         <ListItemText primary="My Coupon" ></ListItemText>
+                    </ListItem>
+                    <ListItem button component={Link} to="/explore">
+                        <ListItemIcon><MapIcon  fontSize="small"/></ListItemIcon>
+                        <ListItemText primary="Explore" ></ListItemText>
                     </ListItem>
                 </>
                 )}

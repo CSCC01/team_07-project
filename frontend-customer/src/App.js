@@ -19,6 +19,7 @@ function App() {
         <Route exact path="/coupon-validation" component={CouponValidation} />
         <Route exact path="/subtask-validation" component={SubtaskValidation} />
         <Route exact path="/coupon-list" component={CouponList} />
+        <Route exact path="/explore" component={CouponList} />
         <Route component={NoMatch} />
       </Switch>
     </div>
