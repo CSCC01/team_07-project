@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import GoogleMapReact from 'google-map-react';
 import TitleBar from '../sharedComponents/TitleBar';
+import AchievementFlag from './AchievementFlag';
 
 class Explore extends Component {
   static defaultProps = {
@@ -9,8 +11,23 @@ class Explore extends Component {
       lat: 43.78,
       lng: -79.18
     },
-    zoom: 15
+    zoom: 12
   };
+
+  state = {
+    flagList: [],
+    jwtToken: localStorage.getItem('Authorization-Token'),
+    username: localStorage.getItem('name'),
+  };
+
+  async componentDidMount() {
+    getAchievements(this.state.jwtToken, this.state.username).then((achievements) => {
+      this.setState({
+        flagList: achievements,
+      });
+      console.log(achievements);
+    });
+  }
 
   render() {
     if (localStorage.getItem('Authorization-Token') === null) {
@@ -22,7 +39,7 @@ class Explore extends Component {
     return (
       <>
         <div data-testid='title'>
-                <TitleBar title='Coupon Validation'/>
+                <TitleBar title='Explore Toronto'/>
         </div>
         <div style={{ height: '94vh', width: '100%' }}>
           <GoogleMapReact
@@ -30,6 +47,15 @@ class Explore extends Component {
             defaultCenter={this.props.center}
             defaultZoom={this.props.zoom}
           >
+            {
+              this.state.flagList.map((flag) => (
+                <AchievementFlag 
+                  lat={flag.restaurant.location.lat}
+                  lng={flag.restaurant.location.lng}
+                  restaurantName={flag.restaurant.name}
+                  number={flag.complete_number}
+                />
+              ))}
           </GoogleMapReact>
         </div>
       </>
@@ -38,3 +64,20 @@ class Explore extends Component {
 }
 
 export default Explore;
+
+export const getAchievements = async (jwtToken, username) => {
+  var achievements;
+  await axios({
+    method: 'GET',
+    url: '/achievements',
+    params: {
+      'user.username': username,
+    },
+    headers: {
+      Authorization: 'Bearer ' + jwtToken,
+    },
+  }).then((response) => {
+    achievements = response.data;
+  });
+  return achievements;
+};
