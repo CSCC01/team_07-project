@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/processes": {
+    "/progresses": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Process"
+                    "$ref": "#/components/schemas/Progress"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Process"
+          "Progress"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Process"
+                  "$ref": "#/components/schemas/Progress"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Process"
+          "Progress"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewProcess"
+                "$ref": "#/components/schemas/NewProgress"
               }
             }
           }
         }
       }
     },
-    "/processes/count": {
+    "/progresses/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Process"
+          "Progress"
         ],
         "parameters": []
       }
     },
-    "/processes/{id}": {
+    "/progresses/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Process"
+                  "$ref": "#/components/schemas/Progress"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Process"
+          "Progress"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Process"
+                  "$ref": "#/components/schemas/Progress"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Process"
+          "Progress"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewProcess"
+                "$ref": "#/components/schemas/NewProgress"
               }
             }
           }
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Process"
+          "Progress"
         ],
         "parameters": [
           {
@@ -514,7 +514,7 @@
   },
   "components": {
     "schemas": {
-      "Process": {
+      "Progress": {
         "required": [
           "id"
         ],
@@ -556,7 +556,7 @@
               "role": {
                 "type": "string"
               },
-              "processes": {
+              "progresses": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -659,7 +659,7 @@
           }
         }
       },
-      "NewProcess": {
+      "NewProgress": {
         "properties": {
           "user": {
             "type": "string"
@@ -686,7 +686,7 @@
   },
   "tags": [
     {
-      "name": "Process"
+      "name": "Progress"
     }
   ]
 }

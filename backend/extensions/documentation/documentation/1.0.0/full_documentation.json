@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "08/05/2020 9:09:09 PM"
+    "x-generation-date": "08/07/2020 4:26:27 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -1067,7 +1067,7 @@
         ]
       }
     },
-    "/processes": {
+    "/progresses": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -1079,7 +1079,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Process"
+                    "$ref": "#/components/schemas/Progress"
                   }
                 }
               }
@@ -1118,7 +1118,7 @@
         },
         "summary": "",
         "tags": [
-          "Process"
+          "Progress"
         ],
         "parameters": [
           {
@@ -1268,7 +1268,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Process"
+                  "$ref": "#/components/schemas/Progress"
                 }
               }
             }
@@ -1306,7 +1306,7 @@
         },
         "summary": "",
         "tags": [
-          "Process"
+          "Progress"
         ],
         "requestBody": {
           "description": "",
@@ -1314,14 +1314,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewProcess"
+                "$ref": "#/components/schemas/NewProgress"
               }
             }
           }
         }
       }
     },
-    "/processes/count": {
+    "/progresses/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -1373,12 +1373,12 @@
         },
         "summary": "",
         "tags": [
-          "Process"
+          "Progress"
         ],
         "parameters": []
       }
     },
-    "/processes/{id}": {
+    "/progresses/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -1388,7 +1388,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Process"
+                  "$ref": "#/components/schemas/Progress"
                 }
               }
             }
@@ -1426,7 +1426,7 @@
         },
         "summary": "",
         "tags": [
-          "Process"
+          "Progress"
         ],
         "parameters": [
           {
@@ -1450,7 +1450,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Process"
+                  "$ref": "#/components/schemas/Progress"
                 }
               }
             }
@@ -1488,7 +1488,7 @@
         },
         "summary": "",
         "tags": [
-          "Process"
+          "Progress"
         ],
         "requestBody": {
           "description": "",
@@ -1496,7 +1496,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewProcess"
+                "$ref": "#/components/schemas/NewProgress"
               }
             }
           }
@@ -1562,7 +1562,7 @@
         },
         "summary": "",
         "tags": [
-          "Process"
+          "Progress"
         ],
         "parameters": [
           {
@@ -5893,7 +5893,7 @@
               "role": {
                 "type": "string"
               },
-              "processes": {
+              "progresses": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -6071,7 +6071,7 @@
               "role": {
                 "type": "string"
               },
-              "processes": {
+              "progresses": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -6157,7 +6157,7 @@
           }
         }
       },
-      "Process": {
+      "Progress": {
         "required": [
           "id"
         ],
@@ -6199,7 +6199,7 @@
               "role": {
                 "type": "string"
               },
-              "processes": {
+              "progresses": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -6302,7 +6302,7 @@
           }
         }
       },
-      "NewProcess": {
+      "NewProgress": {
         "properties": {
           "user": {
             "type": "string"
@@ -6666,7 +6666,7 @@
                 "role": {
                   "type": "string"
                 },
-                "processes": {
+                "progresses": {
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -7051,7 +7051,7 @@
                 "role": {
                   "type": "string"
                 },
-                "processes": {
+                "progresses": {
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -7167,7 +7167,7 @@
               }
             }
           },
-          "processes": {
+          "progresses": {
             "type": "array",
             "items": {
               "required": [
@@ -7331,7 +7331,7 @@
           "role": {
             "type": "string"
           },
-          "processes": {
+          "progresses": {
             "type": "array",
             "items": {
               "type": "string"
@@ -7386,7 +7386,7 @@
       "name": "Coupon"
     },
     {
-      "name": "Process"
+      "name": "Progress"
     },
     {
       "name": "Promotion"

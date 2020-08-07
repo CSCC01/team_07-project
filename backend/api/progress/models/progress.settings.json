@@ -1,6 +1,6 @@
 {
   "kind": "collectionType",
-  "collectionName": "processes",
+  "collectionName": "progresses",
   "info": {
     "name": "Progress"
   },
@@ -12,7 +12,7 @@
     "user": {
       "plugin": "users-permissions",
       "model": "user",
-      "via": "processes"
+      "via": "progresses"
     },
     "promotion": {
       "model": "promotion",
