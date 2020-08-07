@@ -47,6 +47,22 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/promotions/:id/progress",
+      "handler": "promotion.findProgress",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/promotions/:id/participate",
+      "handler": "promotion.participate",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }
