@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "08/07/2020 7:34:18 PM"
+    "x-generation-date": "08/07/2020 7:52:38 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -1701,19 +1701,9 @@
           "Promotion"
         ],
         "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "foo": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
+          "description": "You don't need this",
+          "required": false,
+          "content": {}
         },
         "parameters": [
           {

@@ -29,7 +29,12 @@
               "type": "string"
             }
           }
-        ]
+        ],
+        "requestBody": {
+          "description": "You don't need this",
+          "required": false,
+          "content": {}
+        }
       }
     }
   }
