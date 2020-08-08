@@ -1,0 +1,17 @@
+.flag-texts {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.flag-text {
+    margin-top: 0em;
+    margin-bottom: 0.2em;
+    font-size: 1em;
+}
+
+.title-popup-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
