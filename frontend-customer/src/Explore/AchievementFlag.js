@@ -14,7 +14,7 @@ class AchievementFlag extends Component {
   componentDidMount() {
     if(this.props.number <= 1) {
       this.setState({
-        color: '#FFDE03'
+        color: '#6200EE'
       })
     } else if(2 <= this.props.number && this.props.number <= 4) {
       this.setState({
