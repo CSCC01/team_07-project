@@ -10,7 +10,8 @@
     font-size: 1em;
 }
 
-.flag {
+.title-popup-wrapper {
     display: flex;
-    width: 60vw;
+    flex-direction: row;
+    margin-bottom: 10px;
 }
