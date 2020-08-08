@@ -21,11 +21,9 @@ class Explore extends Component {
   };
 
   async componentDidMount() {
-    getAchievements(this.state.jwtToken, this.state.username).then((achievements) => {
-      this.setState({
-        flagList: achievements,
-      });
-      console.log(achievements);
+    const achievements = await getAchievements(this.state.jwtToken, this.state.username);
+    this.setState({
+      flagList: achievements,
     });
   }
 
@@ -66,8 +64,7 @@ class Explore extends Component {
 export default Explore;
 
 export const getAchievements = async (jwtToken, username) => {
-  var achievements;
-  await axios({
+  const response = await axios({
     method: 'GET',
     url: '/achievements',
     params: {
@@ -76,8 +73,6 @@ export const getAchievements = async (jwtToken, username) => {
     headers: {
       Authorization: 'Bearer ' + jwtToken,
     },
-  }).then((response) => {
-    achievements = response.data;
   });
-  return achievements;
+  return response.data;
 };

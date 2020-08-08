@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box';
 import Popover from '@material-ui/core/Popover';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 
-import './AchievementFlag.css'
+import './AchievementFlag.css';
 
 class AchievementFlag extends Component {
   state = {
@@ -12,19 +12,17 @@ class AchievementFlag extends Component {
   };
 
   componentDidMount() {
+    let flagColor = '';
     if(this.props.number <= 1) {
-      this.setState({
-        color: '#6200EE'
-      })
-    } else if(2 <= this.props.number && this.props.number <= 4) {
-      this.setState({
-        color: '#0336FF'
-      })
-    } else if(5 <= this.props.number) {
-      this.setState({
-        color: '#FF0266'
-      })
+      flagColor = '#6200EE';
+    } else if(this.props.number <= 4) {
+      flagColor = '#0336FF';
+    } else if(this.props.number >= 5) {
+      flagColor = '#FF0266';
     }
+    this.setState({
+      color: flagColor
+    })
   }
 
   render() {

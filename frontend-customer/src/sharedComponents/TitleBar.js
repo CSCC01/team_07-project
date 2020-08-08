@@ -76,35 +76,35 @@ export default function TitleBar(props){
                 {role.localeCompare("Customer") === 0 && (
                 <>
                     <ListItem button component={Link} to="/">
-                        <ListItemIcon><LoyaltyIcon  fontSize="small"/></ListItemIcon>
-                        <ListItemText primary="Promotion"></ListItemText>
+                        <ListItemIcon><LoyaltyIcon fontSize="small" /></ListItemIcon>
+                        <ListItemText primary="Promotion" />
                     </ListItem>
                     <ListItem button component={Link} to="/coupon-List">
-                        <ListItemIcon><AccountBalanceWalletIcon  fontSize="small"/></ListItemIcon>
-                        <ListItemText primary="My Coupon" ></ListItemText>
+                        <ListItemIcon><AccountBalanceWalletIcon fontSize="small" /></ListItemIcon>
+                        <ListItemText primary="My Coupon" />
                     </ListItem>
                     <ListItem button component={Link} to="/explore">
-                        <ListItemIcon><MapIcon  fontSize="small"/></ListItemIcon>
-                        <ListItemText primary="Explore" ></ListItemText>
+                        <ListItemIcon><MapIcon fontSize="small" /></ListItemIcon>
+                        <ListItemText primary="Explore" />
                     </ListItem>
                 </>
                 )}
                 {role.localeCompare("Restaurant Staff") === 0 && (
                 <>
                     <ListItem button component={Link} to="/coupon-validation">
-                        <ListItemIcon><LoyaltyIcon fontSize="small"/></ListItemIcon>
-                        <ListItemText primary="Coupon Validation"></ListItemText>
+                        <ListItemIcon><LoyaltyIcon fontSize="small" /></ListItemIcon>
+                        <ListItemText primary="Coupon Validation" />
                     </ListItem>
                     <ListItem button component={Link} to="/subtask-validation">
-                        <ListItemIcon><LoyaltyIcon fontSize="small"/></ListItemIcon>
-                        <ListItemText primary="Subtask Validation"></ListItemText>
+                        <ListItemIcon><LoyaltyIcon fontSize="small" /></ListItemIcon>
+                        <ListItemText primary="Subtask Validation" />
                     </ListItem>
                 </>
                 )}
                 <Divider />
                 <ListItem button onClick={logout}>
-                        <ListItemIcon><ExitToAppIcon fontSize="small"/></ListItemIcon>
-                        <ListItemText primary="Log out"></ListItemText>
+                        <ListItemIcon><ExitToAppIcon fontSize="small" /></ListItemIcon>
+                        <ListItemText primary="Log out" />
                 </ListItem>
             </List>
             </Drawer>
