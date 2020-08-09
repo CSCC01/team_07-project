@@ -7,6 +7,7 @@ import PromotionDetails from './PromotionDetails';
 import CouponValidation from './CouponValidation';
 import SubtaskValidation from './SubtaskValidation';
 import CouponList from './CouponList';
+import Explore from './Explore';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route exact path="/coupon-validation" component={CouponValidation} />
         <Route exact path="/subtask-validation" component={SubtaskValidation} />
         <Route exact path="/coupon-list" component={CouponList} />
+        <Route exact path="/explore" component={Explore} />
         <Route component={NoMatch} />
       </Switch>
     </div>

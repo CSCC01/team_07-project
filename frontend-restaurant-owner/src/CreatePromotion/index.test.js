@@ -44,7 +44,7 @@ it('alerts when all the required fields are empty on submission', async () => {
   checkData('', '', '', '', [null], -1);
   await waitFor(() =>
     expect(window.alert).toBeCalledWith(
-      'Failure: title is empty\nFailure: description is empty\nFailure: start time is empty\nFailure: expired time is empty\nFailure: image is empty\nFailure: reward is empty',
+      'Failure: title is empty\nFailure: description is empty\nFailure: start time is empty\nFailure: expired time is empty\nFailure: image is empty\nFailure: reward type is empty\nFailure: reward is empty',
     ),
   );
 });
@@ -56,7 +56,10 @@ it('alerts when all the required fields are empty on submission', async () => {
  */
 it('alerts when the title field is empty on submission', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
-  checkData('', 'test', '2020-08-20T00:00', '2020-09-24T00:00', ['test', null], 1);
+  checkData('', 'test', '2020-08-20T00:00', '2020-09-24T00:00', ['test', null], {
+    type: 'coupon',
+    value: '1',
+  });
   await waitFor(() => expect(window.alert).toBeCalledWith('Failure: title is empty'));
 });
 
@@ -67,7 +70,10 @@ it('alerts when the title field is empty on submission', async () => {
  */
 it('alerts when the description field is empty on submission', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
-  checkData('test', '', '2020-08-20T00:00', '2020-09-24T00:00', ['test', null], 1);
+  checkData('test', '', '2020-08-20T00:00', '2020-09-24T00:00', ['test', null], {
+    type: 'coupon',
+    value: '1',
+  });
   await waitFor(() => expect(window.alert).toBeCalledWith('Failure: description is empty'));
 });
 
@@ -78,7 +84,10 @@ it('alerts when the description field is empty on submission', async () => {
  */
 it('alerts when the startTime field is empty on submission', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
-  checkData('test', 'test', '', '2020-09-24T00:00', ['test', null], 1);
+  checkData('test', 'test', '', '2020-09-24T00:00', ['test', null], {
+    type: 'coupon',
+    value: '1',
+  });
   await waitFor(() => expect(window.alert).toBeCalledWith('Failure: start time is empty'));
 });
 
@@ -89,7 +98,10 @@ it('alerts when the startTime field is empty on submission', async () => {
  */
 it('alerts when the closeTime field is empty on submission', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
-  checkData('test', 'test', '2020-08-20T00:00', '', ['test', null], 1);
+  checkData('test', 'test', '2020-08-20T00:00', '', ['test', null], {
+    type: 'coupon',
+    value: '1',
+  });
   await waitFor(() => expect(window.alert).toBeCalledWith('Failure: expired time is empty'));
 });
 
@@ -100,7 +112,10 @@ it('alerts when the closeTime field is empty on submission', async () => {
  */
 it('alerts when the image field is empty on submission', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
-  checkData('test', 'test', '2020-08-20T00:00', '2020-09-24T00:00', [null], 1);
+  checkData('test', 'test', '2020-08-20T00:00', '2020-09-24T00:00', [null], {
+    type: 'coupon',
+    value: '1',
+  });
   await waitFor(() => expect(window.alert).toBeCalledWith('Failure: image is empty'));
 });
 
@@ -112,7 +127,9 @@ it('alerts when the image field is empty on submission', async () => {
 it('alerts when the reward field is unselected on submission', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
   checkData('test', 'test', '2020-08-20T00:00', '2020-09-24T00:00', ['test', null], -1);
-  await waitFor(() => expect(window.alert).toBeCalledWith('Failure: reward is empty'));
+  await waitFor(() =>
+    expect(window.alert).toBeCalledWith('Failure: reward type is empty\nFailure: reward is empty'),
+  );
 });
 
 /**
@@ -136,7 +153,10 @@ it('tests the function lessTime', () => {
  */
 it('alerts when closeTime is earlier than startTime', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
-  checkData('test', 'test', '2020-09-24T00:00', '2020-08-20T00:00', ['test', null], 1);
+  checkData('test', 'test', '2020-09-24T00:00', '2020-08-20T00:00', ['test', null], {
+    type: 'coupon',
+    value: '1',
+  });
   await waitFor(() => expect(window.alert).toBeCalledWith('Failure: closeTime before startTime'));
 });
 
@@ -147,7 +167,10 @@ it('alerts when closeTime is earlier than startTime', async () => {
  */
 it('alerts when startTime is earlier than today', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
-  checkData('test', 'test', '2020-01-24T00:00', '2020-08-20T00:00', ['test', null], 1);
+  checkData('test', 'test', '2020-01-24T00:00', '2020-08-20T00:00', ['test', null], {
+    type: 'coupon',
+    value: '1',
+  });
   await waitFor(() => expect(window.alert).toBeCalledWith('Failure: startTime before today'));
 });
 
@@ -159,7 +182,7 @@ it('alerts when startTime is earlier than today', async () => {
 it('does not alert when all the fields are filled in correctly on submission', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
   checkData('test', 'test', '2020-08-20T00:00', '2020-09-24T00:00', ['test', null], 1);
-  await waitFor(() => expect(window.alert).toBeCalledTimes(9));
+  await waitFor(() => expect(window.alert).toBeCalledTimes(10));
 });
 
 /**

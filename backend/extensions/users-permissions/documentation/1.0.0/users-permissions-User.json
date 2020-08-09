@@ -1245,7 +1245,7 @@
               }
             }
           },
-          "processes": {
+          "progresses": {
             "type": "array",
             "items": {
               "required": [
@@ -1371,6 +1371,37 @@
                 }
               }
             }
+          },
+          "requests": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "subtask": {
+                  "type": "string"
+                },
+                "restaurant": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "coupon": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -1409,7 +1440,7 @@
           "role": {
             "type": "string"
           },
-          "processes": {
+          "progresses": {
             "type": "array",
             "items": {
               "type": "string"
@@ -1425,6 +1456,12 @@
             }
           },
           "coupons": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "requests": {
             "type": "array",
             "items": {
               "type": "string"

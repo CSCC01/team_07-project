@@ -10,8 +10,8 @@
   },
   "attributes": {
     "subtask": {
-      "via": "requests",
-      "model": "subtask"
+      "model": "subtask",
+      "via": "requests"
     },
     "restaurant": {
       "model": "restaurant",
@@ -32,9 +32,14 @@
     "type": {
       "type": "enumeration",
       "enum": [
-        "subtask_request",
-        "coupon_request"
+        "subtask",
+        "coupon"
       ]
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "requests"
     }
   }
 }
