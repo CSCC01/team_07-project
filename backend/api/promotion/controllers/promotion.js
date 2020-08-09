@@ -28,10 +28,37 @@ module.exports = {
       };
       return;
     }
-    console.log(promotion.progresses);
+    const promotionProgress = promotion.progresses.filter((progress) => progress.user === user.id);
+    if (promotionProgress.length > 1) {
+      ctx.response.status = 304;
+      ctx.response.body = {
+        message: 'Already participating.',
+      };
+      return;
+    }
 
+    const subtaskIds = [];
+
+    for (let [index, subtaskDescription] of promotion.subtask.entries()) {
+      console.log(subtaskDescription, index);
+      const subtask = await strapi.query('subtask').create({
+        description: subtaskDescription,
+        status: 'ongoing',
+        index,
+      });
+      subtaskIds.push(subtask.id);
+    }
+
+    await strapi.query('progress').create({
+      status: 'ongoing',
+      user: user.id,
+      promotion: promotion.id,
+      subtasks: subtaskIds,
+    });
+
+    ctx.response.status = 201;
     ctx.response.body = {
-      message: 'Successfully created.',
+      message: 'Successfully created progress and subtasks.',
     };
   },
 };
