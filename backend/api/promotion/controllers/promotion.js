@@ -7,9 +7,32 @@
 
 module.exports = {
   async findProgress(ctx) {
-    console.log(ctx.state.user);
-    ctx.response.send();
+    const { id: promotionId } = ctx.params;
+    const user = ctx.state.user;
+
+    if (user.role.name !== 'Customer') {
+      ctx.response.status = 403;
+      ctx.response.body = { error: 'Promotion participation is only for customers.' };
+      return;
+    }
+
+    const promotionProgresses = await strapi
+      .query('progress')
+      .find({ user: user.id, promotion: promotionId });
+
+    if (promotionProgresses.length === 0) {
+      ctx.response.status = 404;
+      ctx.response.body = { message: 'No progress exists.' };
+      return;
+    }
+
+    if (promotionProgresses.length > 1) {
+      console.warn('Found multiple progresses for one promotion.');
+    }
+
+    return promotionProgresses[0];
   },
+
   async participate(ctx) {
     const { id } = ctx.params;
     const user = ctx.state.user;
@@ -28,8 +51,10 @@ module.exports = {
       };
       return;
     }
-    const promotionProgress = promotion.progresses.filter((progress) => progress.user === user.id);
-    if (promotionProgress.length > 1) {
+    const promotionProgresses = promotion.progresses.filter(
+      (progress) => progress.user === user.id,
+    );
+    if (promotionProgresses.length > 1) {
       ctx.response.status = 304;
       ctx.response.body = {
         message: 'Already participating.',
