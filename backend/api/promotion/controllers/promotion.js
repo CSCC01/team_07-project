@@ -12,7 +12,7 @@ module.exports = {
 
     if (user.role.name !== 'Customer') {
       ctx.response.status = 403;
-      ctx.response.body = { error: 'Promotion participation is only for customers.' };
+      ctx.response.body = { message: 'Promotion participation is only for customers.' };
       return;
     }
 
@@ -39,7 +39,7 @@ module.exports = {
 
     if (user.role.name !== 'Customer') {
       ctx.response.status = 403;
-      ctx.response.body = { error: 'Promotion participation is only for customers.' };
+      ctx.response.body = { message: 'Promotion participation is only for customers.' };
       return;
     }
 
@@ -47,7 +47,7 @@ module.exports = {
     if (promotion === null) {
       ctx.response.status = 404;
       ctx.response.body = {
-        error: 'The specified promotion was not found.',
+        message: 'The specified promotion was not found.',
       };
       return;
     }

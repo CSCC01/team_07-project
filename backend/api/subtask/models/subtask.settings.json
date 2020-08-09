@@ -17,8 +17,8 @@
       "via": "subtasks"
     },
     "requests": {
-      "collection": "request",
-      "via": "subtask"
+      "via": "subtask",
+      "collection": "request"
     },
     "status": {
       "type": "enumeration",
