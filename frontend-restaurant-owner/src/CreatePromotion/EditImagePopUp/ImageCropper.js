@@ -28,7 +28,6 @@ class ImageCropper extends React.Component {
   }
 
   save = () => {
-    // this.props.onSelectImage(this.state.imageDestination);
     this.props.onSelectImage(this.state.canvas);
     this.props.close();
   };
@@ -37,7 +36,7 @@ class ImageCropper extends React.Component {
     return (
       <div className="wrapper">
         <div className="left">
-          <p className="title">Source image</p>
+          <p className="cropper-title">Source image</p>
           <img
             ref={this.imageElement}
             src={this.props.src}
@@ -46,9 +45,19 @@ class ImageCropper extends React.Component {
           />
         </div>
         <div className="right">
-          <p className="title">Preview</p>
+          <p className="cropper-title">Preview</p>
           <img src={this.state.imageDestination} className="popup-img-preview" alt="Destination" />
-          <Button variant="contained" color="primary" style={{ marginTop: 20 }} onClick={this.save}>
+          <Button
+            variant="outlined"
+            color="#FFD564"
+            style={{
+              border: '#000 2px solid',
+              color: '#000',
+              backgroundColor: '#FFD564',
+              marginTop: 30,
+            }}
+            onClick={this.save}
+          >
             save
           </Button>
         </div>

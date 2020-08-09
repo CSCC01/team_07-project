@@ -22,9 +22,10 @@ class EditImagePopUp extends Component {
       <Popup
         trigger={
           <Button
-            variant="contained"
-            color="secondary"
+            variant="outlined"
+            color="#FFD564"
             startIcon={<FontAwesomeIcon icon={faEdit} />}
+            style={{ border: '#000 2px solid', color: '#000', backgroundColor: '#FFD564' }}
           >
             Edit
           </Button>

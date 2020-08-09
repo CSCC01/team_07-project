@@ -23,19 +23,21 @@ class CreateSubtask extends Component {
 
   render() {
     return (
-      <div style={{ marginBottom: 10, textAlign: 'left' }}>
+      <div style={{ marginBottom: 10, textAlign: 'center' }}>
         <TextPopUp
           title="Subtask"
           popup="Users can only use one preset. Reselect preset will delete all the existing task."
         />
-        <SubtaskButtons
-          onSelectTask={this.getSelectedTask}
-          functionFromParent={this.parentFunction}
-        />
-        <PresetTemplates
-          addButton={this.state.addButton}
-          deleteAllTasks={this.state.deleteAllTasks}
-        />
+        <div style={{ textAlign: 'left' }}>
+          <SubtaskButtons
+            onSelectTask={this.getSelectedTask}
+            functionFromParent={this.parentFunction}
+          />
+          <PresetTemplates
+            addButton={this.state.addButton}
+            deleteAllTasks={this.state.deleteAllTasks}
+          />
+        </div>
       </div>
     );
   }

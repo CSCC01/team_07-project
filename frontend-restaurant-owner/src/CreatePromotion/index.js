@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import UploadImage from './UploadImage';
 import TextPopUp from '../sharedComponents/TextPopUp';
-import TextField from '@material-ui/core/TextField';
+// import TextField from '@material-ui/core/TextField';
 import CreateSubtask from './CreateSubtask';
-import SelectReward from './SelectReward';
+// import SelectReward from './SelectReward';
 import EditImagePopUp from './EditImagePopUp';
 
 import Button from '@material-ui/core/Button';
+import 'react-dates/initialize';
+import { DateRangePicker } from 'react-dates';
+import 'react-dates/lib/css/_datepicker.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
@@ -20,8 +23,8 @@ export default class CreatePromotion extends Component {
     currentIndex: 0,
     title: '',
     description: '',
-    startTime: '',
-    closeTime: '',
+    startDate: '',
+    endDate: '',
     tasks: [],
     reward: -1,
     disable: 1, // 0 - disable; 1 - enable
@@ -128,18 +131,14 @@ export default class CreatePromotion extends Component {
     this.UploadImageRef.current.onDelete(url, show);
   };
 
-  discardPromotion = () => {
-    // go to view promotion
-  };
-
   submitPromotion = async () => {
     let jwt_token = localStorage.getItem('Authorization-Token');
     let restaurant = await getRestaurant('/users/me/', jwt_token);
     let restaurant_id = restaurant[0];
     let title = this.state.title;
     let description = this.state.description;
-    let startTime = this.state.startTime;
-    let closeTime = this.state.closeTime;
+    let startTime = this.state.startDate.format();
+    let closeTime = this.state.endDate.format();
     let tasks = this.state.tasks;
     let image = this.state.image;
     let sourceImage = this.state.sourceImage;
@@ -203,57 +202,62 @@ export default class CreatePromotion extends Component {
               onRight={this.onRight}
             />
 
-            {this.state.image.length !== 1 && this.state.disable !== 0 ? (
-              <div className="left-button-row">
-                <EditImagePopUp
-                  sourceImage={this.state.sourceImage[this.state.currentIndex]}
-                  onSelectImage={(value) => this.onEdit(value)}
-                />
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={this.onDelete}
-                  startIcon={<FontAwesomeIcon icon={faTrash} />}
-                >
-                  Delete
-                </Button>
-              </div>
-            ) : null}
+            <div
+              className={
+                this.state.image.length !== 1 && this.state.disable !== 0
+                  ? 'left-button-row show'
+                  : 'left-button-row'
+              }
+            >
+              <EditImagePopUp
+                sourceImage={this.state.sourceImage[this.state.currentIndex]}
+                onSelectImage={(value) => this.onEdit(value)}
+              />
+              <Button
+                variant="outlined"
+                color="#FFD564"
+                onClick={this.onDelete}
+                startIcon={<FontAwesomeIcon icon={faTrash} />}
+                style={{ border: '#000 2px solid', color: '#000', backgroundColor: '#FFD564' }}
+              >
+                Delete
+              </Button>
+            </div>
           </div>
 
-          <div style={{ marginLeft: 20 }}>
+          <div>
             {/* Title */}
             <div style={{ marginBottom: 10 }}>
               <TextPopUp title="Title" popup="Limitation: 30 characters" />
-              <TextField
-                variant="outlined"
-                fullWidth
+              <input
+                type="text"
+                className="create-promotion-title"
                 onChange={(event) => this.onUpdate('title', event.target.value)}
-                inputProps={{ maxLength: 30 }}
+                maxLength="30"
               />
             </div>
 
             {/* Description */}
             <div style={{ marginBottom: 10 }}>
               <TextPopUp title="Description" popup="Limitation: 500 characters" />
-              <TextField
-                variant="outlined"
-                fullWidth
-                multiline
-                rows={4}
+              <textarea
+                rows="5"
+                className="create-promotion-description"
                 onChange={(event) => this.onUpdate('description', event.target.value)}
-                inputProps={{ maxLength: 500 }}
+                maxLength="500"
               />
             </div>
+          </div>
 
+          <div style={{ marginLeft: 20 }}>
             {/* Date Inputs */}
-            <div style={{ marginBottom: 10, textAlign: 'left' }}>
+            <div style={{ marginBottom: 10 }}>
               <TextPopUp title="Date" popup="Empty" />
-              <form noValidate>
+              {/* <form noValidate style={{ textAlign: 'left' }}>
                 <TextField
                   label="Starting Time"
                   type="datetime-local"
-                  defaultValue="2020-01-01T00:00"
+                  defaultValue={getToday()}
                   InputLabelProps={{ shrink: true }}
                   onChange={(event) => this.onUpdate('startTime', event.target.value)}
                 />
@@ -261,31 +265,51 @@ export default class CreatePromotion extends Component {
                 <TextField
                   label="Expiring Time"
                   type="datetime-local"
-                  defaultValue="2020-01-01T00:00"
+                  defaultValue={getToday()}
                   InputLabelProps={{ shrink: true }}
                   onChange={(event) => this.onUpdate('closeTime', event.target.value)}
+                  // style={{ borderBottom: '#000 2px solid' }}
                 />
-              </form>
+              </form> */}
+
+              <div style={{ textAlign: 'left' }}>
+                <DateRangePicker
+                  startDate={this.state.startDate} // momentPropTypes.momentObj or null,
+                  endDate={this.state.endDate} // momentPropTypes.momentObj or null,
+                  onDatesChange={({ startDate, endDate }) => {
+                    this.setState({ startDate, endDate });
+                  }}
+                  focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+                  onFocusChange={(focusedInput) => this.setState({ focusedInput })} // PropTypes.func.isRequired,
+                  noBorder="true"
+                />
+              </div>
             </div>
 
             <CreateSubtask onSelectTask={(value) => this.onUpdate('tasks', value)} />
-            <SelectReward onSelectReward={(value) => this.onUpdate('reward', value)} />
+            {/* <SelectReward onSelectReward={(value) => this.onUpdate('reward', value)} /> */}
+            <div style={{ marginBottom: 10 }}>
+              <TextPopUp title="Reward" popup="Limitation: 300 characters" />
+              <textarea
+                rows="4"
+                className="create-promotion-description"
+                onChange={(event) => this.onUpdate('reward', event.target.value)}
+                maxLength="300"
+              />
+            </div>
           </div>
         </div>
         <div>
           <Button
-            variant="contained"
-            color="secondary"
-            style={{ marginRight: 40 }}
-            onClick={this.discardPromotion}
-          >
-            Discard
-          </Button>
-          <Button
             id="submit"
-            variant="contained"
+            variant="outlined"
             color="secondary"
-            style={{ marginLeft: 40 }}
+            style={{
+              marginLeft: 40,
+              border: '#000 2px solid',
+              color: '#000',
+              backgroundColor: '#FFD564',
+            }}
             onClick={this.submitPromotion}
           >
             Submit
@@ -314,14 +338,6 @@ export const getRestaurant = async (url, jwt_token) => {
   return restaurant_id;
 };
 
-export const lessTime = (t1, t2) => {
-  return new Date(t1) < new Date(t2);
-};
-
-export const getToday = () => {
-  return new Date().toString();
-};
-
 export const checkData = (title, description, startTime, closeTime, sourceImage, reward) => {
   let prompt = [];
 
@@ -340,16 +356,7 @@ export const checkData = (title, description, startTime, closeTime, sourceImage,
   if (sourceImage.length === 1) {
     prompt.push('Failure: image is empty');
   }
-  if (lessTime(closeTime, startTime)) {
-    prompt.push('Failure: closeTime before startTime');
-  }
-  if (lessTime(startTime, getToday())) {
-    prompt.push('Failure: startTime before today');
-  }
-  if (!['points', 'coupon'].includes(reward.type)) {
-    prompt.push('Failure: reward type is empty');
-  }
-  if (!reward.value) {
+  if (!reward) {
     prompt.push('Failure: reward is empty');
   }
 
@@ -442,7 +449,7 @@ export const postData = async (
     starting_date: startTime,
     expired_date: closeTime,
     subtask: tasks,
-    reward,
+    coupon: reward,
     restaurant: restaurant_id,
   };
 

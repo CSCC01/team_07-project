@@ -87,11 +87,11 @@ class UploadImage extends Component {
             <div>
               <div className="upload-image">
                 <Button
-                  variant="contained"
-                  color="secondary"
+                  variant="outlined"
+                  color="#FFD564"
                   startIcon={<FontAwesomeIcon icon={faPlus} />}
-                  className="image-upload-button"
                   onClick={this.imageButtonClick}
+                  style={{ border: '#000 2px solid', color: '#000', backgroundColor: '#FFD564' }}
                 >
                   Upload
                 </Button>
@@ -110,8 +110,13 @@ class UploadImage extends Component {
               <div className="button-wrapper">
                 <div className="left-image">
                   <IconButton
-                    color="secondary"
-                    style={{ borderRadius: 10 }}
+                    color="#000"
+                    style={{
+                      borderRadius: 10,
+                      backgroundColor: '#FFD564',
+                      border: '#000 2px solid',
+                      color: '#000',
+                    }}
                     onClick={this.props.onLeft}
                   >
                     <FontAwesomeIcon icon={faChevronLeft} />
@@ -119,10 +124,11 @@ class UploadImage extends Component {
                 </div>
                 <div className="upload-image">
                   <Button
-                    variant="contained"
-                    color="secondary"
+                    variant="outlined"
+                    color="#FFD564"
                     startIcon={<FontAwesomeIcon icon={faPlus} />}
                     onClick={this.imageButtonClick}
+                    style={{ border: '#000 2px solid', color: '#000', backgroundColor: '#FFD564' }}
                   >
                     Upload
                   </Button>
@@ -144,8 +150,13 @@ class UploadImage extends Component {
                 {this.state.show === 3 ? (
                   <div className="left-image">
                     <IconButton
-                      color="secondary"
-                      style={{ borderRadius: 10 }}
+                      color="#000"
+                      style={{
+                        borderRadius: 10,
+                        backgroundColor: '#FFD564',
+                        border: '#000 2px solid',
+                        color: '#000',
+                      }}
                       onClick={this.props.onLeft}
                     >
                       <FontAwesomeIcon icon={faChevronLeft} />
@@ -154,10 +165,11 @@ class UploadImage extends Component {
                 ) : null}
                 <div className="upload-image">
                   <Button
-                    variant="contained"
-                    color="secondary"
+                    variant="outlined"
+                    color="#FFD564"
                     startIcon={<FontAwesomeIcon icon={faPlus} />}
                     onClick={this.imageButtonClick}
+                    style={{ border: '#000 2px solid', color: '#000', backgroundColor: '#FFD564' }}
                   >
                     Upload
                   </Button>
@@ -172,8 +184,13 @@ class UploadImage extends Component {
                 {this.state.show === 2 || this.state.show === 3 ? (
                   <div className="right-image">
                     <IconButton
-                      color="secondary"
-                      style={{ borderRadius: 10 }}
+                      color="#000"
+                      style={{
+                        borderRadius: 10,
+                        backgroundColor: '#FFD564',
+                        border: '#000 2px solid',
+                        color: '#000',
+                      }}
                       onClick={this.props.onRight}
                     >
                       <FontAwesomeIcon icon={faChevronRight} />

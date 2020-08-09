@@ -11,7 +11,13 @@ function Logout(props) {
   }
 
   return (
-    <Button data-testid="logout" variant="contained" color="primary" onClick={logout}>
+    <Button
+      data-testid="logout"
+      variant="outlined"
+      color="#000"
+      onClick={logout}
+      style={{ border: '#000 2px solid', position: 'relative', top: -7 }}
+    >
       Logout
     </Button>
   );

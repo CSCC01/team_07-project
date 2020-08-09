@@ -19,6 +19,7 @@
     "material-ui-popup-state": "^1.6.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
+    "react-dates": "^21.8.0",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
