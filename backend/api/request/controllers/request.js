@@ -58,7 +58,13 @@ module.exports = {
         return;
       }
 
-      // NOTE: Not checking existing requests
+      if (coupon.status !== 'available') {
+        ctx.response.status = 400;
+        ctx.response.body = { message: 'Coupon is not available for use.' };
+        return;
+      }
+
+      // NOTE: Ignoring existing requests
 
       resultRequest = await strapi.query('request').create({
         user: user.id,
@@ -86,7 +92,7 @@ module.exports = {
         return;
       }
 
-      // NOTE: Not checking existing requests
+      // NOTE: Ignoring existing requests
 
       resultRequest = await strapi.query('request').create({
         user: user.id,
@@ -101,6 +107,129 @@ module.exports = {
     ctx.response.send(resultRequest);
   },
 
-  async verify() {},
-  async reject() {},
+  async verify(ctx) {
+    const { user } = ctx.state;
+    const { id } = ctx.params;
+
+    if (!user.role.name.toLowerCase().includes('restaurant')) {
+      ctx.response.status = 403;
+      ctx.response.body = {
+        message: 'Promotion participation is only for restaurant owners/stuff.',
+      };
+      return;
+    }
+    const request = await strapi.query('request').findOne({ id });
+    if (request === null) {
+      ctx.response.status = 404;
+      ctx.response.body = { message: 'Request not found.' };
+      return;
+    }
+
+    if (request.status === 'confirmed') {
+      ctx.response.status = 304;
+      ctx.response.body = { message: 'Request already confirmed.' };
+      return;
+    }
+
+    if (request.status === 'rejected') {
+      ctx.response.status = 400;
+      ctx.response.body = { message: 'Request already rejected.' };
+      return;
+    }
+
+    if (request.status !== 'pending') {
+      ctx.response.status = 500;
+      ctx.response.body = { message: 'Unexpected status: ' + request.status };
+      return;
+    }
+
+    if (request.type === 'coupon') {
+      /**
+       * Change coupon status
+       */
+      await strapi.query('coupon').update({ id: request.coupon.id }, { status: 'used' });
+      await strapi.query('request').update({ id: request.id }, { status: 'confirmed' });
+      ctx.response.status = 200;
+      ctx.response.body = { message: 'Verified.' };
+      return;
+    }
+
+    if (request.type === 'subtask') {
+      /**
+       * 1. Update subtask status
+       * 2. Check progress, if all completed, then:
+       * 2.1. Update progress status
+       * 2.2. Give reward
+       * 2.3. Update achievement count
+       */
+      await strapi.query('subtask').update({ id: request.subtask.id }, { status: 'completed' });
+      const progress = await strapi.query('progress').findOne({ id: request.subtask.progress });
+      const progressIsComplete =
+        progress.subtasks.filter((subtask) => subtask.status !== 'completed').length === 0;
+
+      if (progressIsComplete) {
+        await strapi.query('progress').update({ id: progress.id }, { status: 'completed' });
+        const promotion = await strapi.query('promotion').findOne({ id: progress.id });
+        const couponDescription = promotion.coupon;
+        await strapi.query('coupon').create({
+          user: progress.user.id,
+          status: 'available',
+          description: couponDescription,
+          restaurant: progress.promotion.restaurant,
+        });
+
+        await strapi.query('');
+      }
+
+      await strapi.query('request').update({ id: request.id }, { status: 'confirmed' });
+      ctx.response.status = 200;
+      ctx.response.body = { message: 'Verified.' };
+
+      return;
+    }
+    ctx.response.status = 500;
+    ctx.response.body = { message: 'Unexpected type: ' + request.type };
+  },
+
+  async reject(ctx) {
+    const { user } = ctx.state;
+    const { id } = ctx.params;
+
+    if (!user.role.name.toLowerCase().includes('restaurant')) {
+      ctx.response.status = 403;
+      ctx.response.body = {
+        message: 'Promotion participation is only for restaurant owners/stuff.',
+      };
+      return;
+    }
+
+    const request = await strapi.query('request').findOne({ id });
+    if (request === null) {
+      ctx.response.status = 404;
+      ctx.response.body = { message: 'Request not found.' };
+      return;
+    }
+
+    if (request.status === 'rejected') {
+      ctx.response.status = 304;
+      ctx.response.body = { message: 'Request already rejected.' };
+      return;
+    }
+
+    if (request.status === 'confirmed') {
+      ctx.response.status = 400;
+      ctx.response.body = { message: 'Request already verified.' };
+      return;
+    }
+
+    if (request.status !== 'pending') {
+      ctx.response.status = 500;
+      ctx.response.body = { message: 'Unexpected status: ' + request.status };
+      return;
+    }
+
+    await strapi.query('request').update({ id }, { status: 'rejected' });
+    ctx.response.status = 200;
+    ctx.response.body = { message: 'Rejected.' };
+  },
 };
