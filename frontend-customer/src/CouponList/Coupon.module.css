@@ -1,10 +1,10 @@
 .coupon {
-    border: black solid 3px;
+    border: black solid 2px;
     border-radius: 10px;
-    background: rgba(255, 174, 0, 0.3);
+    background: #FFD564;
     
     margin: 10px;
-    padding: 5px;
+    padding: 10px;
 
     display: flex;
     justify-content: space-between;
@@ -12,5 +12,5 @@
 }
 
 .description{
-    font-weight: bold;
+    font-weight: 600;
 }

@@ -1,0 +1,35 @@
+.promotion {
+    border-radius: 10px;
+    border: black solid 2px;
+    padding: 10px;
+    margin: 10px;
+
+    background-color: #ffd564;
+}
+
+.headline {
+    display: flex;
+    justify-content: space-between;
+}
+
+.status {
+    font-size: 15px;
+    color: #4caf50;
+}
+
+.promotion a {
+    color: black;
+    text-decoration: none;
+}
+
+.title {
+    font-weight: 600;
+}
+
+.time {
+    font-size: 12px;
+}
+
+.restaurant {
+    font-size: 15px;
+}

@@ -18,8 +18,7 @@ function CouponList() {
             Authorization: 'Bearer ' + localStorage.getItem('Authorization-Token'),
           },
         });
-        console.log(await user.data.id)
-        return await axios.get('/coupons?user.id=' + await user.data.id,
+        return await axios.get('/coupons?user.id=' + await user.data.id
         ).then(response => {
             console.log(response.data);
             return response.data;

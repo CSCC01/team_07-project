@@ -8,17 +8,29 @@ import { Redirect } from 'react-router-dom';
 
 export default class Home extends React.Component {
     state = {
-        promotionList: [],
+        promotions: [],
         progresses: []
     }
 
-    componentDidMount(){
-        getPromotions().then((promotionList)=>{
-            this.setState({
-                promotionList: promotionList,
-            });  
-        });
-        // console.log("AAAA"+participateInPromotion(5));
+    async componentDidMount(){
+        const promotions = await getPromotions();
+        const progresses = await getUserProgresses();
+        this.setState({
+            promotions: promotions,
+            progresses: progresses,
+        })
+    }
+
+    get promotionList() {
+        if (this.state.promotions.length !== 0){
+            return <PromotionList 
+                content={this.state.promotions} 
+                progresses={this.state.progresses} 
+                className="promotion-list"
+                />;
+        } else {
+            return <div>Sorry, We do not have any promotions to show now.</div>;
+        }
     }
     
     render(){
@@ -29,12 +41,6 @@ export default class Home extends React.Component {
             return <Redirect to="/coupon-validation" />;
         }
 
-        let promotionList;
-        if (this.state.promotionList.length !== 0){
-            promotionList = <PromotionList content={this.state.promotionList} progress={this.state.progresses} className="promotion-list"/>;
-        } else {
-            promotionList = <div>Sorry, We do not have any promotions to show now.</div>
-        }
         return (
             <>
                 <div className='title-bar'>
@@ -45,7 +51,7 @@ export default class Home extends React.Component {
                         Promotions Avaliable to You:
                     </Typography>
                     <hr />
-                    {promotionList}
+                    {this.promotionList}
                 </div>
             </>
         );
@@ -55,12 +61,17 @@ export default class Home extends React.Component {
 export const getPromotions = async () => {
     const currentTime = new Date();
     return await axios.get('/promotions').then((response) =>
-        response.data.filter(promotion => new Date(promotion.expired_date) > currentTime)
-    ).catch(() => []);
+        response.data.filter(promotion => new Date(promotion.expired_date) > currentTime))
+    .catch(() => []);
 };
 
-// export const participateInPromotion = async (promotionId) => {
-//     return await axios.get('/promotions/'+ promotionId+ '/progress').then(response => {
-//         console.log(response);
-//     }).catch(() => []);
-// };
+export const getUserProgresses = async () => {
+    const user = await axios.get('/users/me', {
+        headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('Authorization-Token'),
+      },
+    });
+    return await axios.get('/progresses?user.id=' + await user.data.id)
+    .then((reponse) => reponse.data)
+    .catch(() => []);
+}
