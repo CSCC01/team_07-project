@@ -33,7 +33,7 @@
     },
     "progresses": {
       "via": "promotion",
-      "collection": "process"
+      "collection": "progress"
     },
     "coupon": {
       "type": "richtext"

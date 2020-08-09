@@ -609,9 +609,6 @@
                 "role": {
                   "type": "string"
                 },
-                "restaurant": {
-                  "type": "string"
-                },
                 "progresses": {
                   "type": "array",
                   "items": {
@@ -628,6 +625,12 @@
                   }
                 },
                 "coupons": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "requests": {
                   "type": "array",
                   "items": {
                     "type": "string"

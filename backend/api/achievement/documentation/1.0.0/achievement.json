@@ -556,7 +556,7 @@
               "role": {
                 "type": "string"
               },
-              "processes": {
+              "progresses": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -572,6 +572,12 @@
                 }
               },
               "coupons": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "requests": {
                 "type": "array",
                 "items": {
                   "type": "string"

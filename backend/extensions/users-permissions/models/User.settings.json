@@ -53,9 +53,9 @@
       "plugin": "users-permissions",
       "configurable": false
     },
-    "processes": {
+    "progresses": {
       "via": "user",
-      "collection": "process"
+      "collection": "progress"
     },
     "restaurant": {
       "via": "users",
@@ -68,6 +68,10 @@
     "coupons": {
       "via": "user",
       "collection": "coupon"
+    },
+    "requests": {
+      "via": "user",
+      "collection": "request"
     }
   }
 }

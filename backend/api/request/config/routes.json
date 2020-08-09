@@ -10,14 +10,6 @@
     },
     {
       "method": "GET",
-      "path": "/requests/count",
-      "handler": "request.count",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
       "path": "/requests/:id",
       "handler": "request.findOne",
       "config": {
@@ -33,11 +25,21 @@
       }
     },
     {
-      "method": "PUT",
-      "path": "/requests/:id",
-      "handler": "request.update",
+      "method": "POST",
+      "path": "/requests/:id/verify",
+      "handler": "request.verify",
       "config": {
-        "policies": []
+        "policies": [],
+        "description": "Verify a request."
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/requests/:id/reject",
+      "handler": "request.reject",
+      "config": {
+        "policies": [],
+        "description": "Reject a request."
       }
     },
     {

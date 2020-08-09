@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "progresses",
+  "info": {
+    "name": "Progress"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "progresses"
+    },
+    "promotion": {
+      "model": "promotion",
+      "via": "progresses"
+    },
+    "subtasks": {
+      "via": "progress",
+      "collection": "subtask"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "ongoing",
+        "completed"
+      ]
+    }
+  }
+}

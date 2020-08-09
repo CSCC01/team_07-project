@@ -561,9 +561,6 @@
                 "role": {
                   "type": "string"
                 },
-                "restaurant": {
-                  "type": "string"
-                },
                 "progresses": {
                   "type": "array",
                   "items": {
@@ -580,6 +577,12 @@
                   }
                 },
                 "coupons": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "requests": {
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -655,6 +658,9 @@
                 },
                 "type": {
                   "type": "string"
+                },
+                "user": {
+                  "type": "string"
                 }
               }
             }
@@ -710,40 +716,6 @@
                   }
                 },
                 "status": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "progresses": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "time": {
-                  "type": "integer"
-                },
-                "promotion_title": {
-                  "type": "string"
-                },
-                "subtask_content": {
-                  "type": "string"
-                },
-                "code": {
-                  "type": "integer"
-                },
-                "status": {
-                  "type": "string"
-                },
-                "restaurant": {
-                  "type": "string"
-                },
-                "user": {
                   "type": "string"
                 }
               }
