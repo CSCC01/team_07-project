@@ -53,7 +53,8 @@
       "path": "/promotions/:id/progress",
       "handler": "promotion.findProgress",
       "config": {
-        "policies": []
+        "policies": [],
+        "description": "Get progress of current user for a promotion"
       }
     },
     {
@@ -61,7 +62,8 @@
       "path": "/promotions/:id/participate",
       "handler": "promotion.participate",
       "config": {
-        "policies": []
+        "policies": [],
+        "description": "Start participating in a promotion"
       }
     }
   ]

@@ -514,7 +514,7 @@
     "/promotions/{id}/progress": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Get progress of current user for a promotion",
         "responses": {
           "200": {
             "description": "response",
@@ -582,7 +582,7 @@
     "/promotions/{id}/participate": {
       "post": {
         "deprecated": false,
-        "description": "Create a new record",
+        "description": "Start participating in a promotion",
         "responses": {
           "200": {
             "description": "response",

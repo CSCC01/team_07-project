@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "08/07/2020 7:52:38 PM"
+    "x-generation-date": "08/08/2020 10:56:15 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -1581,7 +1581,7 @@
     "/promotions/{id}/progress": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Get progress of current user for a promotion",
         "responses": {
           "200": {
             "description": "response",
@@ -1649,7 +1649,7 @@
     "/promotions/{id}/participate": {
       "post": {
         "deprecated": false,
-        "description": "Create a new record",
+        "description": "Start participating in a promotion",
         "responses": {
           "200": {
             "description": "response",
