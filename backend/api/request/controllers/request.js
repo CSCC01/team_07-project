@@ -169,16 +169,33 @@ module.exports = {
 
       if (progressIsComplete) {
         await strapi.query('progress').update({ id: progress.id }, { status: 'completed' });
-        const promotion = await strapi.query('promotion').findOne({ id: progress.id });
-        const couponDescription = promotion.coupon;
+        const promotion = await strapi.query('promotion').findOne({ id: progress.promotion.id });
         await strapi.query('coupon').create({
           user: progress.user.id,
           status: 'available',
-          description: couponDescription,
-          restaurant: progress.promotion.restaurant,
+          description: promotion.coupon,
+          restaurant: promotion.restaurant,
         });
 
-        await strapi.query('');
+        const existingAchievement = await strapi.query('achievement').findOne({
+          user: progress.user.id,
+          restaurant: promotion.restaurant,
+        });
+
+        if (existingAchievement === null) {
+          await strapi.query('achievement').create({
+            user: progress.user.id,
+            restaurant: promotion.restaurant,
+            complete_number: 1,
+          });
+        } else {
+          await strapi
+            .query('achievement')
+            .update(
+              { id: existingAchievement.id },
+              { complete_number: existingAchievement.complete_number + 1 },
+            );
+        }
       }
 
       await strapi.query('request').update({ id: request.id }, { status: 'confirmed' });
