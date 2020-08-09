@@ -9,6 +9,7 @@ import { Redirect } from 'react-router-dom';
 export default class Home extends React.Component {
     state = {
         promotionList: [],
+        progresses: []
     }
 
     componentDidMount(){
@@ -17,6 +18,7 @@ export default class Home extends React.Component {
                 promotionList: promotionList,
             });  
         });
+        // console.log("AAAA"+participateInPromotion(5));
     }
     
     render(){
@@ -29,7 +31,7 @@ export default class Home extends React.Component {
 
         let promotionList;
         if (this.state.promotionList.length !== 0){
-            promotionList = <PromotionList content={this.state.promotionList} className="promotion-list"/>;
+            promotionList = <PromotionList content={this.state.promotionList} progress={this.state.progresses} className="promotion-list"/>;
         } else {
             promotionList = <div>Sorry, We do not have any promotions to show now.</div>
         }
@@ -56,3 +58,9 @@ export const getPromotions = async () => {
         response.data.filter(promotion => new Date(promotion.expired_date) > currentTime)
     ).catch(() => []);
 };
+
+// export const participateInPromotion = async (promotionId) => {
+//     return await axios.get('/promotions/'+ promotionId+ '/progress').then(response => {
+//         console.log(response);
+//     }).catch(() => []);
+// };
