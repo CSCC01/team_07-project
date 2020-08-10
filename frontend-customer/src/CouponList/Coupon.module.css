@@ -1,0 +1,16 @@
+.coupon {
+    border: black solid 2px;
+    border-radius: 10px;
+    background: #FFD564;
+    
+    margin: 10px;
+    padding: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.description{
+    font-weight: 600;
+}

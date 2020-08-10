@@ -39,25 +39,43 @@ it("displays promotion description", () => {
 it("gets promotion details from the backend", async () => {
   let output = await getPromotionDetails(5);
   const expected = {
-    id: 5,
-    title: "promotion 1",
-    description:
-      "Buy three Nice-Creams from our store during the November, you will get one punch card for free!",
-    starting_date: "2020-10-31T00:00",
-    expired_date: "2020-12-01T00:00",
-    subtask: ["Buy 1 Nice-Cream.", "Buy 1 Nice-Cream.", "Buy 1 Nice-Cream."],
-    image: ["/uploads/demo_15744283fe.png", "/uploads/demo2_f32b8cc16b.png"],
-    restaurant: {
-      id: 1,
-      name: "Restaurant 1",
-      location: { lat: 43.7866, lng: -79.2755 },
-      created_at: "2020-07-20T01:59:07.506Z",
-      updated_at: "2020-08-08T11:02:54.192Z",
+    "id": 5,
+    "title": "promotion 1",
+    "description": "Buy three Nice-Creams from our store during the November, you will get one punch card for free!",
+    "starting_date": "2020-10-31T00:00",
+    "expired_date": "2020-12-01T00:00",
+    "subtask": [
+        "Buy 1 Nice-Cream.",
+        "Buy 1 Nice-Cream.",
+        "Buy 1 Nice-Cream."
+    ],
+    "image": [
+        "/uploads/demo_15744283fe.png",
+        "/uploads/demo2_f32b8cc16b.png"
+    ],
+    "restaurant": {
+        "id": 1,
+        "name": "Restaurant 1",
+        "location": {
+            "lat": 43.7866,
+            "lng": -79.2755
+        },
+        "created_at": "2020-07-20T01:59:07.506Z",
+        "updated_at": "2020-08-08T11:02:54.192Z"
     },
-    coupon: null,
-    created_at: "2020-08-03T15:15:14.698Z",
-    updated_at: "2020-08-08T11:03:09.651Z",
-    progresses: [],
+    "coupon": null,
+    "created_at": "2020-08-03T15:15:14.698Z",
+    "updated_at": "2020-08-10T06:38:39.326Z",
+    "progresses": [
+        {
+            "id": 1,
+            "user": 6,
+            "promotion": 5,
+            "status": "ongoing",
+            "created_at": "2020-08-10T06:39:44.501Z",
+            "updated_at": "2020-08-10T06:40:29.901Z"
+        }
+     ]
   };
   expect(output).toEqual(expected);
 });

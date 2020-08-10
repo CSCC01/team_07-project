@@ -1,0 +1,9 @@
+.available {
+    font-weight: 600;
+    color: #4caf50;
+}
+
+.used {
+    font-weight: 600;
+    color: #9e9e9e;
+}
