@@ -1,16 +1,39 @@
-.coupon {
-    border: black solid 2px;
-    border-radius: 10px;
-    background: #FFD564;
-    
-    margin: 10px;
-    padding: 10px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.headline {
+    text-align: center;
 }
 
-.description{
-    font-weight: 600;
+.mainSection{
+    margin: 10px 0px;
+}
+
+.container {
+    margin: 10px 10% 30px 10%;
+    text-align: center;
+    position: relative;
+}
+
+.coupon {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 1px #eee;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-bottom: 20px;
+    border: #000 2px solid;
+}
+
+.contentWrapper{
+    margin: 0px 20px;
+}
+
+.text {
+    margin: 5px 0px;
+    font-size: 1em;
+    text-align: left;
+}
+
+.textHighlight {
+    color: #f50057;
+    font-size: 1.2em;
+    margin: 0px;
 }

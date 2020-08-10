@@ -43,10 +43,9 @@ export default class Home extends React.Component {
                     <TitleBar title='Promotion'/>
                 </div>
                 <div className='mainSection'>
-                    <Typography component="h2" className='headline'>
+                    <Typography component="h2" className='headline' style={{fontSize: '1.2rem'}}>
                         Promotions Avaliable to You:
                     </Typography>
-                    <hr />
                     {this.promotionList}
                 </div>
             </>

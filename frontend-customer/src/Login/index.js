@@ -100,7 +100,7 @@ function Login() {
             <Typography
               variant="h4"
               align="center"
-              style={{ fontWeight: "bold" }}
+              style={{ fontWeight: 'bold' }}
             >
               Login
             </Typography>
@@ -158,6 +158,11 @@ function Login() {
                   </Link>
                 )}
               </Box>
+              <div style={{marginTop: 10, textAlign: 'center'}}>
+                  <Link variant="body2" href="/register">
+                    Do not have an account? Click here to sign up.
+                  </Link>
+                </div>
             </form>
           </div>
         </Container>

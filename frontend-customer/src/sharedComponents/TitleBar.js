@@ -44,9 +44,9 @@ export default function TitleBar(props){
       }, []);
 
     return(
-        <>
+        <div>
         {/* The navgation bar */}
-        <AppBar position="fixed" style={{ backgroundColor: '#0B345C' }}>
+        <AppBar position="sticky" style={{ backgroundColor: '#0B345C' }}>
             <Toolbar>
                 <IconButton
                     style={{ color: '#fff' }}
@@ -75,18 +75,24 @@ export default function TitleBar(props){
                 {/* If ths user is a customer */}
                 {role.localeCompare("Customer") === 0 && (
                 <>
-                    <ListItem button component={Link} to="/">
-                        <ListItemIcon><LoyaltyIcon fontSize="small" /></ListItemIcon>
-                        <ListItemText primary="Promotion" />
-                    </ListItem>
-                    <ListItem button component={Link} to="/coupon-List">
-                        <ListItemIcon><AccountBalanceWalletIcon fontSize="small" /></ListItemIcon>
-                        <ListItemText primary="My Coupon" />
-                    </ListItem>
-                    <ListItem button component={Link} to="/explore">
-                        <ListItemIcon><MapIcon fontSize="small" /></ListItemIcon>
-                        <ListItemText primary="Explore" />
-                    </ListItem>
+                    <div style={{width: 'max-content', marginLeft: 40, marginBottom: 5}}>
+                        <ListItem button component={Link} to="/" style={{textAlign: 'center', width: 'max-content'}}>
+                            <ListItemIcon style={{color: '#fff', width: 'max-content'}}><LoyaltyIcon fontSize="large" /></ListItemIcon>
+                            <ListItemText style={{color: '#fff', width: 'max-content'}}><p style={{fontSize: "1.2em", margin: 0}}>Promotion</p></ListItemText>
+                        </ListItem>
+                    </div>
+                    <div style={{width: 'max-content', marginLeft: 40, marginBottom: 5}}>
+                        <ListItem button component={Link} to="/coupon-List" style={{textAlign: 'center', width: 'max-content'}}>
+                            <ListItemIcon style={{color: '#fff', width: 'max-content'}}><AccountBalanceWalletIcon fontSize="large" /></ListItemIcon>
+                            <ListItemText style={{color: '#fff', width: 'max-content'}}><p style={{fontSize: "1.2em", margin: 0}}>My Coupon</p></ListItemText>
+                        </ListItem>
+                    </div>
+                    <div style={{width: 'max-content', marginLeft: 40, marginBottom: 5}}>
+                        <ListItem button component={Link} to="/explore" style={{textAlign: 'center', width: 'max-content'}}>
+                            <ListItemIcon style={{color: '#fff', width: 'max-content'}}><MapIcon fontSize="large" /></ListItemIcon>
+                            <ListItemText style={{color: '#fff', width: 'max-content'}}><p style={{fontSize: "1.2em", margin: 0}}>Explore</p></ListItemText>
+                        </ListItem>
+                    </div>
                 </>
                 )}
                 {/* If ths user is a restaurant staff */}
@@ -103,13 +109,13 @@ export default function TitleBar(props){
                 <div style={{width: 'max-content', marginLeft: 40, marginTop: 5}}>
                     <ListItem button onClick={logout} style={{textAlign: 'center', width: 'max-content'}}>
                             <ListItemIcon style={{color: '#fff', width: 'max-content'}}><ExitToAppIcon fontSize="large" /></ListItemIcon>
-                            <ListItemText style={{color: '#fff', width: 'max-content', fontSize: "1.5em", fontWeight: '600'}}><p style={{fontSize: "1.2em", margin: 0}}>Log Out</p></ListItemText>
+                            <ListItemText style={{color: '#fff', width: 'max-content', fontSize: "1.5em", fontWeight: '600'}}><p style={{fontSize: "1.2em", margin: 0}}>Logout</p></ListItemText>
                     </ListItem>
                 </div>
             </List>
             </div>
             </Drawer>
         </React.Fragment>
-        </>
+        </div>
     );
 }

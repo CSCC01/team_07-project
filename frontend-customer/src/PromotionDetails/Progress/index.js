@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretRight, faCheck, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import "./index.css";
 
 export default class Progress extends React.Component {
@@ -10,6 +12,7 @@ export default class Progress extends React.Component {
       participated: false,
       jwtToken: localStorage.getItem("Authorization-Token"),
       progress: null,
+      code: {}, // store the verification code for each subtask
     };
   }
 
@@ -25,28 +28,36 @@ export default class Progress extends React.Component {
   }
 
   render() {
+    // if user does not participated in this promotion
     let subtasks;
     if (this.props.content && !this.state.participated)
-      subtasks = this.props.content.map((subtask) => <div>{subtask}</div>);
+      subtasks = this.props.content.map((subtask) => 
+      <div className="progress-content progress-margin-left">
+        <FontAwesomeIcon icon={faCaretRight} style={{fontSize: '1.5rem', marginRight: 10}}/>
+        <p style={{margin: 'auto', marginLeft: 0}}>{subtask}</p>
+      </div>);
 
+    // if user participates in this promotion
     let subtaskValidate;
     if (this.state.participated && this.state.progress.subtasks) {
       subtaskValidate = this.state.progress.subtasks.map((subtask) => (
-        <div className="item">
-          <div>
-            {subtask.description}
-            {subtask.status === "ongoing" ? (
-              <div style={{ color: "red" }}>ONGOING</div>
-            ) : (
-              <div style={{ color: "green" }}>COMPLETED</div>
-            )}
-          </div>
-
-          <div>
-            <Button
-              style={{ justifyContent: "right" }}
+        <>
+        <div className="progress-content progress-margin-left">
+          <FontAwesomeIcon icon={subtask.status === "ongoing" ? faSpinner : faCheck} style={{fontSize: '1.5rem', marginRight: 10}}/>
+          <p style={{margin: 'auto', marginLeft: 0}}>{subtask.description}</p>
+        </div>
+        <div style={{ marginLeft: 30, textAlign: 'end' }}>
+          {this.state.code[subtask.index] !== undefined && 
+          <p style={{marginBottom: 10, marginTop: 10}}>
+            Verification Code: #{this.state.code[subtask.index]}
+          </p>
+          }
+          <Button
+              style={subtask.status === "ongoing"
+                ? { border: '#000 2px solid', backgroundColor: '#FFD564'}
+                : { border: '#9e9e9e 2px solid' } }
               variant="outlined"
-              color="primary"
+              color="default"
               size="small"
               disabled={subtask.status === "ongoing" ? false : true}
               onClick={async () => {
@@ -55,25 +66,31 @@ export default class Progress extends React.Component {
                   subtask.index,
                   this.state.jwtToken
                 ); alert("Confirmation request sent! Your request ID is: #" + id);
+                let code = this.state.code;
+                code[subtask.index] = id;
+                this.setState({code});
               }}
             >
               {subtask.status === "ongoing" ? "validate" : "validated"}
-            </Button>
-          </div>
+          </Button>
         </div>
+        </>
       ));
     }
 
     return (
       <div onLoad={getProgress(this.props.id, this.state.jwtToken)}>
-        <div>Current Progress:</div>
+        <div className="progress-title">Current Progress:</div>
         {subtasks}
         <div className="container">{subtaskValidate}</div>
         <br></br>
         <div style={{ textAlign: "center" }}>
           <Button
-            variant="contained"
-            color="primary"
+            variant="outlined"
+            color="default"
+            style={this.state.participated
+              ? { border: '#9e9e9e 2px solid', marginBottom: 20 }
+              :{ border: '#000 2px solid', backgroundColor: '#FFD564', marginBottom: 20} }
             disabled={this.state.participated}
             onClick={async () => {
               await postProgress(this.props.id, this.state.jwtToken);

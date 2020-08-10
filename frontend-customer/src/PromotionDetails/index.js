@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import { Typography, Paper } from '@material-ui/core';
 import Progress from './Progress';
-import ParticipateButton from './ParticipateButton';
 import TitleBar from '../sharedComponents/TitleBar';
 
 import "./index.css";
@@ -25,7 +23,7 @@ export default function PromotionDetails(props) {
           <Carousel renderThumbs={()=>{}}>
             {data.image.map(url => 
             (<div className="imageCutter">
-              <img src={axios.defaults.baseURL + url} alt="promotion img" />
+              <img src={axios.defaults.baseURL + url} alt="promotion img" style={{width: '100vw', height: '100vw',objectFit: 'cover'}}/>
             </div>))}
           </Carousel>;
         setImages(carousel);
@@ -50,17 +48,12 @@ export default function PromotionDetails(props) {
       basicInfo = (
         <>
           <div>
-            <Typography variant="h4" component="h1" className="title">
-              {data.title}
-            </Typography>
-            <Typography variant="h6" component="h2" className="restaurant">
-              {data.restaurant.name}
-            </Typography>
-            <Typography>
-              {"Closing Time: " + new Date(data.expired_date).toLocaleString()}
-            </Typography>
+            <p className="promotion-title">{data.title}</p>
+            <p className="restaurant-name">{data.restaurant.name}</p>
+            <p className="title">Closing Time: <span className="content">{new Date(data.expired_date).toLocaleString()}</span></p>
+            <div className="title">Description: </div>
+            <div className="content margin-left">{data.description}</div>
           </div>
-          <Paper className="description">{data.description}</Paper>
         </>
       );
     }

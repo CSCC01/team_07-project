@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import TitleBar from '../sharedComponents/TitleBar';
 import Coupon from './Coupon'
+import styles from './Coupon.module.css';
+import Typography from '@material-ui/core/Typography';
 
 function CouponList() {
     const [coupons, setCoupons] = useState([]);
@@ -12,6 +14,7 @@ function CouponList() {
         });
       }, []);
 
+    // Get coupons that the current user gained
     const getCoupons = async () => {
         const user = await axios.get('/users/me', {
             headers: {
@@ -31,6 +34,7 @@ function CouponList() {
         }).catch(() => []);
     };
 
+    // Redirection
     if (localStorage.getItem('Authorization-Token') === null) {
         return <Redirect to="/login" />;
     }
@@ -40,10 +44,20 @@ function CouponList() {
 
     return (
         <>
+            {/* TitleBar */}
             <div data-testid='title'>
                 <TitleBar title='My coupon'/>
             </div>
-            {coupons}
+            {/* Header */}
+            <div className={styles.mainSection}>
+                <Typography component="h2" className={styles.headline} style={{fontSize: '1.2rem'}}>
+                    Coupons Avaliable to You:
+                </Typography>
+            </div>
+            {/* Coupons */}
+            <div className={styles.container}>
+                {coupons}
+            </div>
         </>
     );
 }

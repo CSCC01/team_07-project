@@ -1,36 +1,53 @@
-.promotion {
-    border-radius: 10px;
-    border: black solid 2px;
-    padding: 10px;
-    margin: 10px;
-
-    background-color: #ffd564;
+.container {
+    margin: 10px 7% 30px 13%;
+    text-align: center;
+    position: relative;
 }
 
-.headline {
-    display: flex;
-    justify-content: space-between;
+.promotion {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 1px #eee;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-bottom: 20px;
+    border: #000 2px solid;
+}
+
+.statusRowWrapper {
+    margin: 10px 20px 10px 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.statusWrapper {
+    margin-top: 0px;
+    position: relative;
+    right: 50px;
+    background-color: #FFD564;
+    border-radius: 20px;
+    border: #000 2px solid;
 }
 
 .status {
-    font-size: 15px;
-    font-weight: bold;
-    color: #4caf50;
+    margin: 5px 20px;
+    font-size: 1.2em;
+    text-align: center;
+    color: #000;
 }
 
-.promotion a {
-    color: black;
-    text-decoration: none;
+.contentWrapper{
+    margin: 0px 20px;
 }
 
-.title {
-    font-weight: 600;
+.text {
+    margin: 5px 0px;
+    font-size: 1em;
+    text-align: left;
 }
 
-.time {
-    font-size: 12px;
-}
-
-.restaurant {
-    font-size: 15px;
+.textHighlight {
+    color: #f50057;
+    font-size: 1.2em;
+    margin: 0px;
 }

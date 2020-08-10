@@ -1,14 +1,18 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
-import styles from './UseCouponButton.module.css';
 
 export default function UseCouponButton(props) {
-    const buttonContent = props.isAvailable ? <div className={styles.available}>use it</div> : <div className={styles.used}>used</div>;
     return (
         <>
-            <Button>
-                {buttonContent}
-            </Button>
+            <Button 
+                variant="outlined" 
+                color="default" 
+                disabled={!props.isAvailable ? true : false}
+                style={!props.isAvailable
+                        ? { border: '#9e9e9e 2px solid' }
+                        :{ border: '#000 2px solid', backgroundColor: '#FFD564'} }>
+                {props.isAvailable ? "use it" : "used"}
+              </Button>
         </>
     );
 }
