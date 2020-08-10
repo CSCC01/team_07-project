@@ -14,20 +14,24 @@ export default class Progress extends React.Component {
   }
 
   async componentDidMount() {
-    this.setState({
-      progress: await getProgress(this.props.id, this.state.jwtToken),
-    }, () => {
-      if (this.state.progress.subtasks) {
-        this.setState({ participated: true });
+    this.setState(
+      {
+        progress: await getProgress(this.props.id, this.state.jwtToken),
+      },
+      () => {
+        if (this.state.progress.subtasks) {
+          this.setState({ participated: true });
+        }
       }
-    });
-    
+    );
   }
 
   render() {
     let subtasks;
     if (this.props.content && !this.state.participated)
-      subtasks = this.props.content.map((subtask) => <div>{subtask}</div>);
+      subtasks = this.props.content.map((subtask, index) => (
+        <div key={index}>{subtask}</div>
+      ));
 
     let subtaskValidate;
     if (this.state.participated && this.state.progress.subtasks) {
@@ -44,7 +48,6 @@ export default class Progress extends React.Component {
 
           <div>
             <Button
-              style={{ justifyContent: "right" }}
               variant="outlined"
               color="primary"
               size="small"
@@ -54,7 +57,8 @@ export default class Progress extends React.Component {
                   this.props.id,
                   subtask.index,
                   this.state.jwtToken
-                ); alert("Confirmation request sent! Your request ID is: #" + id);
+                );
+                alert("Confirmation request sent! Your request ID is: #" + id);
               }}
             >
               {subtask.status === "ongoing" ? "validate" : "validated"}
@@ -79,7 +83,7 @@ export default class Progress extends React.Component {
               await postProgress(this.props.id, this.state.jwtToken);
               this.setState({
                 progress: await getProgress(this.props.id, this.state.jwtToken),
-                participated: true
+                participated: true,
               });
             }}
           >
