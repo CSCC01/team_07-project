@@ -13,14 +13,6 @@ export default function UseCouponButton(props) {
     
     const sendCouponRequest = () => {
         if (props.coupon.status === "available"){
-            // axios.post("/requests", {
-            //     "type": "coupon",
-            //     "coupon_id": props.coupon.id,
-            // }, {
-            //     header: {
-            //         Authorization: 'Bearer ' + localStorage.getItem('Authorization-Token'),
-            //     },
-            // });
             axios({
                 method: "POST",
                 url: "requests",

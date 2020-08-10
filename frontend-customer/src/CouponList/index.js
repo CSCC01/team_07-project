@@ -39,9 +39,9 @@ function CouponList() {
 
     return (
         <>
-            {/* <div data-testid='title'>
+            <div data-testid='title'>
                 <TitleBar title='My coupon'/>
-            </div> */}
+            </div>
             {coupons}
         </>
     );
