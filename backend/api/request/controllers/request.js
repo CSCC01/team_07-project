@@ -10,11 +10,7 @@ module.exports = {
     const { user } = ctx.state;
 
     if (!user.role.name.toLowerCase().includes('restaurant')) {
-      ctx.response.status = 403;
-      ctx.response.body = {
-        message: 'Promotion participation is only for restaurant owners/stuff.',
-      };
-      return;
+      ctx.throw(403, 'Promotion participation is only for restaurant owners/stuff.');
     }
 
     let requests = await strapi.query('request').find({
@@ -38,32 +34,18 @@ module.exports = {
     const { user } = ctx.state;
     const { body: requestBody } = ctx.request;
 
-    if (user.role.name !== 'Customer') {
-      ctx.response.status = 403;
-      ctx.response.body = { message: 'Request creation is only for customer.' };
-      return;
-    }
+    ctx.assert(user.role.name === 'Customer', 403, 'Request creation is only for customer.');
+
     if (!['coupon', 'subtask'].includes(requestBody.type)) {
-      ctx.response.status = 400;
-      ctx.response.body = { message: 'Incorrect or missing field: type.' };
-      return;
+      ctx.throw(400, 'Incorrect or missing field: type.');
     }
 
     let resultRequest;
 
     if (requestBody.type === 'coupon') {
       const coupon = await strapi.query('coupon').findOne({ id: requestBody.coupon_id });
-      if (coupon === null) {
-        ctx.response.status = 404;
-        ctx.response.body = { message: 'Coupon not found.' };
-        return;
-      }
-
-      if (coupon.status !== 'available') {
-        ctx.response.status = 400;
-        ctx.response.body = { message: 'Coupon is not available for use.' };
-        return;
-      }
+      ctx.assert(coupon !== null, 404, 'Coupon not found.');
+      ctx.assert(coupon.status === 'available', 400, 'Coupon is not available for use.');
 
       const newRequestData = {
         user: user.id,
@@ -89,12 +71,7 @@ module.exports = {
           (subtask) => subtask.index === requestBody.subtask_index,
         );
         if (subtask.length > 1) {
-          ctx.response.status = 500;
-          ctx.response.body = {
-            message: 'Subtasks is longer than 1',
-            data: subtask,
-          };
-          return;
+          ctx.throw(500, 'Subtasks is longer than 1', { data: subtask });
         }
         subtask = subtask.length > 0 ? subtask[0] : null;
       }
@@ -129,36 +106,13 @@ module.exports = {
     const { id } = ctx.params;
 
     if (!user.role.name.toLowerCase().includes('restaurant')) {
-      ctx.response.status = 403;
-      ctx.response.body = {
-        message: 'Promotion participation is only for restaurant owners/stuff.',
-      };
-      return;
+      ctx.throw(403, 'Promotion participation is only for restaurant owners/stuff.');
     }
     const request = await strapi.query('request').findOne({ id });
-    if (request === null) {
-      ctx.response.status = 404;
-      ctx.response.body = { message: 'Request not found.' };
-      return;
-    }
-
-    if (request.status === 'confirmed') {
-      ctx.response.status = 304;
-      ctx.response.body = { message: 'Request already confirmed.' };
-      return;
-    }
-
-    if (request.status === 'rejected') {
-      ctx.response.status = 400;
-      ctx.response.body = { message: 'Request already rejected.' };
-      return;
-    }
-
-    if (request.status !== 'pending') {
-      ctx.response.status = 500;
-      ctx.response.body = { message: 'Unexpected status: ' + request.status };
-      return;
-    }
+    ctx.assert(request !== null, 404, 'Request not found.');
+    ctx.assert(request.status !== 'confirmed', 304, 'Request already confirmed.');
+    ctx.assert(request.status !== 'rejected', 400, 'Request already rejected.');
+    ctx.assert(request.status === 'pending', 500, 'Unexpected status' + request.status);
 
     if (request.type === 'coupon') {
       /**
@@ -221,8 +175,7 @@ module.exports = {
 
       return;
     }
-    ctx.response.status = 500;
-    ctx.response.body = { message: 'Unexpected type: ' + request.type };
+    ctx.throw(500, 'Unexpected type: ' + request.type);
   },
 
   async reject(ctx) {
@@ -230,37 +183,14 @@ module.exports = {
     const { id } = ctx.params;
 
     if (!user.role.name.toLowerCase().includes('restaurant')) {
-      ctx.response.status = 403;
-      ctx.response.body = {
-        message: 'Promotion participation is only for restaurant owners/stuff.',
-      };
-      return;
+      ctx.throw(403, 'Promotion participation is only for restaurant owners/stuff.');
     }
 
     const request = await strapi.query('request').findOne({ id });
-    if (request === null) {
-      ctx.response.status = 404;
-      ctx.response.body = { message: 'Request not found.' };
-      return;
-    }
-
-    if (request.status === 'rejected') {
-      ctx.response.status = 304;
-      ctx.response.body = { message: 'Request already rejected.' };
-      return;
-    }
-
-    if (request.status === 'confirmed') {
-      ctx.response.status = 400;
-      ctx.response.body = { message: 'Request already verified.' };
-      return;
-    }
-
-    if (request.status !== 'pending') {
-      ctx.response.status = 500;
-      ctx.response.body = { message: 'Unexpected status: ' + request.status };
-      return;
-    }
+    ctx.assert(request !== null, 404, 'Request not found.');
+    ctx.assert(request.status !== 'rejected', 304, 'Request already rejected.');
+    ctx.assert(request.status !== 'confirmed', 400, 'Request already confirmed.');
+    ctx.assert(request.status === 'pending', 500, 'Unexpected status' + request.status);
 
     await strapi.query('request').update({ id }, { status: 'rejected' });
     ctx.response.status = 200;

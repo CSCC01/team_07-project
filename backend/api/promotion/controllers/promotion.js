@@ -11,24 +11,19 @@ module.exports = {
     const user = ctx.state.user;
 
     if (user.role.name !== 'Customer') {
-      ctx.response.status = 403;
-      ctx.response.body = { message: 'Promotion participation is only for customers.' };
-      return;
+      ctx.throw(403, 'Promotion participation is only for customers.');
     }
 
     const promotionProgresses = await strapi
       .query('progress')
       .find({ user: user.id, promotion: promotionId });
 
-    if (promotionProgresses.length === 0) {
-      ctx.response.status = 404;
-      ctx.response.body = { message: 'No progress exists.' };
-      return;
-    }
-
-    if (promotionProgresses.length > 1) {
-      console.warn('Found multiple progresses for one promotion.');
-    }
+    ctx.assert(promotionProgresses.length > 0, 404, 'No progress exists.');
+    ctx.assert(
+      promotionProgresses.length === 1,
+      500,
+      'Found multiple progresses for one promotion.',
+    );
 
     return promotionProgresses[0];
   },
@@ -38,29 +33,15 @@ module.exports = {
     const user = ctx.state.user;
 
     if (user.role.name !== 'Customer') {
-      ctx.response.status = 403;
-      ctx.response.body = { message: 'Promotion participation is only for customers.' };
-      return;
+      ctx.throw(403, 'Promotion participation is only for customers.');
     }
 
     const promotion = await strapi.query('promotion').findOne({ id });
-    if (promotion === null) {
-      ctx.response.status = 404;
-      ctx.response.body = {
-        message: 'The specified promotion was not found.',
-      };
-      return;
-    }
+    ctx.assert(promotion !== null, 404, 'The specified promotion was not found.');
     const promotionProgresses = promotion.progresses.filter(
       (progress) => progress.user === user.id,
     );
-    if (promotionProgresses.length > 1) {
-      ctx.response.status = 304;
-      ctx.response.body = {
-        message: 'Already participating.',
-      };
-      return;
-    }
+    ctx.assert(promotionProgresses.length === 0, 304, 'Already participating.');
 
     const subtaskIds = [];
 
