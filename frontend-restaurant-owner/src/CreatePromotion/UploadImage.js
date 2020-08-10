@@ -17,10 +17,12 @@ class UploadImage extends Component {
     numOfImage: 0,
   };
 
+  // When the upload button is clicked
   imageButtonClick = () => {
     document.getElementById('image-input').click();
   };
 
+  // This function is called when the input file is changed
   imageInputChange = (event) => {
     if (this.state.numOfImage > 4) {
       alert("Can't upload. Exceed the maximum number of images.");
@@ -51,6 +53,7 @@ class UploadImage extends Component {
     }
   };
 
+  // Set the image that is currently showed and the arrow mode that is currently showed
   show = (url, show) => {
     this.setState({
       url: url,
@@ -58,12 +61,16 @@ class UploadImage extends Component {
     });
   };
 
+  // Update url to be the cropped image
   onEdit = (url) => {
     this.setState({
       url: url,
     });
   };
 
+  // This function is called when the delete button is pressed
+  // It clears the image input field, decreases the numOfImage by 1
+  // and updates url and show
   onDelete = (url, show) => {
     document.getElementById('image-input').value = '';
     let numOfImage = this.state.numOfImage;
@@ -81,7 +88,7 @@ class UploadImage extends Component {
           title="Image"
           popup="Duplicate images are acceptable. Image is uploaded before the current image. Upload at most 5 images."
         />
-
+        {/* Show the upload button, edit button, delete button, left arrow and right arrow based on different mode */}
         <div className="image-button-wrapper">
           {this.state.show === 0 ? (
             <div>
@@ -198,7 +205,9 @@ class UploadImage extends Component {
                   </div>
                 ) : null}
               </div>
+              {/* Image */}
               <img className="image" src={this.state.url} alt=""></img>
+              {/* The grey background layer */}
               <div className="background"></div>
             </div>
           )}

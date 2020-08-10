@@ -1,6 +1,5 @@
 import React from 'react';
 import { Dialog, DialogContent, DialogActions, Button } from '@material-ui/core';
-// import styles from './PresetTemplates.module.css';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Grid from '@material-ui/core/Grid';
@@ -11,6 +10,8 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 const useStyles = makeStyles({
   dialogActions: {
@@ -95,46 +96,6 @@ class PresetTemplates extends React.Component {
   render() {
     return (
       <div>
-        {/* <button
-          className={styles.btn}
-          onClick={() => {
-            this.toggleList();
-            this.hideForms();
-          }}
-        >
-          PRESET TEMPLATES
-        </button>
-
-        <div className={this.state.hideList ? styles.inactive : styles.container}>
-          <p
-            className={styles.item}
-            onClick={() => {
-              this.setState({ selectedTemplate: 1 });
-              this.toggleList();
-            }}
-          >
-            N-th Visit
-          </p>
-          <p
-            className={styles.item}
-            onClick={() => {
-              this.setState({ selectedTemplate: 2 });
-              this.toggleList();
-            }}
-          >
-            Order X Specific Items
-          </p>
-          <p
-            className={styles.item}
-            onClick={() => {
-              this.setState({ selectedTemplate: 3 });
-              this.toggleList();
-            }}
-          >
-            Spend X Dollars in an Order
-          </p>
-        </div> */}
-
         <SplitButton
           handleClick={(selectedIndex) => {
             this.handleClick(selectedIndex);
@@ -179,66 +140,12 @@ class PresetTemplates extends React.Component {
             items="false"
           ></TemplateDialog>
         )}
-
-        {/* <Dialog open={this.state.selectedTemplate !== 0} onClose={this.hideAndClear}>
-          <DialogContent dividers>
-            {this.state.selectedTemplate === 1 && (
-              <div>
-                <p>Enter number of visits</p>
-                <TextField
-                  variant="outlined"
-                  type="number"
-                  inputProps={{ min: 1, max: 20 }}
-                  onChange={this.handleXChange}
-                />
-                <SubmitButton onClick={() => this.onPresetComplete('visits')} />
-              </div>
-            )}
-
-            {this.state.selectedTemplate === 2 && (
-              <div>
-                <p>Enter number of items need to be ordered.</p>
-                <TextField
-                  variant="outlined"
-                  type="number"
-                  inputProps={{ min: 1, max: 20 }}
-                  onChange={this.handleXChange}
-                />
-                <p>Enter the name of item need to be ordered.</p>
-                <TextField type="text" onChange={this.handleItemNameChange} />
-                <SubmitButton onClick={() => this.onPresetComplete('items')} />
-              </div>
-            )}
-
-            {this.state.selectedTemplate === 3 && (
-              <div>
-                <p>Enter the money need to spend on an order.</p>
-                <TextField
-                  variant="outlined"
-                  type="number"
-                  inputProps={{ min: 1, max: 300 }}
-                  onChange={this.handleXChange}
-                />
-                <SubmitButton onClick={() => this.onPresetComplete('dollars')} />
-              </div>
-            )}
-          </DialogContent>*/}
       </div>
     );
   }
 }
 
 export default PresetTemplates;
-
-// function SubmitButton({ onClick }) {
-//   return (
-//     <div>
-//       <Button variant="contained" color="primary" style={{ marginTop: 20 }} onClick={onClick}>
-//         Finish
-//       </Button>
-//     </div>
-//   );
-// }
 
 function SplitButton(props) {
   const options = [
@@ -276,6 +183,7 @@ function SplitButton(props) {
   return (
     <Grid container direction="column" alignItems="left" style={{ marginTop: 15 }}>
       <Grid item xs={12}>
+        {/* Template selection button */}
         <ButtonGroup variant="outlined" color="#000" ref={anchorRef} aria-label="split button">
           <Button
             onClick={handleClick}
@@ -325,9 +233,11 @@ function SplitButton(props) {
                   }
             }
           >
-            +
+            <FontAwesomeIcon icon={faCaretDown} />
           </Button>
         </ButtonGroup>
+
+        {/* Drop down */}
         <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
           {({ TransitionProps, placement }) => (
             <Grow

@@ -14,9 +14,11 @@ class TextPopUp extends Component {
   render() {
     return (
       <div className="title-popup-wrapper">
+        {/* Title */}
         <p className="popup-title">{this.props.title}</p>
         <PopupState variant="popover" popupId="demo-popup-popover">
           {(popupState) => (
+            // Trigger
             <div
               className={
                 this.state.highlight ? 'title-popup-button highlight' : 'title-popup-button'
@@ -38,6 +40,7 @@ class TextPopUp extends Component {
                   horizontal: 'center',
                 }}
               >
+                {/* Content */}
                 <Box p={2} style={{ border: '#000 1.5px solid', borderRadius: 4 }}>
                   <Typography style={{ fontSize: '1em', fontWeight: 600 }}>
                     {this.props.popup}

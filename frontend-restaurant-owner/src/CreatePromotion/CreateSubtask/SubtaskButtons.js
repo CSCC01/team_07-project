@@ -2,11 +2,9 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import { makeStyles } from '@material-ui/core/styles';
-import { TextField } from '@material-ui/core';
 
 const useStyles = makeStyles({
   dialogActions: {
@@ -156,28 +154,6 @@ function SubButton(props) {
         maxWidth="xs"
         fullWidth="true"
       >
-        {/* <DialogTitle
-          id="customized-dialog-title"
-          style={{
-            // border: '#000 2px solid',
-            // borderBottom: '#000 0px solid',
-            // borderTopLeftRadius: 4,
-            // borderTopRightRadius: 4,
-            // backgroundColor: 'feb',
-            textAlign: 'center',
-          }}
-        >
-          <p
-            style={{
-              fontSize: '1em',
-              fontWeight: 500,
-              textAlign: 'left',
-              margin: 0,
-            }}
-          >
-            Subtask {props.num}
-          </p>
-        </DialogTitle> */}
         <DialogContent
           style={{
             textAlign: 'center',
@@ -187,15 +163,6 @@ function SubButton(props) {
             paddingBottom: 0,
           }}
         >
-          {/* <TextField
-            variant="outlined"
-            aria-label="empty textarea"
-            placeholder="Empty"
-            rows={4}
-            multiline
-            value={props.description}
-            onChange={props.editDialog}
-          /> */}
           <p
             style={{
               fontSize: '1.2em',

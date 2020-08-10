@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import UploadImage from './UploadImage';
 import TextPopUp from '../sharedComponents/TextPopUp';
-// import TextField from '@material-ui/core/TextField';
 import CreateSubtask from './CreateSubtask';
-// import SelectReward from './SelectReward';
 import EditImagePopUp from './EditImagePopUp';
 
 import Button from '@material-ui/core/Button';
@@ -31,10 +29,12 @@ export default class CreatePromotion extends Component {
   };
   UploadImageRef = React.createRef();
 
+  // For the title, description, tasks and reward field
   onUpdate = (key, value) => {
     this.setState({ [key]: value });
   };
 
+  // For the image field
   onLoad = (value) => {
     let sourceImage = this.state.sourceImage;
     let image = this.state.image;
@@ -46,6 +46,7 @@ export default class CreatePromotion extends Component {
     this.setState({ disable: 1 });
   };
 
+  // Go to the image on the left
   onLeft = () => {
     let currentIndex = this.state.currentIndex;
     this.setState({ currentIndex: currentIndex - 1 });
@@ -68,6 +69,7 @@ export default class CreatePromotion extends Component {
     this.UploadImageRef.current.show(url, show);
   };
 
+  // Go to the image on the right
   onRight = () => {
     let currentIndex = this.state.currentIndex;
     this.setState({ currentIndex: currentIndex + 1 });
@@ -90,6 +92,7 @@ export default class CreatePromotion extends Component {
     this.UploadImageRef.current.show(url, show);
   };
 
+  // When the image is cropped
   onEdit = (value) => {
     let image = this.state.image;
     image[this.state.currentIndex] = value;
@@ -97,6 +100,7 @@ export default class CreatePromotion extends Component {
     this.UploadImageRef.current.onEdit(value.toDataURL('image/png'));
   };
 
+  // When the delete button is pressed
   onDelete = () => {
     let sourceImage = this.state.sourceImage;
     let image = this.state.image;
@@ -131,6 +135,7 @@ export default class CreatePromotion extends Component {
     this.UploadImageRef.current.onDelete(url, show);
   };
 
+  // When the submit button is pressed
   submitPromotion = async () => {
     let jwt_token = localStorage.getItem('Authorization-Token');
     let restaurant = await getRestaurant('/users/me/', jwt_token);
@@ -144,8 +149,10 @@ export default class CreatePromotion extends Component {
     let sourceImage = this.state.sourceImage;
     let reward = this.state.reward;
 
+    // Check user input
     let indicator = checkData(title, description, startTime, closeTime, sourceImage, reward);
 
+    // Upload image to the backend and get the corresponding url
     let idDict;
     let uploadedImage;
     let output;
@@ -169,6 +176,7 @@ export default class CreatePromotion extends Component {
         }
       }
     }
+    // post data to the backend
     if (indicator === 1) {
       output = await postData(
         '/promotions',
@@ -194,6 +202,7 @@ export default class CreatePromotion extends Component {
     return (
       <div className="create-promotion-wrapper">
         <div className="input-wrapper">
+          {/* Image */}
           <div style={{ marginRight: 20 }}>
             <UploadImage
               ref={this.UploadImageRef}
@@ -253,24 +262,6 @@ export default class CreatePromotion extends Component {
             {/* Date Inputs */}
             <div style={{ marginBottom: 10 }}>
               <TextPopUp title="Date" popup="Empty" />
-              {/* <form noValidate style={{ textAlign: 'left' }}>
-                <TextField
-                  label="Starting Time"
-                  type="datetime-local"
-                  defaultValue={getToday()}
-                  InputLabelProps={{ shrink: true }}
-                  onChange={(event) => this.onUpdate('startTime', event.target.value)}
-                />
-                <br />
-                <TextField
-                  label="Expiring Time"
-                  type="datetime-local"
-                  defaultValue={getToday()}
-                  InputLabelProps={{ shrink: true }}
-                  onChange={(event) => this.onUpdate('closeTime', event.target.value)}
-                  // style={{ borderBottom: '#000 2px solid' }}
-                />
-              </form> */}
 
               <div style={{ textAlign: 'left' }}>
                 <DateRangePicker
@@ -286,8 +277,9 @@ export default class CreatePromotion extends Component {
               </div>
             </div>
 
+            {/* Subtask */}
             <CreateSubtask onSelectTask={(value) => this.onUpdate('tasks', value)} />
-            {/* <SelectReward onSelectReward={(value) => this.onUpdate('reward', value)} /> */}
+            {/* Reward */}
             <div style={{ marginBottom: 10 }}>
               <TextPopUp title="Reward" popup="Limitation: 300 characters" />
               <textarea
@@ -320,6 +312,10 @@ export default class CreatePromotion extends Component {
   }
 }
 
+// This function gets the restaurant that current user belongs to.
+// Return a list of two elements.
+// The first element is the restaurant id.
+// The second element is the axios status code.
 export const getRestaurant = async (url, jwt_token) => {
   let restaurant_id;
   await axios({
@@ -338,6 +334,9 @@ export const getRestaurant = async (url, jwt_token) => {
   return restaurant_id;
 };
 
+// This function validate user input.
+// Return 1 if everything is valid.
+// Otherwise return -1.
 export const checkData = (title, description, startTime, closeTime, sourceImage, reward) => {
   let prompt = [];
 
@@ -370,6 +369,8 @@ export const checkData = (title, description, startTime, closeTime, sourceImage,
   return indicator;
 };
 
+// This function uploads the local image to the backend.
+// Return {-1: -1} if fails.
 export const uploadImage = async (sourceImage, image, url) => {
   let file;
   let idDict = {};
@@ -413,6 +414,8 @@ export const uploadImage = async (sourceImage, image, url) => {
   return idDict;
 };
 
+// This function gets the image urls that are uploaded to the backend.
+// Return {-1: -1} if fails.
 export const getUrl = async (idDict, url) => {
   let uploadedImage = {};
   for (let key in idDict) {
@@ -430,6 +433,8 @@ export const getUrl = async (idDict, url) => {
   return uploadedImage;
 };
 
+// This function posts data to the backend.
+// Return {-1: -1} if fails.
 export const postData = async (
   url,
   title,

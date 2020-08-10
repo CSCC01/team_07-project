@@ -15,6 +15,7 @@ function Login() {
   const [hasToken, setHasToken] = useState(false);
 
   React.useEffect(() => {
+    // check jwt_token
     if (localStorage.getItem('Authorization-Token')) {
       setHasToken(true);
     }
@@ -38,6 +39,7 @@ function Login() {
     // Remove existing login token
     delete axios.defaults.headers.common['Authorization'];
 
+    // authenticate
     axios
       .post('/auth/local', {
         identifier: userName,

@@ -35,6 +35,7 @@ class ImageCropper extends React.Component {
   render() {
     return (
       <div className="wrapper">
+        {/* Title and SourceImage with a cropped canvas */}
         <div className="left">
           <p className="cropper-title">Source image</p>
           <img
@@ -44,6 +45,7 @@ class ImageCropper extends React.Component {
             className="popup-img-origin"
           />
         </div>
+        {/* Review of the cropped image and save button */}
         <div className="right">
           <p className="cropper-title">Preview</p>
           <img src={this.state.imageDestination} className="popup-img-preview" alt="Destination" />

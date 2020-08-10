@@ -6,25 +6,22 @@ class PromotionItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      images: this.props.promotion.image,
-      currentImgTop: 0,
-      currentImgBottom: 0,
-      indicator: 0,
-      baseUrl: axios.defaults.baseURL,
+      images: this.props.promotion.image, // A list of images
+      currentImgTop: 0, // The index of the top image
+      currentImgBottom: 0, // The index of the bottom image
+      indicator: 0, // 0 - change the index of the top image
+      // 1 - change the index of the bottom image
+      baseUrl: axios.defaults.baseURL, // baseURL of the database
     };
   }
 
   componentDidMount() {
-    let time;
-    if (this.props.promotion.id % 2 === 1) {
-      time = 5000;
-    } else {
-      time = 5000;
-    }
-    this.interval = setInterval(() => this.changeBackgroundImage(), time);
+    // Call changeBackgroundImage every 5 seconds
+    this.interval = setInterval(() => this.changeBackgroundImage(), 5000);
   }
 
   componentWillUnmount() {
+    // Clear the interval
     if (this.interval) {
       clearInterval(this.interval);
     }
@@ -36,11 +33,17 @@ class PromotionItem extends Component {
     const noOfImages = images.length;
 
     if (indicator === 0) {
+      // Increase the index of the top image if the current image is not the last one in the list
+      // Otherwise, set the index to be zero
+      // Change indicator to 1 so that next time we will change the index of the bottom image
       if (currentImgTop !== noOfImages - 1) {
         newCurrentImg = currentImgTop + 1;
       }
       this.setState({ currentImgTop: newCurrentImg, indicator: 1 });
     } else {
+      // Increase the index of the bottom image if the current image is not the last one in the list
+      // Otherwise, set the index to be zero
+      // Change indicator to 0 so that next time we will change the index of the top image
       if (currentImgBottom !== noOfImages - 1) {
         newCurrentImg = currentImgBottom + 1;
       }
@@ -57,6 +60,9 @@ class PromotionItem extends Component {
           overflow: 'hidden',
         }}
       >
+        {/* Image layer */}
+        {/* The top image and the bottom image are two consective images in the list */}
+        {/* Use two images instead of one to add fade in transition */}
         <img
           className="image bottom"
           src={this.state.baseUrl + this.state.images[this.state.currentImgBottom]}
@@ -69,9 +75,11 @@ class PromotionItem extends Component {
         ></img>
 
         <div className="text-title-wrapper">
+          {/* The title layer */}
           <div className="title-wrapper">
             <p className="title">{this.props.promotion.title}</p>
           </div>
+          {/* The text layer */}
           <div className="text-wrapper">
             <div className="text">
               <p style={{ fontSize: '1.5em', fontWeight: 600, marginTop: 15, marginBottom: 0 }}>
