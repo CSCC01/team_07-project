@@ -3,7 +3,6 @@ import PromotionBox from './PromotionBox';
 
 export default function PromotionList(props){
     const inProgress = (promotion) => {
-        console.log(props.progresses)
         for (let i=0; i<props.progresses.length; i++) {
             const currentProgress = props.progresses[i];
             if (currentProgress.promotion.id === promotion.id) {
