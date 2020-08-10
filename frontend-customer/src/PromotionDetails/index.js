@@ -4,17 +4,21 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 import { Typography, Paper } from '@material-ui/core';
 import Progress from './Progress';
+import ParticipateButton from './ParticipateButton';
+import TitleBar from '../sharedComponents/TitleBar';
 
 import './index.css'
 
 export default function PromotionDetails(props) {
     const [data, setData] = useState({});
     const [images, setImages] = useState([]); // images as a Carousel element
+    const [progress, setProgress] = useState({}); // {} if no progress
 
     useEffect(() => {
       const { params: { id } } = props.match;
       getPromotionDetails(id).then((data) => {
         setData(data);
+
         const carousel = 
           <Carousel renderThumbs={()=>{}}>
             {data.image.map(url => 
@@ -23,16 +27,32 @@ export default function PromotionDetails(props) {
             </div>))}
           </Carousel>;
         setImages(carousel);
+
+        axios.get('/users/me', {
+          headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('Authorization-Token'),
+          }
+        }).then((user)=>{
+          for (let i=0; i<data.progresses.length; i++) {
+            if (data.progresses[i].user === user.data.id) {
+              setProgress(data.progresses[i]);
+              break;
+            }
+          }
+        })
       });
     }, [props.match])
 
-    return (
-      <>
-        {images}
-        <div className="promotionDetails">
+    let basicInfo = "Loading";
+    if ((Object.keys(data).length !== 0)) { // data is not empty
+      basicInfo = (
+        <>
           <div>
             <Typography variant="h4" component="h1" className="title">
               {data.title}
+            </Typography>
+            <Typography variant="h6" component="h2" className="restaurant">
+              {data.restaurant.name}
             </Typography>
             <Typography>
               {"Closing Time: " + new Date(data.expired_date).toLocaleString()}
@@ -41,7 +61,31 @@ export default function PromotionDetails(props) {
           <Paper className="description">
             {data.description}
           </Paper>
+        </>
+      );
+    }
+
+    let progressInfo = "Loading";
+    if ((Object.keys(progress).length !== 0)) {
+      progressInfo = <Progress content={data.subtask} progress={progress}/>;
+    } else {
+      progressInfo = (
+        <>
+          <ParticipateButton />
           <Progress content={data.subtask} />
+        </>
+      );
+    }
+
+    return (
+      <>
+        <div className='title-bar'>
+          <TitleBar title='Promotion'/>
+        </div>
+        {images}
+        <div className="promotionDetails">
+          {basicInfo}
+          {progressInfo}
         </div>
       </>
     );

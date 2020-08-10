@@ -7,7 +7,7 @@
     align-items:center;
 }
 
-.title {
+.title, .restaurant{
     text-align: center;
 }
 
@@ -21,4 +21,7 @@
 
 .promotionDetails > * {
     margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
 }
