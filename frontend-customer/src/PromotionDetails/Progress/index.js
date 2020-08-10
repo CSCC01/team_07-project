@@ -9,17 +9,19 @@ export default class Progress extends React.Component {
     this.state = {
       participated: false,
       jwtToken: localStorage.getItem("Authorization-Token"),
-      progress: -1,
+      progress: null,
     };
   }
 
   async componentDidMount() {
     this.setState({
       progress: await getProgress(this.props.id, this.state.jwtToken),
+    }, () => {
+      if (this.state.progress.subtasks) {
+        this.setState({ participated: true });
+      }
     });
-    if (this.state.progress !== -1) {
-      this.setState({ participated: true });
-    }
+    
   }
 
   render() {
@@ -28,7 +30,7 @@ export default class Progress extends React.Component {
       subtasks = this.props.content.map((subtask) => <div>{subtask}</div>);
 
     let subtaskValidate;
-    if (this.state.participated) {
+    if (this.state.participated && this.state.progress.subtasks) {
       subtaskValidate = this.state.progress.subtasks.map((subtask) => (
         <div className="item">
           <div>
@@ -73,9 +75,12 @@ export default class Progress extends React.Component {
             variant="contained"
             color="primary"
             disabled={this.state.participated}
-            onClick={() => {
-              postProgress(this.props.id, this.state.jwtToken);
-              this.setState({ participated: true });
+            onClick={async () => {
+              await postProgress(this.props.id, this.state.jwtToken);
+              this.setState({
+                progress: await getProgress(this.props.id, this.state.jwtToken),
+                participated: true
+              });
             }}
           >
             {this.state.participated ? "Participated" : "Participate"}
