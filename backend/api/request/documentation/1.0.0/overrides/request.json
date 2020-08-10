@@ -1,0 +1,46 @@
+{
+  "paths": {
+    "/requests/{id}/verify": {
+      "post": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "You don't need this",
+          "required": false,
+          "content": {}
+        }
+      }
+    },
+    "/requests/{id}/reject": {
+      "post": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "You don't need this",
+          "required": false,
+          "content": {}
+        }
+      }
+    }
+  }
+}

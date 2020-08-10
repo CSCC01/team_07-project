@@ -23,7 +23,7 @@ const jwt_token =
 /**
  * Get promotion list from backend
  */
-it('get empty promotion list from backend', async () => {
+it('get promotion list from backend', async () => {
   let restaurant = await getRestaurant(jwt_token);
   let actualPromotions = await getPromotions(jwt_token, restaurant);
   const expected = [
@@ -39,11 +39,14 @@ it('get empty promotion list from backend', async () => {
       restaurant: {
         id: 1,
         name: 'Restaurant 1',
+        location: { lat: 43.7866, lng: -79.2755 },
         created_at: '2020-07-20T01:59:07.506Z',
-        updated_at: '2020-07-23T18:11:42.475Z',
+        updated_at: '2020-08-08T11:02:54.192Z',
       },
+      coupon: null,
       created_at: '2020-08-03T15:15:14.698Z',
-      updated_at: '2020-08-03T15:15:14.706Z',
+      updated_at: '2020-08-08T11:03:09.651Z',
+      progresses: [],
     },
   ];
   await waitFor(() => expect(actualPromotions).toEqual(expected));

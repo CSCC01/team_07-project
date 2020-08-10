@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
+import React, { useState } from "react";
+import axios from "axios";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
 
 function Register() {
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordDup, setPasswordDup] = useState('');
-  const [email, setEmail] = useState('');
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordDup, setPasswordDup] = useState("");
+  const [email, setEmail] = useState("");
   const [role, setRole] = useState("4");
 
   function postRegister(event) {
@@ -26,40 +26,41 @@ function Register() {
       alert("Your passwords don't match.");
     } else {
       var userid;
-      localStorage.clear('Authorization-Token');
+      localStorage.clear("Authorization-Token");
       axios
-        .post('/auth/local/register', {
+        .post("/auth/local/register", {
           username: userName,
           email: email,
           password: password,
         })
         .then((response) => {
           if (response.status !== 200) console.warn(response);
-          localStorage.setItem('Authorization-Token', response.data.jwt);
-          axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.jwt;
+          localStorage.setItem("Authorization-Token", response.data.jwt);
+          axios.defaults.headers.common["Authorization"] =
+            "Bearer " + response.data.jwt;
           userid = response.data.user.id;
           //Set role to customer
           axios
-            .put('/users/' + userid, {
+            .put("/users/" + userid, {
               // Set role to customer
-              role: Number(role)
+              role: Number(role),
             })
             .then((response) => {
               if (response.status !== 200) console.warn(response);
-              window.alert('Registration is successful. You can log in with this account.');
-              window.location.href = '/login';
+              window.alert(
+                "Registration is successful. You can log in with this account."
+              );
+              window.location.href = "/login";
             })
             .catch((error) => {
-              console.log(error.response);
               // Alert the error message fetched from backend
               alert(error.response.data.message);
             });
-            })
-          .catch((error) => {
-            console.log(error.response);
-            // Alert the error message fetched from backend
-            alert(error.response.data.message[0].messages[0].message);
-          });
+        })
+        .catch((error) => {
+          // Alert the error message fetched from backend
+          alert(error.response.data.message[0].messages[0].message);
+        });
     }
   }
 
@@ -68,26 +69,53 @@ function Register() {
   };
 
   return (
-    <Grid container direction="column" justify="center" style={{ minHeight: '100vh' }}>
+    <Grid
+      container
+      direction="column"
+      justify="center"
+      style={{ minHeight: "100vh" }}
+    >
       <Grid item>
         <Container maxWidth="xs">
           <div>
-            <Typography variant="h4" align="center" style={{fontWeight: "bold"}}>
+            <Typography
+              variant="h4"
+              align="center"
+              style={{ fontWeight: "bold" }}
+            >
               Register
             </Typography>
-            <FormControl component="fieldset"
+            <FormControl
+              component="fieldset"
               align="center"
               margin="normal"
               fullWidth
               style={{
-              justifySelf: "center",
-              alignContent: "center",
-              alignSelf: "center"}}>
-              <FormLabel component="legend" style={{fontSize: "1.5em", color: "black"}}>Role</FormLabel>
-              <RadioGroup row aria-label="role" name="role" value={role} onChange={handleRoleChange}
-              style={{justifyContent: "center"}}>
+                justifySelf: "center",
+                alignContent: "center",
+                alignSelf: "center",
+              }}
+            >
+              <FormLabel
+                component="legend"
+                style={{ fontSize: "1.5em", color: "black" }}
+              >
+                Role
+              </FormLabel>
+              <RadioGroup
+                row
+                aria-label="role"
+                name="role"
+                value={role}
+                onChange={handleRoleChange}
+                style={{ justifyContent: "center" }}
+              >
                 <FormControlLabel value="4" control={<Radio />} label="Staff" />
-                <FormControlLabel value="3" control={<Radio />} label="Customer" />
+                <FormControlLabel
+                  value="3"
+                  control={<Radio />}
+                  label="Customer"
+                />
               </RadioGroup>
             </FormControl>
             <form noValidate>
