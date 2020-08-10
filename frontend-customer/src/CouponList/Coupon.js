@@ -13,7 +13,7 @@ export default function Coupon (props) {
                     {props.coupon.restaurant.name}
                 </div>
             </div>
-            <UseCouponButton coupon={props.coupon} isAvailable={true} />
+            <UseCouponButton coupon={props.coupon} />
         </div>
     );
 }

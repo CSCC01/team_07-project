@@ -24,7 +24,6 @@ function CouponList() {
           },
         }
         ).then(response => {
-            console.log(response.data);
             return response.data;
         }).then(coupons => {
             return coupons.map(coupon => <Coupon coupon={coupon}/>);
@@ -40,9 +39,9 @@ function CouponList() {
 
     return (
         <>
-            <div data-testid='title'>
+            {/* <div data-testid='title'>
                 <TitleBar title='My coupon'/>
-            </div>
+            </div> */}
             {coupons}
         </>
     );
