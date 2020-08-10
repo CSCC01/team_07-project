@@ -44,15 +44,12 @@ export const getRestaurant = async (jwtToken) => {
 
 // This function gets the promotions that is created by the restaurant
 export const getPromotions = async (jwtToken, restaurant) => {
-  var promotionList;
-  await axios({
+  const response = await axios({
     method: 'GET',
     url: '/promotions',
     headers: {
       Authorization: 'Bearer ' + jwtToken,
     },
-  }).then((response) => {
-    promotionList = response.data.filter((promotion) => promotion.restaurant.id === restaurant);
   });
-  return promotionList;
+  return response.data.filter((promotion) => promotion.restaurant.id === restaurant);
 };

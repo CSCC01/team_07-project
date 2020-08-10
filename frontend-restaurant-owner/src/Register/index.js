@@ -9,25 +9,33 @@ import Container from '@material-ui/core/Container';
 
 function Register() {
   const [userName, setUserName] = useState('');
+  const [rName, setRName] = useState('');
+  const [lng, setLng] = useState(-79.2882);
+  const [lat, setLat] = useState(43.8041);
   const [password, setPassword] = useState('');
   const [passwordDup, setPasswordDup] = useState('');
   const [email, setEmail] = useState('');
 
-  function postRegister(event) {
+  async function postRegister(event) {
     // Disable the default form submit action
     event.preventDefault();
     if (password !== passwordDup) {
       alert("Your passwords don't match.");
     } else {
       // User Input is valid. Update the information to the backend
+      const restaurantResponse = await axios.post('/restaurants', {
+        name: rName,
+        location: { lat: Number(lat), lng: Number(lng) },
+      });
       axios
         .post('/auth/local/register', {
           username: userName,
           email: email,
           password: password,
-          restaurant: 2,
+          restaurant: restaurantResponse.data.id,
         })
         .then((response) => {
+          console.log(response);
           if (response.status !== 200) console.warn(response);
           localStorage.setItem('Authorization-Token', response.data.jwt);
           window.alert('Registration is successful. You can log in with this account.');
@@ -46,9 +54,45 @@ function Register() {
         <Container maxWidth="xs">
           <div>
             <Typography component="h1" variant="h5">
-              Register
+              Restaurant Register
             </Typography>
             <form noValidate>
+              <TextField
+                name="Restaurant Name"
+                variant="outlined"
+                required
+                fullWidth
+                id="restaurant-name"
+                label="Restaurant Name"
+                style={{ marginTop: 20 }}
+                onChange={(e) => setRName(e.target.value)}
+              />
+              <TextField
+                name="Restaurant Location Latitude"
+                variant="outlined"
+                required
+                fullWidth
+                type="number"
+                id="restaurant-lat"
+                label="Restaurant Location Latitude"
+                inputProps={{ step: 0.0001 }}
+                style={{ marginTop: 20 }}
+                value={lat}
+                onChange={(e) => setLat(e.target.value)}
+              />
+              <TextField
+                name="Restaurant Location Longitude"
+                variant="outlined"
+                required
+                fullWidth
+                type="number"
+                id="restaurant-lng"
+                label="Restaurant Location Longitude"
+                inputProps={{ step: 0.0001 }}
+                style={{ marginTop: 20 }}
+                value={lng}
+                onChange={(e) => setLng(e.target.value)}
+              />
               <TextField
                 autoComplete="username"
                 name="UserName"
@@ -61,7 +105,6 @@ function Register() {
                 onChange={(e) => {
                   setUserName(e.target.value);
                 }}
-                autoFocus
               />
               <TextField
                 variant="outlined"

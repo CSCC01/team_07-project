@@ -59,8 +59,8 @@ it('get promotion list from backend', async () => {
     },
     {
       id: 7,
-      title: 'promotion3: hotdog',
-      description: 'But one three hotdogs and get a coupon for a "hotcat"!',
+      title: 'promotion3: hotcat',
+      description: 'But one three hotdags and get a coupon for a "hotcat"!',
       starting_date: '2020-11-01T00:00',
       expired_date: '2021-01-01T00:00',
       subtask: ['Buy 1 hotdog', 'Buy 1 hotdog', 'Buy 1 hotdog'],
@@ -75,7 +75,16 @@ it('get promotion list from backend', async () => {
       coupon: 'Get one hotcat!!!',
       created_at: '2020-08-10T06:38:10.524Z',
       updated_at: '2020-08-10T06:39:00.210Z',
-      progresses: [],
+      progresses: [
+        {
+          id: 5,
+          user: 6,
+          promotion: 7,
+          status: 'ongoing',
+          created_at: '2020-08-10T17:22:05.825Z',
+          updated_at: '2020-08-10T17:22:05.834Z',
+        },
+      ],
     },
   ];
   await waitFor(() => expect(actualPromotions).toEqual(expected));

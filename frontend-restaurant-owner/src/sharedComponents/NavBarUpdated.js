@@ -64,17 +64,12 @@ export const getRestaurant = async (url, jwt_token) => {
 };
 
 export const getRestaurantName = async (url, id, jwt_token) => {
-  let restaurant_name;
-  await axios({
+  const response = await axios({
     method: 'GET',
     url: url + '/' + id,
     headers: {
       Authorization: 'Bearer ' + jwt_token,
     },
-  })
-    .then((response) => {
-      restaurant_name = [response.data.name, response.status];
-    })
-    .catch(() => {});
-  return restaurant_name;
+  });
+  return [response.data.name, response.status];
 };
