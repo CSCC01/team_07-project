@@ -10,6 +10,9 @@ import "./index.css";
 export default function PromotionDetails(props) {
   const [data, setData] = useState({});
   const [images, setImages] = useState([]); // images as a Carousel element
+  const {
+    params: { id },
+  } = props.match;
 
   useEffect(() => {
     const {
@@ -43,7 +46,7 @@ export default function PromotionDetails(props) {
           </Typography>
         </div>
         <Paper className="description">{data.description}</Paper>
-        <Progress content={data.subtask} id={props.match} />
+        <Progress content={data.subtask} id={id} />
       </div>
     </>
   );
