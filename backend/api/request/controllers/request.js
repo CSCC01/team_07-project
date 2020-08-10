@@ -28,6 +28,7 @@ module.exports = {
       description:
         request.type === 'subtask' ? request.subtask.description : request.coupon.description,
       status: request.status,
+      user: request.user,
     }));
 
     ctx.response.send(requests);

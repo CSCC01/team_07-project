@@ -9,7 +9,6 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MapIcon from '@material-ui/icons/Map';
 import List from '@material-ui/core/List';
@@ -46,33 +45,34 @@ export default function TitleBar(props){
 
     return(
         <>
-        <AppBar position="static">
+        {/* The navgation bar */}
+        <AppBar position="fixed" style={{ backgroundColor: '#0B345C' }}>
             <Toolbar>
                 <IconButton
-                    color="inherit"
+                    style={{ color: '#fff' }}
                     aria-label="open drawer"
                     edge="start"
                     onClick={handleDrawerOpen}
                 >
                     <MenuIcon />
                 </IconButton>
-                <Typography variant="h6">
+                <Typography variant="h6" style={{ color: '#fff' }}>
                     {props.title}
                 </Typography>
             </Toolbar>
         </AppBar>
+        {/* This drawer will show up after the user clicks on the IconButton in the navigation bar */}
         <React.Fragment>
             <Drawer anchor="left" open={open} onClose={handleDrawerClose}>
+            <div style={{ backgroundImage: 'linear-gradient(to bottom, #0f1622, #042849)', height: '100%' }}>
             <List style={{width: 250}}>
-                <ListItem>
-                    <ListItemIcon>
-                        <AccountCircleIcon/>
-                    </ListItemIcon>
-                    <Typography variant="h6">
-                        Hello, {name}
-                    </Typography>
-                </ListItem>
-                <Divider />
+                {/* Greeting */}
+                <div>
+                    <p style={{color: "#fff", fontSize: '2rem', fontWeight: '600', textAlign: 'center', marginBottom: '10px'}}>Hello!</p>
+                    <p style={{color: "#fff", fontSize: '2rem', fontWeight: '600', textAlign: 'center', marginTop: '10px'}}>{name}</p>
+                </div>
+                {/* <Divider /> */}
+                {/* If ths user is a customer */}
                 {role.localeCompare("Customer") === 0 && (
                 <>
                     <ListItem button component={Link} to="/">
@@ -89,24 +89,25 @@ export default function TitleBar(props){
                     </ListItem>
                 </>
                 )}
+                {/* If ths user is a restaurant staff */}
                 {role.localeCompare("Restaurant Staff") === 0 && (
-                <>
-                    <ListItem button component={Link} to="/coupon-validation">
-                        <ListItemIcon><LoyaltyIcon fontSize="small" /></ListItemIcon>
-                        <ListItemText primary="Coupon Validation" />
+                <div style={{width: 'max-content', marginLeft: 40, marginBottom: 5}}>
+                    <ListItem button component={Link} to="/validation" style={{textAlign: 'center', width: 'max-content'}}>
+                        <ListItemIcon style={{color: '#fff', width: 'max-content'}}><LoyaltyIcon fontSize="large" /></ListItemIcon>
+                        <ListItemText style={{color: '#fff', width: 'max-content'}}><p style={{fontSize: "1.2em", margin: 0}}>Validation</p></ListItemText>
                     </ListItem>
-                    <ListItem button component={Link} to="/subtask-validation">
-                        <ListItemIcon><LoyaltyIcon fontSize="small" /></ListItemIcon>
-                        <ListItemText primary="Subtask Validation" />
-                    </ListItem>
-                </>
+                </div>
                 )}
-                <Divider />
-                <ListItem button onClick={logout}>
-                        <ListItemIcon><ExitToAppIcon fontSize="small" /></ListItemIcon>
-                        <ListItemText primary="Log out" />
-                </ListItem>
+                <Divider style={{backgroundColor: '#fff', width: 180, margin: 'auto'}}/>
+                {/* Log Out (This is shared by both customers and restaurant staff) */}
+                <div style={{width: 'max-content', marginLeft: 40, marginTop: 5}}>
+                    <ListItem button onClick={logout} style={{textAlign: 'center', width: 'max-content'}}>
+                            <ListItemIcon style={{color: '#fff', width: 'max-content'}}><ExitToAppIcon fontSize="large" /></ListItemIcon>
+                            <ListItemText style={{color: '#fff', width: 'max-content', fontSize: "1.5em", fontWeight: '600'}}><p style={{fontSize: "1.2em", margin: 0}}>Log Out</p></ListItemText>
+                    </ListItem>
+                </div>
             </List>
+            </div>
             </Drawer>
         </React.Fragment>
         </>

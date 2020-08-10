@@ -35,7 +35,7 @@ function CouponList() {
         return <Redirect to="/login" />;
     }
     else if (localStorage.getItem('role').localeCompare("Restaurant Staff") === 0) {
-        return <Redirect to="/coupon-validation" />;
+        return <Redirect to="/validation" />;
     }
 
     return (
