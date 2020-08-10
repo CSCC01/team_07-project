@@ -24,7 +24,6 @@ function CouponList() {
           },
         }
         ).then(response => {
-            console.log(response.data);
             return response.data;
         }).then(coupons => {
             return coupons.map(coupon => <Coupon coupon={coupon}/>);
