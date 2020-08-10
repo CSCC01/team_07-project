@@ -64,15 +64,19 @@ module.exports = {
         return;
       }
 
-      // NOTE: Ignoring existing requests
-
-      resultRequest = await strapi.query('request').create({
+      const newRequestData = {
         user: user.id,
         type: 'coupon',
         status: 'pending',
         restaurant: coupon.restaurant,
         coupon: coupon.id,
-      });
+      };
+
+      if ((await strapi.query('request').findOne(newRequestData)) !== null) {
+        await strapi.query('request').delete(newRequestData);
+      }
+
+      resultRequest = await strapi.query('request').create(newRequestData);
     } else {
       const progress = await strapi.query('progress').findOne({
         user: user.id,
@@ -99,15 +103,20 @@ module.exports = {
         return;
       }
 
-      // NOTE: Ignoring existing requests
-
-      resultRequest = await strapi.query('request').create({
+      const newRequestData = {
         user: user.id,
         type: 'subtask',
         status: 'pending',
         restaurant: progress.promotion.restaurant,
         subtask: subtask.id,
-      });
+      };
+
+      // Deleting existing requests
+      if ((await strapi.query('request').findOne(newRequestData)) !== null) {
+        await strapi.query('request').delete(newRequestData);
+      }
+
+      resultRequest = await strapi.query('request').create(newRequestData);
     }
 
     ctx.response.status = 201;
