@@ -21,7 +21,7 @@ export default function Coupon (props) {
             </div>
             {/* Button */}
             <div style={{textAlign: 'center', marginTop: 15, marginBottom: 5}}>
-                <UseCouponButton coupon={props.coupon} isAvailable={true}/>
+                <UseCouponButton coupon={props.coupon}/>
             </div>
         </div>
     );
