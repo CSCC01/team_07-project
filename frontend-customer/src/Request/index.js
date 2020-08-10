@@ -26,7 +26,7 @@ export default class Request extends Component {
             requestStatus={request.status}
             requestId={request.id}
             key={request.id}
-            // data-testid="card"
+            data-testid="card"
           />
         ))}
       </div>
