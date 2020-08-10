@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import UploadImage from './UploadImage';
 import TextPopUp from '../sharedComponents/TextPopUp';
-import TextField from '@material-ui/core/TextField';
 import CreateSubtask from './CreateSubtask';
-import SelectReward from './SelectReward';
 import EditImagePopUp from './EditImagePopUp';
 
 import Button from '@material-ui/core/Button';
+import 'react-dates/initialize';
+import { DateRangePicker } from 'react-dates';
+import 'react-dates/lib/css/_datepicker.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
@@ -20,18 +21,20 @@ export default class CreatePromotion extends Component {
     currentIndex: 0,
     title: '',
     description: '',
-    startTime: '',
-    closeTime: '',
+    startDate: null,
+    endDate: null,
     tasks: [],
     reward: -1,
     disable: 1, // 0 - disable; 1 - enable
   };
   UploadImageRef = React.createRef();
 
+  // For the title, description, tasks and reward field
   onUpdate = (key, value) => {
     this.setState({ [key]: value });
   };
 
+  // For the image field
   onLoad = (value) => {
     let sourceImage = this.state.sourceImage;
     let image = this.state.image;
@@ -43,6 +46,7 @@ export default class CreatePromotion extends Component {
     this.setState({ disable: 1 });
   };
 
+  // Go to the image on the left
   onLeft = () => {
     let currentIndex = this.state.currentIndex;
     this.setState({ currentIndex: currentIndex - 1 });
@@ -65,6 +69,7 @@ export default class CreatePromotion extends Component {
     this.UploadImageRef.current.show(url, show);
   };
 
+  // Go to the image on the right
   onRight = () => {
     let currentIndex = this.state.currentIndex;
     this.setState({ currentIndex: currentIndex + 1 });
@@ -87,6 +92,7 @@ export default class CreatePromotion extends Component {
     this.UploadImageRef.current.show(url, show);
   };
 
+  // When the image is cropped
   onEdit = (value) => {
     let image = this.state.image;
     image[this.state.currentIndex] = value;
@@ -94,6 +100,7 @@ export default class CreatePromotion extends Component {
     this.UploadImageRef.current.onEdit(value.toDataURL('image/png'));
   };
 
+  // When the delete button is pressed
   onDelete = () => {
     let sourceImage = this.state.sourceImage;
     let image = this.state.image;
@@ -128,25 +135,24 @@ export default class CreatePromotion extends Component {
     this.UploadImageRef.current.onDelete(url, show);
   };
 
-  discardPromotion = () => {
-    // go to view promotion
-  };
-
+  // When the submit button is pressed
   submitPromotion = async () => {
     let jwt_token = localStorage.getItem('Authorization-Token');
     let restaurant = await getRestaurant('/users/me/', jwt_token);
     let restaurant_id = restaurant[0];
     let title = this.state.title;
     let description = this.state.description;
-    let startTime = this.state.startTime;
-    let closeTime = this.state.closeTime;
+    let startTime = this.state.startDate.format();
+    let closeTime = this.state.endDate.format();
     let tasks = this.state.tasks;
     let image = this.state.image;
     let sourceImage = this.state.sourceImage;
     let reward = this.state.reward;
 
+    // Check user input
     let indicator = checkData(title, description, startTime, closeTime, sourceImage, reward);
 
+    // Upload image to the backend and get the corresponding url
     let idDict;
     let uploadedImage;
     let output;
@@ -170,6 +176,7 @@ export default class CreatePromotion extends Component {
         }
       }
     }
+    // post data to the backend
     if (indicator === 1) {
       output = await postData(
         '/promotions',
@@ -195,6 +202,7 @@ export default class CreatePromotion extends Component {
     return (
       <div className="create-promotion-wrapper">
         <div className="input-wrapper">
+          {/* Image */}
           <div style={{ marginRight: 20 }}>
             <UploadImage
               ref={this.UploadImageRef}
@@ -203,89 +211,99 @@ export default class CreatePromotion extends Component {
               onRight={this.onRight}
             />
 
-            {this.state.image.length !== 1 && this.state.disable !== 0 ? (
-              <div className="left-button-row">
-                <EditImagePopUp
-                  sourceImage={this.state.sourceImage[this.state.currentIndex]}
-                  onSelectImage={(value) => this.onEdit(value)}
-                />
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={this.onDelete}
-                  startIcon={<FontAwesomeIcon icon={faTrash} />}
-                >
-                  Delete
-                </Button>
-              </div>
-            ) : null}
+            <div
+              className={
+                this.state.image.length !== 1 && this.state.disable !== 0
+                  ? 'left-button-row show'
+                  : 'left-button-row'
+              }
+            >
+              <EditImagePopUp
+                sourceImage={this.state.sourceImage[this.state.currentIndex]}
+                onSelectImage={(value) => this.onEdit(value)}
+              />
+              <Button
+                variant="outlined"
+                color="default"
+                onClick={this.onDelete}
+                startIcon={<FontAwesomeIcon icon={faTrash} />}
+                style={{ border: '#000 2px solid', color: '#000', backgroundColor: '#FFD564' }}
+              >
+                Delete
+              </Button>
+            </div>
           </div>
 
-          <div style={{ marginLeft: 20 }}>
+          <div>
             {/* Title */}
             <div style={{ marginBottom: 10 }}>
               <TextPopUp title="Title" popup="Limitation: 30 characters" />
-              <TextField
-                variant="outlined"
-                fullWidth
+              <input
+                type="text"
+                className="create-promotion-title"
                 onChange={(event) => this.onUpdate('title', event.target.value)}
-                inputProps={{ maxLength: 30 }}
+                maxLength="30"
               />
             </div>
 
             {/* Description */}
             <div style={{ marginBottom: 10 }}>
               <TextPopUp title="Description" popup="Limitation: 500 characters" />
-              <TextField
-                variant="outlined"
-                fullWidth
-                multiline
-                rows={4}
+              <textarea
+                rows="5"
+                className="create-promotion-description"
                 onChange={(event) => this.onUpdate('description', event.target.value)}
-                inputProps={{ maxLength: 500 }}
+                maxLength="500"
               />
             </div>
+          </div>
 
+          <div style={{ marginLeft: 20 }}>
             {/* Date Inputs */}
-            <div style={{ marginBottom: 10, textAlign: 'left' }}>
+            <div style={{ marginBottom: 10 }}>
               <TextPopUp title="Date" popup="Empty" />
-              <form noValidate>
-                <TextField
-                  label="Starting Time"
-                  type="datetime-local"
-                  defaultValue="2020-01-01T00:00"
-                  InputLabelProps={{ shrink: true }}
-                  onChange={(event) => this.onUpdate('startTime', event.target.value)}
+
+              <div style={{ textAlign: 'left' }}>
+                <DateRangePicker
+                  startDate={this.state.startDate} // momentPropTypes.momentObj or null,
+                  endDate={this.state.endDate} // momentPropTypes.momentObj or null,
+                  startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
+                  endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
+                  onDatesChange={({ startDate, endDate }) => {
+                    this.setState({ startDate, endDate });
+                  }}
+                  focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+                  onFocusChange={(focusedInput) => this.setState({ focusedInput })} // PropTypes.func.isRequired,
+                  noBorder={true}
                 />
-                <br />
-                <TextField
-                  label="Expiring Time"
-                  type="datetime-local"
-                  defaultValue="2020-01-01T00:00"
-                  InputLabelProps={{ shrink: true }}
-                  onChange={(event) => this.onUpdate('closeTime', event.target.value)}
-                />
-              </form>
+              </div>
             </div>
 
+            {/* Subtask */}
             <CreateSubtask onSelectTask={(value) => this.onUpdate('tasks', value)} />
-            <SelectReward onSelectReward={(value) => this.onUpdate('reward', value)} />
+            {/* Reward */}
+            <div style={{ marginBottom: 10 }}>
+              <TextPopUp title="Reward" popup="Limitation: 300 characters" />
+              <textarea
+                rows="4"
+                className="create-promotion-description"
+                onChange={(event) => this.onUpdate('reward', event.target.value)}
+                maxLength="300"
+              />
+            </div>
           </div>
         </div>
         <div>
           <Button
-            variant="contained"
-            color="secondary"
-            style={{ marginRight: 40 }}
-            onClick={this.discardPromotion}
-          >
-            Discard
-          </Button>
-          <Button
             id="submit"
-            variant="contained"
+            variant="outlined"
             color="secondary"
-            style={{ marginLeft: 40 }}
+            style={{
+              marginLeft: 40,
+              border: '#000 2px solid',
+              color: '#000',
+              backgroundColor: '#FFD564',
+            }}
             onClick={this.submitPromotion}
           >
             Submit
@@ -296,6 +314,10 @@ export default class CreatePromotion extends Component {
   }
 }
 
+// This function gets the restaurant that current user belongs to.
+// Return a list of two elements.
+// The first element is the restaurant id.
+// The second element is the axios status code.
 export const getRestaurant = async (url, jwt_token) => {
   let restaurant_id;
   await axios({
@@ -314,14 +336,9 @@ export const getRestaurant = async (url, jwt_token) => {
   return restaurant_id;
 };
 
-export const lessTime = (t1, t2) => {
-  return new Date(t1) < new Date(t2);
-};
-
-export const getToday = () => {
-  return new Date().toString();
-};
-
+// This function validate user input.
+// Return 1 if everything is valid.
+// Otherwise return -1.
 export const checkData = (title, description, startTime, closeTime, sourceImage, reward) => {
   let prompt = [];
 
@@ -331,25 +348,16 @@ export const checkData = (title, description, startTime, closeTime, sourceImage,
   if (description === '') {
     prompt.push('Failure: description is empty');
   }
-  if (startTime === '') {
+  if (startTime === null) {
     prompt.push('Failure: start time is empty');
   }
-  if (closeTime === '') {
+  if (closeTime === null) {
     prompt.push('Failure: expired time is empty');
   }
   if (sourceImage.length === 1) {
     prompt.push('Failure: image is empty');
   }
-  if (lessTime(closeTime, startTime)) {
-    prompt.push('Failure: closeTime before startTime');
-  }
-  if (lessTime(startTime, getToday())) {
-    prompt.push('Failure: startTime before today');
-  }
-  if (!['points', 'coupon'].includes(reward.type)) {
-    prompt.push('Failure: reward type is empty');
-  }
-  if (!reward.value) {
+  if (!reward) {
     prompt.push('Failure: reward is empty');
   }
 
@@ -363,6 +371,8 @@ export const checkData = (title, description, startTime, closeTime, sourceImage,
   return indicator;
 };
 
+// This function uploads the local image to the backend.
+// Return {-1: -1} if fails.
 export const uploadImage = async (sourceImage, image, url) => {
   let file;
   let idDict = {};
@@ -406,6 +416,8 @@ export const uploadImage = async (sourceImage, image, url) => {
   return idDict;
 };
 
+// This function gets the image urls that are uploaded to the backend.
+// Return {-1: -1} if fails.
 export const getUrl = async (idDict, url) => {
   let uploadedImage = {};
   for (let key in idDict) {
@@ -423,6 +435,8 @@ export const getUrl = async (idDict, url) => {
   return uploadedImage;
 };
 
+// This function posts data to the backend.
+// Return {-1: -1} if fails.
 export const postData = async (
   url,
   title,
@@ -442,7 +456,7 @@ export const postData = async (
     starting_date: startTime,
     expired_date: closeTime,
     subtask: tasks,
-    reward,
+    coupon: reward,
     restaurant: restaurant_id,
   };
 

@@ -17,10 +17,12 @@ class UploadImage extends Component {
     numOfImage: 0,
   };
 
+  // When the upload button is clicked
   imageButtonClick = () => {
     document.getElementById('image-input').click();
   };
 
+  // This function is called when the input file is changed
   imageInputChange = (event) => {
     if (this.state.numOfImage > 4) {
       alert("Can't upload. Exceed the maximum number of images.");
@@ -51,6 +53,7 @@ class UploadImage extends Component {
     }
   };
 
+  // Set the image that is currently showed and the arrow mode that is currently showed
   show = (url, show) => {
     this.setState({
       url: url,
@@ -58,12 +61,16 @@ class UploadImage extends Component {
     });
   };
 
+  // Update url to be the cropped image
   onEdit = (url) => {
     this.setState({
       url: url,
     });
   };
 
+  // This function is called when the delete button is pressed
+  // It clears the image input field, decreases the numOfImage by 1
+  // and updates url and show
   onDelete = (url, show) => {
     document.getElementById('image-input').value = '';
     let numOfImage = this.state.numOfImage;
@@ -81,17 +88,17 @@ class UploadImage extends Component {
           title="Image"
           popup="Duplicate images are acceptable. Image is uploaded before the current image. Upload at most 5 images."
         />
-
+        {/* Show the upload button, edit button, delete button, left arrow and right arrow based on different mode */}
         <div className="image-button-wrapper">
           {this.state.show === 0 ? (
             <div>
               <div className="upload-image">
                 <Button
-                  variant="contained"
-                  color="secondary"
+                  variant="outlined"
+                  color="default"
                   startIcon={<FontAwesomeIcon icon={faPlus} />}
-                  className="image-upload-button"
                   onClick={this.imageButtonClick}
+                  style={{ border: '#000 2px solid', color: '#000', backgroundColor: '#FFD564' }}
                 >
                   Upload
                 </Button>
@@ -110,8 +117,13 @@ class UploadImage extends Component {
               <div className="button-wrapper">
                 <div className="left-image">
                   <IconButton
-                    color="secondary"
-                    style={{ borderRadius: 10 }}
+                    color="default"
+                    style={{
+                      borderRadius: 10,
+                      backgroundColor: '#FFD564',
+                      border: '#000 2px solid',
+                      color: '#000',
+                    }}
                     onClick={this.props.onLeft}
                   >
                     <FontAwesomeIcon icon={faChevronLeft} />
@@ -119,10 +131,11 @@ class UploadImage extends Component {
                 </div>
                 <div className="upload-image">
                   <Button
-                    variant="contained"
-                    color="secondary"
+                    variant="outlined"
+                    color="default"
                     startIcon={<FontAwesomeIcon icon={faPlus} />}
                     onClick={this.imageButtonClick}
+                    style={{ border: '#000 2px solid', color: '#000', backgroundColor: '#FFD564' }}
                   >
                     Upload
                   </Button>
@@ -144,8 +157,13 @@ class UploadImage extends Component {
                 {this.state.show === 3 ? (
                   <div className="left-image">
                     <IconButton
-                      color="secondary"
-                      style={{ borderRadius: 10 }}
+                      color="default"
+                      style={{
+                        borderRadius: 10,
+                        backgroundColor: '#FFD564',
+                        border: '#000 2px solid',
+                        color: '#000',
+                      }}
                       onClick={this.props.onLeft}
                     >
                       <FontAwesomeIcon icon={faChevronLeft} />
@@ -154,10 +172,11 @@ class UploadImage extends Component {
                 ) : null}
                 <div className="upload-image">
                   <Button
-                    variant="contained"
-                    color="secondary"
+                    variant="outlined"
+                    color="default"
                     startIcon={<FontAwesomeIcon icon={faPlus} />}
                     onClick={this.imageButtonClick}
+                    style={{ border: '#000 2px solid', color: '#000', backgroundColor: '#FFD564' }}
                   >
                     Upload
                   </Button>
@@ -172,8 +191,13 @@ class UploadImage extends Component {
                 {this.state.show === 2 || this.state.show === 3 ? (
                   <div className="right-image">
                     <IconButton
-                      color="secondary"
-                      style={{ borderRadius: 10 }}
+                      color="default"
+                      style={{
+                        borderRadius: 10,
+                        backgroundColor: '#FFD564',
+                        border: '#000 2px solid',
+                        color: '#000',
+                      }}
                       onClick={this.props.onRight}
                     >
                       <FontAwesomeIcon icon={faChevronRight} />
@@ -181,7 +205,9 @@ class UploadImage extends Component {
                   </div>
                 ) : null}
               </div>
+              {/* Image */}
               <img className="image" src={this.state.url} alt=""></img>
+              {/* The grey background layer */}
               <div className="background"></div>
             </div>
           )}

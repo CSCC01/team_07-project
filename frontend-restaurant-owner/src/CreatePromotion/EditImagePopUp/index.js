@@ -22,9 +22,10 @@ class EditImagePopUp extends Component {
       <Popup
         trigger={
           <Button
-            variant="contained"
-            color="secondary"
+            variant="outlined"
+            color="default"
             startIcon={<FontAwesomeIcon icon={faEdit} />}
+            style={{ border: '#000 2px solid', color: '#000', backgroundColor: '#FFD564' }}
           >
             Edit
           </Button>
@@ -34,6 +35,7 @@ class EditImagePopUp extends Component {
         contentStyle={{ width: '90%', height: 'fit-content', borderRadius: '20px', border: '0px' }}
       >
         {(close) => (
+          // Content of the popup
           <div style={{ margin: 30 }}>
             <IconButton style={{ position: 'absolute', top: 20, right: 20 }} onClick={close}>
               <FontAwesomeIcon icon={faTimes} style={{ marginLeft: 3, marginRight: 3 }} />

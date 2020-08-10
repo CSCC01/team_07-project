@@ -26,10 +26,10 @@
     object-fit: contain;
 }
 
-.title {
+.cropper-title {
     color: black;
-    font-size: 1.5em;
-    font-weight: 500;
-    margin-bottom: 10px;
-    text-align: left;
+    font-size: 2em;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
 }

@@ -1,0 +1,51 @@
+/* --------nav bar-------- */
+.nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  padding-bottom: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  transition: 1s;
+  position: sticky;
+  width: 98%;
+  top:0;
+  z-index: 100;
+}
+
+.nav-link {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+.nav-link::after {
+  display:block;
+  content: '';
+  border-bottom: solid 3px #f50057;  
+  transform: scaleX(0);
+  transition: transform 0.2s;
+  transition-timing-function: cubic-bezier(.17,.67,.83,.67);
+}
+
+.nav-link-white {
+  display: block;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: #000;
+  text-decoration: none;
+  transition: color 0.5s;
+}
+
+.nav-link:hover a {
+  display: block;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: #f50057;
+  text-decoration: none;
+}
+
+.nav-link:hover::after {
+ transform: scaleX(1);
+}

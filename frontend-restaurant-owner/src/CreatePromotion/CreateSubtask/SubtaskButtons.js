@@ -2,16 +2,19 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import { makeStyles } from '@material-ui/core/styles';
-import { TextField } from '@material-ui/core';
 
 const useStyles = makeStyles({
   dialogActions: {
     display: 'flex',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
+    margin: 'auto',
+    width: '85%',
+    padding: 0,
+    marginTop: 20,
+    marginBottom: 20,
   },
 });
 
@@ -104,10 +107,17 @@ export default class SubtaskButtons extends React.Component {
     }
 
     return (
-      <ButtonGroup>
-        {buttons}
-        <Button onClick={() => this.addButton('')}>+</Button>
-      </ButtonGroup>
+      <>
+        <ButtonGroup>
+          {buttons}
+          <Button
+            onClick={() => this.addButton('')}
+            style={{ border: '#000 2px solid', backgroundColor: '#FFD564' }}
+          >
+            +
+          </Button>
+        </ButtonGroup>
+      </>
     );
   }
 }
@@ -116,29 +126,85 @@ function SubButton(props) {
   const classes = useStyles();
   return (
     <div>
-      <Button onClick={props.openDialog}>{props.num}</Button>
+      <Button
+        onClick={props.openDialog}
+        style={
+          props.num === 1
+            ? {
+                borderBottomRightRadius: '0',
+                borderTopRightRadius: '0',
+                border: '#000 2px solid',
+                backgroundColor: '#FFD564',
+                borderRight: '#000 0px solid',
+              }
+            : {
+                borderRadius: '0',
+                border: '#000 2px solid',
+                backgroundColor: '#FFD564',
+                borderRight: '#000 0px solid',
+              }
+        }
+      >
+        {props.num}
+      </Button>
       <Dialog
         onClose={props.closeDialog}
         aria-labelledby="customized-dialog-title"
         open={props.isOpen}
+        maxWidth="xs"
+        fullWidth="true"
       >
-        <DialogTitle id="customized-dialog-title">Subtask {props.num}</DialogTitle>
-        <DialogContent dividers>
-          <TextField
-            variant="outlined"
-            aria-label="empty textarea"
-            placeholder="Empty"
-            rows={4}
-            multiline
-            value={props.description}
+        <DialogContent
+          style={{
+            textAlign: 'center',
+            paddingLeft: 0,
+            paddingRight: 0,
+            paddingTop: 0,
+            paddingBottom: 0,
+          }}
+        >
+          <p
+            style={{
+              fontSize: '1.2em',
+              fontWeight: 600,
+              textAlign: 'center',
+              marginBottom: 20,
+            }}
+          >
+            Please enter the description for Subtask {props.num}
+          </p>
+          <textarea
+            rows="5"
+            cols="30"
+            className="subtask-not-focus"
             onChange={props.editDialog}
+            maxLength="500"
+            value={props.description}
           />
         </DialogContent>
         <DialogActions className={classes.dialogActions}>
-          <Button autoFocus onClick={props.closeDialog} color="primary">
+          <Button
+            autoFocus
+            onClick={props.closeDialog}
+            color="default"
+            variant="outlined"
+            style={{
+              border: '#000 2px solid',
+              backgroundColor: '#FFD564',
+            }}
+          >
             Save
           </Button>
-          <Button autoFocus onClick={props.deleteTask} color="secondary">
+          <Button
+            autoFocus
+            onClick={props.deleteTask}
+            color="default"
+            variant="outlined"
+            style={{
+              border: '#000 2px solid',
+              backgroundColor: '#FFD564',
+            }}
+          >
             Delete
           </Button>
         </DialogActions>

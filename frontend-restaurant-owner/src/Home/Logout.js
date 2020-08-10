@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios';
 
 function Logout(props) {
+  // This function is called when the log out button is pressed
   function logout() {
     localStorage.clear('Authorization-Token');
     delete axios.defaults.headers.common['Authorization'];
@@ -11,8 +12,14 @@ function Logout(props) {
   }
 
   return (
-    <Button data-testid="logout" variant="contained" color="primary" onClick={logout}>
-      Logout
+    <Button
+      data-testid="logout"
+      variant="outlined"
+      color="default"
+      onClick={logout}
+      style={{ border: '#000 2px solid', position: 'relative', top: -7 }}
+    >
+      Log Out
     </Button>
   );
 }

@@ -19,6 +19,7 @@ function Register() {
     if (password !== passwordDup) {
       alert("Your passwords don't match.");
     } else {
+      // User Input is valid. Update the information to the backend
       axios
         .post('/auth/local/register', {
           username: userName,

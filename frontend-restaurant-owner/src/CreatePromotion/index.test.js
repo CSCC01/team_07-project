@@ -3,18 +3,17 @@
  * The following aspects are tested:
  * 1. the existence of the submit button
  * 2. the functionality of checkData
- * 3. the functionality of lessTime
- * 4. the functionality of uploadImage
- * 5. the functionality of getUrl
- * 6. the functionality of getRestaurant
- * 7. the functionality of postData
+ * 3. the functionality of uploadImage
+ * 4. the functionality of getUrl
+ * 5. the functionality of getRestaurant
+ * 6. the functionality of postData
  */
 
 import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import CreatePromotion from '.';
-import { checkData, lessTime, uploadImage, getUrl, getRestaurant, postData } from './index.js';
+import { checkData, uploadImage, getUrl, getRestaurant, postData } from './index.js';
 
 import axios from 'axios';
 
@@ -41,10 +40,10 @@ it('shows the submit button', () => {
  */
 it('alerts when all the required fields are empty on submission', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
-  checkData('', '', '', '', [null], -1);
+  checkData('', '', null, null, [null], '');
   await waitFor(() =>
     expect(window.alert).toBeCalledWith(
-      'Failure: title is empty\nFailure: description is empty\nFailure: start time is empty\nFailure: expired time is empty\nFailure: image is empty\nFailure: reward type is empty\nFailure: reward is empty',
+      'Failure: title is empty\nFailure: description is empty\nFailure: start time is empty\nFailure: expired time is empty\nFailure: image is empty\nFailure: reward is empty',
     ),
   );
 });
@@ -56,10 +55,14 @@ it('alerts when all the required fields are empty on submission', async () => {
  */
 it('alerts when the title field is empty on submission', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
-  checkData('', 'test', '2020-08-20T00:00', '2020-09-24T00:00', ['test', null], {
-    type: 'coupon',
-    value: '1',
-  });
+  checkData(
+    '',
+    'test',
+    '2020-09-16T12:00:00-04:00',
+    '2020-09-17T12:00:00-04:00',
+    ['test', null],
+    '1',
+  );
   await waitFor(() => expect(window.alert).toBeCalledWith('Failure: title is empty'));
 });
 
@@ -70,10 +73,14 @@ it('alerts when the title field is empty on submission', async () => {
  */
 it('alerts when the description field is empty on submission', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
-  checkData('test', '', '2020-08-20T00:00', '2020-09-24T00:00', ['test', null], {
-    type: 'coupon',
-    value: '1',
-  });
+  checkData(
+    'test',
+    '',
+    '2020-08-12T12:00:00-04:00',
+    '2020-09-16T12:00:00-04:00',
+    ['test', null],
+    '1',
+  );
   await waitFor(() => expect(window.alert).toBeCalledWith('Failure: description is empty'));
 });
 
@@ -84,10 +91,7 @@ it('alerts when the description field is empty on submission', async () => {
  */
 it('alerts when the startTime field is empty on submission', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
-  checkData('test', 'test', '', '2020-09-24T00:00', ['test', null], {
-    type: 'coupon',
-    value: '1',
-  });
+  checkData('test', 'test', null, '2020-09-16T12:00:00-04:00', ['test', null], '1');
   await waitFor(() => expect(window.alert).toBeCalledWith('Failure: start time is empty'));
 });
 
@@ -98,10 +102,7 @@ it('alerts when the startTime field is empty on submission', async () => {
  */
 it('alerts when the closeTime field is empty on submission', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
-  checkData('test', 'test', '2020-08-20T00:00', '', ['test', null], {
-    type: 'coupon',
-    value: '1',
-  });
+  checkData('test', 'test', '2020-09-16T12:00:00-04:00', null, ['test', null], '1');
   await waitFor(() => expect(window.alert).toBeCalledWith('Failure: expired time is empty'));
 });
 
@@ -112,66 +113,8 @@ it('alerts when the closeTime field is empty on submission', async () => {
  */
 it('alerts when the image field is empty on submission', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
-  checkData('test', 'test', '2020-08-20T00:00', '2020-09-24T00:00', [null], {
-    type: 'coupon',
-    value: '1',
-  });
+  checkData('test', 'test', '2020-09-16T12:00:00-04:00', '2020-09-16T12:00:00-04:00', [null], '1');
   await waitFor(() => expect(window.alert).toBeCalledWith('Failure: image is empty'));
-});
-
-/**
- * This function tests the function checkData.
- * It tests the case when reward is unselected on submission.
- * The promotion page should alert with a useful message.
- */
-it('alerts when the reward field is unselected on submission', async () => {
-  jest.spyOn(window, 'alert').mockImplementation(() => {});
-  checkData('test', 'test', '2020-08-20T00:00', '2020-09-24T00:00', ['test', null], -1);
-  await waitFor(() =>
-    expect(window.alert).toBeCalledWith('Failure: reward type is empty\nFailure: reward is empty'),
-  );
-});
-
-/**
- * This function tests the function lessTime.
- * lessTime should return true if the first time is earlier than the second time.
- * Otherwise, it should return false.
- * This function tests cases when the first time is earlier than the second time and
- * when the first time is later than the second time.
- */
-it('tests the function lessTime', () => {
-  let output1 = lessTime('2020-08-20T00:00', '2020-09-24T00:00');
-  expect(output1).toBeTruthy();
-  let output2 = lessTime('2020-09-20T00:00', '2020-08-20T00:00');
-  expect(output2).toBeFalsy();
-});
-
-/**
- * This function tests the function checkData.
- * It tests the case when closeTime is earlier than startTime on submission.
- * The promotion page should alert with a useful message.
- */
-it('alerts when closeTime is earlier than startTime', async () => {
-  jest.spyOn(window, 'alert').mockImplementation(() => {});
-  checkData('test', 'test', '2020-09-24T00:00', '2020-08-20T00:00', ['test', null], {
-    type: 'coupon',
-    value: '1',
-  });
-  await waitFor(() => expect(window.alert).toBeCalledWith('Failure: closeTime before startTime'));
-});
-
-/**
- * This function tests the function checkData.
- * It tests the case when startTime is earlier than today on submission.
- * The promotion page should alert with a useful message.
- */
-it('alerts when startTime is earlier than today', async () => {
-  jest.spyOn(window, 'alert').mockImplementation(() => {});
-  checkData('test', 'test', '2020-01-24T00:00', '2020-08-20T00:00', ['test', null], {
-    type: 'coupon',
-    value: '1',
-  });
-  await waitFor(() => expect(window.alert).toBeCalledWith('Failure: startTime before today'));
 });
 
 /**
@@ -181,8 +124,15 @@ it('alerts when startTime is earlier than today', async () => {
  */
 it('does not alert when all the fields are filled in correctly on submission', async () => {
   jest.spyOn(window, 'alert').mockImplementation(() => {});
-  checkData('test', 'test', '2020-08-20T00:00', '2020-09-24T00:00', ['test', null], 1);
-  await waitFor(() => expect(window.alert).toBeCalledTimes(10));
+  checkData(
+    'test',
+    'test',
+    '2020-09-16T12:00:00-04:00',
+    '2020-09-16T12:00:00-04:00',
+    ['test', null],
+    '1',
+  );
+  await waitFor(() => expect(window.alert).toBeCalledTimes(6));
 });
 
 /**
