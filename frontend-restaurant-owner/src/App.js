@@ -5,7 +5,6 @@ import CreatePromotion from './CreatePromotion';
 import Home from './Home';
 import Login from './Login';
 import Register from './Register';
-import Navbar from './sharedComponents/Navbar';
 import NavBarUpdated from './sharedComponents/NavBarUpdated';
 
 function App() {
