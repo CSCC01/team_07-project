@@ -35,7 +35,7 @@ export default class Progress extends React.Component {
     // if user does not participated in this promotion
     let subtasks;
     if (this.props.content && !this.state.participated)
-      subtasks = this.props.content.map((subtask, index) => 
+      subtasks = this.props.content.map((subtask, index) =>
       <div key={index} className="progress-content progress-margin-left">
         <FontAwesomeIcon icon={faCaretRight} style={{fontSize: '1.5rem', marginRight: 10}}/>
         <p style={{margin: 'auto', marginLeft: 0}}>{subtask}</p>
@@ -51,32 +51,11 @@ export default class Progress extends React.Component {
           <p style={{margin: 'auto', marginLeft: 0}}>{subtask.description}</p>
         </div>
         <div style={{ marginLeft: 30, textAlign: 'end' }}>
-          {this.state.code[subtask.index] !== undefined && 
+          {this.state.code[subtask.index] !== undefined &&
           <p style={{marginBottom: 10, marginTop: 10}}>
             Verification Code: #{this.state.code[subtask.index]}
           </p>
           }
-          {/* <Button
-              style={subtask.status === "ongoing"
-                ? { border: '#000 2px solid', backgroundColor: '#FFD564'}
-                : { border: '#9e9e9e 2px solid' } }
-              variant="outlined"
-              color="default"
-              size="small"
-              disabled={subtask.status === "ongoing" ? false : true}
-              onClick={async () => {
-                const id = await postTaskRequest(
-                  this.props.id,
-                  subtask.index,
-                  this.state.jwtToken
-                ); alert("Confirmation request sent! Your request ID is: #" + id);
-                let code = this.state.code;
-                code[subtask.index] = id;
-                this.setState({code});
-              }}
-            >
-              {subtask.status === "ongoing" ? "validate" : "validated"}
-          </Button> */}
           <Popup
             trigger={
               <div>
@@ -87,7 +66,7 @@ export default class Progress extends React.Component {
                     variant="outlined"
                     color="default"
                     size="small"
-                    disabled={subtask.status === "ongoing" ? false : true}
+                    disabled={subtask.status !== "ongoing"}
                     onClick={async () => {
                       const id = await postTaskRequest(
                         this.props.id,
@@ -103,7 +82,7 @@ export default class Progress extends React.Component {
                 </Button>
               </div>
             }
-            disabled={this.props.status ? true : false}
+            disabled={this.props.status}
             modal
             closeOnDocumentClick
             contentStyle={{
@@ -122,7 +101,7 @@ export default class Progress extends React.Component {
                   <FontAwesomeIcon icon={faTimes} style={{ marginLeft: 3, marginRight: 3 }} />
                 </IconButton>
                 <p style={{ fontSize: '1.2em', marginTop: 10 }}>{"Confirmation request sent! Your request ID is: #" + this.state.code[subtask.index]}</p>
-                <Button variant="outlined" color="#000" onClick={close} 
+                <Button variant="outlined" color="#000" onClick={close}
                 style={{ border: '#000 2px solid', backgroundColor: '#FFD564'}}>
                   OK
                 </Button>

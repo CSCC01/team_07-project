@@ -12,9 +12,6 @@ import Progress from "./index";
 
 configure({ adapter: new Adapter() });
 
-const jwt_token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTk2MDg3NDg2LCJleHAiOjE1OTg2Nzk0ODZ9.bH-txoYGWnFdv4JWqvv_NQKWsNvcIOjBjJmKltk3mr8";
-
 /**
  * Renders Progress component without crash
  */

@@ -17,7 +17,7 @@ export default class Action extends Component {
     } else {
       this.props.onYes('/verify');
     }
-    
+
   };
 
   render() {
@@ -26,10 +26,10 @@ export default class Action extends Component {
         <Popup
           trigger={
             <div>
-              <Button 
-                variant="outlined" 
-                color="#000" 
-                disabled={this.props.status ? true : false}
+              <Button
+                variant="outlined"
+                color="#000"
+                disabled={this.props.status}
                 style={this.props.status
                         ? { border: '#9e9e9e 2px solid' }
                         :{ border: '#000 2px solid', backgroundColor: '#FFD564'} }>
@@ -37,7 +37,7 @@ export default class Action extends Component {
               </Button>
             </div>
           }
-          disabled={this.props.status ? true : false}
+          disabled={this.props.status}
           modal
           closeOnDocumentClick
           contentStyle={{
@@ -56,7 +56,7 @@ export default class Action extends Component {
                 <FontAwesomeIcon icon={faTimes} style={{ marginLeft: 3, marginRight: 3 }} />
               </IconButton>
               <p style={{ fontSize: '1.2em', marginTop: 10 }}>Are you sure you want to <span className="request-highlight">{this.props.type}</span> this request?</p>
-              <Button variant="outlined" color="#000" onClick={()=>this.onYes(this.props.type)} 
+              <Button variant="outlined" color="#000" onClick={()=>this.onYes(this.props.type)}
               style={{ border: '#000 2px solid', backgroundColor: '#FFD564'}}>
                 Yes
               </Button>

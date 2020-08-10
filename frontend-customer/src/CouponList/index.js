@@ -54,7 +54,7 @@ function CouponList() {
             {/* Header */}
             <div className={styles.mainSection}>
                 <Typography component="h2" className={styles.headline} style={{fontSize: '1.2rem'}}>
-                    Coupons Avaliable to You:
+                    Coupons Available to You:
                 </Typography>
             </div>
             {/* Coupons */}

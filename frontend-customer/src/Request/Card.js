@@ -17,9 +17,9 @@ export default class Card extends Component {
     let output = await updateStatus(url, jwt_token);
     if (output === 200) {
       if (type === '/verify') {
-        this.setState({status: 'comfirmed'});
+        this.setState({status: 'confirmed' });
       } else {
-        this.setState({status: 'rejected'});
+        this.setState({status: 'rejected' });
       }
     }
 

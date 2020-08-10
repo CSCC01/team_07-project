@@ -45,7 +45,7 @@ export default function TitleBar(props){
 
     return(
         <div>
-        {/* The navgation bar */}
+        {/* The navigation bar */}
         <AppBar position="sticky" style={{ backgroundColor: '#0B345C' }}>
             <Toolbar>
                 <IconButton
