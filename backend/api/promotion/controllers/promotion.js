@@ -65,7 +65,6 @@ module.exports = {
     const subtaskIds = [];
 
     for (let [index, subtaskDescription] of promotion.subtask.entries()) {
-      console.log(subtaskDescription, index);
       const subtask = await strapi.query('subtask').create({
         description: subtaskDescription,
         status: 'ongoing',
