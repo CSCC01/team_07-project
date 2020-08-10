@@ -16,6 +16,7 @@ export default class Request extends Component {
 
   render() {
     return (
+      <>
       <div className="dashboard">
         {this.state.requests.map((request) => (
           <Card
@@ -26,10 +27,12 @@ export default class Request extends Component {
             requestStatus={request.status}
             requestId={request.id}
             key={request.id}
-            // data-testid="card"
+            data-testid="card"
           />
         ))}
       </div>
+      {this.state.requests.length === 0 && <div style={{marginLeft: 20, marginRight: 20,fontSize: '1.2rem'}}>Great, no request needs to be verified now.</div>}
+      </>
     );
   }
 }
@@ -45,7 +48,6 @@ export const getRequest = async (jwt_token, url) => {
     },
   })
     .then((response) => {
-      console.log(response.data);
       requests = response.data;
     })
     .catch(() => {

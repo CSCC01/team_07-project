@@ -1,26 +1,53 @@
 .imageCutter{
     width: 100vw;
-    height: 60vw;
+    height:100vw;
     overflow: hidden;
     display:flex;
     justify-content:center;
     align-items:center;
 }
 
-.title, .restaurant{
+.promotion-title{
     text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
 
-.description {
-    padding: 3px;
+.restaurant-name{
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
+
+.title{
+    text-align: start;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.content{
+    font-size: 1rem;
+    font-weight: 400;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.margin-left {
+    margin-left: 30px;
+}
+
 .promotionDetails{
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    /* background-color: antiquewhite; */
 }
 
 .promotionDetails > * {
-    margin-bottom: 15px;
     display: flex;
     flex-direction: column;
     justify-items: center;

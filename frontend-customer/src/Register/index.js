@@ -25,7 +25,6 @@ function Register() {
     if (password !== passwordDup) {
       alert("Your passwords don't match.");
     } else {
-      var userid;
       localStorage.clear("Authorization-Token");
       axios
         .post("/auth/local/register", {
@@ -38,10 +37,10 @@ function Register() {
           localStorage.setItem("Authorization-Token", response.data.jwt);
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + response.data.jwt;
-          userid = response.data.user.id;
+          const userId = response.data.user.id;
           //Set role to customer
           axios
-            .put("/users/" + userid, {
+            .put("/users/" + userId, {
               // Set role to customer
               role: Number(role),
             })

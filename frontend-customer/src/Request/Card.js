@@ -17,9 +17,9 @@ export default class Card extends Component {
     let output = await updateStatus(url, jwt_token);
     if (output === 200) {
       if (type === '/verify') {
-        this.setState({status: 'comfirmed'});
+        this.setState({status: 'confirmed' });
       } else {
-        this.setState({status: 'rejected'});
+        this.setState({status: 'rejected' });
       }
     }
 
@@ -60,7 +60,7 @@ export default class Card extends Component {
         {/* verify button and reject button */}
         <div className="button-row-wrapper">
           <Action onYes={this.onYes} type="reject" status={this.state.status === 'pending' ? 0 : 1} />
-          <Action onYes={this.onYes} type="verify" status={this.state.status === 'pending' ? 0 : 1}/>
+          <Action onYes={this.onYes} type="confirm" status={this.state.status === 'pending' ? 0 : 1}/>
         </div>
       </div>
     );

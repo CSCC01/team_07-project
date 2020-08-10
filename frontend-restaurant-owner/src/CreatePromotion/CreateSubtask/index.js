@@ -16,9 +16,8 @@ class CreateSubtask extends Component {
     this.props.onSelectTask(tasks);
   };
 
-  parentFunction = (addButtonFromChild, deleteAllTasksFromChild) => {
-    this.setState({ addButton: addButtonFromChild });
-    this.setState({ deleteAllTasks: deleteAllTasksFromChild });
+  parentFunction = (addButton, deleteAllTasks) => {
+    this.setState({ addButton, deleteAllTasks });
   };
 
   render() {

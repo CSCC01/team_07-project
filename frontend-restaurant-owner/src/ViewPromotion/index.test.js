@@ -59,8 +59,8 @@ it('get promotion list from backend', async () => {
     },
     {
       id: 7,
-      title: 'promotion3: hotcat',
-      description: 'But one three hotdags and get a coupon for a "hotcat"!',
+      title: 'promotion3: hotdog',
+      description: 'But one three hotdogs and get a coupon for a "hotcat"!',
       starting_date: '2020-11-01T00:00',
       expired_date: '2021-01-01T00:00',
       subtask: ['Buy 1 hotdog', 'Buy 1 hotdog', 'Buy 1 hotdog'],
