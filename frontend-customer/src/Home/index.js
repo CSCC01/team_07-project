@@ -8,16 +8,13 @@ import { Redirect } from 'react-router-dom';
 
 export default class Home extends React.Component {
     state = {
-        promotions: [],
-        progresses: []
+        promotions: []
     }
 
     async componentDidMount(){
         const promotions = await getPromotions();
-        const progresses = await getUserProgresses();
         this.setState({
             promotions: promotions,
-            progresses: progresses,
         })
     }
 
@@ -25,7 +22,6 @@ export default class Home extends React.Component {
         if (this.state.promotions.length !== 0){
             return <PromotionList 
                 content={this.state.promotions} 
-                progresses={this.state.progresses} 
                 className="promotion-list"
                 />;
         } else {
@@ -64,14 +60,3 @@ export const getPromotions = async () => {
         response.data.filter(promotion => new Date(promotion.expired_date) > currentTime))
     .catch(() => []);
 };
-
-export const getUserProgresses = async () => {
-    const user = await axios.get('/users/me', {
-        headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('Authorization-Token'),
-      },
-    });
-    return await axios.get('/progresses?user.id=' + await user.data.id)
-    .then((reponse) => reponse.data)
-    .catch(() => []);
-}

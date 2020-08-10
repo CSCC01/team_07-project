@@ -5,6 +5,7 @@ import { Carousel } from 'react-responsive-carousel';
 import { Typography, Paper } from '@material-ui/core';
 import Progress from './Progress';
 import ParticipateButton from './ParticipateButton';
+import TitleBar from '../sharedComponents/TitleBar';
 
 import './index.css'
 
@@ -78,6 +79,9 @@ export default function PromotionDetails(props) {
 
     return (
       <>
+        <div className='title-bar'>
+          <TitleBar title='Promotion'/>
+        </div>
         {images}
         <div className="promotionDetails">
           {basicInfo}
