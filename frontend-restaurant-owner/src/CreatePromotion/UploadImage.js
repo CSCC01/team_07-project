@@ -95,7 +95,7 @@ class UploadImage extends Component {
               <div className="upload-image">
                 <Button
                   variant="outlined"
-                  color="#FFD564"
+                  color="default"
                   startIcon={<FontAwesomeIcon icon={faPlus} />}
                   onClick={this.imageButtonClick}
                   style={{ border: '#000 2px solid', color: '#000', backgroundColor: '#FFD564' }}
@@ -117,7 +117,7 @@ class UploadImage extends Component {
               <div className="button-wrapper">
                 <div className="left-image">
                   <IconButton
-                    color="#000"
+                    color="default"
                     style={{
                       borderRadius: 10,
                       backgroundColor: '#FFD564',
@@ -132,7 +132,7 @@ class UploadImage extends Component {
                 <div className="upload-image">
                   <Button
                     variant="outlined"
-                    color="#FFD564"
+                    color="default"
                     startIcon={<FontAwesomeIcon icon={faPlus} />}
                     onClick={this.imageButtonClick}
                     style={{ border: '#000 2px solid', color: '#000', backgroundColor: '#FFD564' }}
@@ -157,7 +157,7 @@ class UploadImage extends Component {
                 {this.state.show === 3 ? (
                   <div className="left-image">
                     <IconButton
-                      color="#000"
+                      color="default"
                       style={{
                         borderRadius: 10,
                         backgroundColor: '#FFD564',
@@ -173,7 +173,7 @@ class UploadImage extends Component {
                 <div className="upload-image">
                   <Button
                     variant="outlined"
-                    color="#FFD564"
+                    color="default"
                     startIcon={<FontAwesomeIcon icon={faPlus} />}
                     onClick={this.imageButtonClick}
                     style={{ border: '#000 2px solid', color: '#000', backgroundColor: '#FFD564' }}
@@ -191,7 +191,7 @@ class UploadImage extends Component {
                 {this.state.show === 2 || this.state.show === 3 ? (
                   <div className="right-image">
                     <IconButton
-                      color="#000"
+                      color="default"
                       style={{
                         borderRadius: 10,
                         backgroundColor: '#FFD564',

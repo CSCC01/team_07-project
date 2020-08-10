@@ -21,8 +21,8 @@ export default class CreatePromotion extends Component {
     currentIndex: 0,
     title: '',
     description: '',
-    startDate: '',
-    endDate: '',
+    startDate: null,
+    endDate: null,
     tasks: [],
     reward: -1,
     disable: 1, // 0 - disable; 1 - enable
@@ -224,7 +224,7 @@ export default class CreatePromotion extends Component {
               />
               <Button
                 variant="outlined"
-                color="#FFD564"
+                color="default"
                 onClick={this.onDelete}
                 startIcon={<FontAwesomeIcon icon={faTrash} />}
                 style={{ border: '#000 2px solid', color: '#000', backgroundColor: '#FFD564' }}
@@ -267,12 +267,14 @@ export default class CreatePromotion extends Component {
                 <DateRangePicker
                   startDate={this.state.startDate} // momentPropTypes.momentObj or null,
                   endDate={this.state.endDate} // momentPropTypes.momentObj or null,
+                  startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
+                  endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
                   onDatesChange={({ startDate, endDate }) => {
                     this.setState({ startDate, endDate });
                   }}
                   focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
                   onFocusChange={(focusedInput) => this.setState({ focusedInput })} // PropTypes.func.isRequired,
-                  noBorder="true"
+                  noBorder={true}
                 />
               </div>
             </div>
@@ -346,10 +348,10 @@ export const checkData = (title, description, startTime, closeTime, sourceImage,
   if (description === '') {
     prompt.push('Failure: description is empty');
   }
-  if (startTime === '') {
+  if (startTime === null) {
     prompt.push('Failure: start time is empty');
   }
-  if (closeTime === '') {
+  if (closeTime === null) {
     prompt.push('Failure: expired time is empty');
   }
   if (sourceImage.length === 1) {

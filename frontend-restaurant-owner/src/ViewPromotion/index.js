@@ -21,7 +21,7 @@ class ViewPromotion extends React.Component {
 
   render() {
     return (
-      <div style={{ marginTop: 75 }}>
+      <div>
         <PromotionListDetail promotions={this.state.promotionList} />
       </div>
     );

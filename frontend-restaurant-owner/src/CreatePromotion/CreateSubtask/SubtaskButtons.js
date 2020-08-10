@@ -186,7 +186,7 @@ function SubButton(props) {
           <Button
             autoFocus
             onClick={props.closeDialog}
-            color="#000"
+            color="default"
             variant="outlined"
             style={{
               border: '#000 2px solid',
@@ -198,7 +198,7 @@ function SubButton(props) {
           <Button
             autoFocus
             onClick={props.deleteTask}
-            color="#000"
+            color="default"
             variant="outlined"
             style={{
               border: '#000 2px solid',

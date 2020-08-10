@@ -51,7 +51,7 @@ class ImageCropper extends React.Component {
           <img src={this.state.imageDestination} className="popup-img-preview" alt="Destination" />
           <Button
             variant="outlined"
-            color="#FFD564"
+            color="default"
             style={{
               border: '#000 2px solid',
               color: '#000',

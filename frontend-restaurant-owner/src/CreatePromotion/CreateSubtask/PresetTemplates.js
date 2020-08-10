@@ -181,10 +181,10 @@ function SplitButton(props) {
   };
 
   return (
-    <Grid container direction="column" alignItems="left" style={{ marginTop: 15 }}>
+    <Grid container direction="column" style={{ marginTop: 15 }}>
       <Grid item xs={12}>
         {/* Template selection button */}
-        <ButtonGroup variant="outlined" color="#000" ref={anchorRef} aria-label="split button">
+        <ButtonGroup variant="outlined" color="default" ref={anchorRef} aria-label="split button">
           <Button
             onClick={handleClick}
             style={
@@ -208,7 +208,7 @@ function SplitButton(props) {
             {options[selectedIndex]}
           </Button>
           <Button
-            color="#000"
+            color="default"
             size="small"
             aria-controls={open ? 'split-button-menu' : undefined}
             aria-expanded={open ? 'true' : undefined}
@@ -335,7 +335,7 @@ function TemplateDialog(props) {
           <Button
             autoFocus
             onClick={props.onClick}
-            color="#000"
+            color="default"
             variant="outlined"
             style={{
               border: '#000 2px solid',

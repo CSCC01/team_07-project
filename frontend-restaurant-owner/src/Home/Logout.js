@@ -15,7 +15,7 @@ function Logout(props) {
     <Button
       data-testid="logout"
       variant="outlined"
-      color="#000"
+      color="default"
       onClick={logout}
       style={{ border: '#000 2px solid', position: 'relative', top: -7 }}
     >
