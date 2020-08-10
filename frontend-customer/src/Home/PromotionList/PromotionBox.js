@@ -6,22 +6,16 @@ import Button from '@material-ui/core/Button';
 
 export default function PromotionBox(props) {
     const [status, setStatus] = useState("NA");
-    
-    useEffect(() => {
-        inProgress().then(status => {
-            setStatus(status);
-        }).catch(() => {});
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, []);
 
-    const inProgress = async () => {
-        const progress = await axios.get('/promotions/' + props.content.id + '/progress', {
+    useEffect(() => {
+        axios.get('/promotions/' + props.content.id + '/progress', {
             headers: {
-            Authorization: 'Bearer ' + localStorage.getItem('Authorization-Token'),
+                Authorization: 'Bearer ' + localStorage.getItem('Authorization-Token'),
             }
-          })
-        return progress.data.status;
-    }
+        }).then((response) => {
+            setStatus(response.data.status);
+        });
+      }, [props.content.id]);
 
     return (
         <div className={styles.promotion}>
@@ -56,9 +50,9 @@ export default function PromotionBox(props) {
             {/* Button */}
             <div style={{textAlign: 'center'}}>
                 <Link to={'promotions/' + props.content.id} style={{textDecoration: 'none'}}>
-                    <Button 
-                        variant="outlined" 
-                        color="default" 
+                    <Button
+                        variant="outlined"
+                        color="default"
                         style={{ border: '#000 2px solid', backgroundColor: '#FFD564', marginTop: 10, marginRight: 0}}>
                         View Details
                     </Button>

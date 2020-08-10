@@ -19,9 +19,9 @@ export default function PromotionDetails(props) {
       getPromotionDetails(id).then((data) => {
         setData(data);
 
-        const carousel = 
+        const carousel =
           <Carousel renderThumbs={()=>{}}>
-            {data.image.map(url => 
+            {data.image.map(url =>
             (<div className="imageCutter">
               <img src={axios.defaults.baseURL + url} alt="promotion img" style={{width: '100vw', height: '100vw',objectFit: 'cover'}}/>
             </div>))}
