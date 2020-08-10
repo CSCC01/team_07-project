@@ -68,6 +68,10 @@
     "coupons": {
       "via": "user",
       "collection": "coupon"
+    },
+    "requests": {
+      "via": "user",
+      "collection": "request"
     }
   }
 }
