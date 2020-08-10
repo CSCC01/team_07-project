@@ -51,7 +51,7 @@ class AchievementFlag extends Component {
                   <Box p={2}>
                     <div className='flag-texts'>
                         <p className='flag-text'>{this.props.restaurantName}</p>
-                        <p className='flag-text'>Completed {this.props.number} promotions</p>
+                <p className='flag-text'>Completed {this.props.number} {this.props.number <= 1 ? "achievement":"achievements"}</p>
                     </div>
                   </Box>
                 </Popover>

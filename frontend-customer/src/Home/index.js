@@ -25,7 +25,7 @@ export default class Home extends React.Component {
                 className="promotion-list"
                 />;
         } else {
-            return <div>Sorry, We do not have any promotions to show now.</div>;
+            return <div style={{marginLeft: 20, marginRight: 20, marginTop: 10, fontSize: '1.2rem'}}>Sorry, We do not have any promotions to show now.</div>;
         }
     }
     

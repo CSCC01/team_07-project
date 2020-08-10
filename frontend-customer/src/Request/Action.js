@@ -12,7 +12,12 @@ export default class Action extends Component {
 
   // This function is called when user clicks on the verify button or the reject button
   onYes = (type) => {
-    this.props.onYes('/' + type);
+    if (type === "reject") {
+      this.props.onYes('/' + type);
+    } else {
+      this.props.onYes('/verify');
+    }
+    
   };
 
   render() {

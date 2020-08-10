@@ -29,7 +29,11 @@ function CouponList() {
         ).then(response => {
             return response.data;
         }).then(coupons => {
-            return coupons.map(coupon => <Coupon coupon={coupon}/>);
+            if (coupons.length !== 0) {
+                return coupons.map(coupon => <Coupon coupon={coupon}/>);
+            } else {
+                return <div style={{marginTop: 10, fontSize: '1.2rem'}}>Sorry, We do not have any coupons to show now.</div>;
+            }
         }).catch(() => []);
     };
 
