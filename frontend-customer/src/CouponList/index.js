@@ -46,7 +46,7 @@ function CouponList() {
     }
 
     return (
-        <>
+        <div className="coupon-list">
             {/* TitleBar */}
             <div data-testid='title'>
                 <TitleBar title='My coupon'/>
@@ -61,7 +61,7 @@ function CouponList() {
             <div className={styles.container}>
                 {coupons}
             </div>
-        </>
+        </div>
     );
 }
 
