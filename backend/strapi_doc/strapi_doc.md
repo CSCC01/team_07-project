@@ -99,17 +99,15 @@ trigger: all subtasks are completed
    else:
    	create new achievement
    ```
-
+3. create acoupon
 
 
 ##### customers use a coupon
 
 trigger: click "use it" in the coupon area
 
-1. create a coupon
+1. create a request
 
-2. create a request
-
-3. (staff confirm) change request status and coupon status
+2. (staff confirm) change request status and coupon status
 
    (this is expected: customer can request repeatedly if the status is pending)
