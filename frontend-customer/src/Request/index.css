@@ -1,15 +1,18 @@
 .dashboard {
-    margin: 30px 10%;
+    margin: 30px 7% 30px 13%;
     text-align: center;
+    position: relative;
+    top: 56px;
 }
 
 .card-wrapper {
-    background-color: #eee;
+    background-color: #fff;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 1px #eee;
     padding-bottom: 10px;
     padding-top: 10px;
     margin-bottom: 20px;
+    border: #000 2px solid;
 }
 
 .status-id-wrapper {
@@ -22,61 +25,50 @@
     margin-top: 0px;
     position: relative;
     right: 50px;
-    background-color: #2a3eb1;
+    background-color: #FFD564;
     border-radius: 20px;
+    border: #000 2px solid;
 }
 
 .status {
     margin: 5px 20px;
     font-size: 1.2em;
     text-align: center;
-    color: white;
+    color: #000;
 }
 
-.message-id-wrapper {
+.request-id-wrapper {
     margin-top: 0px;
     color: #f50057;
     font-size: 1.2em;
     text-align: end;
 }
 
-.message-id {
+.request-id {
     margin: 5px 0px;
 }
 
-.message-wrapper {
+.request-wrapper {
     margin: 0px 20px;
 }
 
-.message {
-    margin: 0px;
+.request {
+    margin: 5px 0px;
     font-size: 1em;
     text-align: left;
 }
 
-.message-highlight {
+.request-highlight {
     color: #f50057;
     font-size: 1.2em;
     margin: 0px;
 }
 
 .button-row-wrapper {
-    margin-top: 10px;
+    margin-top: 15px;
     margin-bottom: 10px;
     margin-right: 20px;
+    margin-left: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-}
-
-.time {
-    text-align: start;
-    margin: auto;
-    margin-left: 20px;
-    margin-bottom: 0;
-    color: grey;
-    font-size: 1.2em;
-}
-
-.verification {
-    text-align: end;
 }

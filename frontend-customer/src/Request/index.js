@@ -5,32 +5,28 @@ import Card from './Card';
 
 import axios from 'axios';
 
-export default class Message extends Component {
-  state = { messages: [] };
+export default class Request extends Component {
+  state = { requests: [] };
 
   async componentDidMount() {
     let jwt_token = localStorage.getItem('Authorization-Token');
-    let restaurant = await getRestaurant('/users/me/', jwt_token);
-    let restaurant_id = restaurant[0];
-
-    let messages = await getMessage(jwt_token, '/requests', restaurant_id);
-    this.setState({ messages });
+    let requests = await getRequest(jwt_token, '/requests');
+    this.setState({ requests });
   }
 
   render() {
     return (
       <div className="dashboard">
-        {this.state.messages.map((message) => (
+        {this.state.requests.map((request) => (
           <Card
-            userName={message.user.username}
-            promotionName={message.promotion_title}
-            subtaskName={message.subtask_content}
-            messageId={message.code}
-            id={message.id}
-            message={message}
-            time={message.time}
-            key={message.id}
-            data-testid="card"
+            userName={request.user.username}
+            description={request.description}
+            requestCode={generateRandomNumber(request.id)}
+            requestType={request.type}
+            requestStatus={request.status}
+            requestId={request.id}
+            key={request.id}
+            // data-testid="card"
           />
         ))}
       </div>
@@ -38,8 +34,9 @@ export default class Message extends Component {
   }
 }
 
-export const getRestaurant = async (url, jwt_token) => {
-  let restaurant_id;
+// This function get the requests relevant to the current restaurant
+export const getRequest = async (jwt_token, url) => {
+  let requests = [];
   await axios({
     method: 'GET',
     url: url,
@@ -48,33 +45,18 @@ export const getRestaurant = async (url, jwt_token) => {
     },
   })
     .then((response) => {
-      restaurant_id = [response.data.restaurant, response.status];
+      console.log(response.data);
+      requests = response.data;
     })
     .catch(() => {
-      restaurant_id = [-1, -1];
+      requests = [-1];
     });
-  return restaurant_id;
+  return requests;
 };
 
-export const getMessage = async (jwt_token, url, restaurant_id) => {
-  let messages = [];
-  await axios({
-    method: 'GET',
-    url: url,
-    headers: {
-      Authorization: 'Bearer ' + jwt_token,
-    },
-  })
-    .then((response) => {
-      response.data.forEach((message) => {
-        if (message.restaurant.id === restaurant_id && message.status === 'pending') {
-          messages.push(message);
-        }
-      });
-    })
-    .catch((error) => {
-      messages = [-1];
-    });
-    console.log(messages);
-  return messages;
+// This function generates a random number to be the verification code
+export const generateRandomNumber = (id) => {
+  let randomNumber = 3**15*id;
+  let lastFourDigit = randomNumber %10000
+  return lastFourDigit;
 };
