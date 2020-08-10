@@ -1,6 +1,7 @@
 import React from "react";
-// import axios from "axios";
+import axios from "axios";
 import Button from "@material-ui/core/Button";
+import "./index.css";
 
 export default class Progress extends React.Component {
   constructor(props) {
@@ -29,12 +30,23 @@ export default class Progress extends React.Component {
     let subtaskValidate;
     if (this.state.participated) {
       subtaskValidate = this.state.progress.subtasks.map((subtask) => (
-        <div>
-          {subtask.description}
-          {subtask.status === "ongoing" && (
+        <div className="item">
+          <div>
+            {subtask.description}
+            {subtask.status === "ongoing" ? (
+              <div style={{ color: "red" }}>ONGOING</div>
+            ) : (
+              <div style={{ color: "green" }}>COMPLETED</div>
+            )}
+          </div>
+
+          <div>
             <Button
+              style={{ justifyContent: "right" }}
+              variant="outlined"
               color="primary"
               size="small"
+              disabled={subtask.status === "ongoing" ? false : true}
               onClick={async () =>
                 await postTaskRequest(
                   this.props.id,
@@ -43,15 +55,9 @@ export default class Progress extends React.Component {
                 )
               }
             >
-              validate
+              {subtask.status === "ongoing" ? "validate" : "validated"}
             </Button>
-          )}
-          {subtask.status === "ongoing" && (
-            <div style={{ color: "red" }}>ONGOING</div>
-          )}
-          {subtask.status === "completed" && (
-            <div style={{ color: "green" }}>COMPLETED</div>
-          )}
+          </div>
         </div>
       ));
     }
@@ -60,7 +66,7 @@ export default class Progress extends React.Component {
       <div onLoad={getProgress(this.props.id, this.state.jwtToken)}>
         <div>Current Progress:</div>
         {subtasks}
-        {subtaskValidate}
+        <div className="container">{subtaskValidate}</div>
         <br></br>
         <div style={{ textAlign: "center" }}>
           <Button
@@ -109,7 +115,7 @@ const getProgress = async (id, jwtToken) => {
 };
 
 const postTaskRequest = async (promotion_id, subtask_index, jwtToken) => {
-  await axios({
+  let code = await axios({
     method: "POST",
     url: "requests",
     data: {
@@ -120,5 +126,15 @@ const postTaskRequest = async (promotion_id, subtask_index, jwtToken) => {
     headers: {
       Authorization: "Bearer " + jwtToken,
     },
+  }).then((response) => {
+    return generateRandomNumber(response.data.id);
   });
+  return code;
+};
+
+// This function generates a random number to be the verification code
+const generateRandomNumber = (id) => {
+  let randomNumber = 3 ** 15 * id;
+  let lastFourDigit = randomNumber % 10000;
+  return lastFourDigit;
 };
