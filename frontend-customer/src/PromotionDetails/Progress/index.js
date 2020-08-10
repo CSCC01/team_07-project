@@ -49,13 +49,13 @@ export default class Progress extends React.Component {
               color="primary"
               size="small"
               disabled={subtask.status === "ongoing" ? false : true}
-              onClick={async () =>
-                await postTaskRequest(
+              onClick={async () => {
+                const id = await postTaskRequest(
                   this.props.id,
                   subtask.index,
                   this.state.jwtToken
-                )
-              }
+                ); alert(id);
+              }}
             >
               {subtask.status === "ongoing" ? "validate" : "validated"}
             </Button>
@@ -120,7 +120,7 @@ const getProgress = async (id, jwtToken) => {
 };
 
 const postTaskRequest = async (promotion_id, subtask_index, jwtToken) => {
-  let code = await axios({
+  let response = await axios({
     method: "POST",
     url: "requests",
     data: {
@@ -131,10 +131,8 @@ const postTaskRequest = async (promotion_id, subtask_index, jwtToken) => {
     headers: {
       Authorization: "Bearer " + jwtToken,
     },
-  }).then((response) => {
-    return generateRandomNumber(response.data.id);
   });
-  return code;
+  return generateRandomNumber(response.data.id);
 };
 
 // This function generates a random number to be the verification code
