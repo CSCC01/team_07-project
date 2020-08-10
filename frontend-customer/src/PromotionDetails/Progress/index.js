@@ -54,7 +54,7 @@ export default class Progress extends React.Component {
                   this.props.id,
                   subtask.index,
                   this.state.jwtToken
-                ); alert(id);
+                ); alert("Confirmation request sent! Your request ID is: #" + id);
               }}
             >
               {subtask.status === "ongoing" ? "validate" : "validated"}
